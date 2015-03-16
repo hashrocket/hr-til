@@ -1,0 +1,16 @@
+!!! 5
+%html(lang="en-US")
+  %head
+    %title Hashrocket TIL
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %header
+      = link_to root_path do
+        %h1 Hashrocket TIL
+      = link_to "Sign Up", account_signup_path
+      - if developer_signed_in?
+        = developer.username
+    = yield
+
