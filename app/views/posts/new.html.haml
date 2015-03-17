@@ -1,0 +1,6 @@
+%h3 Create TIL
+
+= form_for post do |d|
+  = d.label :body
+  = d.text_field :body
+  .button= d.submit "Create TIL"
