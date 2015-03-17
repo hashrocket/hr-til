@@ -36,18 +36,6 @@ And 'I do not see the signup link' do
   expect(page).to_not have_content("Sign Up")
 end
 
-When 'I enter an invalid username' do
-  fill_in 'Username', with: 'johndoe'
-end
-
-And 'I enter an invalid email' do
-  fill_in 'Email', with: 'foo'
-end
-
-And 'I enter an invalid password' do
-  fill_in 'Password', with: 'bar'
-end
-
 Then 'I see validation errors' do
   expect(page).to have_content("Signup failed")
 end

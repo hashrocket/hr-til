@@ -15,9 +15,6 @@ Feature: Developer signs up
     Given I see the homepage
     When I click signup
     Then I see the signup page
-    When I enter an invalid username
-    And I enter an invalid email
-    And I enter an invalid password
     And I click submit
     Then I see validation errors
     And I see the signup link
