@@ -9,7 +9,8 @@
     %header
       = link_to root_path do
         %h1 Hashrocket TIL
-      = link_to "Sign Up", account_signup_path
+      - unless developer_signed_in?
+        = link_to "Sign Up", account_signup_path
       - if developer_signed_in?
         = developer.username
     = yield

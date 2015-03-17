@@ -31,3 +31,7 @@ end
 Then 'I see my username in the upper right' do
   expect(page).to have_content 'johndoe'
 end
+
+And 'I do not see the signup link' do
+  expect(page).to_not have_content("Sign Up")
+end

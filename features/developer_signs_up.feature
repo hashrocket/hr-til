@@ -9,3 +9,4 @@ Feature: Developer signs up
     And I enter a password
     And I click submit
     Then I see my username in the upper right
+    And I do not see the signup link
