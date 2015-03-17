@@ -7,6 +7,12 @@
     = csrf_meta_tags
   %body
     %header
+      #flash
+        - if flash.present?
+          - if flash[:alert]
+            - [flash[:alert]].flatten.each do |alert_message|
+              %p.error= alert_message
+              %br
       = link_to root_path do
         %h1 Hashrocket TIL
       - unless developer_signed_in?

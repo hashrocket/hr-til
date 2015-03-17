@@ -11,15 +11,15 @@ Then 'I see the signup page' do
   expect(page).to have_content("Create an Account")
 end
 
-When 'I enter a username' do
+When 'I enter a valid username' do
   fill_in 'Username', with: 'johndoe'
 end
 
-When 'I enter my email' do
+And 'I enter a valid email' do
   fill_in 'Email', with: 'johndoe@hashrocket.com'
 end
 
-When 'I enter a password' do
+And 'I enter a valid password' do
   fill_in 'Password', with: 'ha$hrocket'
   fill_in 'Password Confirmation', with: 'ha$hrocket'
 end
@@ -34,4 +34,24 @@ end
 
 And 'I do not see the signup link' do
   expect(page).to_not have_content("Sign Up")
+end
+
+When 'I enter an invalid username' do
+  fill_in 'Username', with: 'johndoe'
+end
+
+And 'I enter an invalid email' do
+  fill_in 'Email', with: 'foo'
+end
+
+And 'I enter an invalid password' do
+  fill_in 'Password', with: 'bar'
+end
+
+Then 'I see validation errors' do
+  expect(page).to have_content("Signup failed")
+end
+
+And 'I see the signup link' do
+  expect(page).to have_content("Sign Up")
 end
