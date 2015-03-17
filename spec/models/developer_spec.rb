@@ -15,4 +15,12 @@ describe Developer do
     expect(developer).to be_valid
     expect(dup_developer).to_not be_valid
   end
+
+  it 'validates username format' do
+    developer             = Developer.create(username: 'foobar', email: 'johndoe@ha$hrocket.com', password: 'password', password_confirmation: 'password')
+    punctuation_developer = Developer.create(username: 'f.oba$', email: 'johndoe@ha$hrocket.com', password: 'password', password_confirmation: 'password')
+
+    expect(developer).to be_valid
+    expect(punctuation_developer).to_not be_valid
+  end
 end
