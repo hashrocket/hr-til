@@ -8,7 +8,9 @@ When 'I click signup' do
 end
 
 Then 'I see the signup page' do
-  expect(page).to have_content('Create an Account')
+  within 'h3' do
+    expect(page).to have_content('Create an Account')
+  end
 end
 
 When 'I enter a valid username' do
@@ -53,7 +55,9 @@ When 'I click sign in' do
 end
 
 Then 'I see the signin page' do
-  expect(page).to have_content('Sign in to your Account')
+  within 'h3' do
+    expect(page).to have_content('Sign in to your Account')
+  end
 end
 
 When 'I enter my credentials' do
