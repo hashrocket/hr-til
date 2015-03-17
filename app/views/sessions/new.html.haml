@@ -1,9 +1,9 @@
 %h3 Sign in to your Account
 
-= form_for 'session' do |d|
-  = d.label :email
-  = d.email_field :email
-  = d.label :password
-  = d.password_field :password
-  .button= d.submit "Sign In"
+= form_for 'session' do |s|
+  = s.label :email
+  = s.email_field :email
+  = s.label :password
+  = s.password_field :password
+  .button= s.submit "Sign In"
 
