@@ -20,5 +20,6 @@
         = link_to "Sign In", account_signin_path
       - if developer_signed_in?
         = developer.username
+        = link_to "Sign Out", account_signout_path
     = yield
 

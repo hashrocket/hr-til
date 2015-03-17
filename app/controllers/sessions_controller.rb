@@ -11,4 +11,9 @@ class SessionsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    sign_out_developer
+    redirect_to root_path
+  end
 end

@@ -1,14 +1,14 @@
 Given 'I see the homepage' do
   visit root_path
-  expect(page).to have_content("Hashrocket TIL")
+  expect(page).to have_content('Hashrocket TIL')
 end
 
 When 'I click signup' do
-  click_on "Sign Up"
+  click_on 'Sign Up'
 end
 
 Then 'I see the signup page' do
-  expect(page).to have_content("Create an Account")
+  expect(page).to have_content('Create an Account')
 end
 
 When 'I enter a valid username' do
@@ -33,15 +33,15 @@ Then 'I see my username in the upper right' do
 end
 
 And 'I do not see the signup link' do
-  expect(page).to_not have_content("Sign Up")
+  expect(page).to_not have_content('Sign Up')
 end
 
 Then 'I see validation errors' do
-  expect(page).to have_content("Signup failed")
+  expect(page).to have_content('Signup failed')
 end
 
 And 'I see the signup link' do
-  expect(page).to have_content("Sign Up")
+  expect(page).to have_content('Sign Up')
 end
 
 And 'I am a developer with credentials' do
@@ -49,33 +49,57 @@ And 'I am a developer with credentials' do
 end
 
 When 'I click sign in' do
-  click_on("Sign In")
+  click_on('Sign In')
 end
 
 Then 'I see the signin page' do
-  expect(page).to have_content("Sign in to your Account")
+  expect(page).to have_content('Sign in to your Account')
 end
 
 When 'I enter my credentials' do
   fill_in 'Email', with: @developer.email
-  fill_in 'Password', with: "ha$hrocket"
+  fill_in 'Password', with: 'ha$hrocket'
 end
 
 And 'I click the sign in button' do
-  within ".button" do
-    click_on "Sign In"
+  within '.button' do
+    click_on 'Sign In'
   end
 end
 
 And 'I do not see the signin link' do
-  expect(page).to_not have_content("Sign In")
+  expect(page).to_not have_content('Sign In')
 end
 
 When 'I enter my credentials incorrectly' do
   fill_in 'Email', with: @developer.email
-  fill_in 'Password', with: "foobar"
+  fill_in 'Password', with: 'foobar'
 end
 
 And 'I see the signin link' do
-  expect(page).to have_content("Sign In")
+  expect(page).to have_content('Sign In')
+end
+
+Given 'I am a signed in developer' do
+  steps %Q{
+    Given I am a developer with credentials
+    Given I see the homepage
+    When I click sign in
+    Then I see the signin page
+    When I enter my credentials
+    And I click the sign in button
+    Then I see my username in the upper right
+  }
+end
+
+And 'I click sign out' do
+  click_on 'Sign Out'
+end
+
+Then 'I should not see my username in the upper right' do
+  expect(page).to_not have_content 'johndoe'
+end
+
+And 'I do not see the signout link' do
+  expect(page).to_not have_content 'Sign Out'
 end
