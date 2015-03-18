@@ -6,7 +6,7 @@ class DevelopersController < ApplicationController
       sign_in developer
       redirect_to root_path
     else
-      flash.now.alert = "Signup failed"
+      flash[:alert] = developer.errors.full_messages
       render :new
     end
   end

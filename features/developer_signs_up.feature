@@ -17,6 +17,9 @@ Feature: Developer signs up
     When I click signup
     Then I see the signup page
     And I click create account
-    Then I see an error message "Signup failed"
+    Then I see an error message "Password can't be blank"
+    And I see an error message "Email can't be blank"
+    And I see an error message "Username can't be blank"
+    And I see an error message "Username is invalid"
     And I see the signup link
     And I see the signin link
