@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
       sign_in developer
       redirect_to root_path
     else
-      flash.now.alert = "Your email and password do not match"
+      flash.now.alert = "Signin failed"
       render :new
     end
   end

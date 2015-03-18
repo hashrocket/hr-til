@@ -18,6 +18,6 @@ Feature: Developer signs in
     Then I see the signin page
     When I enter my credentials incorrectly
     And I click the sign in button
-    Then I see an error message "Your email and password do not match"
+    Then I see an error message "Signin failed"
     And I see the signup link
     And I see the signin link
