@@ -1,8 +1,3 @@
-Given 'I see the homepage' do
-  visit root_path
-  expect(page).to have_content('Hashrocket TIL')
-end
-
 When 'I click signup' do
   click_on 'Sign Up'
 end

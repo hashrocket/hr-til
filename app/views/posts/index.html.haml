@@ -1,7 +1,12 @@
+%h3 All Posts
+
 .content
   - posts.each do |p|
-    %strong= p.developer_username
-    %br
-    = p.body
-    %br
-    %br
+    %article
+      %strong= p.developer_username
+      = '/'
+      %strong= p.created_at.strftime('%A, %b %d')
+      %br
+      = p.body
+      %br
+      %br
