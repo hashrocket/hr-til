@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     if post.save
       redirect_to root_path
     else
-      flash.now.alert = "TIL Creation failed"
+      flash[:alert] = post.errors.full_messages
       render :new
     end
   end
