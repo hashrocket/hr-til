@@ -61,7 +61,7 @@ When 'I enter my credentials' do
 end
 
 And 'I click the sign in button' do
-  within '.button' do
+  within 'form' do
     click_on 'Sign In'
   end
 end
