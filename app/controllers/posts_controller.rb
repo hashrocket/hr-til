@@ -18,6 +18,11 @@ class PostsController < ApplicationController
     self.posts = Post.order created_at: :desc
   end
 
+  def sorted_tags
+    Tag.order name: :asc
+  end
+  helper_method :sorted_tags
+
   private
 
   def post_params
