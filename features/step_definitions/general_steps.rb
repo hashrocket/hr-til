@@ -8,3 +8,11 @@ Then(/^I see an error message "(.*?)"$/) do |error|
     expect(page).to have_content(error)
   end
 end
+
+Given 'I am a visitor' do
+  # noop
+end
+
+When 'I try to add a post' do
+  visit new_post_path
+end

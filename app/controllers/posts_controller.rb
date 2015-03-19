@@ -13,7 +13,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    self.posts = Post.all
+    self.posts = Post.order created_at: :desc
   end
 
   private
