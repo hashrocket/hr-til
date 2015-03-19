@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
 
   validates_presence_of :body
+  validates_presence_of :tag
   validate :body_size
   belongs_to :developer
   belongs_to :tag

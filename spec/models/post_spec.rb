@@ -5,24 +5,17 @@ describe Post do
   let (:tag) { create(:tag) }
 
   it 'accepts valid parameters' do
-    post = create(:post, developer: developer)
+    post = create(:post, developer: developer, tag: tag)
 
     expect(post).to be
     expect(post).to be_valid
     expect(post.developer_username).to eq('johndoe')
+    expect(post.tag_name).to eq('Phantomjs')
   end
 
   it 'validates body length' do
     post = Post.create(developer: developer, body: 'word ' * 201)
 
     expect(post).to_not be_valid
-  end
-
-  it 'belongs to a tag' do
-    post = create(:post, developer: developer, tag_id: tag.id)
-
-    expect(post).to be
-    expect(post.tag_id).to eq(tag.id)
-    expect(post.tag_name).to eq('Phantomjs')
   end
 end

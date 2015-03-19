@@ -24,6 +24,12 @@ And 'I select a tag' do
   end
 end
 
+And 'I select no tag' do
+  within '.new_post' do
+    select "", from: 'Tag'
+  end
+end
+
 When 'I click create' do
   within '.new_post' do
     click_on 'Create TIL'

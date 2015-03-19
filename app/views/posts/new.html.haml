@@ -4,5 +4,5 @@
   = d.label :body
   = d.text_field :body
   = d.label :tag_id, 'Tag'
-  = d.collection_select :tag_id, Tag.all, :id, :name
+  = d.collection_select :tag_id, Tag.all, :id, :name, include_blank: ""
   = d.submit "Create TIL"
