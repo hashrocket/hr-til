@@ -3,4 +3,6 @@
 = form_for post do |d|
   = d.label :body
   = d.text_field :body
-  .button= d.submit "Create TIL"
+  = d.label :tag_id, 'Tag'
+  = d.collection_select :tag_id, Tag.all, :id, :name
+  = d.submit "Create TIL"

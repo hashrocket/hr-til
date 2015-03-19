@@ -2,12 +2,15 @@ Feature: Developer creates post
 
   Scenario: Happy path
     Given I am a signed in developer
+    And a tag exists
     When I click create TIL
     Then I see a form for TIL
     When I enter information into that form
+    And I select a tag
     And I click create
     Then I see the homepage
     And I see the post I created
+    And I see the tag I selected
 
   Scenario: No post body
     Given I am a signed in developer
