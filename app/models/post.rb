@@ -3,11 +3,16 @@ class Post < ActiveRecord::Base
   validates_presence_of :body
   validate :body_size
   belongs_to :developer
+  belongs_to :tag
 
   MAX_WORDS = 200
 
   def developer_username
     developer.username
+  end
+
+  def tag_name
+    tag.name
   end
 
   private
