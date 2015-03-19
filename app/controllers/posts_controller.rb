@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   expose(:post, attributes: :post_params)
   expose(:posts) { developer.posts }
 
+  before_filter :require_developer, except: :index
+
   def create
     if post.save
       redirect_to root_path
