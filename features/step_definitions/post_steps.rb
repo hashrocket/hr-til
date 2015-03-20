@@ -14,22 +14,22 @@ end
 
 When 'I enter information into that form' do
   topic = %w(rails ember karate).sample
-  @content = "Today I learned about #{topic}"
+  @content = 'Today I learned about #{topic}'
   fill_in 'Body', with: @content
 end
 
 When 'I enter information with markdown headers into that form' do
-  markdown_content = "##### Small Header"
+  markdown_content = '##### Small Header'
   fill_in 'Body', with: markdown_content
 end
 
 When 'I enter information with markdown inline code into that form' do
-  markdown_content = "`killer robot attack`"
+  markdown_content = '`killer robot attack`'
   fill_in 'Body', with: markdown_content
 end
 
 When 'I enter information with markdown bullets into that form' do
-  markdown_content = "* item from a list of items"
+  markdown_content = '* item from a list of items'
   fill_in 'Body', with: markdown_content
 end
 
@@ -41,7 +41,7 @@ end
 
 And 'I select no tag' do
   within '.new_post' do
-    select "", from: 'Tag'
+    select '', from: 'Tag'
   end
 end
 
@@ -52,33 +52,33 @@ When 'I click create' do
 end
 
 Then 'I see the post I created' do
-  within 'article#0' do
+  within 'article:first-child' do
     expect(page).to have_content @developer.username
     expect(page).to have_content @content
   end
 end
 
 Then 'I see the markdown headers I created' do
-  within 'article#0 h5' do
-    expect(page).to have_content "Small Header"
+  within 'article:first-child h5' do
+    expect(page).to have_content 'Small Header'
   end
 end
 
 Then 'I see the markdown inline code I created' do
-  within 'article#0 code' do
-    expect(page).to have_content "killer robot attack"
+  within 'article:first-child code' do
+    expect(page).to have_content 'killer robot attack'
   end
 end
 
 Then 'I see the markdown bullets I created' do
-  within 'article#0 li' do
-    expect(page).to have_content "item from a list of items"
+  within 'article:first-child li' do
+    expect(page).to have_content 'item from a list of items'
   end
 end
 
 And 'I see the tag I selected' do
-  within 'article#0' do
-    expect(page).to have_content("Tagged: Phantomjs")
+  within 'article:first-child' do
+    expect(page).to have_content('Tagged: Phantomjs')
   end
 end
 
@@ -95,29 +95,25 @@ Given 'there exist multiple TILs' do
 end
 
 Then 'I see TILs sorted by date/time' do
-  expect(@rails_post).to be
-  expect(@ember_post).to be
-  expect(@karate_post).to be
-
   within 'h3' do
     expect(page).to have_content('All Posts')
   end
 
-  within 'article#0' do
+  within 'article:first-child' do
     expect(page).to have_content('karatedude')
     expect(page).to have_content(@karate_post.created_at.strftime('%A, %b %d'))
     expect(page).to have_content('Today I learned about Karate')
     expect(page).to have_content('Tagged: Phantomjs')
   end
 
-  within 'article#1' do
+  within 'article:nth-child(2)' do
     expect(page).to have_content('embergal')
     expect(page).to have_content(@ember_post.created_at.strftime('%A, %b %d'))
     expect(page).to have_content('Today I learned about Ember')
     expect(page).to have_content('Tagged: Phantomjs')
   end
 
-  within "article#2" do
+  within 'article:last-child' do
     expect(page).to have_content('railsguy')
     expect(page).to have_content(@rails_post.created_at.strftime('%A, %b %d'))
     expect(page).to have_content('Today I learned about Rails')

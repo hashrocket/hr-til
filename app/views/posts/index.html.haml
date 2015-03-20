@@ -2,7 +2,7 @@
 
 .content
   - posts.each_with_index do |p, i|
-    %article{id: "#{i}"}
+    %article
       %strong= p.developer_username
       = '/'
       %strong= p.created_at.strftime('%A, %b %d')
