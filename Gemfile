@@ -12,6 +12,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'haml-rails'
 gem 'authem'
 gem 'decent_exposure'
+gem 'redcarpet'
 
 group :development, :test do
   gem 'byebug'

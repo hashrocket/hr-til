@@ -7,7 +7,7 @@
       = '/'
       %strong= p.created_at.strftime('%A, %b %d')
       %br
-      = p.body
+      = raw markdown.render p.body
       %br
       %em= "Tagged: #{p.tag_name}"
       %br

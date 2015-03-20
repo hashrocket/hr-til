@@ -18,6 +18,21 @@ When 'I enter information into that form' do
   fill_in 'Body', with: @content
 end
 
+When 'I enter information with markdown headers into that form' do
+  markdown_content = "##### Small Header"
+  fill_in 'Body', with: markdown_content
+end
+
+When 'I enter information with markdown inline code into that form' do
+  markdown_content = "`killer robot attack`"
+  fill_in 'Body', with: markdown_content
+end
+
+When 'I enter information with markdown bullets into that form' do
+  markdown_content = "* item from a list of items"
+  fill_in 'Body', with: markdown_content
+end
+
 And 'I select a tag' do
   within '.new_post' do
     select @tag.name, from: 'Tag'
@@ -37,11 +52,27 @@ When 'I click create' do
 end
 
 Then 'I see the post I created' do
-  within '.content' do
-    expect(@content).to be
-
+  within 'article#0' do
     expect(page).to have_content @developer.username
     expect(page).to have_content @content
+  end
+end
+
+Then 'I see the markdown headers I created' do
+  within 'article#0 h5' do
+    expect(page).to have_content "Small Header"
+  end
+end
+
+Then 'I see the markdown inline code I created' do
+  within 'article#0 code' do
+    expect(page).to have_content "killer robot attack"
+  end
+end
+
+Then 'I see the markdown bullets I created' do
+  within 'article#0 li' do
+    expect(page).to have_content "item from a list of items"
   end
 end
 
