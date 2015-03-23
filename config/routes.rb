@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post 'account/signin' => 'sessions#create'
   get 'account/signout' => 'sessions#destroy'
   resources :posts, only: [:new, :create]
+  get '/:name', to: 'tags#show'
 end

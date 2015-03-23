@@ -1,0 +1,19 @@
+.content
+  - unless @post_days.any?
+    No posts.
+  - @post_days.each do |date, posts|
+    .post_group
+      %em
+        - if date.today?
+          Today
+        - else
+          = date.strftime('%A, %b %d')
+      %br
+      %br
+      - posts.each do |post|
+        .post
+          %strong= post.developer_username
+          = raw markdown.render post.body
+          = "##{post.tag_name}"
+          %br
+          %br

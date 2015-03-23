@@ -1,18 +1,3 @@
 %h3 All Posts
 
-.content
-  - @post_days.each do |date, posts|
-    %article
-      %em
-        - if date.today?
-          Today
-        - else
-          = date.strftime('%A, %b %d')
-      %br
-      %br
-      - posts.each do |post|
-        %strong= post.developer_username
-        = raw markdown.render post.body
-        = "##{post.tag_name}"
-        %br
-        %br
+= render 'post'

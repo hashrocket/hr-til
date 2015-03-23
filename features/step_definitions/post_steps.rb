@@ -8,7 +8,7 @@ Then 'I see a form for TIL' do
   end
 end
 
-And 'a tag exists' do
+Given 'a tag exists' do
   @tag = FactoryGirl.create(:tag)
 end
 
@@ -52,32 +52,32 @@ When 'I click create' do
 end
 
 Then 'I see the post I created' do
-  within 'article' do
+  within '.post_group .post' do
     expect(page).to have_content @developer.username
     expect(page).to have_content @content
   end
 end
 
 Then 'I see the markdown headers I created' do
-  within 'article h5' do
+  within '.post_group .post h5' do
     expect(page).to have_content 'Small Header'
   end
 end
 
 Then 'I see the markdown inline code I created' do
-  within 'article code' do
+  within '.post_group .post code' do
     expect(page).to have_content 'killer robot attack'
   end
 end
 
 Then 'I see the markdown bullets I created' do
-  within 'article li' do
+  within '.post_group .post li' do
     expect(page).to have_content 'item from a list of items'
   end
 end
 
 And 'I see the tag I selected' do
-  within 'article' do
+  within '.post_group .post' do
     expect(page).to have_content('#phantomjs')
   end
 end
@@ -90,19 +90,39 @@ Given 'there exist TILs for today, yesterday, and last week' do
 
   tag = FactoryGirl.create(:tag)
 
-  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate', tag_id: tag.id)
-  @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure', tag_id: tag.id)
-  @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember', tag_id: tag.id)
-  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails', tag_id: tag.id)
+  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate', tag: tag)
+  @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure', tag: tag)
+  @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember', tag: tag)
+  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails', tag: tag)
+end
+
+Given 'there are TILs with that tag' do
+  developer = FactoryGirl.create(:developer)
+  3.times { FactoryGirl.create(:post, developer: developer, tag: @tag) }
+end
+
+Given 'there are no TILs with that tag' do
+  # noop
+end
+
+When "I visit url http://domain/phantomjs" do
+  visit '/phantomjs'
+end
+
+Then 'I see all posts tagged phantomjs' do
+  within 'h3' do
+    expect(page).to have_content('Phantomjs')
+  end
+
+  expect(page).to have_selector '.post', count: 3
 end
 
 Then 'I see TILs sorted and grouped by date/time' do
-  save_and_open_page
   within 'h3' do
     expect(page).to have_content('All Posts')
   end
 
-  within '.content article:first-child' do
+  within '.content .post_group:first-child' do
     expect(page).to have_content('Today')
 
     expect(page).to have_content('karatedude')
@@ -110,7 +130,7 @@ Then 'I see TILs sorted and grouped by date/time' do
     expect(page).to have_content('#phantomjs')
   end
 
-  within '.content article:nth-child(2)' do
+  within '.content .post_group:nth-child(2)' do
     expect(page).to have_content(@clojure_post.created_at.strftime('%A, %b %d'))
 
     expect(page).to have_content('clojureman')
@@ -122,7 +142,7 @@ Then 'I see TILs sorted and grouped by date/time' do
     expect(page).to have_content('#phantomjs')
   end
 
-  within '.content article:last-child' do
+  within '.content .post_group:last-child' do
     expect(page).to have_content(@rails_post.created_at.strftime('%A, %b %d'))
 
     expect(page).to have_content('railsguy')
