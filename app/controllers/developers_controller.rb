@@ -11,6 +11,12 @@ class DevelopersController < ApplicationController
     end
   end
 
+  def show
+    @developer = Developer.find_by_username(params[:username])
+    posts = @developer.posts.order created_at: :desc
+    @post_days = posts.group_by { |p| p.created_at.beginning_of_day }
+  end
+
   private
 
   def developer_params

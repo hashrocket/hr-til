@@ -11,3 +11,9 @@ Feature: Visitor views posts
     And no posts exist
     When I visit the homepage
     Then I see a message "No posts."
+
+  Scenario: Visitor views posts by author
+    Given I am a visitor
+    And posts exist for a given author
+    When I visit the url 'http://domain/author/username'
+    Then I see all the posts for that author

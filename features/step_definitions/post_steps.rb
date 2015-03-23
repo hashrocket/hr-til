@@ -181,3 +181,22 @@ When 'I enter a long body into that form' do
   long_body = 'word ' * 201
   fill_in 'Body', with: long_body
 end
+
+Given 'posts exist for a given author' do
+  developer = FactoryGirl.create(:developer, username: 'prolificposter')
+  tag = FactoryGirl.create(:tag)
+
+  3.times { FactoryGirl.create(:post, developer: developer, tag: tag) }
+end
+
+When "I visit the url 'http://domain/author/username'" do
+  visit "author/prolificposter"
+end
+
+Then 'I see all the posts for that author' do
+  within 'h3' do
+    expect(page).to have_content('Prolificposter')
+  end
+
+  expect(page).to have_selector '.post', count: 3
+end
