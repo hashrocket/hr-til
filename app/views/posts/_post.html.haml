@@ -14,6 +14,6 @@
         .post
           %strong= post.developer_username
           = raw markdown.render post.body
-          = "##{post.tag_name}"
+          = link_to "##{post.tag_name}", "/#{post.tag_name}"
           %br
           %br
