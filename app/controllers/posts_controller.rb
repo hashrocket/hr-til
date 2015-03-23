@@ -1,4 +1,7 @@
 class PostsController < ApplicationController
+
+  include MarkdownHelper
+
   expose(:developer) { current_developer }
   expose(:post, attributes: :post_params)
   expose(:posts) { developer.posts }
