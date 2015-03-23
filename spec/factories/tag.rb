@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :tag do
-    name "Phantomjs"
+    name "phantomjs"
   end
 end

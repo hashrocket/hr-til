@@ -18,7 +18,8 @@ class PostsController < ApplicationController
   end
 
   def index
-    self.posts = Post.order created_at: :desc
+    posts = Post.order created_at: :desc
+    @post_days = posts.group_by { |p| p.created_at.beginning_of_day }
   end
 
   def sorted_tags

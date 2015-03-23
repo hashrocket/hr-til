@@ -10,7 +10,7 @@ describe Post do
     expect(post).to be
     expect(post).to be_valid
     expect(post.developer_username).to eq('johndoe')
-    expect(post.tag_name).to eq('Phantomjs')
+    expect(post.tag_name).to eq('phantomjs')
   end
 
   it 'validates body length' do

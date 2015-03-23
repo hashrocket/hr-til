@@ -1,14 +1,18 @@
 %h3 All Posts
 
 .content
-  - posts.each_with_index do |p, i|
+  - @post_days.each do |date, posts|
     %article
-      %strong= p.developer_username
-      = '/'
-      %strong= p.created_at.strftime('%A, %b %d')
-      %br
-      = raw markdown.render p.body
-      %br
-      %em= "Tagged: #{p.tag_name}"
+      %em
+        - if date.today?
+          Today
+        - else
+          = date.strftime('%A, %b %d')
       %br
       %br
+      - posts.each do |post|
+        %strong= post.developer_username
+        = raw markdown.render post.body
+        = "##{post.tag_name}"
+        %br
+        %br

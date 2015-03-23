@@ -6,6 +6,6 @@ describe Tag do
 
     expect(tag).to be
     expect(tag).to be_valid
-    expect(tag.name).to eq("Phantomjs")
+    expect(tag.name).to eq("phantomjs")
   end
 end
