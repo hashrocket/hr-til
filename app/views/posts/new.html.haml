@@ -2,7 +2,7 @@
 
 = form_for post do |d|
   = d.label :body
-  = d.text_field :body
+  = d.text_area :body, size: "90x30"
   = d.label :tag_id, 'Tag'
   = d.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
   = d.submit "Create TIL"
