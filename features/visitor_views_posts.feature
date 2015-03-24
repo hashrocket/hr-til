@@ -17,3 +17,10 @@ Feature: Visitor views posts
     And posts exist for a given author
     When I visit the url 'http://domain/author/username'
     Then I see all the posts for that author
+
+  Scenario: Visitor views posts by author via link
+    Given I am a visitor
+    And posts exist for a given author
+    When I visit the homepage
+    And I click that author's username
+    Then I see all the posts for that author

@@ -193,6 +193,12 @@ When "I visit the url 'http://domain/author/username'" do
   visit "author/prolificposter"
 end
 
+When "I click that author's username" do
+  within '.content .post_group' do
+    first('strong').click_on('prolificposter')
+  end
+end
+
 Then 'I see all the posts for that author' do
   within 'h3' do
     expect(page).to have_content('Prolificposter')
