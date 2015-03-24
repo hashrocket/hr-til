@@ -68,33 +68,39 @@ Then 'I see the post I created' do
 end
 
 Then 'I see a title created from the first line of the body' do
-  within '.post_group .post h4' do
+  within '.post_group .post .title' do
     expect(page).to have_content('I learned how to split a string')
     expect(page).to_not have_content('And other things')
   end
 end
 
 Then 'I see a title created from the first fifty characters' do
-  within '.post_group .post h4' do
+  within '.post_group .post .title' do
     expect(page).to have_content('code code code code code code code code code code...')
     expect(page).to_not have_content(' extra content')
   end
 end
 
 Then 'I see the markdown headers I created' do
-  within '.post_group .post h5' do
+  within '.post_group .post .body h5' do
     expect(page).to have_content 'Small Header'
   end
 end
 
 Then 'I see the markdown inline code I created' do
-  within '.post_group .post code' do
+  within '.post_group .post .body code' do
+    expect(page).to have_content 'killer robot attack'
+  end
+end
+
+Then 'I see the title with inline code' do
+  within '.post_group .post .title code' do
     expect(page).to have_content 'killer robot attack'
   end
 end
 
 Then 'I see the markdown bullets I created' do
-  within '.post_group .post li' do
+  within '.post_group .post .body li' do
     expect(page).to have_content 'item from a list of items'
   end
 end
@@ -218,7 +224,7 @@ end
 
 When "I click that author's username" do
   within '.content .post_group' do
-    first('strong').click_on('prolificposter')
+    first('.username').click_on('prolificposter')
   end
 end
 

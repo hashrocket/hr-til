@@ -12,11 +12,11 @@
       %br
       - posts.each do |post|
         .post
+          - name = post.developer_username
+          .username= link_to name, "/author/#{name}"
           %strong
-            - name = post.developer_username
-            = link_to name, "/author/#{name}"
-          %h4= post.title
-          = raw markdown.render post.body
+            .title= raw markdown.render post.title
+          .body= raw markdown.render post.body
           = link_to "##{post.tag_name}", "/#{post.tag_name}"
           %br
           %br
