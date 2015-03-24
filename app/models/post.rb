@@ -3,8 +3,11 @@ class Post < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :tag
   validate :body_size
+
   belongs_to :developer
   belongs_to :tag
+
+  before_save :create_title
 
   MAX_WORDS = 200
 
@@ -17,6 +20,10 @@ class Post < ActiveRecord::Base
   end
 
   private
+
+  def create_title
+    self.title = body.split("\n").first
+  end
 
   def body_size
     if body && body.split(' ').size > MAX_WORDS

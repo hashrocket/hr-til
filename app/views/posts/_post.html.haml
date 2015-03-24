@@ -15,6 +15,7 @@
           %strong
             - name = post.developer_username
             = link_to name, "/author/#{name}"
+          %h4= post.title
           = raw markdown.render post.body
           = link_to "##{post.tag_name}", "/#{post.tag_name}"
           %br
