@@ -14,8 +14,20 @@ describe Post do
   end
 
   it 'validates body length' do
-    post = Post.create(developer: developer, body: 'word ' * 201)
+    post = Post.create(developer: developer, tag: tag, body: 'word ' * 201)
 
     expect(post).to_not be_valid
+  end
+
+  it 'creates a title from the first newline' do
+    post = Post.create(developer: developer, tag: tag, body: "First line\nSecond line")
+
+    expect(post.title).to eq('First line')
+  end
+
+  it 'creates a title from the first fifty chararcters' do
+    post = Post.create(developer: developer, tag: tag, body: "code " * 10 + "extra content")
+
+    expect(post.title).to eq('code code code code code code code code code code...')
   end
 end

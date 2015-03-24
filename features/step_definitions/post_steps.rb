@@ -22,6 +22,11 @@ When 'I enter a body with the first line less than fifty characters' do
   fill_in 'Body', with: "I learned how to split a string\nAnd other things"
 end
 
+When 'I enter a body with the first line greater than fifty characters' do
+  long_body = 'code ' * 10 + "extra content"
+  fill_in 'Body', with: long_body
+end
+
 When 'I enter information with markdown headers into that form' do
   markdown_content = '##### Small Header'
   fill_in 'Body', with: markdown_content
@@ -66,6 +71,13 @@ Then 'I see a title created from the first line of the body' do
   within '.post_group .post h4' do
     expect(page).to have_content('I learned how to split a string')
     expect(page).to_not have_content('And other things')
+  end
+end
+
+Then 'I see a title created from the first fifty characters' do
+  within '.post_group .post h4' do
+    expect(page).to have_content('code code code code code code code code code code...')
+    expect(page).to_not have_content(' extra content')
   end
 end
 
