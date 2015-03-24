@@ -26,7 +26,7 @@ class Post < ActiveRecord::Base
     self.title = if first_line.size <= 50
                    first_line
                  else
-                   first_line[0..49].chop + '...'
+                   first_line[0..49].strip + '...'
                  end
   end
 
