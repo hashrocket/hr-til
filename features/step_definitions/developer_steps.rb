@@ -9,11 +9,11 @@ Then 'I see the signup page' do
 end
 
 When 'I enter a valid username' do
-  fill_in 'Username', with: 'johndoe'
+  fill_in 'Username', with: 'username'
 end
 
 And 'I enter a valid email' do
-  fill_in 'Email', with: 'johndoe@hashrocket.com'
+  fill_in 'Email', with: 'developer@hashrocket.com'
 end
 
 And 'I enter a valid password' do
@@ -26,7 +26,7 @@ When 'I click create account' do
 end
 
 Then 'I see my username in the upper right' do
-  expect(page).to have_content 'johndoe'
+  expect(page).to have_content 'username'
 end
 
 And 'I do not see the signup link' do
@@ -96,7 +96,7 @@ And 'I click sign out' do
 end
 
 Then 'I should not see my username in the upper right' do
-  expect(page).to_not have_content 'johndoe'
+  expect(page).to_not have_content 'developer'
 end
 
 And 'I do not see the signout link' do

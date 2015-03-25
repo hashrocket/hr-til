@@ -4,7 +4,10 @@ FactoryGirl.define do
       "developer#{n}@hashrocket.com"
     end
 
-    username "johndoe"
+    sequence :username do |n|
+      "username#{n}"
+    end
+
     password "ha$hrocket"
     password_confirmation "ha$hrocket"
   end
