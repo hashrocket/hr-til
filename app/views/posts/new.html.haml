@@ -1,8 +1,8 @@
 %h3 Create TIL
 
-= form_for post do |d|
-  = d.label :body
-  = d.text_area :body, size: "90x30"
-  = d.label :tag_id, 'Tag'
-  = d.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
-  = d.submit "Create TIL"
+= form_for post do |f|
+  = f.label :body
+  = f.text_area :body, size: "90x30"
+  = f.label :tag_id, 'Tag'
+  = f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
+  = f.submit "Create TIL"

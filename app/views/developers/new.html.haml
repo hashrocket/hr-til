@@ -1,12 +1,12 @@
 %h3 Create an Account
 
-= form_for developer do |d|
-  = d.label :username
-  = d.text_field :username
-  = d.label :email
-  = d.text_field :email
-  = d.label :password
-  = d.password_field :password
-  = d.label :password_confirmation, 'Password Confirmation'
-  = d.password_field :password_confirmation
-  = d.submit "Create Account"
+= form_for developer do |f|
+  = f.label :username
+  = f.text_field :username
+  = f.label :email
+  = f.text_field :email
+  = f.label :password
+  = f.password_field :password
+  = f.label :password_confirmation, 'Password Confirmation'
+  = f.password_field :password_confirmation
+  = f.submit "Create Account"
