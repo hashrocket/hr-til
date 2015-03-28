@@ -60,8 +60,10 @@ Then 'I see the signin page' do
 end
 
 When 'I enter my credentials' do
-  fill_in 'Email', with: @developer.email
-  fill_in 'Password', with: 'ha$hrocket'
+  within 'form' do
+    fill_in 'Email', with: @developer.email
+    fill_in 'Password', with: @developer.password
+  end
 end
 
 And 'I click the sign in button' do
@@ -71,16 +73,18 @@ And 'I click the sign in button' do
 end
 
 And 'I do not see the signin link' do
-  expect(page).to_not have_content('Sign In')
+  expect(page).to_not have_link 'Sign In'
 end
 
 When 'I enter my credentials incorrectly' do
-  fill_in 'Email', with: @developer.email
-  fill_in 'Password', with: 'foobar'
+  within 'form' do
+    fill_in 'Email', with: @developer.email
+    fill_in 'Password', with: 'foobar'
+  end
 end
 
 And 'I see the signin link' do
-  expect(page).to have_content('Sign In')
+  expect(page).to have_link 'Sign In'
 end
 
 Given 'I am a signed in developer' do
@@ -104,5 +108,5 @@ Then 'I should not see my username in the upper right' do
 end
 
 And 'I do not see the signout link' do
-  expect(page).to_not have_content 'Sign Out'
+  expect(page).to_not have_link 'Sign Out'
 end
