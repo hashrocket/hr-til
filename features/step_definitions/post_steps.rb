@@ -140,14 +140,9 @@ Given 'there are TILs with that tag' do
   3.times { FactoryGirl.create(:post, developer: developer, tag: @tag) }
 end
 
-Given 'there is a TIL with that tag' do
-  developer = FactoryGirl.create(:developer)
-  FactoryGirl.create(:post, developer: developer, tag: @tag)
-end
-
 When 'I click the tag' do
-  within '.content .post_group .post' do
-    click_on '#phantomjs'
+  within '.content .post_group' do
+    first('.post').click_on '#phantomjs'
   end
 end
 
@@ -159,17 +154,9 @@ When "I visit '/that tag'" do
   visit '/phantomjs'
 end
 
-Then 'I see the post tagged with that tag' do
-  within 'h3' do
-    expect(page).to have_content('Phantomjs')
-  end
-
-  expect(page).to have_selector '.post', count: 1
-end
-
 Then 'I see all posts tagged with that tag' do
   within 'h3' do
-    expect(page).to have_content('Phantomjs')
+    expect(page).to have_content 'Phantomjs'
   end
 
   expect(page).to have_selector '.post', count: 3
