@@ -7,7 +7,7 @@ end
 
 Then(/^I see an error message "(.*?)"$/) do |error|
   within '#flash' do
-    expect(page).to have_content(error)
+    expect(page).to have_content error
   end
 end
 

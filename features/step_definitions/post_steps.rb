@@ -13,33 +13,43 @@ Given 'a tag exists' do
 end
 
 When 'I enter information into that form' do
-  topic = %w(rails ember karate).sample
-  @content = "I learned about #{topic}"
-  fill_in 'Body', with: @content
+  within 'form' do
+    fill_in 'Body', with: 'I learned about Rails'
+  end
 end
 
 When 'I enter a body with the first line less than fifty characters' do
-  fill_in 'Body', with: "I learned how to split a string\nAnd other things"
+  within 'form' do
+    fill_in 'Body', with: "I learned how to split a string\nAnd other things"
+  end
 end
 
 When 'I enter a body with the first line greater than fifty characters' do
-  long_body = 'code ' * 10 + "extra content"
-  fill_in 'Body', with: long_body
+  within 'form' do
+    long_body = 'word ' * 10 + "extra content"
+    fill_in 'Body', with: long_body
+  end
 end
 
 When 'I enter information with markdown headers into that form' do
-  markdown_content = '##### Small Header'
-  fill_in 'Body', with: markdown_content
+  within 'form' do
+    markdown_content = '##### Small Header'
+    fill_in 'Body', with: markdown_content
+  end
 end
 
 When 'I enter information with markdown inline code into that form' do
-  markdown_content = '`killer robot attack`'
-  fill_in 'Body', with: markdown_content
+  within 'form' do
+    markdown_content = '`killer robot attack`'
+    fill_in 'Body', with: markdown_content
+  end
 end
 
 When 'I enter information with markdown bullets into that form' do
-  markdown_content = '* item from a list of items'
-  fill_in 'Body', with: markdown_content
+  within 'form' do
+    markdown_content = '* item from a list of items'
+    fill_in 'Body', with: markdown_content
+  end
 end
 
 And 'I select a tag' do
@@ -62,22 +72,22 @@ end
 
 Then 'I see the post I created' do
   within '.post_group .post' do
-    expect(page).to have_content @developer.username
-    expect(page).to have_content @content
+    expect(page).to have_content "username1"
+    expect(page).to have_content 'I learned about Rails'
   end
 end
 
 Then 'I see a title created from the first line of the body' do
   within '.post_group .post .title' do
-    expect(page).to have_content('I learned how to split a string')
-    expect(page).to_not have_content('And other things')
+    expect(page).to have_content 'I learned how to split a string'
+    expect(page).to_not have_content 'And other things'
   end
 end
 
 Then 'I see a title created from the first fifty characters' do
   within '.post_group .post .title' do
-    expect(page).to have_content('code code code code code code code code code code...')
-    expect(page).to_not have_content(' extra content')
+    expect(page).to have_content 'word word word word word word word word word word...'
+    expect(page).to_not have_content ' extra content'
   end
 end
 
@@ -107,7 +117,7 @@ end
 
 And 'I see the tag I selected' do
   within '.post_group .post' do
-    expect(page).to have_content('#phantomjs')
+    expect(page).to have_content '#phantomjs'
   end
 end
 
