@@ -1,6 +1,8 @@
 Given(/^I (see|visit) the homepage$/) do |_|
   visit root_path
-  expect(page).to have_content('Hashrocket TIL')
+  within 'body header h1' do
+    expect(page).to have_content('Hashrocket TIL')
+  end
 end
 
 Then(/^I see an error message "(.*?)"$/) do |error|

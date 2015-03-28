@@ -4,25 +4,33 @@ end
 
 Then 'I see the signup page' do
   within 'h3' do
-    expect(page).to have_content('Create an Account')
+    expect(page).to have_content 'Create an Account'
   end
 end
 
 When 'I enter a valid username' do
-  fill_in 'Username', with: 'username'
+  within 'form' do
+    fill_in 'Username', with: 'username'
+  end
 end
 
 And 'I enter a valid email' do
-  fill_in 'Email', with: 'developer@hashrocket.com'
+  within 'form' do
+    fill_in 'Email', with: 'developer@hashrocket.com'
+  end
 end
 
 And 'I enter a valid password' do
-  fill_in 'Password', with: 'ha$hrocket'
-  fill_in 'Password Confirmation', with: 'ha$hrocket'
+  within 'form' do
+    fill_in 'Password', with: 'ha$hrocket'
+    fill_in 'Password Confirmation', with: 'ha$hrocket'
+  end
 end
 
 When 'I click create account' do
-  click_on 'Create Account'
+  within 'form' do
+    click_on 'Create Account'
+  end
 end
 
 Then 'I see my username in the upper right' do
@@ -30,15 +38,11 @@ Then 'I see my username in the upper right' do
 end
 
 And 'I do not see the signup link' do
-  expect(page).to_not have_content('Sign Up')
-end
-
-Then 'I see validation errors' do
-  expect(page).to have_content('Signup failed')
+  expect(page).to_not have_link 'Sign Up'
 end
 
 And 'I see the signup link' do
-  expect(page).to have_content('Sign Up')
+  expect(page).to have_link 'Sign Up'
 end
 
 And 'I am a developer with credentials' do
@@ -46,12 +50,12 @@ And 'I am a developer with credentials' do
 end
 
 When 'I click sign in' do
-  click_on('Sign In')
+  click_on 'Sign In'
 end
 
 Then 'I see the signin page' do
   within 'h3' do
-    expect(page).to have_content('Sign in to your Account')
+    expect(page).to have_content 'Sign in to your Account'
   end
 end
 
