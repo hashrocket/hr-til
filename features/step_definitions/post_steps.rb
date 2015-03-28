@@ -177,42 +177,42 @@ end
 
 Then 'I see TILs sorted and grouped by date/time' do
   within 'h3' do
-    expect(page).to have_content('All Posts')
+    expect(page).to have_content 'All Posts'
   end
 
   within '.content .post_group:first-child' do
-    expect(page).to have_content('Today')
+    expect(page).to have_content 'Today'
 
-    expect(page).to have_content('karatedude')
-    expect(page).to have_content('I learned about Karate')
-    expect(page).to have_content('#phantomjs')
+    expect(page).to have_content 'karatedude'
+    expect(page).to have_content 'I learned about Karate'
+    expect(page).to have_content '#phantomjs'
   end
 
   within '.content .post_group:nth-child(2)' do
-    expect(page).to have_content(@clojure_post.created_at.strftime('%A, %b %d'))
+    expect(page).to have_content @clojure_post.created_at.strftime('%A, %b %d')
 
-    expect(page).to have_content('clojureman')
-    expect(page).to have_content('I learned about Clojure')
-    expect(page).to have_content('#phantomjs')
+    expect(page).to have_content 'clojureman'
+    expect(page).to have_content 'I learned about Clojure'
+    expect(page).to have_content '#phantomjs'
 
-    expect(page).to have_content('embergal')
-    expect(page).to have_content('I learned about Ember')
-    expect(page).to have_content('#phantomjs')
+    expect(page).to have_content 'embergal'
+    expect(page).to have_content 'I learned about Ember'
+    expect(page).to have_content '#phantomjs'
   end
 
   within '.content .post_group:last-child' do
-    expect(page).to have_content(@rails_post.created_at.strftime('%A, %b %d'))
+    expect(page).to have_content @rails_post.created_at.strftime('%A, %b %d')
 
-    expect(page).to have_content('railsguy')
-    expect(page).to have_content(@rails_post.created_at.strftime('%A, %b %d'))
-    expect(page).to have_content('I learned about Rails')
-    expect(page).to have_content('#phantomjs')
+    expect(page).to have_content 'railsguy'
+    expect(page).to have_content @rails_post.created_at.strftime('%A, %b %d')
+    expect(page).to have_content 'I learned about Rails'
+    expect(page).to have_content '#phantomjs'
   end
 end
 
 Then(/^I see today's posts in a group labeled "(.*?)"$/) do |label|
   within '.content' do
-    expect(page).to have_content(label)
+    expect(page).to have_content label
   end
 end
 
@@ -234,13 +234,13 @@ end
 
 When "I click that author's username" do
   within '.content .post_group' do
-    first('.username').click_on('prolificposter')
+    first('.username').click_on 'prolificposter'
   end
 end
 
 Then 'I see all the posts for that author' do
   within 'h3' do
-    expect(page).to have_content('Prolificposter')
+    expect(page).to have_content 'Prolificposter'
   end
 
   expect(page).to have_selector '.post', count: 3
