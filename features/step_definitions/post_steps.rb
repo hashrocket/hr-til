@@ -12,6 +12,13 @@ Given 'a tag exists' do
   @tag = FactoryGirl.create(:tag)
 end
 
+Given 'a post exists' do
+  developer = FactoryGirl.create(:developer)
+  tag = FactoryGirl.create(:tag)
+
+  @post = FactoryGirl.create(:post, developer: developer, tag: tag)
+end
+
 When 'I enter information into that form' do
   within 'form' do
     fill_in 'Body', with: 'I learned about Rails'
@@ -231,4 +238,18 @@ Then 'I see all the posts for that author' do
   end
 
   expect(page).to have_selector '.post', count: 3
+end
+
+When 'I click on the title of the post' do
+  within '.title' do
+    click_on 'Today I learned about web development'
+  end
+end
+
+Then 'I see the show page for that post' do
+  within '.post' do
+    expect(page).to have_content 'username1'
+    expect(page).to have_content 'Today I learned about web development'
+    expect(page).to have_content '#phantomjs'
+  end
 end

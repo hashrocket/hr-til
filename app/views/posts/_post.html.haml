@@ -15,7 +15,7 @@
           - name = post.developer_username
           .username= link_to name, "/author/#{name}"
           %strong
-            .title= raw markdown.render post.title
+            .title= link_to((raw markdown.render post.title), post_path(post))
           .body= raw markdown.render post.body
           = link_to "##{post.tag_name}", "/#{post.tag_name}"
           %br

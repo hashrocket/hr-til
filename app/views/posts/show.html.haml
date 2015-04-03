@@ -1,0 +1,14 @@
+.post
+  %strong
+    .title= link_to((raw markdown.render @post.title), post_path(@post))
+  %em
+    - if @post.created_at.today?
+      Today
+    - else
+      = @post.created_at.strftime('%A, %b %d')
+  %br
+  %br
+  - name = @post.developer_username
+  .username= link_to name, "/author/#{name}"
+  .body= raw markdown.render @post.body
+  = link_to "##{@post.tag_name}", "/#{@post.tag_name}"

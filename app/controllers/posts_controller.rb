@@ -6,7 +6,7 @@ class PostsController < ApplicationController
   expose(:post, attributes: :post_params)
   expose(:posts) { developer.posts }
 
-  before_filter :require_developer, except: :index
+  before_filter :require_developer, except: [:index, :show]
 
   def create
     if post.save
@@ -19,6 +19,10 @@ class PostsController < ApplicationController
 
   def index
     @post_days = Post.order(created_at: :desc).includes(:developer, :tag).group_by { |p| p.created_at.beginning_of_day }
+  end
+
+  def show
+    @post = Post.find(params[:id])
   end
 
   def sorted_tags
