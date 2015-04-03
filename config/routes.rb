@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   get 'account/signin', to: 'sessions#new'
   post 'account/signin', to: 'sessions#create'
   get 'account/signout', to: 'sessions#destroy'
-  get '/:name', to: 'tags#show'
-  get '/author/:username', to: 'developers#show'
+  get '/:name', to: 'tags#show', as: 'tags_show'
+  get '/author/:username', to: 'developers#show', as: 'developers_show'
 end

@@ -9,6 +9,6 @@
   %br
   %br
   - name = @post.developer_username
-  .username= link_to name, "/author/#{name}"
+  .username= link_to name, developers_show_path(name)
   .body= raw markdown.render @post.body
-  = link_to "##{@post.tag_name}", "/#{@post.tag_name}"
+  = link_to "##{@post.tag_name}", tags_show_path(@post.tag_name)
