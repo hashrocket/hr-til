@@ -1,12 +1,16 @@
 class DevelopersController < ApplicationController
-  expose(:developer, attributes: :developer_params)
+
+  def new
+    @developer = Developer.new
+  end
 
   def create
-    if developer.save
-      sign_in developer
+    @developer = Developer.new(developer_params)
+    if @developer.save
+      sign_in @developer
       redirect_to root_path
     else
-      flash[:alert] = developer.errors.full_messages
+      flash[:alert] = @developer.errors.full_messages
       render :new
     end
   end

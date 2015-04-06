@@ -1,5 +1,4 @@
 class TagsController < ApplicationController
-  expose(:developer) { current_developer }
 
   def show
     @tag = Tag.find_by_name(params[:name])

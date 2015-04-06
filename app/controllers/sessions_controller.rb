@@ -1,5 +1,4 @@
 class SessionsController < ApplicationController
-  expose(:developer)
 
   def create
     developer = Developer.find_by(email: params[:session][:email].downcase)
