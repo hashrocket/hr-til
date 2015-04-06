@@ -29,6 +29,9 @@ class PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    unless @post.developer == current_developer
+      redirect_to root_path, alert: "Access denied"
+    end
   end
 
   def update

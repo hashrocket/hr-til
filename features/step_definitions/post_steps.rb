@@ -19,6 +19,17 @@ Given 'a post exists' do
   @post = FactoryGirl.create(:post, developer: developer, tag: tag)
 end
 
+Given 'a post exists by another developer' do
+  developer = FactoryGirl.create(:developer)
+  tag = FactoryGirl.create(:tag)
+
+  @others_post = FactoryGirl.create(:post, developer: developer, tag: tag)
+end
+
+When 'I visit the edit page for that post' do
+  visit edit_post_path @others_post
+end
+
 When 'I enter information into that form' do
   within 'form' do
     fill_in 'Body', with: 'I learned about Rails'
