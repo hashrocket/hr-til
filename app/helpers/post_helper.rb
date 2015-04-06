@@ -21,4 +21,8 @@ module PostHelper
     posts = Post.order created_at: :desc
     posts[posts.index(post) - 1]
   end
+
+  def editable?(post)
+    current_developer && current_developer == post.developer
+  end
 end

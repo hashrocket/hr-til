@@ -17,8 +17,8 @@
           %strong
             .title= link_to((raw markdown.render post.title), post_path(post))
           .body= raw markdown.render post.body
-          = link_to "##{post.tag_name}", tags_show_path(post.tag_name)
-          - if current_developer && current_developer == post.developer
+          .tag= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
+          - if editable? post
             = link_to "[edit]", edit_post_path(post)
           %br
           %br
