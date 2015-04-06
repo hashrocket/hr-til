@@ -99,6 +99,11 @@ Given 'I am a signed in developer' do
   }
 end
 
+And 'I have a post' do
+  tag = FactoryGirl.create(:tag)
+  FactoryGirl.create(:post, tag: tag, developer: @developer)
+end
+
 And 'I click sign out' do
   click_on 'Sign Out'
 end
@@ -109,4 +114,11 @@ end
 
 And 'I do not see the signout link' do
   expect(page).to_not have_link 'Sign Out'
+end
+
+When 'I click edit' do
+  within '.post' do
+    click_on "[edit]"
+  end
+
 end

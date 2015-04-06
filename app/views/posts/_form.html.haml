@@ -1,0 +1,6 @@
+= form_for post do |f|
+  = f.label :body
+  = f.text_area :body, size: "90x30"
+  = f.label :tag_id, 'Tag'
+  = f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
+  = f.submit 'Submit'

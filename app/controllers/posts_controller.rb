@@ -25,6 +25,14 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def update
+    if post.save
+      redirect_to post, notice: 'Post updated'
+    else
+      render :edit
+    end
+  end
+
   def sorted_tags
     Tag.order name: :asc
   end

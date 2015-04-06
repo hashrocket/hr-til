@@ -25,6 +25,12 @@ When 'I enter information into that form' do
   end
 end
 
+When 'I enter new information into that form' do
+  within 'form' do
+    fill_in 'Body', with: 'I learned about changing content'
+  end
+end
+
 When 'I enter a body with the first line less than fifty characters' do
   within 'form' do
     fill_in 'Body', with: "I learned how to split a string\nAnd other things"
@@ -60,20 +66,20 @@ When 'I enter information with markdown bullets into that form' do
 end
 
 And 'I select a tag' do
-  within '.new_post' do
+  within 'form' do
     select @tag.name, from: 'Tag'
   end
 end
 
 And 'I select no tag' do
-  within '.new_post' do
+  within 'form' do
     select '', from: 'Tag'
   end
 end
 
-When 'I click create' do
-  within '.new_post' do
-    click_on 'Create TIL'
+When 'I click submit' do
+  within 'form' do
+    click_on 'Submit'
   end
 end
 
@@ -251,5 +257,26 @@ Then 'I see the show page for that post' do
     expect(page).to have_content 'username1'
     expect(page).to have_content 'Today I learned about web development'
     expect(page).to have_content '#phantomjs'
+  end
+end
+
+Then 'I see the show page for that edited post' do
+  within '.title' do
+    expect(page).to have_content 'I learned about changing content'
+  end
+  within '.post' do
+    expect(page).to have_content 'username1'
+    expect(page).to have_content 'I learned about changing content'
+    expect(page).to have_content '#phantomjs'
+  end
+end
+
+Then 'I see the edit page for that post' do
+  within 'h3' do
+    expect(page).to have_content 'Edit Post'
+  end
+
+  within 'body' do
+    expect(page).to have_content 'Today I learned about web development'
   end
 end

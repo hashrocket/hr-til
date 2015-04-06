@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :developers, only: [:new, :create]
-  resources :posts, only: [:new, :create, :show]
+  resources :posts, only: [:new, :create, :show, :edit, :update]
 
   get 'account/signup', to: 'developers#new'
   post 'account/signup', to: 'developers#create'

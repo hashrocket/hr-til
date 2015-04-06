@@ -7,7 +7,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter information into that form
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see the post I created
     And I see the tag I selected
@@ -19,7 +19,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter a body with the first line less than fifty characters
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see a title created from the first line of the body
 
@@ -30,7 +30,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter a body with the first line greater than fifty characters
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see a title created from the first fifty characters
 
@@ -41,7 +41,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter information with markdown headers into that form
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see the markdown headers I created
 
@@ -52,7 +52,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter information with markdown inline code into that form
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see the markdown inline code I created
     And I see the title with inline code
@@ -64,7 +64,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter information with markdown bullets into that form
     And I select a tag
-    And I click create
+    And I click submit
     Then I see the homepage
     And I see the markdown bullets I created
 
@@ -72,7 +72,7 @@ Feature: Developer creates post
     Given I am a signed in developer
     When I click create TIL
     Then I see a form for TIL
-    When I click create
+    When I click submit
     Then I see an error message "Body can't be blank"
 
   Scenario: Sad path (post body too long)
@@ -81,7 +81,7 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter a long body into that form
     And I select no tag
-    When I click create
+    When I click submit
     Then I see an error message "Body is too long"
 
   Scenario: Sad path (no tag)
@@ -89,6 +89,6 @@ Feature: Developer creates post
     When I click create TIL
     Then I see a form for TIL
     When I enter information into that form
-    And I click create
+    And I click submit
     Then I see an error message "Tag can't be blank"
 
