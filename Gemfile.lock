@@ -77,7 +77,6 @@ GEM
       rails (>= 3, < 5)
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
-    decent_exposure (2.3.2)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.4.0)
@@ -227,7 +226,6 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
-  decent_exposure
   factory_girl_rails
   haml-rails
   jbuilder (~> 2.0)

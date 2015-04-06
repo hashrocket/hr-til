@@ -19,7 +19,7 @@
         = link_to "Sign Up", account_signup_path
         = link_to "Sign In", account_signin_path
       - if developer_signed_in?
-        = developer.username
+        = current_developer.username
         = link_to "Sign Out", account_signout_path
         = link_to "Create TIL", new_post_path
     = yield

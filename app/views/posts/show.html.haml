@@ -12,5 +12,5 @@
   .username= link_to name, developers_show_path(name)
   .body= raw markdown.render @post.body
   = link_to "##{@post.tag_name}", tags_show_path(@post.tag_name)
-  - if current_developer && current_developer == post.developer
-    = link_to "[edit]", edit_post_path(post)
+  - if current_developer && current_developer == @post.developer
+    = link_to "[edit]", edit_post_path(@post)

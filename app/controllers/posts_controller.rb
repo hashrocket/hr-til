@@ -2,17 +2,19 @@ class PostsController < ApplicationController
 
   include MarkdownHelper
 
-  expose(:developer) { current_developer }
-  expose(:post, attributes: :post_params)
-  expose(:posts) { developer.posts }
-
   before_filter :require_developer, except: [:index, :show]
 
+  def new
+    @post = Post.new
+  end
+
   def create
-    if post.save
+    @post = Post.new(post_params)
+    @post.developer = current_developer
+    if @post.save
       redirect_to root_path
     else
-      flash[:alert] = post.errors.full_messages
+      flash[:alert] = @post.errors.full_messages
       render :new
     end
   end
@@ -25,9 +27,14 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
   def update
-    if post.save
-      redirect_to post, notice: 'Post updated'
+    @post = Post.find(params[:id])
+    if @post.update!(post_params)
+      redirect_to @post, notice: 'Post updated'
     else
       render :edit
     end
@@ -41,6 +48,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit :body, :tag_id
+    params.require(:post).permit :body, :tag_id, :developer_id
   end
 end

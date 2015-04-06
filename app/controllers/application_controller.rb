@@ -3,10 +3,6 @@ class ApplicationController < ActionController::Base
 
   authem_for :developer
 
-  decent_configuration do
-    strategy DecentExposure::StrongParametersStrategy
-  end
-
   private
 
   def require_developer
