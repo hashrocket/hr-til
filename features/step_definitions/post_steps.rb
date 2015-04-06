@@ -280,3 +280,15 @@ Then 'I see the edit page for that post' do
     expect(page).to have_content 'Today I learned about web development'
   end
 end
+
+When 'I try to add a post' do
+  visit new_post_path
+end
+
+When 'I try to edit that post' do
+  visit edit_post_path(@post)
+end
+
+Given 'no posts exist' do
+  # noop
+end

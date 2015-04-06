@@ -15,14 +15,6 @@ Given 'I am a visitor' do
   # noop
 end
 
-When 'I try to add a post' do
-  visit new_post_path
-end
-
 Then(/^I see a message "(.*?)"$/) do |message|
   expect(page).to have_content message
-end
-
-Given 'no posts exist' do
-  # noop
 end
