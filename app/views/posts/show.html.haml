@@ -14,3 +14,9 @@
   = link_to "##{@post.tag_name}", tags_show_path(@post.tag_name)
   - if current_developer && current_developer == @post.developer
     = link_to "[edit]", edit_post_path(@post)
+  .nav
+    - if multiple_posts?
+      - unless oldest_post? @post
+        = link_to '<', post_path(previous_post @post)
+      - unless newest_post? @post
+        = link_to '>', post_path(next_post @post)

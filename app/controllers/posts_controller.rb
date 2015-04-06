@@ -1,6 +1,7 @@
 class PostsController < ApplicationController
 
   include MarkdownHelper
+  include PostHelper
 
   before_filter :require_developer, except: [:index, :show]
 

@@ -153,10 +153,64 @@ Given 'there exist TILs for today, yesterday, and last week' do
 
   tag = FactoryGirl.create(:tag)
 
-  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate', tag: tag)
+  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails', tag: tag)
   @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure', tag: tag)
   @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember', tag: tag)
-  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails', tag: tag)
+  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate', tag: tag)
+end
+
+Given 'three posts exist' do
+  developer = FactoryGirl.create(:developer)
+  tag = FactoryGirl.create(:tag)
+
+  @first_post   = FactoryGirl.create(:post, body: 'First', tag: tag, developer: developer)
+  @second_post  = FactoryGirl.create(:post, body: 'Second', tag: tag, developer: developer)
+  @third_post   = FactoryGirl.create(:post, body: 'Third', tag: tag, developer: developer)
+end
+
+When 'I go to the most recent post' do
+  visit post_path @third_post
+end
+
+When 'I see only a left arrow' do
+  within '.post .nav' do
+    expect(page).to have_link "<"
+    expect(page).to_not have_link ">"
+  end
+end
+
+When 'I click the left arrow' do
+  within '.post .nav' do
+    click_on "<"
+  end
+end
+
+Then 'I see the second most recent post' do
+  expect(current_path).to eq(post_path(@second_post))
+end
+
+And 'I see a right arrow and a left arrow' do
+  within '.post .nav' do
+    expect(page).to have_link ">"
+    expect(page).to have_link "<"
+  end
+end
+
+Then 'I see the least recent post' do
+  expect(current_path).to eq(post_path(@first_post))
+end
+
+When 'I see only a right arrow' do
+  within '.post .nav' do
+    expect(page).to have_link ">"
+    expect(page).to_not have_link "<"
+  end
+end
+
+When 'I click the right arrow' do
+  within '.post .nav' do
+    click_on ">"
+  end
 end
 
 Given 'there are TILs with that tag' do
