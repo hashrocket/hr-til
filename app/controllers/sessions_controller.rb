@@ -1,8 +1,8 @@
 class SessionsController < ApplicationController
 
   def create
-    developer = Developer.find_by(email: params[:session][:email].downcase)
-    if developer && developer.authenticate(params[:session][:password])
+    developer = Developer.find_by(email: session_params[:email].downcase)
+    if developer && developer.authenticate(session_params[:password])
       sign_in developer
       redirect_to root_path
     else
@@ -14,5 +14,11 @@ class SessionsController < ApplicationController
   def destroy
     sign_out_developer
     redirect_to root_path
+  end
+
+  private
+
+  def session_params
+    params.require(:session).permit(:email, :password)
   end
 end
