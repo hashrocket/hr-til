@@ -12,8 +12,11 @@ gem 'omniauth-google-oauth2'
 gem 'redcarpet'
 gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
-gem 'figaro'
 gem 'uglifier', '>= 1.3.0'
+
+group :development do
+  gem 'figaro'
+end
 
 group :development, :test do
   gem 'byebug'
