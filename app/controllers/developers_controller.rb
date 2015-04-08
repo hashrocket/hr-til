@@ -1,9 +1,5 @@
 class DevelopersController < ApplicationController
 
-  def new
-    @developer = Developer.new
-  end
-
   def create
     @developer = Developer.new(developer_params)
     if @developer.save

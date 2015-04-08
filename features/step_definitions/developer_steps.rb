@@ -1,102 +1,33 @@
-When 'I click signup' do
-  click_on 'Sign Up'
+Given 'I am not already a developer' do
+  # noop
 end
 
-Then 'I see the signup page' do
-  within 'h3' do
-    expect(page).to have_content 'Create an Account'
-  end
-end
-
-When 'I enter a valid username' do
-  within 'form' do
-    fill_in 'Username', with: 'username'
-  end
-end
-
-And 'I enter a valid email' do
-  within 'form' do
-    fill_in 'Email', with: 'developer@hashrocket.com'
-  end
-end
-
-And 'I enter a valid password' do
-  within 'form' do
-    fill_in 'Password', with: 'ha$hrocket'
-    fill_in 'Password Confirmation', with: 'ha$hrocket'
-  end
-end
-
-When 'I click create account' do
-  within 'form' do
-    click_on 'Create Account'
-  end
-end
-
-Then 'I see my username in the upper right' do
-  expect(page).to have_content 'username'
-end
-
-And 'I do not see the signup link' do
-  expect(page).to_not have_link 'Sign Up'
-end
-
-And 'I see the signup link' do
-  expect(page).to have_link 'Sign Up'
-end
-
-And 'I am a developer with credentials' do
-  @developer = FactoryGirl.create(:developer)
-end
-
-When 'I click sign in' do
-  click_on 'Sign In'
-end
-
-Then 'I see the signin page' do
-  within 'h3' do
-    expect(page).to have_content 'Sign in to your Account'
-  end
-end
-
-When 'I enter my credentials' do
-  within 'form' do
-    fill_in 'Email', with: @developer.email
-    fill_in 'Password', with: @developer.password
-  end
-end
-
-And 'I click the sign in button' do
-  within 'form' do
-    click_on 'Sign In'
-  end
-end
-
-And 'I do not see the signin link' do
-  expect(page).to_not have_link 'Sign In'
-end
-
-When 'I enter my credentials incorrectly' do
-  within 'form' do
-    fill_in 'Email', with: @developer.email
-    fill_in 'Password', with: 'foobar'
-  end
+Given 'I am already a developer' do
+  @developer = FactoryGirl.create(:developer, email: 'johnsmith@hashrocket.com', password: 'password', password_confirmation: 'password', username: 'johnsmith')
 end
 
 And 'I see the signin link' do
-  expect(page).to have_link 'Sign In'
+  expect(page).to have_link 'Rocketeer Sign In'
 end
 
 Given 'I am a signed in developer' do
-  steps %Q{
-    Given I am a developer with credentials
-    Given I see the homepage
-    When I click sign in
-    Then I see the signin page
-    When I enter my credentials
-    And I click the sign in button
-    Then I see my username in the upper right
-  }
+ steps %Q{
+   Given I try to sign up or sign in with valid credentials
+   Then I am signed in
+ }
+end
+
+And 'I try to sign up or sign in with valid credentials' do
+  OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@hashrocket.com' })
+  visit root_path
+  click_on "Rocketeer Sign In"
+end
+
+Then 'I am signed in' do
+  expect(current_path).to eq root_path
+  expect(page).to have_content 'johnsmith'
+  expect(page).to_not have_content 'Sign In'
+  @developer = Developer.last
 end
 
 And 'I have a post' do
@@ -109,7 +40,7 @@ And 'I click sign out' do
 end
 
 Then 'I should not see my username in the upper right' do
-  expect(page).to_not have_content 'developer'
+  expect(page).to_not have_content 'johnsmith'
 end
 
 And 'I do not see the signout link' do
@@ -120,5 +51,4 @@ When 'I click edit' do
   within '.post' do
     click_on "[edit]"
   end
-
 end

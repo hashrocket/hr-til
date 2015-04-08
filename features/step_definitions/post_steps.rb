@@ -96,7 +96,7 @@ end
 
 Then 'I see the post I created' do
   within '.post_group .post' do
-    expect(page).to have_content "username1"
+    expect(page).to have_content "johnsmith"
     expect(page).to have_content 'I learned about Rails'
   end
 end
@@ -275,12 +275,6 @@ Then 'I see TILs sorted and grouped by date/time' do
   end
 end
 
-Then(/^I see today's posts in a group labeled "(.*?)"$/) do |label|
-  within '.content' do
-    expect(page).to have_content label
-  end
-end
-
 When 'I enter a long body into that form' do
   long_body = 'word ' * 201
   fill_in 'Body', with: long_body
@@ -319,7 +313,7 @@ end
 
 Then 'I see the show page for that post' do
   within '.post' do
-    expect(page).to have_content 'username1'
+    expect(page).to have_content 'username3'
     expect(page).to have_content 'Today I learned about web development'
     expect(page).to have_content '#phantomjs'
   end
@@ -330,7 +324,7 @@ Then 'I see the show page for that edited post' do
     expect(page).to have_content 'I learned about changing content'
   end
   within '.post' do
-    expect(page).to have_content 'username1'
+    expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'I learned about changing content'
     expect(page).to have_content '#phantomjs'
   end

@@ -1,18 +1,12 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  resources :developers, only: [:new, :create]
+  resources :developers, only: :create
   resources :posts, only: [:new, :create, :show, :edit, :update]
+  resources :sessions, only: [:new, :create]
 
-  get '/auth/:provider/callback', to: 'sessions#create_oauth'
-
-  get 'account/signup', to: 'developers#new'
-  post 'account/signup', to: 'developers#create'
-
-  get 'authem/signin', to: 'sessions#new'
-  get 'oauth/signin', to: 'sessions#new'
-  post 'authem/signin', to: 'sessions#create_authem'
-  post 'oauth/signin', to: 'sessions#create_oauth'
+  get '/auth/google_oauth2', as: 'google_oauth2'
+  get '/auth/google_oauth2/callback', to: 'sessions#create'
 
   get 'account/signout', to: 'sessions#destroy'
   get '/:name', to: 'tags#show', as: 'tags_show'

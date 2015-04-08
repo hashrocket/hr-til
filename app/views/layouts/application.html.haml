@@ -16,8 +16,7 @@
       = link_to root_path do
         %h1 Hashrocket TIL
       - unless developer_signed_in?
-        = link_to "Sign Up", account_signup_path
-        = link_to "Sign In", authem_signin_path
+        = link_to "Rocketeer Sign In", google_oauth2_path
       - if developer_signed_in?
         = current_developer.username
         = link_to "Sign Out", account_signout_path
