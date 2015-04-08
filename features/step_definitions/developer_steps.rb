@@ -3,7 +3,7 @@ Given 'I am not already a developer' do
 end
 
 Given 'I am already a developer' do
-  @developer = FactoryGirl.create(:developer, email: 'johnsmith@hashrocket.com', password: 'password', password_confirmation: 'password', username: 'johnsmith')
+  @developer = FactoryGirl.create(:developer, email: 'johnsmith@hashrocket.com', username: 'johnsmith')
 end
 
 And 'I see the signin link' do

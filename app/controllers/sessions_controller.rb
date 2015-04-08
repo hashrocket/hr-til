@@ -21,16 +21,10 @@ class SessionsController < ApplicationController
 
   private
 
-  def session_params
-    params.require(:session).permit(:email, :password)
-  end
-
   def oauth_developer_params
     {
       username: generate_username(request.env['omniauth.auth']['info']['name']),
       email: request.env['omniauth.auth']['info']['email'],
-      password: 'password',
-      password_confirmation: 'password'
     }
   end
 end

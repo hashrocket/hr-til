@@ -16,16 +16,6 @@ describe Developer do
     expect(developer).to_not be_valid
   end
 
-  it 'should require a password' do
-    developer = FactoryGirl.build(:developer, password: '')
-    expect(developer).to_not be_valid
-  end
-
-  it 'should require a password confirmation' do
-    developer = FactoryGirl.build(:developer, password: 'password', password_confirmation: '')
-    expect(developer).to_not be_valid
-  end
-
   it 'should validate username format' do
     developer = FactoryGirl.build(:developer, username: 'foo_bar')
     expect(developer).to_not be_valid

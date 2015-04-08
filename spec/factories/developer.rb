@@ -7,8 +7,5 @@ FactoryGirl.define do
     sequence :username do |n|
       "username#{n}"
     end
-
-    password "ha$hrocket"
-    password_confirmation "ha$hrocket"
   end
 end
