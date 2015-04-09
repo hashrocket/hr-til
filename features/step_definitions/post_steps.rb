@@ -173,14 +173,14 @@ When 'I go to the most recent post' do
 end
 
 When 'I see only a left arrow' do
-  within '.post .nav' do
+  within '.nav' do
     expect(page).to have_link "<"
     expect(page).to_not have_link ">"
   end
 end
 
 When 'I click the left arrow' do
-  within '.post .nav' do
+  within '.nav' do
     click_on "<"
   end
 end
@@ -190,7 +190,7 @@ Then 'I see the second most recent post' do
 end
 
 And 'I see a right arrow and a left arrow' do
-  within '.post .nav' do
+  within '.nav' do
     expect(page).to have_link ">"
     expect(page).to have_link "<"
   end
@@ -201,14 +201,14 @@ Then 'I see the least recent post' do
 end
 
 When 'I see only a right arrow' do
-  within '.post .nav' do
+  within '.nav' do
     expect(page).to have_link ">"
     expect(page).to_not have_link "<"
   end
 end
 
 When 'I click the right arrow' do
-  within '.post .nav' do
+  within '.nav' do
     click_on ">"
   end
 end

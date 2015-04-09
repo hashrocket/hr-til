@@ -26,6 +26,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @post_days = { @post.created_at.beginning_of_day => [ @post ] }
   end
 
   def edit

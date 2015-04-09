@@ -1,22 +1,4 @@
-.post
-  %strong
-    .title= link_to((raw markdown.render @post.title), post_path(@post))
-  %em
-    - if @post.created_at.today?
-      Today
-    - else
-      = @post.created_at.strftime('%A, %b %d')
-  %br
-  %br
-  - name = @post.developer_username
-  .username= link_to name, developers_show_path(name)
-  .body= raw markdown.render @post.body
-  .tag= link_to "##{@post.tag_name}", tags_show_path(@post.tag_name)
-  - if editable? @post
-    = link_to "[edit]", edit_post_path(@post)
-  .nav
-    - if multiple_posts?
-      - unless oldest_post? @post
-        = link_to '<', post_path(previous_post @post)
-      - unless newest_post? @post
-        = link_to '>', post_path(next_post @post)
+%h3= raw markdown.render @post.title
+
+= render 'post_group'
+= render 'post_nav'
