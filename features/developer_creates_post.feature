@@ -55,7 +55,6 @@ Feature: Developer creates post
     And I click submit
     Then I see the homepage
     And I see the markdown inline code I created
-    And I see the title with inline code
 
   Scenario: Happy path with markdown bullets
     Given I am a signed in developer

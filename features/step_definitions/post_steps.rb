@@ -127,12 +127,6 @@ Then 'I see the markdown inline code I created' do
   end
 end
 
-Then 'I see the title with inline code' do
-  within '.post_group .post .title code' do
-    expect(page).to have_content 'killer robot attack'
-  end
-end
-
 Then 'I see the markdown bullets I created' do
   within '.post_group .post .body li' do
     expect(page).to have_content 'item from a list of items'
