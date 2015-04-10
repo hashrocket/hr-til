@@ -6,22 +6,23 @@
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
-    %header
-      #flash
-        - if flash.present?
-          - if flash[:alert]
-            - [flash[:alert]].flatten.each do |alert_message|
-              %p.error= alert_message
-              %br
-      = link_to root_path do
-        %h1 Hashrocket TIL
-      %ul
-        - if developer_signed_in?
-          %li= current_developer.username
-          %li= link_to "Sign Out", account_signout_path
-          %li= link_to "Create TIL", new_post_path
-        - else
-          %li= link_to "Rocketeer Sign In", google_oauth2_path
-    %section.content
-      = yield
+    %main
+      %header
+        #flash
+          - if flash.present?
+            - if flash[:alert]
+              - [flash[:alert]].flatten.each do |alert_message|
+                %p.error= alert_message
+                %br
+        = link_to root_path do
+          %h1 Hashrocket TIL
+        %ul
+          - if developer_signed_in?
+            %li= current_developer.username
+            %li= link_to "Sign Out", account_signout_path
+            %li= link_to "Create TIL", new_post_path
+          - else
+            %li= link_to "Rocketeer Sign In", google_oauth2_path
+      %section.content
+        = yield
 
