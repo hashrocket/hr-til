@@ -108,6 +108,12 @@ Then 'I see a title created from the first line of the body' do
   end
 end
 
+Then /^I dont see the title in the body$/ do
+  within '.post .body' do
+    expect(page).to_not have_content 'I learned how to split a string'
+  end
+end
+
 Then 'I see a title created from the first fifty characters' do
   within '.post_group .post .title' do
     expect(page).to have_content 'word word word word word word word word word word...'
