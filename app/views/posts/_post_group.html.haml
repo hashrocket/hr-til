@@ -2,15 +2,14 @@
   No posts.
 - @post_days.each do |date, posts|
   .post_group
-    %em
+    %header
       - if date.today?
         Today
       - else
         = date.strftime('%A, %b %d')
-    %br
-    %br
+
     - posts.each do |post|
-      .post
+      %article.post
         - name = post.developer_username
         .username= link_to name, developers_show_path(name)
         %strong
@@ -19,5 +18,3 @@
         .tag= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
         - if editable? post
           = link_to "[edit]", edit_post_path(post)
-        %br
-        %br
