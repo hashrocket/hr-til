@@ -15,11 +15,13 @@
               %br
       = link_to root_path do
         %h1 Hashrocket TIL
-      - unless developer_signed_in?
-        = link_to "Rocketeer Sign In", google_oauth2_path
-      - if developer_signed_in?
-        = current_developer.username
-        = link_to "Sign Out", account_signout_path
-        = link_to "Create TIL", new_post_path
-    = yield
+      %ul
+        - if developer_signed_in?
+          %li= current_developer.username
+          %li= link_to "Sign Out", account_signout_path
+          %li= link_to "Create TIL", new_post_path
+        - else
+          %li= link_to "Rocketeer Sign In", google_oauth2_path
+    %section.content
+      = yield
 

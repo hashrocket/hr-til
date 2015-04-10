@@ -1,24 +1,23 @@
-.content
-  - unless @post_days.any?
-    No posts.
-  - @post_days.each do |date, posts|
-    .post_group
-      %em
-        - if date.today?
-          Today
-        - else
-          = date.strftime('%A, %b %d')
-      %br
-      %br
-      - posts.each do |post|
-        .post
-          - name = post.developer_username
-          .username= link_to name, developers_show_path(name)
-          %strong
-            .title= link_to((raw markdown.render post.title), post_path(post))
-          .body= raw markdown.render post.body
-          .tag= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
-          - if editable? post
-            = link_to "[edit]", edit_post_path(post)
-          %br
-          %br
+- unless @post_days.any?
+  No posts.
+- @post_days.each do |date, posts|
+  .post_group
+    %em
+      - if date.today?
+        Today
+      - else
+        = date.strftime('%A, %b %d')
+    %br
+    %br
+    - posts.each do |post|
+      .post
+        - name = post.developer_username
+        .username= link_to name, developers_show_path(name)
+        %strong
+          .title= link_to((raw markdown.render post.title), post_path(post))
+        .body= raw markdown.render post.body
+        .tag= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
+        - if editable? post
+          = link_to "[edit]", edit_post_path(post)
+        %br
+        %br
