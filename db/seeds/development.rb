@@ -21,10 +21,10 @@ When the named parameter is handled by the server, it will be logged as
 environment if you want to keep the parameters unfiltered in development.
 HEREDOC
 
-tag = Tag.create!(name: 'perftest')
-developer = Developer.create!(username: 'perftest', email: 'perf_test@example.com', password: 'password')
+tag = Tag.create!(name: 'testtag')
+developer = Developer.create!(username: 'testuser', email: 'test_user@example.com')
 
-1000.times do |i|
+5.times do |i|
   puts "Creating post: ##{i}"
   Post.create(body: body, tag: tag, developer: developer)
 end
