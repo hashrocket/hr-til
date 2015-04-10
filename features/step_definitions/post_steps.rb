@@ -241,9 +241,7 @@ Then 'I see all posts tagged with that tag' do
 end
 
 Then 'I see TILs sorted and grouped by date/time' do
-  within 'h3' do
-    expect(page).to have_content 'All Posts'
-  end
+  expect(current_path).to eq(root_path)
 
   within '.content .post_group:first-child' do
     expect(page).to have_content 'Today'
