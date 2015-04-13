@@ -8,15 +8,6 @@
   %body
     %main
       %header
-        #flash
-          - if flash.present?
-            - if flash[:alert]
-              - [flash[:alert]].flatten.each do |alert_message|
-                %p.error= alert_message
-            - elsif flash[:notice]
-              - [flash[:notice]].flatten.each do |notice|
-                %p.notice= notice
-            %br
         = link_to root_path do
           %h1 TIL / Hashrocket
         %ul
@@ -26,6 +17,15 @@
             %li= link_to "Create Post", new_post_path
           - else
             %li= link_to "Rocketeer Sign In", google_oauth2_path
+        #flash
+          - if flash.present?
+            - if flash[:alert]
+              - [flash[:alert]].flatten.each do |alert_message|
+                %p.error= alert_message
+            - elsif flash[:notice]
+              - [flash[:notice]].flatten.each do |notice|
+                %p.notice= notice
+            %br
       %section.content
         = yield
 
