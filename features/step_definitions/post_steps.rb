@@ -246,7 +246,7 @@ end
 
 Then 'I see all posts tagged with that tag' do
   within 'h3' do
-    expect(page).to have_content 'Phantomjs'
+    expect(page).to have_content '#phantomjs'
   end
 
   expect(page).to have_selector '.post', count: 3
@@ -309,7 +309,7 @@ end
 
 Then 'I see all the posts for that author' do
   within 'h3' do
-    expect(page).to have_content 'Prolificposter'
+    expect(page).to have_content 'prolificposter'
   end
 
   expect(page).to have_selector '.post', count: 3
