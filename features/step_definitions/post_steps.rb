@@ -32,12 +32,14 @@ end
 
 When 'I enter information into that form' do
   within 'form' do
+    fill_in 'Title', with: 'Web Development'
     fill_in 'Body', with: 'I learned about Rails'
   end
 end
 
 When 'I enter new information into that form' do
   within 'form' do
+    fill_in 'Title', with: 'I changed the header'
     fill_in 'Body', with: 'I learned about changing content'
   end
 end
@@ -57,6 +59,7 @@ end
 
 When 'I enter information with markdown headers into that form' do
   within 'form' do
+    fill_in 'Title', with: 'Headerized'
     markdown_content = '##### Small Header'
     fill_in 'Body', with: markdown_content
   end
@@ -64,6 +67,7 @@ end
 
 When 'I enter information with markdown inline code into that form' do
   within 'form' do
+    fill_in 'Title', with: 'Codified'
     markdown_content = '`killer robot attack`'
     fill_in 'Body', with: markdown_content
   end
@@ -71,6 +75,7 @@ end
 
 When 'I enter information with markdown bullets into that form' do
   within 'form' do
+    fill_in 'Title', with: 'Bulletized'
     markdown_content = '* item from a list of items'
     fill_in 'Body', with: markdown_content
   end
@@ -299,13 +304,13 @@ end
 
 When 'I click on the title of the post' do
   within '.title' do
-    click_on 'Today I learned about web development'
+    click_on 'Web Development'
   end
 end
 
 Then 'I see the show page for that post' do
   within '.post' do
-    expect(page).to have_content 'username3'
+    expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
     expect(page).to have_content '#phantomjs'
   end
@@ -313,7 +318,7 @@ end
 
 Then 'I see the show page for that edited post' do
   within '.title' do
-    expect(page).to have_content 'I learned about changing content'
+    expect(page).to have_content 'I changed the header'
   end
   within '.post' do
     expect(page).to have_content 'johnsmith'

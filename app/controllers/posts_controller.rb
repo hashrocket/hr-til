@@ -53,6 +53,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit :body, :tag_id, :developer_id
+    params.require(:post).permit :body, :tag_id, :developer_id, :title
   end
 end

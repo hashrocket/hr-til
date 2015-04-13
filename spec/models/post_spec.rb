@@ -6,7 +6,7 @@ describe Post do
 
   it 'should have a valid factory' do
     post = FactoryGirl.build(:post, developer: developer, tag: tag)
-    expect(developer).to be_valid
+    expect(post).to be_valid
   end
 
   it 'should require a body' do
@@ -19,14 +19,14 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  it 'should create a title from the first newline' do
-    post = Post.create(developer: developer, tag: tag, body: "First line\nSecond line")
-    expect(post.title).to eq('First line')
+  it 'should require a title' do
+    post = FactoryGirl.build(:post, developer: developer, tag: tag, title: nil)
+    expect(post).to_not be_valid
   end
 
-  it 'should create a title from the first fifty characters' do
-    post = Post.create(developer: developer, tag: tag, body: 'code ' * 10 + 'extra content')
-
-    expect(post.title).to eq('code code code code code code code code code code...')
+  it 'should reject a title that is too long' do
+    post = FactoryGirl.build(:post, developer: developer, tag: tag, title: 'a' * 51 )
+    expect(post).to_not be_valid
   end
+
 end
