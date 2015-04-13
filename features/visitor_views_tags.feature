@@ -1,13 +1,13 @@
 Feature: Visitor views page for a tag
 
-  Scenario: Happy path
+  Scenario: Posts exist
     Given I am a visitor
     And a tag exists
     And there are TILs with that tag
     When I visit '/that tag'
     Then I see all posts tagged with that tag
 
-  Scenario: Sad path (no posts)
+  Scenario: Posts do not exist
     Given I am a visitor
     And a tag exists
     And there are no TILs with that tag
