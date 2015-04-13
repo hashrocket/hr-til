@@ -11,6 +11,8 @@ Feature: Developer creates post
     Then I see the homepage
     And I see the post I created
     And I see the tag I selected
+    When I click on my username in the upper right
+    Then I see the post I created
 
   Scenario: Happy path with markdown inline code
     Given I am a signed in developer

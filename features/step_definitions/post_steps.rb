@@ -106,6 +106,12 @@ When 'I click submit' do
   end
 end
 
+When 'I click on my username in the upper right' do
+  within 'header ul' do
+    click_on @developer.username
+  end
+end
+
 Then 'I see the post I created' do
   within '.post_group .post' do
     expect(page).to have_content "johnsmith"
