@@ -22,7 +22,6 @@ Feature: Developer creates post
     And I click submit
     Then I see the homepage
     And I see a title created from the first line of the body
-    And I dont see the title in the body
 
   Scenario: Happy path with long title
     Given I am a signed in developer

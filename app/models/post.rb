@@ -23,7 +23,6 @@ class Post < ActiveRecord::Base
 
   def create_title
     first_line = body.split("\n").first
-    self.body =  body.split("\n")[1..-1].join ?\n
     self.title = if first_line.size <= 50
                    first_line
                  else
