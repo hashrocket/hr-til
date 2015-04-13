@@ -13,7 +13,10 @@
             - if flash[:alert]
               - [flash[:alert]].flatten.each do |alert_message|
                 %p.error= alert_message
-                %br
+            - elsif flash[:notice]
+              - [flash[:notice]].flatten.each do |notice|
+                %p.notice= notice
+            %br
         = link_to root_path do
           %h1 Hashrocket TIL
         %ul

@@ -44,6 +44,13 @@ When 'I enter new information into that form' do
   end
 end
 
+
+When 'I edit the post to no longer have a body' do
+  within 'form' do
+    fill_in 'Body', with: ''
+  end
+end
+
 When 'I enter a body with the first line less than fifty characters' do
   within 'form' do
     fill_in 'Body', with: "I learned how to split a string\nAnd other things"
