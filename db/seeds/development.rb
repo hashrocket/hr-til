@@ -1,7 +1,11 @@
-# Use this post to measure the performance of posts#index at scale
-body = <<-HEREDOC
-Parameters Filtering
+require 'securerandom'
 
+hex = SecureRandom.hex(5)
+developer = Developer.create!(username: "developer#{hex}", email: "developer_#{hex}@example.com")
+tag = Tag.find_or_create_by!(name: 'rails')
+
+title = 'Parameters Filtering'
+body = <<-HEREDOC
 Rails logs your server's activity, which is useful for development and
 debugging. However, often the server handles sensitive information that
 should not be logged.
@@ -21,10 +25,7 @@ When the named parameter is handled by the server, it will be logged as
 environment if you want to keep the parameters unfiltered in development.
 HEREDOC
 
-tag = Tag.create!(name: 'testtag')
-developer = Developer.create!(username: 'testuser', email: 'test_user@example.com')
-
 5.times do |i|
   puts "Creating post: ##{i}"
-  Post.create(body: body, tag: tag, developer: developer)
+  Post.create(body: body, tag: tag, developer: developer, title: title)
 end
