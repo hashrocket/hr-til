@@ -1,7 +1,7 @@
 Given(/^I (see|visit) the homepage$/) do |_|
   visit root_path
   within 'body header h1' do
-    expect(page).to have_content 'Hashrocket TIL'
+    expect(page).to have_content 'TIL / Hashrocket'
   end
 end
 

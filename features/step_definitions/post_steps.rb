@@ -1,10 +1,10 @@
 When 'I click create TIL' do
-  click_on 'Create TIL'
+  click_on 'Create Post'
 end
 
 Then 'I see a form for TIL' do
   within 'h3' do
-    expect(page).to have_content 'Create TIL'
+    expect(page).to have_content 'Create Post'
   end
 end
 
