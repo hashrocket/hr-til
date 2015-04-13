@@ -26,6 +26,13 @@
               - [flash[:notice]].flatten.each do |notice|
                 %p.notice= notice
             %br
+
       %section.content
         = yield
+
+      %footer
+        %p
+          &copy;
+          = Date.today.year
+          = link_to 'Hashrocket', 'http://hashrocket.com'
 
