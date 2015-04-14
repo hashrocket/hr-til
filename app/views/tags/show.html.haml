@@ -1,3 +1,5 @@
-%h3= "##{@tag.name}"
+%h3
+  = "##{@tag.name}"
+  = @tag.posts_count
 
 = render 'posts/post_group'
