@@ -1,5 +1,23 @@
 // Variables
 $background-color: #eeeeee
+// Colors source: https://github.com/github/linguist
+$assembly: #6E4C13
+$bash: #89e051
+$clojure: #db5855
+$coffeescript: #244776
+$css: #563d7c
+$go: #375eab
+$html: #e44b23
+$javascript: #f1e05a
+$ruby: #701516
+$vim: #199f4b
+
+// Functions
+@function responsive-color($hex)
+  @if lightness($hex) > 50%
+    @return black
+  @else
+    @return $background-color
 
 //Normalization
 ul
@@ -50,39 +68,48 @@ section.content
         padding: 2px
         display: inline
         background-color: #cccccc + #ff0000
+        @debug $background-color
 
-        // Tag colors scraped from the Github Linguist library:
-        // https://github.com/github/linguist
         &.assembly
-          background-color: #6E4C13
+          background-color: $assembly
           a
-            color: $background-color
+            color: responsive-color($assembly)
         &.bash
-          background-color: #89e051
+          background-color: $bash
+          a
+            color: responsive-color($bash)
         &.clojure
-          background-color: #db5855
+          background-color: $clojure
+          a
+            color: responsive-color($clojure)
         &.coffeescript
-          background-color: #244776
+          background-color: $coffeescript
           a
-            color: $background-color
+            color: responsive-color($coffeescript)
         &.css
-          background-color: #563d7c
+          background-color: $css
           a
-            color: $background-color
+            color: responsive-color($css)
         &.go
-          background-color: #375eab
+          background-color: $go
           a
-            color: $background-color
+            color: responsive-color($go)
         &.html
-          background-color: #e44b23
-        &.javascript
-          background-color: #f1e05a
-        &.ruby, &.rails
-          background-color: #701516
+          background-color: $html
           a
-            color: $background-color
+            color: responsive-color($html)
+        &.javascript, &.emberjs, &.reactjs
+          background-color: $javascript
+          a
+            color: responsive-color($javascript)
+        &.ruby, &.rails
+          background-color: $ruby
+          a
+            color: responsive-color($ruby)
         &.vim
-          background-color: #199f4b
+          background-color: $vim
+          a
+            color: responsive-color($vim)
 
 footer
   p
