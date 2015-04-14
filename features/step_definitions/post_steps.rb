@@ -309,7 +309,7 @@ end
 
 Then 'I see all the posts for that author' do
   within 'h3' do
-    expect(page).to have_content 'prolificposter'
+    expect(page).to have_content 'prolificposter (3 posts)'
   end
 
   expect(page).to have_selector '.post', count: 3

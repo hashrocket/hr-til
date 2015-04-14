@@ -1,3 +1,6 @@
-%h3= @developer.username
+%h3
+  = @developer.username
+  - if @developer.posts.any?
+    = "(#{@developer.posts_count} posts)"
 
 = render 'posts/post_group'
