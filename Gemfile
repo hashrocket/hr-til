@@ -14,6 +14,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'rails_12factor', group: :production
+gem 'draper'
 
 group :development do
   gem 'figaro'

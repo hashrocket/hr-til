@@ -22,13 +22,4 @@ describe Developer do
 
     expect(dup_developer).to_not be_valid
   end
-
-  it 'should tell you how many posts it has' do
-    developer = FactoryGirl.create(:developer, username: 'foo_bar')
-    expect(developer.posts_count).to eq 0
-
-    tag = FactoryGirl.create(:tag)
-    3.times { FactoryGirl.create(:post, tag: tag, developer: developer) }
-    expect(developer.posts_count).to eq 3
-  end
 end

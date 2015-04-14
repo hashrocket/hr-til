@@ -78,6 +78,11 @@ GEM
     database_cleaner (1.4.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    draper (2.1.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     execjs (2.4.0)
     factory_girl (4.5.0)
@@ -191,6 +196,7 @@ GEM
     rake (10.4.2)
     rb-readline (0.5.2)
     redcarpet (3.2.2)
+    request_store (1.1.0)
     rspec-core (3.2.0)
       rspec-support (~> 3.2.0)
     rspec-expectations (3.2.0)
@@ -256,6 +262,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
+  draper
   factory_girl_rails
   figaro
   haml-rails
