@@ -14,6 +14,7 @@ gem 'sass-rails', '~> 5.0'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'draper'
+gem 'newrelic_rpm'
 
 group :development do
   gem 'figaro'
@@ -30,7 +31,6 @@ end
 
 group :production do
   gem 'rails_12factor'
-  gem 'newrelic_rpm'
 end
 
 group :test do
