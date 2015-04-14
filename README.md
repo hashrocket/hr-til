@@ -11,3 +11,17 @@ bundle install
 rake db:create db:migrate db:seed
 rails s
 ```
+
+### Hosting
+
+Staging and production are hosted on Heroku.
+
+* http://hr-til-staging.herokuapp.com
+* http://til.hashrocket.com
+
+Environmental variables of note:
+
+```
+google_client_id
+google_client_secret
+```
