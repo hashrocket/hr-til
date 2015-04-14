@@ -25,19 +25,19 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.find_by_slug(params[:slug])
     @post_days = { @post.created_at.beginning_of_day => [ @post ] }
   end
 
   def edit
-    @post = Post.find(params[:id])
+    @post = Post.find_by_slug(params[:slug])
     unless @post.developer == current_developer
       redirect_to root_path, alert: "Access denied"
     end
   end
 
   def update
-    @post = Post.find(params[:id])
+    @post = Post.find_by_slug(params[:slug])
     if @post.update(post_params)
       redirect_to @post, notice: 'Post updated'
     else
@@ -54,6 +54,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit :body, :tag_id, :developer_id, :title
+    params.require(:post).permit :body, :tag_id, :developer_id, :title, :slug
   end
 end

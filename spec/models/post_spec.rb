@@ -29,4 +29,9 @@ describe Post do
     expect(post).to_not be_valid
   end
 
+  it 'should create a slug' do
+    post = FactoryGirl.create(:post, developer: developer, tag: tag)
+    post.save
+    expect(post.slug).to be
+  end
 end

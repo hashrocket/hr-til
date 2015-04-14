@@ -12,10 +12,10 @@
       %article.post
         - name = post.developer_username
         .title
-          %span= link_to post.title, post_path(post)
+          %span= link_to post.title, post_path(post.slug)
           %span //
           %span.username= link_to name, developers_show_path(name)
         .body= raw markdown.render post.body
         .tag= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
         - if editable? post
-          = link_to "[edit]", edit_post_path(post)
+          = link_to "[edit]", edit_post_path(post.slug)

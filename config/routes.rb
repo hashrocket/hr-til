@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :developers, only: :create
-  resources :posts, only: [:new, :create, :show, :edit, :update]
+  resources :posts, param: :slug
   resources :sessions, only: [:new, :create]
 
   get '/auth/google_oauth2', as: 'google_oauth2'
