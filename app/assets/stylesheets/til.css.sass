@@ -1,5 +1,6 @@
 // Variables
 $background-color: #eeeeee
+$light-text: #eeeeee
 // Colors source: https://github.com/github/linguist
 $assembly: #6E4C13
 $bash: #89e051
@@ -17,7 +18,7 @@ $vim: #199f4b
   @if lightness($hex) > 50%
     @return black
   @else
-    @return $background-color
+    @return $light-text
 
 //Normalization
 ul
