@@ -1,10 +1,5 @@
-require 'securerandom'
-
-hex = SecureRandom.hex(5)
-developer = Developer.create!(username: "developer#{hex}", email: "developer_#{hex}@example.com")
-tag = Tag.find_or_create_by!(name: 'rails')
-
 title = 'Parameters Filtering'
+
 body = <<-HEREDOC
 Rails logs your server's activity, which is useful for development and
 debugging. However, often the server handles sensitive information that
@@ -25,7 +20,15 @@ When the named parameter is handled by the server, it will be logged as
 environment if you want to keep the parameters unfiltered in development.
 HEREDOC
 
+tags = %w(rails ruby javascript go html css)
+
 5.times do |i|
-  puts "Creating post: ##{i}"
-  Post.create(body: body, tag: tag, developer: developer, title: title)
+  puts "Creating post ##{i}"
+
+  hex = SecureRandom.hex(5)
+  developer = Developer.create!(username: "developer#{hex}", email: "developer_#{hex}@hashrocket.com")
+
+  tag = Tag.find_or_create_by!(name: tags.sample)
+
+  Post.create!(body: body, tag: tag, developer: developer, title: title)
 end
