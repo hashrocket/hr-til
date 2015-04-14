@@ -329,6 +329,12 @@ Then 'I see the show page for that post' do
   end
 end
 
+And 'I see a unique CSS selector for that tag' do
+  within '.post' do
+    expect(page).to have_selector '.phantomjs'
+  end
+end
+
 Then 'I see the show page for that edited post' do
   within '.title' do
     expect(page).to have_content 'I changed the header'

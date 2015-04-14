@@ -1,3 +1,6 @@
+// Variables
+$background-color: #eeeeee
+
 //Normalization
 ul
   list-style: none
@@ -11,7 +14,7 @@ a
 
 //Application
 body
-  background-color: #eeeeee
+  background-color: $background-color
 
 main
   width: 900px
@@ -47,6 +50,39 @@ section.content
         padding: 2px
         display: inline
         background-color: #cccccc + #ff0000
+
+        // Tag colors scraped from the Github Linguist library:
+        // https://github.com/github/linguist
+        &.assembly
+          background-color: #6E4C13
+          a
+            color: $background-color
+        &.bash
+          background-color: #89e051
+        &.clojure
+          background-color: #db5855
+        &.coffeescript
+          background-color: #244776
+          a
+            color: $background-color
+        &.css
+          background-color: #563d7c
+          a
+            color: $background-color
+        &.go
+          background-color: #375eab
+          a
+            color: $background-color
+        &.html
+          background-color: #e44b23
+        &.javascript
+          background-color: #f1e05a
+        &.ruby, .rails
+          background-color: #701516
+          a
+            color: $background-color
+        &.vim
+          background-color: #199f4b
 
 footer
   p

@@ -20,3 +20,11 @@ Feature: Visitor views post
     And I see only a right arrow
     When I click the right arrow
     Then I see the second most recent post
+
+  Scenario: Visitor clicks on post title and sees a colored tag
+    Given I am a visitor
+    And a post exists
+    And I visit the homepage
+    When I click on the title of the post
+    Then I see the show page for that post
+    And I see a unique CSS selector for that tag
