@@ -3,8 +3,8 @@ class SessionsController < ApplicationController
   include DeveloperHelper
 
   def create
-    email = request.env['omniauth.auth']['info']['email']
-    if developer = Developer.find_by(email: email)
+    email = oauth_info['email']
+    if developer = Developer.find_by_email(email)
       sign_in developer
       redirect_to root_path
     else
@@ -23,8 +23,12 @@ class SessionsController < ApplicationController
 
   def oauth_developer_params
     {
-      username: generate_username(request.env['omniauth.auth']['info']['name']),
-      email: request.env['omniauth.auth']['info']['email'],
+      username: generate_username(oauth_info['name']),
+      email: oauth_info['email']
     }
+  end
+
+  def oauth_info
+    request.env['omniauth.auth']['info']
   end
 end
