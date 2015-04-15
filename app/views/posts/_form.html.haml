@@ -3,14 +3,14 @@
   %p= f.text_field :title, placeholder: 'Enter title...'
   %p= f.label :body
   %p= f.text_area :body, size: "147x10", placeholder: 'Enter body...'
+  %p.label Markdown Preview
+  .post_group
+    %article.post
+      .body
   %p= f.label :tag_id, 'Tag'
   %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
   %p= f.submit 'Submit'
 
-%p.label Preview
-.post_group
-  %article.post
-    .body
 
 :javascript
   $(document).ready(function(){
