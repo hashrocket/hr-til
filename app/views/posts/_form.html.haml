@@ -5,16 +5,19 @@
   %p= f.text_area :body, size: "147x10", placeholder: 'Enter body...'
   %p= f.label :tag_id, 'Tag'
   %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
-  Preview
-  %p.post_preview
   %p= f.submit 'Submit'
+
+%p.label Preview
+.post_group
+  %article.post
+    .body
 
 :javascript
   $(document).ready(function(){
     $("#post_body").keyup(function(){
       var txt = $("#post_body").val();
         $.post("/post_preview", {body: txt}, function(result){
-          $(".post_preview").html(result);
+          $(".body").html(result);
         });
      });
   });

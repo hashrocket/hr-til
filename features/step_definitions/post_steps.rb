@@ -369,7 +369,7 @@ Given 'no posts exist' do
 end
 
 Then 'I see a markdown preview with my rendered code' do
-  within('.post_preview code') do
+  within('.post .body code') do
     expect(page).to have_content 'killer robot attack'
   end
 end
