@@ -10,7 +10,6 @@
 %p.label Preview
 .post_group
   %article.post
-    .title
     .body
 
 :javascript
@@ -20,10 +19,5 @@
         $.post("/post_preview", {body: txt}, function(result){
           $(".body").html(result);
         });
-     });
-
-    $("#post_title").keyup(function(){
-      var txt = $("#post_title").val();
-      $(".title").html(txt);
      });
   });
