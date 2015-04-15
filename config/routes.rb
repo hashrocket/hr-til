@@ -11,4 +11,6 @@ Rails.application.routes.draw do
   get 'account/signout', to: 'sessions#destroy'
   get '/:name', to: 'tags#show', as: 'tags_show'
   get '/author/:username', to: 'developers#show', as: 'developers_show'
+
+  post '/post_preview', to: 'posts#preview'
 end

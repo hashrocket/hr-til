@@ -367,3 +367,9 @@ end
 Given 'no posts exist' do
   # noop
 end
+
+Then 'I see a markdown preview with my rendered code' do
+  within('.post_preview code') do
+    expect(page).to have_content 'killer robot attack'
+  end
+end

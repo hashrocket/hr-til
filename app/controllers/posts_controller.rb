@@ -5,6 +5,10 @@ class PostsController < ApplicationController
 
   before_filter :require_developer, except: [:index, :show]
 
+  def preview
+    render layout: false
+  end
+
   def new
     @post = Post.new
   end
