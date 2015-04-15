@@ -61,10 +61,11 @@ Feature: Developer creates post
     Then I see an error message "Tag can't be blank"
 
   @javascript
-  Scenario: Markdown preview
+  Scenario: Post preview
     Given I am a signed in developer
     And a tag exists
     When I click create TIL
     Then I see a form for TIL
     When I enter information with markdown inline code into that form
-    Then I see a markdown preview with my rendered code
+    Then I see a preview with my rendered code
+
