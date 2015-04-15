@@ -10,14 +10,3 @@
   %p= f.label :tag_id, 'Tag'
   %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
   %p= f.submit 'Submit'
-
-
-:javascript
-  $(document).ready(function(){
-    $("#post_body").keyup(function(){
-      var txt = $("#post_body").val();
-        $.post("/post_preview", {body: txt}, function(result){
-          $(".body").html(result);
-        });
-     });
-  });
