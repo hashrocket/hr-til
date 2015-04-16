@@ -324,6 +324,9 @@ When 'I click on the title of the post' do
 end
 
 Then 'I see the show page for that post' do
+  within 'h3' do
+    expect(page).to have_content @post.title
+  end
   within '.post' do
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
