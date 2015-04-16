@@ -60,6 +60,15 @@ Feature: Developer creates post
     And I click submit
     Then I see an error message "Tag can't be blank"
 
+  Scenario: Developer clicks cancel
+    Given I am a signed in developer
+    And a tag exists
+    When I click create TIL
+    Then I see a form for TIL
+    When I click cancel
+    Then I see the homepage
+    And no post was created
+
   @javascript
   Scenario: Markdown preview
     Given I am a signed in developer

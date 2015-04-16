@@ -391,3 +391,7 @@ Then 'I see a markdown preview with my rendered code' do
     expect(page).to have_content 'killer robot attack'
   end
 end
+
+And 'no post was created' do
+  expect(page).to_not have_selector '.post_group'
+end

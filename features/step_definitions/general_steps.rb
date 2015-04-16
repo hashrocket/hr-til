@@ -28,3 +28,7 @@ Then 'I see copyright and company information' do
     expect(page).to have_link "Hashrocket", href: 'http://hashrocket.com'
   end
 end
+
+When 'I click cancel' do
+  click_on 'cancel'
+end
