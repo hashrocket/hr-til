@@ -35,6 +35,11 @@ And 'I have a post' do
   FactoryGirl.create(:post, tag: tag, developer: @developer)
 end
 
+And 'I have a post with markdown' do
+  tag = FactoryGirl.create(:tag)
+  FactoryGirl.create(:post, tag: tag, developer: @developer, body: '*emphasis*')
+end
+
 And 'I click sign out' do
   click_on 'Sign Out'
 end

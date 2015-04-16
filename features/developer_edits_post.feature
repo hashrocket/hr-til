@@ -26,3 +26,14 @@ Feature: Developer edits post
     When I edit the post to no longer have a body
     And I click submit
     Then I see an error message "Body can't be blank"
+
+  @javascript
+  Scenario: Developer edits post with a markdown preview
+    Given I am a signed in developer
+    And I have a post with markdown
+    And I visit the homepage
+    When I click edit
+    Then I see the edit page for my markdown post
+    And I see a markdown preview of my post
+    When I enter information with markdown inline code into that form
+    Then I see a markdown preview with my rendered code

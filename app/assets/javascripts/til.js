@@ -15,12 +15,12 @@ $(function(){
 		};
 	};
 
-	var lazyMarkdown = debounce(function(){
+	var renderMarkdown = function(){
 		var txt = $("#post_body").val();
 		$.post("/post_preview", {body: txt}, function(result){
 			$(".body").html(result);
 		});
-	}, 300);
+	};
 
-	$('#post_body').on('keyup', lazyMarkdown);
+	$('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
 });

@@ -353,8 +353,18 @@ Then 'I see the edit page for that post' do
     expect(page).to have_content 'Edit Post'
   end
 
-  within 'body' do
+  within 'textarea#post_body' do
     expect(page).to have_content 'Today I learned about web development'
+  end
+end
+
+Then 'I see the edit page for my markdown post' do
+  within 'h3' do
+    expect(page).to have_content 'Edit Post'
+  end
+
+  within 'textarea#post_body' do
+    expect(page).to have_content '*emphasis*'
   end
 end
 
@@ -368,6 +378,12 @@ end
 
 Given 'no posts exist' do
   # noop
+end
+
+And 'I see a markdown preview of my post' do
+  within('.post_group .post .body em') do
+    expect(page).to have_content 'emphasis'
+  end
 end
 
 Then 'I see a markdown preview with my rendered code' do
