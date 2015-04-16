@@ -1,8 +1,11 @@
-Given(/^I (see|visit) the homepage$/) do |_|
-  visit root_path
+Given 'I see the homepage' do
   within 'body header h1' do
     expect(page).to have_content 'TIL / Hashrocket'
   end
+end
+
+Given 'I visit the homepage' do
+  visit root_path
 end
 
 Then(/^I see an error message "(.*?)"$/) do |error|
