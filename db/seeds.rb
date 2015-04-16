@@ -8,7 +8,7 @@ tags = %w(vim development design consulting rails
           ruby emberjs testing bash git html css
           javascript clojure postgres algorithms
           coffeescript reactjs assembly devops go
-          internet)
+          internet android ios)
 
 tags.each do |tag|
   puts "Finding or creating tag: #{tag}"
