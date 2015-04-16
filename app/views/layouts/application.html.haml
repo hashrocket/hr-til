@@ -14,7 +14,7 @@
           - if developer_signed_in?
             %li= link_to current_developer.username, developers_show_path(current_developer.username)
             %li= link_to "Sign Out", account_signout_path
-            %li= link_to "Create Post", new_post_path
+            %li= link_to "Create Post", new_post_path, { :'data-no-turbolink' => true }
           - else
             %li= link_to "Rocketeer Sign In", google_oauth2_path
         #flash
