@@ -406,3 +406,15 @@ And 'I see my unedited post' do
     expect(page).to have_content 'Today I learned about web development'
   end
 end
+
+When(/^I enter (\d+) words into that form$/) do |number|
+  within 'form' do
+    fill_in 'Body', with: 'word ' * number.to_i
+  end
+end
+
+Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, noun|
+  within 'form' do
+    expect(page).to have_content "#{number} #{noun} available"
+  end
+end

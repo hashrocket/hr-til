@@ -25,4 +25,13 @@ module PostHelper
   def editable?(post)
     current_developer && current_developer == post.developer
   end
+
+  def remaining_words(body)
+    Post::MAX_WORDS - body.split(' ').size
+  end
+
+  def remaining_words_formatter(rw)
+    noun = rw == 1 ? 'word' : 'words'
+    noun + ' available'
+  end
 end

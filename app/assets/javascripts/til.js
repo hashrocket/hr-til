@@ -23,4 +23,13 @@ $(function(){
 	};
 
 	$('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
+
+	var renderWordCount = function(){
+		var txt = $("#post_body").val();
+		$.post("/word_count", {body: txt}, function(result){
+			$(".word_count").html(result);
+		});
+	};
+
+	$('#post_body').on('keyup', debounce(renderWordCount, 500)).each(renderWordCount);
 });

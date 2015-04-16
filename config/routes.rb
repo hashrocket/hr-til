@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get '/author/:username', to: 'developers#show', as: 'developers_show'
 
   post '/post_preview', to: 'posts#preview'
+  post '/word_count', to: 'posts#word_count'
 end

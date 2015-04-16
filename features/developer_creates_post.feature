@@ -77,3 +77,18 @@ Feature: Developer creates post
     Then I see a form for TIL
     When I enter information with markdown inline code into that form
     Then I see a markdown preview with my rendered code
+
+  @javascript
+  Scenario: Developer sees updating word count
+    Given I am a signed in developer
+    And a tag exists
+    When I click create TIL
+    Then I see a form for TIL
+    When I enter 10 words into that form
+    Then I see a message saying I have 190 words left
+    When I enter 50 words into that form
+    Then I see a message saying I have 150 words left
+    When I enter 199 words into that form
+    Then I see a message saying I have 1 word left
+    When I enter 300 words into that form
+    Then I see a message saying I have -100 words left
