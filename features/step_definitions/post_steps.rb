@@ -398,3 +398,11 @@ end
 And 'no post was created' do
   expect(page).to_not have_selector '.post_group'
 end
+
+And 'I see my unedited post' do
+  expect(page).to have_selector '.post_group', count: 1
+  within '.post_group' do
+    expect(page).to have_content 'Web Development'
+    expect(page).to have_content 'Today I learned about web development'
+  end
+end

@@ -27,6 +27,16 @@ Feature: Developer edits post
     And I click submit
     Then I see an error message "Body can't be blank"
 
+  Scenario: Developer clicks cancel
+    Given I am a signed in developer
+    And I have a post
+    And I visit the homepage
+    When I click edit
+    Then I see the edit page for that post
+    When I click cancel
+    Then I see the homepage
+    And I see my unedited post
+
   @javascript
   Scenario: Developer edits post with a markdown preview
     Given I am a signed in developer
