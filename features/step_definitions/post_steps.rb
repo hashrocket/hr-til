@@ -1,5 +1,7 @@
 When 'I click create TIL' do
-  click_on 'Create Post'
+  within 'header ul' do
+    click_on 'Create Post'
+  end
 end
 
 Then 'I see a form for TIL' do
