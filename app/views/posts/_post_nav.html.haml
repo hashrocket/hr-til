@@ -1,6 +1,6 @@
 .nav
   - if multiple_posts?
     - unless oldest_post? @post
-      = link_to '<', post_path(previous_post @post)
+      = link_to '<', post_path(previous_post @post), { 'data-no-turbolink': true }
     - unless newest_post? @post
-      = link_to '>', post_path(next_post @post)
+      = link_to '>', post_path(next_post @post), { 'data-no-turbolink': true }

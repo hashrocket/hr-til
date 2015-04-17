@@ -13,6 +13,7 @@ Feature: Developer creates post
     And I see the tag I selected
     When I click on my username in the upper right
     Then I see the post I created
+    And I see a link to tweet
 
   Scenario: Happy path with markdown inline code
     Given I am a signed in developer

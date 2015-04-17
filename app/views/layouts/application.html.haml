@@ -8,13 +8,13 @@
   %body
     %main
       %header
-        = link_to root_path do
+        = link_to root_path, { 'data-no-turbolink': true } do
           %h1 TIL / Hashrocket
         %ul
           - if developer_signed_in?
-            %li= link_to current_developer.username, developers_show_path(current_developer.username)
-            %li= link_to "Sign Out", account_signout_path
-            %li= link_to "Create Post", new_post_path, { :'data-no-turbolink' => true }
+            %li= link_to current_developer.username, developers_show_path(current_developer.username), { 'data-no-turbolink': true }
+            %li= link_to "Sign Out", account_signout_path, { 'data-no-turbolink': true }
+            %li= link_to "Create Post", new_post_path, { 'data-no-turbolink': true }
           - else
             %li= link_to "Rocketeer Sign In", google_oauth2_path
         #flash

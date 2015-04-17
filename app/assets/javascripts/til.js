@@ -22,8 +22,6 @@ $(function(){
 		});
 	};
 
-	$('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
-
 	var renderWordCount = function(){
 		var txt = $("#post_body").val();
 		$.post("/word_count", {body: txt}, function(result){
@@ -32,4 +30,7 @@ $(function(){
 	};
 
 	$('#post_body').on('keyup', debounce(renderWordCount, 500)).each(renderWordCount);
+	$('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
+
+        !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
 });

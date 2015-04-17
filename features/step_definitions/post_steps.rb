@@ -121,6 +121,12 @@ Then 'I see the post I created' do
   end
 end
 
+And 'I see a link to tweet' do
+  within '.post_group .post' do
+    expect(page).to have_link 'Tweet'
+  end
+end
+
 Then 'I see a title created from the first line of the body' do
   within '.post_group .post .title' do
     expect(page).to have_content 'I learned how to split a string'
@@ -327,6 +333,7 @@ Then 'I see the show page for that post' do
   within 'h3' do
     expect(page).to have_content @post.title
   end
+
   within '.post' do
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
