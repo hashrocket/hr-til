@@ -19,6 +19,4 @@
         .tag{ class: post.tag_name }= link_to "##{post.tag_name}", tags_show_path(post.tag_name), { 'data-no-turbolink': true }
         - if editable? post
           = link_to "[edit]", edit_post_path(post.slug), { 'data-no-turbolink': true }
-
-        - root_url = Rails.env.production? ? PROD_ROOT : TEST_ROOT
-        %a{href: "http://twitter.com/share", class:"twitter-share-button", 'data-text': "Today I learned: #{post.title}", 'data-via': "hashrocket", 'data-url': "#{root_url}#{post_path post}"}Tweet
+        = tweet_link post
