@@ -1,26 +1,26 @@
-// Variables
-$background-color: #eeeeee
-$light-text: #eeeeee
-// Colors source: https://github.com/github/linguist
-$assembly: #6E4C13
-$bash: #89e051
-$clojure: #db5855
-$coffeescript: #244776
-$css: #563d7c
-$go: #375eab
-$html: #e44b23
-$javascript: #f1e05a
-$ruby: #701516
-$vim: #199f4b
+$background-color: #eee
+$dark-text:        #000
+$light-text:       #eee
+
+$assembly:         #6E4C13
+$bash:             #89e051
+$clojure:          #db5855
+$coffeescript:     #244776
+$css:              #563d7c
+$go:               #375eab
+$html:             #e44b23
+$javascript:       #f1e05a
+$ruby:             #701516
+$vim:              #199f4b
 
 // Functions
 @function responsive-color($hex)
   @if lightness($hex) > 50%
-    @return black
+    @return $dark-text
   @else
     @return $light-text
 
-//Normalization
+// Normalization
 ul
   list-style: none
 ul, li
@@ -31,7 +31,7 @@ a
   text-decoration: initial
   color: black
 
-//Application
+// Application
 body
   background-color: $background-color
 
