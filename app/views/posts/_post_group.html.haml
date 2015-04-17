@@ -21,4 +21,4 @@
           = link_to "[edit]", edit_post_path(post.slug), { 'data-no-turbolink': true }
 
         - root_url = Rails.env.production? ? PROD_ROOT : TEST_ROOT
-        %a{href: "http://twitter.com/share", class:"twitter-share-button", 'data-text': "TodayI learned: #{post.title}", 'data-via': "hashrocket", 'data-url': "#{root_url}#{post_path post}"}Tweet
+        %a{href: "http://twitter.com/share", class:"twitter-share-button", 'data-text': "Today I learned: #{post.title}", 'data-via': "hashrocket", 'data-url': "#{root_url}#{post_path post}"}Tweet
