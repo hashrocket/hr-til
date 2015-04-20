@@ -1,2 +1,5 @@
+.rss= link_to image_tag("feed-icon-28x28.png"), root_path(format: "atom")
+= content_for :head, auto_discovery_link_tag(:atom, root_path(format: "atom"))
+
 .post_groups
   = render 'post_group'
