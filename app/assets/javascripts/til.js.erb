@@ -23,13 +23,14 @@ $(function(){
 	};
 
 	var renderWordCount = function(){
-		var txt = $("#post_body").val();
-		$.post("/word_count", {body: txt}, function(result){
-			$(".word_count").html(result);
-		});
+		var max = <%= Post::MAX_WORDS + 1 %>
+		var words = $("#post_body").val().split(' ').length;
+		var result = max - words
+		var copy = result === 1 ? ' word available' : ' words available'
+		$(".word_count").html(result + copy);
 	};
 
-	$('#post_body').on('keyup', debounce(renderWordCount, 500)).each(renderWordCount);
+	$('#post_body').on('keyup', renderWordCount).each(renderWordCount);
 	$('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
 
         !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');

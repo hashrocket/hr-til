@@ -26,15 +26,6 @@ module PostHelper
     current_developer && current_developer == post.developer
   end
 
-  def remaining_words(body)
-    Post::MAX_WORDS - body.split(' ').size
-  end
-
-  def remaining_words_formatter(rw)
-    noun = rw == 1 ? 'word' : 'words'
-    noun + ' available'
-  end
-
   def tweet_link(post)
     title = post.title
     handle = 'hashrocket'
