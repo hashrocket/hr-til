@@ -93,3 +93,7 @@ Feature: Developer creates post
     Then I see a message saying I have 1 word left
     When I enter 300 words into that form
     Then I see a message saying I have -100 words left
+    And the message is red
+    When I enter 30 words into that form
+    Then I see a message saying I have 170 words left
+    And the message is not red

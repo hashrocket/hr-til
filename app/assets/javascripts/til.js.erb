@@ -26,6 +26,13 @@ $(function(){
 		var max = <%= Post::MAX_WORDS + 1 %>
 		var words = $("#post_body").val().split(' ').length;
 		var result = max - words
+
+		if(result < 0) {
+			$(".word_count").addClass('negative');
+		} else {
+			$(".word_count").removeClass('negative');
+		}
+
 		var copy = result === 1 ? ' word available' : ' words available'
 		$(".word_count").html(result + copy);
 	};

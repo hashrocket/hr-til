@@ -425,3 +425,15 @@ Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, n
     expect(page).to have_content "#{number} #{noun} available"
   end
 end
+
+And 'the message is red' do
+  within 'form' do
+    expect(page).to have_selector '.negative'
+  end
+end
+
+And 'the message is not red' do
+  within 'form' do
+    expect(page).to_not have_selector '.negative'
+  end
+end
