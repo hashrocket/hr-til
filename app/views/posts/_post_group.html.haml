@@ -15,7 +15,7 @@
           %span= link_to post.title, post_path(post.slug)
           %span //
           %span.username= link_to name, developers_show_path(name)
-        .body= raw markdown.render post.body
+        .body= markdown_render post.body
         .tag{ class: post.tag_name }= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
         - if editable? post
           = link_to "[edit]", edit_post_path(post.slug)
