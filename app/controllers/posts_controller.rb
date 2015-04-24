@@ -21,9 +21,10 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.developer = current_developer
     if @post.save
+      flash[:notice] = 'Post created'
       redirect_to root_path
     else
-      flash[:alert] = @post.errors.full_messages
+      flash.now[:error] = @post.errors.full_messages
       render :new
     end
   end
@@ -40,16 +41,18 @@ class PostsController < ApplicationController
   def edit
     @post = Post.find_by_slug(params[:slug])
     unless @post.developer == current_developer
-      redirect_to root_path, alert: "Access denied"
+      flash[:error] = 'Access denied'
+      redirect_to root_path
     end
   end
 
   def update
     @post = Post.find_by_slug(params[:slug])
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post updated'
+      flash[:notice] = 'Post updated'
+      redirect_to @post
     else
-      flash[:alert] = @post.errors.full_messages
+      flash.now[:error] = @post.errors.full_messages
       render :edit
     end
   end
