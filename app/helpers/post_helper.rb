@@ -37,8 +37,4 @@ module PostHelper
                 'data-text': "Today I learned: #{title}", 'data-via': "#{handle}",
                 'data-hashtags': "#{hashtag}", 'data-url': "#{url}")
   end
-
-  def markdown_render(md)
-    raw markdown.render md
-  end
 end

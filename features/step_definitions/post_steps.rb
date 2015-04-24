@@ -82,6 +82,14 @@ When 'I enter information with markdown inline code into that form' do
   end
 end
 
+When 'I enter information with markdown fenced code into that form' do
+  within 'form' do
+    fill_in 'Title', with: 'Fenced'
+    markdown_content = "```first line\nsecond line\nthird line\n```"
+    fill_in 'Body', with: markdown_content
+  end
+end
+
 When 'I enter information with markdown bullets into that form' do
   within 'form' do
     fill_in 'Title', with: 'Bulletized'
@@ -150,6 +158,12 @@ end
 Then 'I see the markdown inline code I created' do
   within '.post_group .post .body code' do
     expect(page).to have_content 'killer robot attack'
+  end
+end
+
+Then 'I see the markdown fenced code I created' do
+  within '.post_group .post .body' do
+    expect(page).to have_content "first line\nsecond line\nthird line"
   end
 end
 
@@ -343,7 +357,7 @@ end
 
 And 'I see a unique CSS selector for that tag' do
   within '.post' do
-    expect(page).to have_selector '.phantomjs'
+    expect(page).to have_selector '.phantomjs_tag'
   end
 end
 

@@ -1,6 +1,6 @@
 Feature: Developer creates post
 
-  Scenario: Happy path
+  Scenario: With valid information
     Given I am a signed in developer
     And a tag exists
     When I click create TIL
@@ -15,7 +15,7 @@ Feature: Developer creates post
     Then I see the post I created
     And I see a link to tweet
 
-  Scenario: Happy path with markdown inline code
+  Scenario: With valid information and markdown inline code
     Given I am a signed in developer
     And a tag exists
     When I click create TIL
@@ -26,7 +26,18 @@ Feature: Developer creates post
     Then I see the homepage
     And I see the markdown inline code I created
 
-  Scenario: Happy path with markdown bullets
+  Scenario: With valid information and markdown fenced code
+    Given I am a signed in developer
+    And a tag exists
+    When I click create TIL
+    Then I see a form for TIL
+    When I enter information with markdown fenced code into that form
+    And I select a tag
+    And I click submit
+    Then I see the homepage
+    And I see the markdown fenced code I created
+
+  Scenario: With valid information and markdown bullets
     Given I am a signed in developer
     And a tag exists
     When I click create TIL
@@ -37,14 +48,14 @@ Feature: Developer creates post
     Then I see the homepage
     And I see the markdown bullets I created
 
-  Scenario: Sad path (no post body)
+  Scenario: With invalid information (no post body)
     Given I am a signed in developer
     When I click create TIL
     Then I see a form for TIL
     When I click submit
     Then I see an error message "Body can't be blank"
 
-  Scenario: Sad path (post body too long)
+  Scenario: With invalid information (post body too long)
     Given I am a signed in developer
     When I click create TIL
     Then I see a form for TIL
@@ -53,7 +64,7 @@ Feature: Developer creates post
     When I click submit
     Then I see an error message "Body is too long"
 
-  Scenario: Sad path (no tag)
+  Scenario: With invalid information (no tag)
     Given I am a signed in developer
     When I click create TIL
     Then I see a form for TIL
