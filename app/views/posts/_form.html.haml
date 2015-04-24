@@ -14,4 +14,4 @@
   %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
   %p.actions
     %span= f.submit 'Submit'
-    %span= link_to 'cancel', root_path, { 'data-no-turbolink': true }
+    %span= link_to 'cancel', root_path

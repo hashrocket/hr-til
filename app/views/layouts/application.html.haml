@@ -2,20 +2,20 @@
 %html(lang="en-US")
   %head
     %title TIL / Hashrocket
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = stylesheet_link_tag    'application', media: 'all'
+    = javascript_include_tag 'application'
     = csrf_meta_tags
     = yield :head
   %body
     %main
       %header
-        = link_to root_path, { 'data-no-turbolink': true } do
+        = link_to root_path do
           %h1 TIL / Hashrocket
         %ul
           - if developer_signed_in?
-            %li= link_to current_developer.username, developers_show_path(current_developer.username), { 'data-no-turbolink': true }
-            %li= link_to "Sign Out", account_signout_path, { 'data-no-turbolink': true }
-            %li= link_to "Create Post", new_post_path, { 'data-no-turbolink': true }
+            %li= link_to current_developer.username, developers_show_path(current_developer.username)
+            %li= link_to "Sign Out", account_signout_path
+            %li= link_to "Create Post", new_post_path
           - else
             %li= link_to "Rocketeer Sign In", google_oauth2_path
         #flash
