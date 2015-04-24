@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   root to: 'posts#index'
 
-  resources :developers, only: :create
+  resources :developers, only: :update
   resources :posts, param: :slug
   resources :sessions, only: [:new, :create]
 
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   get 'account/signout', to: 'sessions#destroy'
   get '/:name', to: 'tags#show', as: 'tags_show'
   get '/author/:username', to: 'developers#show', as: 'developers_show'
+  get '/developer/profile', to: 'developers#profile', as: 'developers_profile'
 
   post '/post_preview', to: 'posts#preview'
 end

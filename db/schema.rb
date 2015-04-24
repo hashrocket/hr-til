@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150414002719) do
+ActiveRecord::Schema.define(version: 20150424190902) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -31,10 +31,11 @@ ActiveRecord::Schema.define(version: 20150414002719) do
   add_index "authem_sessions", ["expires_at", "token"], name: "index_authem_sessions_on_expires_at_and_token", unique: true, using: :btree
 
   create_table "developers", force: :cascade do |t|
-    t.string   "email",      null: false
-    t.string   "username",   null: false
+    t.string   "email",          null: false
+    t.string   "username",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "twitter_handle"
   end
 
   create_table "posts", force: :cascade do |t|

@@ -1,12 +1,33 @@
 Given 'I see the homepage' do
-  within 'body header h1' do
-    expect(page).to have_content 'TIL / Hashrocket'
-  end
+  expect(current_path).to eq root_path
 end
 
 Given 'I visit the homepage' do
   visit root_path
 end
+
+And 'I click profile' do
+  click_on 'Profile'
+end
+
+Then 'I see my profile page' do
+  within 'h3' do
+    expect(page).to have_content 'My Profile'
+  end
+end
+
+When 'I enter my twitter handle' do
+  within 'form' do
+    fill_in 'Twitter handle', with: 'hashrocket'
+    click_on 'Submit'
+  end
+end
+
+And 'my twitter handle is set' do
+  @developer.reload
+  expect(@developer.twitter_handle).to eq 'hashrocket'
+end
+
 
 Then(/^I see an error message "(.*?)"$/) do |error|
   within '#flash' do
