@@ -18,6 +18,7 @@ gem 'newrelic_rpm'
 
 group :development do
   gem 'figaro'
+  gem 'brakeman', require: false
 end
 
 group :development, :test do
