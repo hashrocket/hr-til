@@ -36,6 +36,9 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by_slug(untitled_slug)
     @post_days = { @post.created_at.beginning_of_day => [ @post ] }
+    unless @post.to_param == params[:titled_slug]
+      redirect_to @post
+    end
   end
 
   def edit
@@ -43,6 +46,10 @@ class PostsController < ApplicationController
     unless @post.developer == current_developer
       flash[:error] = 'Access denied'
       redirect_to root_path
+    end
+
+    unless @post.to_param == params[:titled_slug]
+      redirect_to edit_post_path @post
     end
   end
 
