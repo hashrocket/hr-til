@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en-US")
   %head
-    %title TIL / Hashrocket
+    %title= "#{SITE_NAME}"
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
@@ -10,7 +10,7 @@
     %main
       %header
         = link_to root_path do
-          %h1 TIL / Hashrocket
+          %h1= "#{SITE_NAME}"
         %ul
           - if developer_signed_in?
             %li= link_to current_developer.username, developers_show_path(current_developer.username)

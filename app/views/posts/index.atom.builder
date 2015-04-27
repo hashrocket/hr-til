@@ -1,5 +1,5 @@
 atom_feed do |feed|
-  feed.title 'TIL / Hashrocket'
+  feed.title SITE_NAME
   feed.updated @post_days.keys.first
 
   @post_days.each do |days, posts|
