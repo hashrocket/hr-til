@@ -156,19 +156,19 @@ Then 'I see the markdown headers I created' do
 end
 
 Then 'I see the markdown inline code I created' do
-  within '.post_group .post .body code' do
+  within '.post_group .post .content code' do
     expect(page).to have_content 'killer robot attack'
   end
 end
 
 Then 'I see the markdown fenced code I created' do
-  within '.post_group .post .body' do
+  within '.post_group .post .content' do
     expect(page).to have_content "first line\nsecond line\nthird line"
   end
 end
 
 Then 'I see the markdown bullets I created' do
-  within '.post_group .post .body li' do
+  within '.post_group .post .content li' do
     expect(page).to have_content 'item from a list of items'
   end
 end
@@ -407,13 +407,13 @@ Given 'no posts exist' do
 end
 
 And 'I see a markdown preview of my post' do
-  within('.post_group .post .body em') do
+  within('.post_group .post .content_preview em') do
     expect(page).to have_content 'emphasis'
   end
 end
 
 Then 'I see a markdown preview with my rendered code' do
-  within('.post .body code') do
+  within('.post .content_preview code') do
     expect(page).to have_content 'killer robot attack'
   end
 end
