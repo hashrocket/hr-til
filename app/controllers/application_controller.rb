@@ -7,7 +7,6 @@ class ApplicationController < ActionController::Base
 
   def require_developer
     unless current_developer
-      flash[:error] = 'Access denied'
       redirect_to root_path
     end
   end
