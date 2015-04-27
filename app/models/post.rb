@@ -20,7 +20,7 @@ class Post < ActiveRecord::Base
   end
 
   def to_param
-    slug
+    slug + '-' + slugified_title
   end
 
   private
@@ -33,5 +33,9 @@ class Post < ActiveRecord::Base
 
   def generate_slug
     self.slug = SecureRandom.hex(5)
+  end
+
+  def slugified_title
+    title.downcase.strip.gsub(/\s+/, '-').gsub(/(?![a-z0-9\-])./, "")
   end
 end

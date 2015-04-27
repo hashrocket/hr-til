@@ -348,6 +348,8 @@ Then 'I see the show page for that post' do
     expect(page).to have_content @post.title
   end
 
+  expect(current_path).to eq "/posts/#{@post.slug}-web-development"
+
   within '.post' do
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'

@@ -34,12 +34,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.find_by_slug(untitled_slug)
     @post_days = { @post.created_at.beginning_of_day => [ @post ] }
   end
 
   def edit
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.find_by_slug(untitled_slug)
     unless @post.developer == current_developer
       flash[:error] = 'Access denied'
       redirect_to root_path
@@ -47,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def update
-    @post = Post.find_by_slug(params[:slug])
+    @post = Post.find_by_slug(untitled_slug)
     if @post.update(post_params)
       flash[:notice] = 'Post updated'
       redirect_to @post
@@ -66,5 +66,9 @@ class PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit :body, :tag_id, :developer_id, :title, :slug
+  end
+
+  def untitled_slug
+    params[:titled_slug].split('-').first
   end
 end

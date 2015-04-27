@@ -31,7 +31,21 @@ describe Post do
 
   it 'should create a slug' do
     post = FactoryGirl.create(:post, developer: developer, tag: tag)
-    post.save
     expect(post.slug).to be
+  end
+
+  it 'should create a slug with dashes' do
+    post = FactoryGirl.create(:post, title: 'Today I learned about clojure', developer: developer, tag: tag)
+    expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure'
+  end
+
+  it 'should remove whitespace' do
+    post = FactoryGirl.create(:post, title: '  Today I             learned about clojure   ', developer: developer, tag: tag)
+    expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure'
+  end
+
+  it 'should not allow punctuation' do
+    post = FactoryGirl.create(:post, title: 'Today I! learned? about #clojure', developer: developer, tag: tag)
+    expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure'
   end
 end
