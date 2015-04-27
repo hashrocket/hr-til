@@ -9,6 +9,5 @@ Feature: Visitor views homepage
     Given I am a visitor
     And a post exists
     And I visit the homepage
-    Then I see a link to the Atom feed
-    When I click the Atom feed link
+    When I visit the Atom feed page
     Then I see an Atom feed

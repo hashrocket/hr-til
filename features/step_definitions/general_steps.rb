@@ -54,16 +54,8 @@ When 'I click cancel' do
   click_on 'cancel'
 end
 
-Then 'I see a link to the Atom feed' do
-  within '.rss' do
-    expect(page).to have_link '', href: root_path(format: "atom")
-  end
-end
-
-When 'I click the Atom feed link' do
-  within '.rss' do
-    click_on ''
-  end
+When 'I visit the Atom feed page' do
+  visit root_path(format: "atom")
 end
 
 Then 'I see an Atom feed' do
