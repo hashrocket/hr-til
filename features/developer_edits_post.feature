@@ -15,7 +15,7 @@ Feature: Developer edits post
     Given I am a signed in developer
     And a post exists by another developer
     When I visit the edit page for that post
-    Then I see an error message "Access denied"
+    Then I see an error message "You can only edit your own posts"
 
   Scenario: Developer edits post with invalid data
     Given I am a signed in developer

@@ -3,7 +3,9 @@ class PostsController < ApplicationController
   include MarkdownHelper
   include PostHelper
 
+  before_action :set_post, only: [:show, :edit, :update]
   before_filter :require_developer, except: [:index, :show]
+  before_filter :authorize_developer, only: [:edit]
 
   def preview
     render layout: false
@@ -34,7 +36,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find_by_slug(untitled_slug)
     @post_days = { @post.created_at.beginning_of_day => [ @post ] }
     unless @post.to_param == params[:titled_slug]
       redirect_to @post
@@ -42,19 +43,12 @@ class PostsController < ApplicationController
   end
 
   def edit
-    @post = Post.find_by_slug(untitled_slug)
-    unless @post.developer == current_developer
-      flash[:error] = 'Access denied'
-      redirect_to root_path
-    end
-
     unless @post.to_param == params[:titled_slug]
       redirect_to edit_post_path @post
     end
   end
 
   def update
-    @post = Post.find_by_slug(untitled_slug)
     if @post.update(post_params)
       flash[:notice] = 'Post updated'
       redirect_to @post
@@ -77,5 +71,16 @@ class PostsController < ApplicationController
 
   def untitled_slug
     params[:titled_slug].split('-').first
+  end
+
+  def set_post
+    @post = Post.find_by_slug(untitled_slug)
+  end
+
+  def authorize_developer
+    unless @post.developer == current_developer
+      flash[:error] = 'You can only edit your own posts'
+      redirect_to root_path
+    end
   end
 end
