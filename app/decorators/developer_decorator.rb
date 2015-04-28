@@ -1,7 +1,4 @@
 class DeveloperDecorator < Draper::Decorator
+  include PresentsPosts
   delegate_all
-
-  def posts_count
-    posts.presence && "(#{h.pluralize posts.count, 'post'})"
-  end
 end
