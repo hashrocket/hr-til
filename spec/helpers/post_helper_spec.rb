@@ -3,9 +3,7 @@ require "rails_helper"
 describe PostHelper do
   describe "#tweet_link" do
     it "returns a link to twitter" do
-      developer = FactoryGirl.create(:developer)
-      tag = FactoryGirl.create(:tag)
-      @post = FactoryGirl.create(:post, tag: tag, developer: developer)
+      @post = FactoryGirl.create(:post)
       @post.slug = '1234'
       @post.save!
 
@@ -16,8 +14,7 @@ describe PostHelper do
 
     it "returns a link to twitter with developer's twitter handle" do
       developer = FactoryGirl.create(:developer, twitter_handle: 'awesome_handle')
-      tag = FactoryGirl.create(:tag)
-      @post = FactoryGirl.create(:post, tag: tag, developer: developer)
+      @post = FactoryGirl.create(:post, developer: developer)
       @post.slug = '1234'
       @post.save!
 

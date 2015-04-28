@@ -15,17 +15,11 @@ Given 'a tag exists' do
 end
 
 Given 'a post exists' do
-  developer = FactoryGirl.create(:developer)
-  tag = FactoryGirl.create(:tag)
-
-  @post = FactoryGirl.create(:post, developer: developer, tag: tag)
+  @post = FactoryGirl.create(:post)
 end
 
 Given 'a post exists by another developer' do
-  developer = FactoryGirl.create(:developer)
-  tag = FactoryGirl.create(:tag)
-
-  @others_post = FactoryGirl.create(:post, developer: developer, tag: tag)
+  @others_post = FactoryGirl.create(:post)
 end
 
 When 'I visit the edit page for that post' do
@@ -185,21 +179,16 @@ Given 'there exist TILs for today, yesterday, and last week' do
   clojure_dev  = FactoryGirl.create(:developer, username: 'clojureman')
   karate_dev   = FactoryGirl.create(:developer, username: 'karatedude')
 
-  tag = FactoryGirl.create(:tag)
-
-  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails', tag: tag)
-  @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure', tag: tag)
-  @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember', tag: tag)
-  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate', tag: tag)
+  @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails')
+  @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure')
+  @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember')
+  @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate')
 end
 
 Given 'three posts exist' do
-  developer = FactoryGirl.create(:developer)
-  tag = FactoryGirl.create(:tag)
-
-  @first_post   = FactoryGirl.create(:post, body: 'First', tag: tag, developer: developer)
-  @second_post  = FactoryGirl.create(:post, body: 'Second', tag: tag, developer: developer)
-  @third_post   = FactoryGirl.create(:post, body: 'Third', tag: tag, developer: developer)
+  @first_post   = FactoryGirl.create(:post, body: 'First')
+  @second_post  = FactoryGirl.create(:post, body: 'Second')
+  @third_post   = FactoryGirl.create(:post, body: 'Third')
 end
 
 When 'I go to the most recent post' do
@@ -248,8 +237,7 @@ When 'I click the right arrow' do
 end
 
 Given 'there are TILs with that tag' do
-  developer = FactoryGirl.create(:developer)
-  3.times { FactoryGirl.create(:post, developer: developer, tag: @tag) }
+  FactoryGirl.create_list(:post, 3, tag: @tag)
 end
 
 When 'I click the tag' do
@@ -314,9 +302,7 @@ end
 
 Given 'posts exist for a given author' do
   developer = FactoryGirl.create(:developer, username: 'prolificposter')
-  tag = FactoryGirl.create(:tag)
-
-  3.times { FactoryGirl.create(:post, developer: developer, tag: tag) }
+  FactoryGirl.create_list(:post, 3, developer: developer)
 end
 
 When "I visit the url 'http://domain/author/username'" do
