@@ -25,8 +25,16 @@ class Post < ActiveRecord::Base
 
   private
 
+  def word_count
+    body.split(' ').size
+  end
+
+  def words_remaining
+    MAX_WORDS - word_count
+  end
+
   def body_size
-    if body && body.split(' ').size > MAX_WORDS
+    if word_count > MAX_WORDS
       errors.add :body, "is too long"
     end
   end

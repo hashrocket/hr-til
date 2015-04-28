@@ -56,4 +56,43 @@ describe Post do
     post_for_last_week = FactoryGirl.create(:post, :for_last_week)
     expect(post_for_last_week.created_at.min).to eq (Time.now - 1.day).min
   end
+
+  context 'it should count its words' do
+    it 'with trailing spaces' do
+      post = FactoryGirl.create(:post, body: 'word ' * 150)
+      expect(post.send(:word_count)).to eq 150
+    end
+
+    it 'with no trailing spaces' do
+      post = FactoryGirl.create(:post, body: ('word ' * 150).strip)
+      expect(post.send(:word_count)).to eq 150
+    end
+
+    it 'with one word' do
+      post = FactoryGirl.create(:post, body: 'word')
+      expect(post.send(:word_count)).to eq 1
+    end
+  end
+
+  context 'it should know how many words are available' do
+    it 'with trailing spaces' do
+      post = FactoryGirl.create(:post, body: 'word ' * 150)
+      expect(post.send(:words_remaining)).to eq 50
+    end
+
+    it 'with no trailing spaces' do
+      post = FactoryGirl.create(:post, body: ('word ' * 150).strip)
+      expect(post.send(:words_remaining)).to eq 50
+    end
+
+    it 'with one word' do
+      post = FactoryGirl.create(:post, body: 'word')
+      expect(post.send(:words_remaining)).to eq 199
+    end
+
+    it 'with too many words' do
+      post = FactoryGirl.build(:post, body: 'word ' * 300)
+      expect(post.send(:words_remaining)).to eq -100
+    end
+  end
 end
