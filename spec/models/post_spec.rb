@@ -46,4 +46,14 @@ describe Post do
     post.title = 'Today I! learned? about #clojure'
     expect(post.send(:slugified_title)).to eq valid_title
   end
+
+  it 'should simulate posts posted yesterday' do
+    post_for_yesterday = FactoryGirl.create(:post, :for_yesterday)
+    expect(post_for_yesterday.created_at.min).to eq (Time.now - 1.day).min
+  end
+
+  it 'should simulate posts posted last week' do
+    post_for_last_week = FactoryGirl.create(:post, :for_last_week)
+    expect(post_for_last_week.created_at.min).to eq (Time.now - 1.day).min
+  end
 end
