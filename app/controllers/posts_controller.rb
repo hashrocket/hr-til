@@ -1,8 +1,5 @@
 class PostsController < ApplicationController
 
-  include MarkdownHelper
-  include PostHelper
-
   before_action :set_post, only: [:show, :edit, :update]
   before_filter :require_developer, except: [:index, :show]
   before_filter :authorize_developer, only: [:edit]
