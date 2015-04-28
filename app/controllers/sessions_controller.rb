@@ -1,15 +1,13 @@
 class SessionsController < ApplicationController
 
-  include DeveloperHelper
-
   def create
-    email = oauth_info['email']
-    if developer = Developer.find_by_email(email)
+    oauth_info = OAuthInfo.new(request.env['omniauth.auth'])
+    if developer = Developer.find_by_email(oauth_info.email)
       sign_in developer
       flash[:notice] = 'Signed in'
       redirect_to root_path
     else
-      developer = Developer.create(oauth_developer_params)
+      developer = Developer.create(username: oauth_info.username, email: oauth_info.email)
       sign_in developer
       flash[:notice] = 'Signed in'
       redirect_to root_path
@@ -20,18 +18,5 @@ class SessionsController < ApplicationController
     sign_out_developer
     flash[:notice] = 'Signed out'
     redirect_to root_path
-  end
-
-  private
-
-  def oauth_developer_params
-    {
-      username: generate_username(oauth_info['name']),
-      email: oauth_info['email']
-    }
-  end
-
-  def oauth_info
-    request.env['omniauth.auth']['info']
   end
 end
