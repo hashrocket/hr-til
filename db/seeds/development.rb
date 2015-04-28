@@ -26,8 +26,7 @@ tags = %w(rails ruby javascript go html css)
   puts "Creating post ##{i}"
 
   hex = SecureRandom.hex(5)
-  developer = Developer.create!(username: "developer#{hex}", email: "developer_#{hex}@hashrocket.com")
-
+  developer = Developer.create!(username: "developer_#{hex}", email: "developer_#{hex}@hashrocket.com")
   tag = Tag.find_or_create_by!(name: tags.sample)
 
   Post.create!(body: body, tag: tag, developer: developer, title: title)
