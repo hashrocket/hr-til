@@ -99,6 +99,8 @@ Feature: Developer creates post
     When I enter 0 words into that form
     Then I see a message saying I have 200 words left
     And the message is not red
+    When I enter 1 word and a newline into that form
+    Then I see a message saying I have 199 words left
     When I enter 1 word into that form
     Then I see a message saying I have 199 words left
     When I enter 50 words into that form

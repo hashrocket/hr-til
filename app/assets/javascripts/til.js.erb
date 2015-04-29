@@ -24,8 +24,8 @@ $(function(){
 
 	var renderWordCount = function(){
 		var max = <%= Post::MAX_WORDS %>
-		var words = $("#post_body").val().split(' ').filter(Boolean).length;
-		var result = max - words
+		var word_count = $("#post_body").val().split(/\s+|\n/).filter(Boolean).length;
+		var result = max - word_count
 
 		if(result < 0) {
 			$(".word_count").addClass('negative');

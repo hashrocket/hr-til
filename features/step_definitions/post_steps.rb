@@ -416,6 +416,12 @@ And 'I see my unedited post' do
   end
 end
 
+When 'I enter 1 word and a newline into that form' do
+  within 'form' do
+    fill_in 'Body', with: "word \n"
+  end
+end
+
 When(/^I enter (\d+) words* into that form$/) do |number|
   within 'form' do
     case number
