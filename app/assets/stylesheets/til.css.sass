@@ -48,17 +48,17 @@ header
   ul
     float: right
     margin-top: -20px
-  li
-    display: inline
-    background-color: #d3d3d3
-    padding: 3px
+    li
+      display: inline
+      background-color: #d3d3d3
+      padding: 3px
+
+section.content
   #flash
     p.error
       color: red
     p.notice
       color: green
-
-section.content
   .post_group
     header
       font-style: italic
@@ -121,10 +121,16 @@ section.content
     span
       padding-right: 5px
 
-  .word_count
-    float: right
-    &.negative
+  form
+    .field_with_errors
+      display: inline
+    .formError
+      display: inline
       color: red
+    .word_count
+      float: right
+      &.negative
+        color: red
 footer
   p
     margin: 0 auto

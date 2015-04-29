@@ -95,6 +95,7 @@ GEM
       activemodel (>= 3.0)
       activesupport (>= 3.0)
       request_store (~> 1.0)
+    dynamic_form (1.1.4)
     erubis (2.7.0)
     execjs (2.4.0)
     factory_girl (4.5.0)
@@ -291,6 +292,7 @@ DEPENDENCIES
   cucumber-rails
   database_cleaner
   draper
+  dynamic_form
   factory_girl_rails
   figaro
   haml-rails

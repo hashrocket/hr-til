@@ -30,7 +30,7 @@ end
 
 
 Then(/^I see an error message "(.*?)"$/) do |error|
-  within '#flash' do
+  within 'section' do
     expect(page).to have_content error
   end
 end

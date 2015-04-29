@@ -1,7 +1,11 @@
 = form_for @post do |f|
-  %p= f.label :title
+  %p
+    = f.label :title
+    = f.error_message_on :title
   %p= f.text_field :title, size: '50', placeholder: 'Enter title...'
-  %p= f.label :body
+  %p
+    = f.label :body
+    = f.error_message_on :body
   %p= f.text_area :body, size: "147x20", placeholder: 'Enter body...'
   .word_count
 
@@ -10,7 +14,9 @@
     %article.post
       .content_preview
 
-  %p= f.label :tag_id, 'Tag'
+  %p
+    = f.label :tag_id
+    = f.error_message_on :tag_id
   %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
   %p.actions
     %span= f.submit 'Submit'

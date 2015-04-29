@@ -1,0 +1,8 @@
+#flash
+  - if flash.present?
+    - if flash[:notice]
+      - [flash[:notice]].flatten.each do |notice|
+        %p.notice= notice
+    - elsif flash[:error]
+      - [flash[:error]].flatten.each do |error|
+        %p.error= error

@@ -19,14 +19,6 @@
             %li= link_to "Profile", developers_profile_path
           - else
             %li= link_to "Rocketeer Sign In", google_oauth2_path
-        #flash
-          - if flash.present?
-            - if flash[:notice]
-              - [flash[:notice]].flatten.each do |notice|
-                %p.notice= notice
-            - elsif flash[:error]
-              - [flash[:error]].flatten.each do |error|
-                %p.error= error
 
       %section.content
         = yield
