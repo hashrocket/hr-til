@@ -96,15 +96,15 @@ Feature: Developer creates post
     And a tag exists
     When I click create TIL
     Then I see a form for TIL
-    When I enter 10 words into that form
-    Then I see a message saying I have 190 words left
+    When I enter 0 words into that form
+    Then I see a message saying I have 200 words left
+    And the message is not red
+    When I enter 1 word into that form
+    Then I see a message saying I have 199 words left
     When I enter 50 words into that form
     Then I see a message saying I have 150 words left
-    When I enter 199 words into that form
-    Then I see a message saying I have 1 word left
+    When I enter 200 words into that form
+    Then I see a message saying I have 0 words left
     When I enter 300 words into that form
     Then I see a message saying I have -100 words left
     And the message is red
-    When I enter 30 words into that form
-    Then I see a message saying I have 170 words left
-    And the message is not red

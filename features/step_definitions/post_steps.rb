@@ -416,9 +416,16 @@ And 'I see my unedited post' do
   end
 end
 
-When(/^I enter (\d+) words into that form$/) do |number|
+When(/^I enter (\d+) words* into that form$/) do |number|
   within 'form' do
-    fill_in 'Body', with: 'word ' * number.to_i
+    case number
+    when '0'
+      # noop
+    when '1'
+      fill_in 'Body', with: 'word'
+    else
+      fill_in 'Body', with: 'word ' * number.to_i
+    end
   end
 end
 
