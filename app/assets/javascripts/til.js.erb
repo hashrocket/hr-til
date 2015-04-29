@@ -16,30 +16,35 @@ $(function(){
     };
   };
 
-  var renderMarkdown = function(){
-    var txt = $("#post_body").val();
-    $.post("/post_preview", {body: txt}, function(result){
-      $(".content_preview").html(result);
-    });
-  };
+  var post_body = {
+    $el: $("#post_body"),
+    renderMarkdown: function() {
+      var txt = $("#post_body").val();
+      $.post("/post_preview", {body: txt}, function(result){
+        $(".content_preview").html(result);
+      });
+    },
+    renderWordCount: function() {
+      var max = <%= Post::MAX_WORDS %>
+      var word_count = $("#post_body").val().split(/\s+|\n/).filter(Boolean).length;
+      var result = max - word_count
 
-  var renderWordCount = function(){
-    var max = <%= Post::MAX_WORDS %>
-    var word_count = $("#post_body").val().split(/\s+|\n/).filter(Boolean).length;
-    var result = max - word_count
+      if(result < 0) {
+        $(".word_count").addClass('negative');
+      } else {
+        $(".word_count").removeClass('negative');
+      }
 
-    if(result < 0) {
-      $(".word_count").addClass('negative');
-    } else {
-      $(".word_count").removeClass('negative');
+      var copy = result === 1 ? ' word available' : ' words available'
+      $(".word_count").html(result + copy);
+    },
+    init: function() {
+      this.$el.on('keyup', this.renderWordCount).each(this.renderWordCount);
+      this.$el.on('keyup', debounce(this.renderMarkdown, 350)).each(this.renderMarkdown);
     }
+  }
 
-    var copy = result === 1 ? ' word available' : ' words available'
-    $(".word_count").html(result + copy);
-  };
-
-  $('#post_body').on('keyup', renderWordCount).each(renderWordCount);
-  $('#post_body').on('keyup', debounce(renderMarkdown, 350)).each(renderMarkdown);
+  post_body.init();
 
   // Twitter button
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
