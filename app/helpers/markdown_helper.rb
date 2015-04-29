@@ -1,7 +1,7 @@
 module MarkdownHelper
   def markdown
     @markdown ||= Redcarpet::Markdown.new(
-      Redcarpet::Render::HTML,
+      RedCarpetCodeHighlighter,
       autolink: true,
       fenced_code_blocks: true,
       no_intra_emphasis: true,

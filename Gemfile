@@ -16,6 +16,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'draper'
 gem 'newrelic_rpm'
 gem 'dynamic_form'
+gem 'rouge'
 
 group :development do
   gem 'figaro'
