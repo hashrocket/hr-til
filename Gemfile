@@ -22,7 +22,10 @@ gem 'rouge'
 gem 'sass-rails', '~> 5.0'
 gem 'sucker_punch', '~> 1.0'
 gem 'uglifier', '>= 1.3.0'
-
+gem 'draper'
+gem 'newrelic_rpm'
+gem 'dynamic_form'
+gem 'rouge'
 gem 'bourbon'
 gem 'phil'
 
