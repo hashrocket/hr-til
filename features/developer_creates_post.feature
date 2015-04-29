@@ -62,7 +62,7 @@ Feature: Developer creates post
     When I enter a long body into that form
     And I select no tag
     When I click submit
-    Then I see an error message "Body is too long"
+    Then I see an error message "Body of this post is too long. It is 100 words over the limit of 200 words"
 
   Scenario: With invalid information (no tag)
     Given I am a signed in developer

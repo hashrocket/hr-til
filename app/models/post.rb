@@ -35,7 +35,8 @@ class Post < ActiveRecord::Base
 
   def body_size
     if word_count > MAX_WORDS
-      errors.add :body, "is too long"
+      words_remaining_abs = words_remaining.abs
+      errors.add :body, "of this post is too long. It is #{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} over the limit of 200 words"
     end
   end
 

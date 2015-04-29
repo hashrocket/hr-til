@@ -37,14 +37,28 @@ describe Post do
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
-  it 'should remove whitespace' do
+  it 'should remove whitespace from slug' do
     post.title = '  Today I             learned about clojure   '
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
-  it 'should not allow punctuation' do
+  it 'should not allow punctuation in slug' do
     post.title = 'Today I! learned? about #clojure'
     expect(post.send(:slugified_title)).to eq valid_title
+  end
+
+  it 'should not allow a body longer than 200 words' do
+    post.body = 'word ' * 201
+    expect(post).to_not be_valid
+    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
+
+    post.body = 'word ' * 300
+    expect(post).to_not be_valid
+    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 100 words over the limit of 200 words']
+
+    post.body = 'word ' * 400
+    expect(post).to_not be_valid
+    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
   end
 
   it 'should simulate posts posted yesterday' do

@@ -296,7 +296,7 @@ Then 'I see TILs sorted and grouped by date/time' do
 end
 
 When 'I enter a long body into that form' do
-  long_body = 'word ' * 201
+  long_body = 'word ' * 300
   fill_in 'Body', with: long_body
 end
 
