@@ -16,35 +16,37 @@ $(function(){
     };
   };
 
-  var post_body = {
-    $el: $("#post_body"),
+  var post_form = {
+    $el: $("#post_edit"),
     renderMarkdown: function() {
-      var txt = $("#post_body").val();
-      $.post("/post_preview", {body: txt}, function(result){
-        $(".content_preview").html(result);
+      var txt = post_form.$textarea.val();
+      $.post("/post_preview", { body: txt }, function(result){
+        post_form.$preview.html(result);
       });
     },
     renderWordCount: function() {
-      var max = <%= Post::MAX_WORDS %>
-      var word_count = $("#post_body").val().split(/\s+|\n/).filter(Boolean).length;
-      var result = max - word_count
+      var max = <%= Post::MAX_WORDS %>,
+        words = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
+        remaining_words = max - words,
+        copy = remaining_words === 1 ? ' word available' : ' words available'
 
-      if(result < 0) {
-        $(".word_count").addClass('negative');
-      } else {
-        $(".word_count").removeClass('negative');
-      }
+      post_form.$word_count
+        .toggleClass('negative', remaining_words < 0)
+        .html(remaining_words + copy);
 
-      var copy = result === 1 ? ' word available' : ' words available'
-      $(".word_count").html(result + copy);
     },
     init: function() {
-      this.$el.on('keyup', this.renderWordCount).each(this.renderWordCount);
-      this.$el.on('keyup', debounce(this.renderMarkdown, 350)).each(this.renderMarkdown);
+      this.$preview = this.$el.find('.content_preview');
+      this.$word_count = this.$el.find('.word_count');
+      this.$textarea = this.$el.find('#post_body');
+
+      this.$textarea.on('keyup', this.renderWordCount);
+      this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
+      this.$textarea.trigger('keyup');
     }
   }
 
-  post_body.init();
+  post_form.init();
 
   // Twitter button
   !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
