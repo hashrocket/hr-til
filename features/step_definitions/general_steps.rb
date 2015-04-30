@@ -23,6 +23,13 @@ When 'I enter my twitter handle' do
   end
 end
 
+When 'I enter an invalid twitter handle' do
+  within 'form' do
+    fill_in 'Twitter handle', with: 'a.!&'
+    click_on 'Submit'
+  end
+end
+
 And 'my twitter handle is set' do
   @developer.reload
   expect(@developer.twitter_handle).to eq 'hashrocket'

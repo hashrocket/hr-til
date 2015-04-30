@@ -1,8 +1,8 @@
 %h3 My Profile
 
 = form_for @developer do |f|
-  %p= f.label :twitter_handle
   %p
-    @
-    = f.text_field :twitter_handle, placeholder: 'handle'
+    = f.label :twitter_handle
+    = f.error_message_on :twitter_handle
+  %p= f.text_field :twitter_handle, placeholder: 'Enter handle...'
   %p= f.submit 'Submit'
