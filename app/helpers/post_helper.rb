@@ -23,7 +23,7 @@ module PostHelper
   end
 
   def editable?(post)
-    current_developer && current_developer == post.developer
+    current_developer && (current_developer == post.developer || current_developer.admin?)
   end
 
   def tweet_link(post)

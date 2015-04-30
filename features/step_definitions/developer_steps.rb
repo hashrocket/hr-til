@@ -30,6 +30,11 @@ Then 'I am signed in' do
   @developer = Developer.last
 end
 
+And 'I am an admin' do
+  @developer.admin = true
+  @developer.save
+end
+
 And 'I have a post' do
   FactoryGirl.create(:post, developer: @developer)
 end

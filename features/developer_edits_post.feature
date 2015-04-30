@@ -11,11 +11,17 @@ Feature: Developer edits post
     Then I see the show page for that edited post
     And I see a message "Post updated"
 
-  Scenario: Developer can't edit other developer's posts
+  Scenario: Developer can't edit other developer's posts via url
     Given I am a signed in developer
     And a post exists by another developer
     When I visit the edit page for that post
     Then I see an error message "You can only edit your own posts"
+
+  Scenario: Developer can't edit other developer's posts via edit button
+    Given I am a signed in developer
+    And a post exists by another developer
+    When I visit the homepage
+    Then I do not see the edit button
 
   Scenario: Developer edits post with invalid data
     Given I am a signed in developer

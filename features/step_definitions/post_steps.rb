@@ -360,10 +360,9 @@ Then 'I see the show page for that edited post' do
   within '.title' do
     expect(page).to have_content 'I changed the header'
   end
+
   within '.post' do
-    expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'I learned about changing content'
-    expect(page).to have_content '#phantomjs'
   end
 end
 

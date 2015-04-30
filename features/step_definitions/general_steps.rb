@@ -69,3 +69,7 @@ Then 'I see an Atom feed' do
   expect(page).to have_content '?format=atom'
   expect(page).to have_content 'Today I learned about web development'
 end
+
+Then 'I do not see the edit button' do
+  expect(page).to_not have_link '[edit]'
+end

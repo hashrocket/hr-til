@@ -4,6 +4,8 @@ class PostsController < ApplicationController
   before_filter :require_developer, except: [:index, :show]
   before_filter :authorize_developer, only: [:edit]
 
+  include PostHelper
+
   def preview
     render layout: false
   end
@@ -75,7 +77,7 @@ class PostsController < ApplicationController
   end
 
   def authorize_developer
-    unless @post.developer == current_developer
+    unless editable?(@post)
       flash[:error] = 'You can only edit your own posts'
       redirect_to root_path
     end

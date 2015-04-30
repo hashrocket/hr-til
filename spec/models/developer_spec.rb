@@ -23,6 +23,10 @@ describe Developer do
     expect(dup_developer.errors.messages[:username]).to eq ['has already been taken']
   end
 
+  it 'should set admin as false on create' do
+    expect(developer.admin).to eq false
+  end
+
   context 'twitter username should be valid' do
     it 'should be alphanumeric' do
       developer.twitter_handle = 'abc...'
