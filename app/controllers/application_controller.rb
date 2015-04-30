@@ -4,6 +4,11 @@ class ApplicationController < ActionController::Base
 
   authem_for :developer
 
+  # TODO remove production from here after site launch
+  if Rails.env.staging? || Rails.env.production?
+    http_basic_authenticate_with name: ENV['auth_name'], password: ENV['auth_password']
+  end
+
   private
 
   def require_developer
