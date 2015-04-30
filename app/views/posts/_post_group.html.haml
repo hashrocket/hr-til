@@ -19,4 +19,5 @@
         .tag{ class: "#{ post.tag_name }_tag" }= link_to "##{post.tag_name}", tags_show_path(post.tag_name)
         - if editable? post
           = link_to "[edit]", edit_post_path(post)
-        = tweet_link post
+        - if current_page? post_path(post)
+          = tweet_link post
