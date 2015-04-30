@@ -302,7 +302,9 @@ end
 
 Given 'posts exist for a given author' do
   developer = FactoryGirl.create(:developer, username: 'prolificposter')
-  FactoryGirl.create_list(:post, 3, developer: developer)
+  FactoryGirl.create(:post, :for_last_week, developer: developer)
+  FactoryGirl.create(:post, :for_yesterday, developer: developer)
+  @newest_post = FactoryGirl.create(:post, developer: developer, title: 'Newest post')
 end
 
 When "I visit the url 'http://domain/author/username'" do
@@ -310,17 +312,22 @@ When "I visit the url 'http://domain/author/username'" do
 end
 
 When "I click that author's username" do
-  within '.content .post_group' do
+  within '.content .post_group:first-child' do
     first('.username').click_on 'prolificposter'
   end
 end
 
-Then 'I see all the posts for that author' do
+Then 'I see all the posts for that author grouped by date/time' do
   within 'h3' do
     expect(page).to have_content 'prolificposter (3 posts)'
   end
 
   expect(page).to have_selector '.post', count: 3
+
+  within first('.content article.post') do
+    expect(page).to have_content 'Today'
+    expect(page).to have_content 'Newest post'
+  end
 end
 
 When 'I click on the title of the post' do
