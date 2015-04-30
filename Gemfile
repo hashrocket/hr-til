@@ -26,6 +26,7 @@ gem 'draper'
 gem 'newrelic_rpm'
 gem 'dynamic_form'
 gem 'rouge'
+gem 'puma'
 gem 'bourbon'
 gem 'phil'
 
