@@ -47,6 +47,9 @@ GEM
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
+    bourbon (4.2.2)
+      sass (~> 3.4)
+      thor
     brakeman (3.0.2)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -113,6 +116,7 @@ GEM
     faraday (0.9.1)
       multipart-post (>= 1.2, < 3)
     fastercsv (1.5.5)
+    ffaker (2.0.0)
     figaro (1.1.0)
       thor (~> 0.14)
     gherkin (2.12.2)
@@ -184,6 +188,9 @@ GEM
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
     pg (0.18.1)
+    phil (0.9.8)
+      activesupport
+      ffaker (~> 2.0)
     poltergeist (1.6.0)
       capybara (~> 2.1)
       cliver (~> 0.3.1)
@@ -316,6 +323,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   authem
+  bourbon
   brakeman
   byebug
   coffee-rails (~> 4.1.0)
@@ -333,6 +341,7 @@ DEPENDENCIES
   newrelic_rpm
   omniauth-google-oauth2
   pg
+  phil
   poltergeist
   pry-rails
   puma
