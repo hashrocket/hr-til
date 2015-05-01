@@ -43,8 +43,8 @@ describe Developer do
       expect(developer).to_not be_valid
     end
 
-    it 'should remove a leading @ symbol' do
-      developer.twitter_handle = '@hashrocket'
+    it 'should remove any leading @ symbols' do
+      developer.twitter_handle = '@@@@hashrocket'
       expect(developer.twitter_handle).to eq 'hashrocket'
     end
   end
