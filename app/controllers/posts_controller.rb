@@ -31,16 +31,12 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post_days = { @post.created_at.beginning_of_day => [ @post ] }
-    unless @post.to_param == params[:titled_slug]
-      redirect_to @post
-    end
+    redirect_to @post unless valid_url?
+    @post_days = [@post].group_by { |p| p.created_at.beginning_of_day }
   end
 
   def edit
-    unless @post.to_param == params[:titled_slug]
-      redirect_to edit_post_path @post
-    end
+    redirect_to edit_post_path @post unless valid_url?
   end
 
   def update
@@ -77,5 +73,9 @@ class PostsController < ApplicationController
       flash[:error] = 'You can only edit your own posts'
       redirect_to root_path
     end
+  end
+
+  def valid_url?
+    @post.to_param == params[:titled_slug]
   end
 end

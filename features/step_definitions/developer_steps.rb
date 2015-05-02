@@ -36,7 +36,7 @@ And 'I am an admin' do
 end
 
 And 'I have a post' do
-  FactoryGirl.create(:post, developer: @developer)
+  @post = FactoryGirl.create(:post, developer: @developer)
 end
 
 And 'I have a post with markdown' do

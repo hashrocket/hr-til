@@ -28,3 +28,11 @@ Feature: Visitor views post
     When I click on the title of the post
     Then I see the show page for that post
     And I see a unique CSS selector for that tag
+
+  Scenario: Visitor mangles url
+    Given I am a visitor
+    And a post exists
+    And I visit the homepage
+    When I click on the title of the post
+    And I visit a mangled version of the show url
+    Then I see the show page for that post

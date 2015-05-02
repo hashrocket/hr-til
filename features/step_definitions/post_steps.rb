@@ -294,6 +294,14 @@ When 'I click on the title of the post' do
   end
 end
 
+When 'I visit a mangled version of the show url' do
+  visit "/posts/#{@post.slug}-web-cool-tricks"
+end
+
+When 'I visit a mangled version of the edit url' do
+  visit "/posts/#{@post.slug}-web-cool-tricks/edit"
+end
+
 Then 'I see the show page for that post' do
   within 'h3' do
     expect(page).to have_content @post.title
