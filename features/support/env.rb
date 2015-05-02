@@ -1,3 +1,5 @@
+require 'simplecov'
+SimpleCov.start
 require 'cucumber/rails'
 require 'capybara/poltergeist'
 

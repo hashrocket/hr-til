@@ -6,3 +6,5 @@
 !/log/.keep
 /tmp
 /config/application.yml
+
+coverage

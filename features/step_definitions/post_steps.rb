@@ -40,31 +40,9 @@ When 'I enter new information into that form' do
   end
 end
 
-
 When 'I edit the post to no longer have a body' do
   within 'form' do
     fill_in 'Body', with: ''
-  end
-end
-
-When 'I enter a body with the first line less than fifty characters' do
-  within 'form' do
-    fill_in 'Body', with: "I learned how to split a string\nAnd other things"
-  end
-end
-
-When 'I enter a body with the first line greater than fifty characters' do
-  within 'form' do
-    long_body = 'word ' * 10 + "extra content"
-    fill_in 'Body', with: long_body
-  end
-end
-
-When 'I enter information with markdown headers into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'Headerized'
-    markdown_content = '##### Small Header'
-    fill_in 'Body', with: markdown_content
   end
 end
 
@@ -126,26 +104,6 @@ end
 And 'I see a link to tweet' do
   within '.post_group .post' do
     expect(page).to have_link 'Tweet'
-  end
-end
-
-Then 'I see a title created from the first line of the body' do
-  within '.post_group .post .title' do
-    expect(page).to have_content 'I learned how to split a string'
-    expect(page).to_not have_content 'And other things'
-  end
-end
-
-Then 'I see a title created from the first fifty characters' do
-  within '.post_group .post .title' do
-    expect(page).to have_content 'word word word word word word word word word word...'
-    expect(page).to_not have_content ' extra content'
-  end
-end
-
-Then 'I see the markdown headers I created' do
-  within '.post_group .post .body h5' do
-    expect(page).to have_content 'Small Header'
   end
 end
 

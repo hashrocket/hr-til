@@ -42,5 +42,6 @@ group :test do
   gem 'database_cleaner'
   gem 'poltergeist'
   gem 'launchy'
+  gem 'simplecov', require: false
 end
 
