@@ -1,5 +1,4 @@
 require 'simplecov'
-SimpleCov.start
 require 'pathname'
 
 Dir[Pathname(__FILE__).dirname.join('support/*.rb')].each { |file| require file }
