@@ -10,10 +10,6 @@ class PostsController < ApplicationController
     render layout: false
   end
 
-  def word_count
-    render layout: false
-  end
-
   def new
     @post = Post.new
   end
