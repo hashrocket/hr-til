@@ -11,9 +11,7 @@ class ApplicationController < ActionController::Base
   private
 
   def require_developer
-    unless current_developer
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_developer
   end
 
   def set_cache_header
