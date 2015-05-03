@@ -6,7 +6,6 @@ Bundler.require(*Rails.groups)
 
 module HrTil
   class Application < Rails::Application
-
     config.autoload_paths << Rails.root.join('lib')
     config.time_zone = 'Eastern Time (US & Canada)'
 

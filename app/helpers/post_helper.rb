@@ -1,5 +1,4 @@
 module PostHelper
-
   def multiple_posts?
     Post.count > 1
   end

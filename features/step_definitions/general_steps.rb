@@ -35,7 +35,6 @@ And 'my twitter handle is set' do
   expect(@developer.twitter_handle).to eq 'hashrocket'
 end
 
-
 Then(/^I see an error message "(.*?)"$/) do |error|
   within 'section' do
     expect(page).to have_content error

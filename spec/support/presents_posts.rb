@@ -20,4 +20,3 @@ shared_examples_for 'a presenter of posts' do
     end
   end
 end
-

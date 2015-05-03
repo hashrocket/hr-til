@@ -1,6 +1,5 @@
 require 'rails_helper'
 describe SessionsController do
-
   describe '#create' do
     context 'with oauth' do
       it 'signs in existing developer by email' do
