@@ -11,10 +11,10 @@ And 'I see the signin link' do
 end
 
 Given 'I am a signed in developer' do
- steps %Q{
-   Given I try to sign up or sign in with valid credentials
-   Then I am signed in
- }
+  steps %(
+    Given I try to sign up or sign in with valid credentials
+    Then I am signed in
+    )
 end
 
 And 'I try to sign up or sign in with valid credentials' do
