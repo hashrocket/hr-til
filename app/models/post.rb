@@ -15,6 +15,10 @@ class Post < ActiveRecord::Base
     developer.username
   end
 
+  def developer_twitter_handle
+    developer.twitter_handle
+  end
+
   def tag_name
     tag.name
   end

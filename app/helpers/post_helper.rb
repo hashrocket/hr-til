@@ -28,7 +28,7 @@ module PostHelper
 
   def tweet_link(post)
     title = post.title
-    handle = post.developer.twitter_handle? ? post.developer.twitter_handle : 'hashrocket'
+    handle = post.developer_twitter_handle ? post.developer_twitter_handle : 'hashrocket'
     hashtag = post.tag_name
     root = Rails.env.production? ? PROD_ROOT : TEST_ROOT
     url = [root, post_path(post)].join
