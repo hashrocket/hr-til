@@ -96,7 +96,7 @@ end
 
 Then 'I see the post I created' do
   within '.post_group .post' do
-    expect(page).to have_content "johnsmith"
+    expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'I learned about Rails'
   end
 end
@@ -155,14 +155,14 @@ end
 
 When 'I see only a left arrow' do
   within '.nav' do
-    expect(page).to have_link "<"
-    expect(page).to_not have_link ">"
+    expect(page).to have_link '<'
+    expect(page).to_not have_link '>'
   end
 end
 
 When 'I click the left arrow' do
   within '.nav' do
-    click_on "<"
+    click_on '<'
   end
 end
 
@@ -172,8 +172,8 @@ end
 
 And 'I see a right arrow and a left arrow' do
   within '.nav' do
-    expect(page).to have_link ">"
-    expect(page).to have_link "<"
+    expect(page).to have_link '>'
+    expect(page).to have_link '<'
   end
 end
 
@@ -183,14 +183,14 @@ end
 
 When 'I see only a right arrow' do
   within '.nav' do
-    expect(page).to have_link ">"
-    expect(page).to_not have_link "<"
+    expect(page).to have_link '>'
+    expect(page).to_not have_link '<'
   end
 end
 
 When 'I click the right arrow' do
   within '.nav' do
-    click_on ">"
+    click_on '>'
   end
 end
 
@@ -266,7 +266,7 @@ Given 'posts exist for a given author' do
 end
 
 When "I visit the url 'http://domain/author/username'" do
-  visit "author/prolificposter"
+  visit 'author/prolificposter'
 end
 
 When "I click that author's username" do

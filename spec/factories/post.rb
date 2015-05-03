@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :post do
-    title "Web Development"
-    body "Today I learned about web development"
+    title 'Web Development'
+    body 'Today I learned about web development'
     developer { FactoryGirl.create(:developer) }
     tag { FactoryGirl.create(:tag) }
   end

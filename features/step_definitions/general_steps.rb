@@ -52,7 +52,7 @@ end
 Then 'I see copyright and company information' do
   within 'footer' do
     expect(page).to have_content "© #{Date.today.year}"
-    expect(page).to have_link "Hashrocket", href: 'http://hashrocket.com'
+    expect(page).to have_link 'Hashrocket', href: 'http://hashrocket.com'
   end
 end
 
@@ -61,7 +61,7 @@ When 'I click cancel' do
 end
 
 When 'I visit the Atom feed page' do
-  visit root_path(format: "atom")
+  visit root_path(format: 'atom')
 end
 
 Then 'I see an Atom feed' do

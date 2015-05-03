@@ -1,1 +1,1 @@
-load Rails.root.join("config/environments/production.rb")
+load Rails.root.join('config/environments/production.rb')

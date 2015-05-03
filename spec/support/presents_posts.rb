@@ -10,13 +10,13 @@ shared_examples_for 'a presenter of posts' do
     it 'should return the count and a singular noun when there is one post' do
       FactoryGirl.create(:post, tag: tag, developer: developer)
 
-      expect(subject.posts_count).to eq("(1 post)")
+      expect(subject.posts_count).to eq('(1 post)')
     end
 
     it 'should return the count and a plural noun when there are multiple posts' do
       3.times { FactoryGirl.create(:post, tag: tag, developer: developer) }
 
-      expect(subject.posts_count).to eq("(3 posts)")
+      expect(subject.posts_count).to eq('(3 posts)')
     end
   end
 end

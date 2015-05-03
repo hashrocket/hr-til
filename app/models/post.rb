@@ -48,6 +48,6 @@ class Post < ActiveRecord::Base
   end
 
   def slugified_title
-    title.downcase.strip.gsub(/\s+/, '-').gsub(/(?![a-z0-9\-])./, "")
+    title.downcase.strip.gsub(/\s+/, '-').gsub(/(?![a-z0-9\-])./, '')
   end
 end

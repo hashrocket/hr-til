@@ -20,7 +20,7 @@ end
 And 'I try to sign up or sign in with valid credentials' do
   OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@hashrocket.com' })
   visit root_path
-  click_on "Rocketeer Sign In"
+  click_on 'Rocketeer Sign In'
 end
 
 Then 'I am signed in' do
@@ -57,6 +57,6 @@ end
 
 When 'I click edit' do
   within '.post' do
-    click_on "[edit]"
+    click_on '[edit]'
   end
 end
