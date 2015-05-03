@@ -2,8 +2,8 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resources :developers, only: :update
-  resources :posts, param: :titled_slug
-  resources :sessions, only: [:new, :create]
+  resources :posts, except: :destroy, param: :titled_slug
+  resources :sessions, only: :create
 
   get '/auth/google_oauth2', as: 'google_oauth2'
   get '/auth/google_oauth2/callback', to: 'sessions#create'
