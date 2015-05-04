@@ -3,6 +3,11 @@ Rails.application.routes.draw do
 
   resources :developers, only: :update
   resources :posts, except: :destroy, param: :titled_slug
+  resources :statistics, only: :index do
+    collection do
+      get 'tag_posts_counts'
+    end
+  end
 
   get '/auth/google_oauth2', as: 'google_oauth2'
   get '/auth/google_oauth2/callback', to: 'sessions#create'
