@@ -1,5 +1,6 @@
+# To download production data instead of these seeds, run
+# rake db:restore_production_dump
 title = 'Parameters Filtering'
-
 body = <<-HEREDOC
 Rails logs your server's activity, which is useful for development and
 debugging. However, often the server handles sensitive information that
@@ -19,7 +20,6 @@ When the named parameter is handled by the server, it will be logged as
 `[FILTERED]` instead of its actual value. Add this configuration by
 environment if you want to keep the parameters unfiltered in development.
 HEREDOC
-
 tags = %w(rails ruby javascript go html css)
 
 5.times do |i|
