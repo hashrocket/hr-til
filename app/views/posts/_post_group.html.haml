@@ -20,4 +20,5 @@
         - if editable? post
           = link_to "[edit]", edit_post_path(post)
         - if current_page? post_path(post)
+          = link_to '[raw]', post_text_path(post)
           = tweet_link post

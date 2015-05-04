@@ -88,6 +88,10 @@ When 'I click submit' do
   end
 end
 
+And 'I click raw' do
+  click_on '[raw]'
+end
+
 When 'I click on my username in the upper right' do
   within 'header ul' do
     click_on @developer.username

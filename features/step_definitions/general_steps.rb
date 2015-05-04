@@ -7,7 +7,11 @@ Given 'I visit the homepage' do
 end
 
 And 'I visit the post text page' do
-  visit post_path(@post) + ".text"
+  visit post_text_path(@post)
+end
+
+And 'I visit the post page' do
+  visit post_path(@post)
 end
 
 Then (/^I see "(.*?)"$/) do |content|

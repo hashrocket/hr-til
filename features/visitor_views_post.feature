@@ -37,9 +37,17 @@ Feature: Visitor views post
     And I visit a mangled version of the show url
     Then I see the show page for that post
 
-  Scenario: Visitor views raw text of post
+  Scenario: Visitor views raw text of post via path
     Given I am a visitor
     And a post exists with a body "Raw text content"
     And I visit the post text page
+    Then I see "Raw text content"
+    And I should get a response with content-type "text/plain; charset=utf-8"
+
+  Scenario: Visitor views raw text of post via button
+    Given I am a visitor
+    And a post exists with a body "Raw text content"
+    When I visit the post page
+    And I click raw
     Then I see "Raw text content"
     And I should get a response with content-type "text/plain; charset=utf-8"

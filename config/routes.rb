@@ -13,4 +13,5 @@ Rails.application.routes.draw do
   get '/developer/profile', to: 'developers#profile', as: 'developers_profile'
 
   post '/post_preview', to: 'posts#preview'
+  get '/posts/:titled_slug.text', to: 'posts#show', as: 'post_text'
 end
