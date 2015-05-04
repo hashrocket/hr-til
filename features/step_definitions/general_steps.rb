@@ -6,6 +6,18 @@ Given 'I visit the homepage' do
   visit root_path
 end
 
+And 'I visit the post text page' do
+  visit post_path(@post) + ".text"
+end
+
+Then (/^I see "(.*?)"$/) do |content|
+  expect(page.body).to include(content)
+end
+
+Then /^I should get a response with content-type "([^"]*)"$/ do |content_type|
+  expect(page.response_headers['Content-Type']).to eq(content_type)
+end
+
 And 'I click profile' do
   click_on 'Profile'
 end

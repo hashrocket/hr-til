@@ -424,3 +424,7 @@ And 'the message is not red' do
     expect(page).to_not have_selector '.negative'
   end
 end
+
+Given(/^a post exists with a body "(.*?)"$/) do |body|
+  @post = FactoryGirl.create(:post, body: body)
+end

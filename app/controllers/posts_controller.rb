@@ -30,8 +30,15 @@ class PostsController < ApplicationController
   end
 
   def show
-    redirect_to @post unless valid_url?
     @post_days = [@post].group_by { |p| p.created_at.beginning_of_day }
+    if valid_url?
+      respond_to do |format|
+        format.text { render text: @post.body }
+        format.html
+      end
+    else
+      redirect_to @post unless valid_url?
+    end
   end
 
   def edit
