@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :statistics, only: :index do
     collection do
       get 'tag_posts_counts'
+      get 'author_posts_counts'
     end
   end
 
