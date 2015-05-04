@@ -51,3 +51,10 @@ Feature: Visitor views post
     And I click raw
     Then I see "Raw text content"
     And I should get a response with content-type "text/plain; charset=utf-8"
+
+  Scenario: Visitor mangles url on raw page
+    Given I am a visitor
+    And a post exists with a body "Raw text content"
+    And I visit the post text page with a mangled url
+    Then I see "Raw text content"
+    And I should get a response with content-type "text/plain; charset=utf-8"

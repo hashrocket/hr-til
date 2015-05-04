@@ -10,6 +10,10 @@ And 'I visit the post text page' do
   visit post_text_path(@post)
 end
 
+And 'I visit the post text page with a mangled url' do
+  visit post_path(@post) + 'noise.text'
+end
+
 And 'I visit the post page' do
   visit post_path(@post)
 end

@@ -37,7 +37,7 @@ class PostsController < ApplicationController
         format.html
       end
     else
-      redirect_to @post unless valid_url?
+      redirect_to_valid_slug
     end
   end
 
@@ -61,6 +61,13 @@ class PostsController < ApplicationController
   helper_method :sorted_tags
 
   private
+
+  def redirect_to_valid_slug
+    respond_to do |format|
+      format.text { redirect_to post_text_path(@post) }
+      format.html { redirect_to @post }
+    end
+  end
 
   def post_params
     params.require(:post).permit :body, :tag_id, :developer_id, :title, :slug
