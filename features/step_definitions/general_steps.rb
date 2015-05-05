@@ -2,6 +2,15 @@ Given 'I see the homepage' do
   expect(current_path).to eq root_path
 end
 
+When 'I visit the statistics page' do
+  visit statistics_path
+end
+
+Then 'I see statistics' do
+  expect(page).to have_content 'Tags by posts'
+  expect(page).to have_content 'Posts by author'
+end
+
 Given 'I visit the homepage' do
   visit root_path
 end

@@ -6,7 +6,6 @@ $.get('/statistics/tag_posts_counts',function(data){
   tags.forEach(function(tag){
     datapoints.push(data[tag]);
   });
-
   var ctx = document.getElementById("myChartTags").getContext("2d");
   var myBarChart = new Chart(ctx).Bar({
     labels: tags,
