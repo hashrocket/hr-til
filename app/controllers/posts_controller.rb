@@ -33,7 +33,7 @@ class PostsController < ApplicationController
     @post_days = [@post].group_by { |p| p.created_at.beginning_of_day }
     if valid_url?
       respond_to do |format|
-        format.text { render text: @post.body }
+        format.md { render text: @post.body }
         format.html
       end
     else
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
 
   def redirect_to_valid_slug
     respond_to do |format|
-      format.text { redirect_to post_text_path(@post) }
+      format.md { redirect_to post_text_path(@post) }
       format.html { redirect_to @post }
     end
   end

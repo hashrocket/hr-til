@@ -20,7 +20,7 @@ And 'I visit the post text page' do
 end
 
 And 'I visit the post text page with a mangled url' do
-  visit post_path(@post) + 'noise.text'
+  visit post_path(@post) + 'noise.md'
 end
 
 And 'I visit the post page' do
