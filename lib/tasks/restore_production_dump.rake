@@ -11,6 +11,6 @@ namespace :db do
     verify_exec 'curl -o latest.dump `heroku pg:backups public-url -a hr-til-production`'
     verify_exec 'pg_restore --verbose --clean --no-acl --no-owner -h localhost -d hr-til_development latest.dump'
     verify_exec 'rm latest.dump'
-    puts "Completed successfully!"
+    puts 'Completed successfully!'
   end
 end
