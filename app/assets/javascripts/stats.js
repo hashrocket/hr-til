@@ -74,8 +74,12 @@ $.get('/statistics/post_days_counts',function(data){
       }
     ]
   },{
-    scaleBeginAtZero : true,
+    scaleBeginAtZero: true,
+    scaleOverride: true,
+    scaleSteps: Math.max.apply(Math, datapoints) + 10,
+    scaleStepWidth: 1,
     bezierCurve: true,
+    showTooltips: false,
     scaleLabel: " <%= value%>" // Fix scale lable cropping bug
   });
 });
