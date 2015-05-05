@@ -50,3 +50,32 @@ $.get('/statistics/author_posts_counts',function(data){
     scaleLabel: " <%= value%>" // Fix scale lable cropping bug
   });
 });
+
+$.get('/statistics/post_days_counts',function(data){
+  var dates = Object.keys(data);
+  var datapoints = [];
+  dates.forEach(function(date){
+    datapoints.push(data[date]);
+  });
+
+  var ctx = document.getElementById("myChartPosts").getContext("2d");
+  var myBarChart = new Chart(ctx).Line({
+    labels: dates,
+    datasets: [
+      {
+        label: "Posts by date",
+        strokeColor: "#ffcccc",
+        fillColor: "rgba(220,220,220,0.2)",
+        pointColor: "rgba(220,220,220,1)",
+        pointStrokeColor: "#fff",
+        pointHighlightFill: "#fff",
+        pointHighlightStroke: "rgba(220,220,220,1)",
+        data: datapoints
+      }
+    ]
+  },{
+    scaleBeginAtZero : true,
+    bezierCurve: true,
+    scaleLabel: " <%= value%>" // Fix scale lable cropping bug
+  });
+});

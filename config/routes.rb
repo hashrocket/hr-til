@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     collection do
       get 'tag_posts_counts'
       get 'author_posts_counts'
+      get 'post_days_counts'
     end
   end
 
