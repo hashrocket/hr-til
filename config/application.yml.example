@@ -1,3 +1,6 @@
-development:
+development: &default
   google_client_id:
   google_client_secret:
+  slack_token:
+test:
+  <<: *default

@@ -17,7 +17,7 @@ Staging and production are hosted on Heroku.
 * http://hr-til-staging.herokuapp.com
 * http://til.hashrocket.com
 
-Environmental variables of note:
+### Environmental Variables
 
 ```
 google_client_id
@@ -25,4 +25,7 @@ google_client_secret
 basic_auth
 auth_name
 auth_password
+slack_token
 ```
+
+Post creation will send a message via slack when then `slack_token` variable is set.

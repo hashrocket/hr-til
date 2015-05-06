@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
 
   belongs_to :developer
   belongs_to :tag
+  after_commit :notify_slack, on: :create
 
   MAX_WORDS = 200
 
@@ -49,5 +50,9 @@ class Post < ActiveRecord::Base
 
   def slugified_title
     title.downcase.strip.gsub(/\s+/, '-').gsub(/(?![a-z0-9\-])./, '')
+  end
+
+  def notify_slack
+    SlackNotifier.new.async.perform(self)
   end
 end

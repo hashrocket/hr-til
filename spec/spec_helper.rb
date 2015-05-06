@@ -1,5 +1,6 @@
 require 'simplecov'
 require 'pathname'
+require 'webmock/rspec'
 
 Dir[Pathname(__FILE__).dirname.join('support/*.rb')].each { |file| require file }
 
