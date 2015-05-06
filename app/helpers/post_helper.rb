@@ -29,8 +29,7 @@ module PostHelper
     title = post.title
     handle = post.developer_twitter_handle ? post.developer_twitter_handle : 'hashrocket'
     hashtag = post.tag_name
-    root = Rails.env.production? ? PROD_ROOT : TEST_ROOT
-    url = [root, post_path(post)].join
+    url = Rails.configuration.server_url + post_path(post)
 
     content_tag(:a, 'Tweet', href: "http://twitter.com/share", class:"twitter-share-button",
                 'data-text': "Today I learned: #{title}", 'data-via': "#{handle}",
