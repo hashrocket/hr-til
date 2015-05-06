@@ -2,7 +2,7 @@ class Post < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :tag_id
   validates :title, presence: true, length: { maximum: 50 }
-  validate :body_size
+  validate :body_size, if: -> { body.present? }
   before_create :generate_slug
 
   belongs_to :developer
