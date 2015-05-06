@@ -4,7 +4,7 @@ class SlackNotifier
   include Rails.application.routes.url_helpers
 
   base_uri "https://hashrocket.slack.com"
-  CHANNEL = Rails.env.testing? ? "#testing" : "#til"
+  CHANNEL = "#til"
   NOTIFY_ENDPOINT = "/services/hooks/slackbot"
 
   def perform(post)
