@@ -1,5 +1,5 @@
 class StatisticsController < ApplicationController
-  before_filter :require_admin
+  before_filter :require_developer
 
   def tag_posts_counts
     render json: Tag.all.map { |tag| [tag.name, tag.posts.count] }.to_h

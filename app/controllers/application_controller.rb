@@ -17,8 +17,4 @@ class ApplicationController < ActionController::Base
   def set_cache_header
     headers['Cache-Control'] = 'no-cache, no-store'
   end
-
-  def require_admin
-    redirect_to root_path unless current_developer && current_developer.admin?
-  end
 end
