@@ -4,11 +4,9 @@ ruby '2.2.0'
 
 gem 'rails', '4.2.0'
 
-<<<<<<< HEAD
 gem 'active_model_serializers'
-=======
->>>>>>> Post in slack for a new TIL
 gem 'authem'
+gem 'bourbon'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'draper'
 gem 'dynamic_form'
@@ -19,23 +17,13 @@ gem 'jquery-rails'
 gem 'newrelic_rpm'
 gem 'omniauth-google-oauth2'
 gem 'pg'
+gem 'phil'
 gem 'puma'
 gem 'redcarpet'
 gem 'rouge'
 gem 'sass-rails', '~> 5.0'
 gem 'sucker_punch', '~> 1.0'
 gem 'uglifier', '>= 1.3.0'
-<<<<<<< HEAD
-gem 'draper'
-gem 'newrelic_rpm'
-gem 'dynamic_form'
-gem 'rouge'
-gem 'puma'
-=======
-
->>>>>>> Post in slack for a new TIL
-gem 'bourbon'
-gem 'phil'
 
 group :development do
   gem 'brakeman', require: false
@@ -50,10 +38,7 @@ group :development, :test do
   gem 'spring'
   gem 'test_after_commit'
   gem 'web-console', '~> 2.0'
-<<<<<<< HEAD
-=======
   gem 'webmock'
->>>>>>> Post in slack for a new TIL
 end
 
 group :production do
