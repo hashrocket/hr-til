@@ -4,6 +4,7 @@ ruby '2.2.0'
 
 gem 'rails', '4.2.0'
 
+gem 'active_model_serializers'
 gem 'authem'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'draper'
@@ -35,7 +36,6 @@ group :development, :test do
   gem 'spring'
   gem 'test_after_commit'
   gem 'web-console', '~> 2.0'
-  gem 'webmock'
 end
 
 group :production do
@@ -48,4 +48,5 @@ group :test do
   gem 'poltergeist'
   gem 'launchy'
   gem 'simplecov', require: false
+  gem 'webmock'
 end

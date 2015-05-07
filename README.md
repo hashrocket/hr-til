@@ -25,7 +25,10 @@ google_client_secret
 basic_auth
 auth_name
 auth_password
-slack_token
+slack_post_endpoint
 ```
 
-Post creation will send a message via slack when then `slack_token` variable is set.
+### Slack Integration
+
+1. Create an incoming hook in the API
+2. Set `slack_post_endpoint` to the path of the hook url, e.g. the part of the url after the domain

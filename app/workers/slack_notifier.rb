@@ -1,27 +1,21 @@
 class SlackNotifier
   include SuckerPunch::Job
   include HTTParty
-  include Rails.application.routes.url_helpers
 
-  base_uri "https://hashrocket.slack.com"
-  CHANNEL = "#til"
-  NOTIFY_ENDPOINT = "/services/hooks/slackbot"
+  base_uri "https://hooks.slack.com"
 
   def perform(post)
-    return if ENV['slack_token'].blank?
-    message = "[TIL]  #{post.developer_username} #{Rails.configuration.server_url}#{post_path(post)}"
-    response = self.class.post NOTIFY_ENDPOINT,
-      query: notify_query,
-      body: message
+    return if notify_endpoint.blank?
+    response = self.class.post notify_endpoint,
+      body: PostSlackSerializer.new(post).to_json
     unless response.success?
       raise "Sending message to slack failed with response #{response.code}"
     end
   end
 
-  def notify_query
-    {
-      token: ENV['slack_token'],
-      channel: CHANNEL
-    }
+  private
+
+  def notify_endpoint
+    ENV['slack_post_endpoint']
   end
 end
