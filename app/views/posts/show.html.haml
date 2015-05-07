@@ -1,3 +1,6 @@
+- content_for :meta_description do
+  = " | " + @post.body.gsub(/\A(.{50}).+\z/m,'\1...')
+
 = render 'shared/flash'
 %h3= @post.title
 
