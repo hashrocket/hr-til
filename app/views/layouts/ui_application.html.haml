@@ -12,6 +12,12 @@
     %header.site_head
       %h1= link_to "Today I learned", "#"
 
+    %nav.site_nav
+      %ul
+        %li= link_to Phil.name, "#"
+        %li= link_to "sign out", "#"
+        %li= link_to "create post", "#"
+
     %main= yield
 
     %footer.site_footer

@@ -12,14 +12,8 @@
   %body
     %header.site_head
       %h1= link_to SITE_NAME, root_path
-    %main= yield
 
-    %footer.site_footer
-      %p
-        &copy;
-        = Date.today.year
-        and maintained with love from Jacksonville and Chicago by
-        = link_to 'Hashrocket', 'http://hashrocket.com'
+    %nav.site_nav
       %ul
         - if developer_signed_in?
           %li= link_to current_developer.username, developers_show_path(current_developer.username)
@@ -29,3 +23,11 @@
         - else
           %li= link_to "Rocketeer Sign In", google_oauth2_path
 
+    %main= yield
+
+    %footer.site_footer
+      %p
+        &copy;
+        = Date.today.year
+        and maintained with love from Jacksonville and Chicago by
+        = link_to 'Hashrocket', 'http://hashrocket.com'

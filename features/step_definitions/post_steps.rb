@@ -1,5 +1,5 @@
 When 'I click create TIL' do
-  within 'header ul' do
+  within '.site_nav' do
     click_on 'Create Post'
   end
 end
@@ -93,7 +93,7 @@ And 'I click raw' do
 end
 
 When 'I click on my username in the upper right' do
-  within 'header ul' do
+  within '.site_nav' do
     click_on @developer.username
   end
 end
@@ -203,7 +203,7 @@ Given 'there are TILs with that tag' do
 end
 
 When 'I click the tag' do
-  within '.content .post_group' do
+  within '.post_group' do
     first('.post').click_on '#phantomjs'
   end
 end
@@ -227,7 +227,7 @@ end
 Then 'I see TILs sorted and grouped by date/time' do
   expect(current_path).to eq(root_path)
 
-  within '.content .post_group:first-child' do
+  within '.post_group:first-child' do
     expect(page).to have_content 'Today'
 
     expect(page).to have_content 'karatedude'
@@ -235,7 +235,7 @@ Then 'I see TILs sorted and grouped by date/time' do
     expect(page).to have_content '#phantomjs'
   end
 
-  within '.content .post_group:nth-child(2)' do
+  within '.post_group:nth-child(2)' do
     expect(page).to have_content @clojure_post.created_at.strftime('%A, %b %d')
 
     expect(page).to have_content 'clojureman'
@@ -247,7 +247,7 @@ Then 'I see TILs sorted and grouped by date/time' do
     expect(page).to have_content '#phantomjs'
   end
 
-  within '.content .post_group:last-child' do
+  within '.post_group:last-child' do
     expect(page).to have_content @rails_post.created_at.strftime('%A, %b %d')
 
     expect(page).to have_content 'railsguy'
@@ -274,7 +274,7 @@ When "I visit the url 'http://domain/author/username'" do
 end
 
 When "I click that author's username" do
-  within '.content .post_group:first-child' do
+  within '.post_group:first-child' do
     first('.username').click_on 'prolificposter'
   end
 end
@@ -286,7 +286,7 @@ Then 'I see all the posts for that author grouped by date/time' do
 
   expect(page).to have_selector '.post', count: 3
 
-  within first('.content article.post') do
+  within first('.post') do
     expect(page).to have_content 'Today'
     expect(page).to have_content 'Newest post'
   end

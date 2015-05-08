@@ -65,7 +65,7 @@ And 'my twitter handle is set' do
 end
 
 Then(/^I see an error message "(.*?)"$/) do |error|
-  within 'section' do
+  within 'body' do
     expect(page).to have_content error
   end
 end
