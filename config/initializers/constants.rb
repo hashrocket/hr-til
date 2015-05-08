@@ -1,1 +1,1 @@
-SITE_NAME = 'TIL / Hashrocket'
+SITE_NAME = 'Today I Learned'

@@ -9,16 +9,14 @@
     %link(href='http://fonts.googleapis.com/css?family=Rosario:400,700italic,700,400italic' rel='stylesheet' type='text/css')
     = yield :head
   %body
-    %main
-      %header.site_head
-        %h1= link_to "Today I learned", "#"
+    %header.site_head
+      %h1= link_to "Today I learned", "#"
 
-      %main= yield
+    %main= yield
 
-      %footer.site_footer
-        %p
-          &copy;
-          = Date.today.year
-          and maintained with love from Jacksonville and Chicago by
-          = link_to 'Hashrocket', 'http://hashrocket.com'
-
+    %footer.site_footer
+      %p
+        &copy;
+        = Date.today.year
+        and maintained with love from Jacksonville and Chicago by
+        = link_to 'Hashrocket', 'http://hashrocket.com'

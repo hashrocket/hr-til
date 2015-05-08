@@ -5,27 +5,27 @@
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags
+    %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
+    %link(href='http://fonts.googleapis.com/css?family=Raleway:900' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Rosario:400,700italic,700,400italic' rel='stylesheet' type='text/css')
     = yield :head
   %body
-    %main
-      %header
-        = link_to root_path do
-          %h1= "#{SITE_NAME}"
-        %ul
-          - if developer_signed_in?
-            %li= link_to current_developer.username, developers_show_path(current_developer.username)
-            %li= link_to "Sign Out", account_signout_path
-            %li= link_to "Create Post", new_post_path
-            %li= link_to "Profile", developers_profile_path
-          - else
-            %li= link_to "Rocketeer Sign In", google_oauth2_path
+    %header.site_head
+      %h1= link_to SITE_NAME, root_path
+    %main= yield
 
-      %section.content
-        = yield
-
-      %footer
-        %p
-          &copy;
-          = Date.today.year
-          = link_to 'Hashrocket', 'http://hashrocket.com'
+    %footer.site_footer
+      %p
+        &copy;
+        = Date.today.year
+        and maintained with love from Jacksonville and Chicago by
+        = link_to 'Hashrocket', 'http://hashrocket.com'
+      %ul
+        - if developer_signed_in?
+          %li= link_to current_developer.username, developers_show_path(current_developer.username)
+          %li= link_to "Sign Out", account_signout_path
+          %li= link_to "Create Post", new_post_path
+          %li= link_to "Profile", developers_profile_path
+        - else
+          %li= link_to "Rocketeer Sign In", google_oauth2_path
 
