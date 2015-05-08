@@ -39,6 +39,20 @@ a
       list-style-type: decimal
     li + li
       margin-top: .2em
+    pre
+      margin-bottom: 1em
+      overflow: auto
+      code
+        display: block
+        background: $light
+        padding: 2em
+        width: 100%
+        box-sizing: border-box
+        line-height: 1.6
+        +mobile
+          padding: 1em
+    code
+      font-size: 95%
     +mobile
       margin-right: 0
       margin-bottom: 1rem
@@ -49,6 +63,7 @@ a
     font-size: .8em
     text-align: right
     padding: .5vw 0 1vw 0
+    border-top: 2px solid  transparentize($light - #1a1a1a, .5)
     +mobile
       font-size: 1em
   aside

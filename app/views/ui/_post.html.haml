@@ -1,6 +1,12 @@
 %article.post
   %section
-    = Phil.markup ["h1 p h2 p ul h3 p", "h1 p", "h1 p p p"].sample
+    = Phil.markup ["h1 p h2 p ul h3 p", "h1 p"].sample
+    - Phil.sometimes do
+      %pre
+        %code
+          :plain
+            commodi architectofd jf djakf j fj dkasfd j
+      = Phil.paragraphs 1..3
     %footer
       %p= Phil.date.strftime("%B %e, %Y")
   %aside
