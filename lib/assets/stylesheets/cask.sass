@@ -1,0 +1,46 @@
+// cask.sass
+// additional mixins for use along with Bourbon
+
+$site-width-max: 1400px !default
+$site-width-mid: 800px !default
+$site-width-narrow: 480px !default
+
+= retina-asset($filename, $background-size, $extension: png)
+  +retina-image($filename, $background-size, $extension, null, '@2x', true)
+
+= min-width($width)
+  @media screen and (min-width: #{$width})
+    @content
+
+= max-width($width)
+  @media screen and (max-width: #{$width})
+    @content
+
+= tablet
+  +max-width($site-width-mid)
+    @content
+
+= mobile
+  +max-width($site-width-narrow)
+    @content
+
+= max
+  +min-width($site-width-max)
+    @content
+
+= print
+  @media print
+    @content
+
+= hide-print
+  @media print
+    display: none !important
+
+= responsive($attr, $full, $mid:false, $narrow:false)
+  #{$attr}: #{$full}
+  @if $mid
+    +max-width($site-width-mid)
+      #{$attr}: #{$mid}
+  @if $narrow
+    +max-width($site-width-narrow)
+      #{$attr}: #{$narrow}
