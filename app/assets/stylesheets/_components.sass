@@ -5,15 +5,24 @@ a
 .post
   +clearfix
   max-width: 82rem
-  padding: 0 6rem
-  margin: 0 auto 2rem auto
+  padding: 0 6vw
+  margin: 0 auto 2vw auto
+  display: flex
+  align-items: flex-start
+  +tablet
+    padding: 0 3vw
+  +mobile
+    display: block
   section
+    flex: 0 1 auto
     box-sizing: border-box
     padding: 3vw 3vw 1.5vw 3vw
+    margin-right: 2rem
     +shadow
-    margin-right: 22rem
-    h1, h2, h3, p
+    h1, h2, h3, p, ul, ol
       margin: 0 0 1em 0
+      +mobile
+        margin-bottom: .7em
     h1
       font-size: 1.8em
     h2
@@ -23,19 +32,22 @@ a
     p, ul, ol
       line-height: 1.6
     ul, ol
-      padding: 0 6rem
+      padding: 0 6vw
+    ul
+      list-style-type: disc
+    ol
+      list-style-type: decimal
     li + li
       margin-top: .2em
+    +mobile
+      margin-right: 0
+      margin-bottom: 1rem
+      font-size: .85em
   aside
-    box-sizing: border-box
-    float: right
-    width: 20rem
+    flex: 0 0 auto
     +shadow
     font-size: .9em
     ul
-      list-style-type: none
-      margin: 0
-      padding: 0
       li
         padding: .4rem
         a
@@ -60,3 +72,13 @@ a
             right: 0
       li + li
         border-top: 2px solid transparentize($light - #1a1a1a, .5)
+    +mobile
+      background: none
+      box-shadow: none
+      ul
+        li
+          display: inline-block
+          +shadow
+          margin: 0 .7rem 1rem 0
+          + li
+            border-top: 0

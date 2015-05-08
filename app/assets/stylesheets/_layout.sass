@@ -15,16 +15,19 @@ header.site_head
   top: 0
   right: 0
   text-align: center
-  padding: 2vw 0
+  padding: 3vw 0
   z-index: -1
   h1
     a
       font-family: $secondary-typeface
       color: transparentize($blue-dark, .3)
       text-shadow: -.1rem .1rem 0 lighten($blue, 20%)
-      font-size: 6vw
+      font-size: 7vw
       text-transform: uppercase
       letter-spacing: 2vw
+      margin-left: 2vw
+      +max
+        font-size: 9rem
 
 footer.site_footer
   text-align: center
