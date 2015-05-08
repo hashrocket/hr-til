@@ -1,6 +1,6 @@
 = shadow
-  background: $light
-  box-shadow: -.5rem .5rem 0 0 mix($blue-dark, $blue), -1rem 1rem 0 0 $blue-dark
+  background: transparentize($light, .2)
+  box-shadow: -1rem 1rem 0 0 transparentize($blue-dark, .2)
 
 = lang-colors($attr)
   @each $lang, $color in $langs

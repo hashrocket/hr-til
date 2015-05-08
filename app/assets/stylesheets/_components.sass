@@ -1,14 +1,17 @@
+a
+  text-decoration: none
+  color: $blue-dark
+
 .post
   +clearfix
   max-width: 82rem
   padding: 0 6rem
-  margin: 0 auto
+  margin: 0 auto 2rem auto
   section
     box-sizing: border-box
-    float: left
-    max-width: 60rem
-    padding: 3vw
+    padding: 3vw 3vw 1.5vw 3vw
     +shadow
+    margin-right: 22rem
     h1, h2, h3, p
       margin: 0 0 1em 0
     h1
@@ -46,4 +49,4 @@
           &:hover
             color: $dark
       li + li
-        border-top: 2px solid darken($light, 5%)
+        border-top: 2px solid transparentize($light - #1a1a1a, .5)
