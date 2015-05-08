@@ -40,13 +40,23 @@ a
         padding: .4rem
         a
           display: block
+          position: relative
           padding: .8rem .5rem
-          color: mix($dark, $light)
-          border-left: 2px solid
+          color: $dark
+          border-left: 2px solid $blue-dark
           font-style: italic
           +lang-colors(border-color)
-          +transition(color .2s)
-          &:hover
-            color: $dark
+          &:before
+            position: absolute
+            content: ''
+            top: 0
+            left: 0
+            bottom: 0
+            right: 100%
+            background: #fff
+            +transition(right .1s)
+            z-index: -1
+          &:hover:before
+            right: 0
       li + li
         border-top: 2px solid transparentize($light - #1a1a1a, .5)
