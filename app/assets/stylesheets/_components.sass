@@ -45,10 +45,12 @@ a
       font-size: .85em
   footer
     font-style: italic
-    color: transparentize($dark, .5)
+    color: mix($dark, $blue, 30%)
     font-size: .8em
     text-align: right
     padding: .5vw 0 1vw 0
+    +mobile
+      font-size: 1em
   aside
     flex: 0 0 auto
     +shadow

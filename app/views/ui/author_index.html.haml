@@ -1,0 +1,5 @@
+%section#author
+  %header.page_head
+    %h1 #{Phil.pick 1..1000} posts by #{Phil.name.downcase.gsub(" ", "")}
+  - 10.times do
+    = render "post"

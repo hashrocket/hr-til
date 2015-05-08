@@ -21,7 +21,7 @@ header.site_head
     a
       font-family: $secondary-typeface
       color: transparentize($blue-dark, .3)
-      text-shadow: -.1rem .1rem 0 lighten($blue, 20%)
+      text-shadow: -.1rem .1rem 0 lighten($blue, 15%)
       font-size: 7vw
       text-transform: uppercase
       letter-spacing: 2vw
@@ -35,12 +35,20 @@ footer.site_footer
 
 main
   min-height: 60vh
-  padding: 7vw 0
+  padding: 7vw 0 3vw 0
 
 header.page_head
+  position: fixed
+  z-index: -1
+  left: 0
+  top: 11vw
+  right: 0
   text-align: center
-  font-size: 2rem
-  padding: 1rem 4rem
-  max-width: 60vw
-  margin: 0 auto 2rem auto
-  +shadow
+  font-family: $secondary-typeface
+  text-shadow: -.1rem .1rem 0 lighten($blue, 15%)
+  color: mix($blue-dark, $light, 70%)
+  text-transform: uppercase
+  letter-spacing: .2vw
+  font-size: 2vw
+  +mobile
+    font-size: 1.5rem
