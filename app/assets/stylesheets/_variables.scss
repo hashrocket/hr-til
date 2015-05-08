@@ -1,0 +1,21 @@
+$primary-typeface: Rosario, $helvetica;
+$secondary-typeface: Codystar, $helvetica;
+
+$light: #f6f5e8;
+$dark: #24303c;
+
+$blue: #a4deda;
+$blue-dark: darken($blue, 30%);
+
+$langs: (
+  "assembly": "#6E4C13",
+  "bash": "#89e051",
+  "clojure": "#db5855",
+  "coffeescript": "#244776",
+  "css": "#563d7c",
+  "go": "#375eab",
+  "html": "#e44b23",
+  "javascript": "#f1e05a",
+  "ruby": "#701516",
+  "vim": "#199f4b"
+);

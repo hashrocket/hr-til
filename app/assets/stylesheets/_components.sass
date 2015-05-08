@@ -1,0 +1,49 @@
+.post
+  +clearfix
+  max-width: 82rem
+  padding: 0 6rem
+  margin: 0 auto
+  section
+    box-sizing: border-box
+    float: left
+    max-width: 60rem
+    padding: 3vw
+    +shadow
+    h1, h2, h3, p
+      margin: 0 0 1em 0
+    h1
+      font-size: 1.8em
+    h2
+      font-size: 1.4em
+    h3
+      font-size: 1.2em
+    p, ul, ol
+      line-height: 1.6
+    ul, ol
+      padding: 0 6rem
+    li + li
+      margin-top: .2em
+  aside
+    box-sizing: border-box
+    float: right
+    width: 20rem
+    +shadow
+    font-size: .9em
+    ul
+      list-style-type: none
+      margin: 0
+      padding: 0
+      li
+        padding: .4rem
+        a
+          display: block
+          padding: .8rem .5rem
+          color: mix($dark, $light)
+          border-left: 2px solid
+          font-style: italic
+          +lang-colors(border-color)
+          +transition(color .2s)
+          &:hover
+            color: $dark
+      li + li
+        border-top: 2px solid darken($light, 5%)

@@ -1,0 +1,45 @@
+html
+  font-size: 62.5%
+
+body
+  -webkit-text-size-adjust: none
+  -webkit-font-smoothing: antialiased
+  background: $blue
+  color: $dark
+  font-family: $primary-typeface
+  font-size: 1.6rem
+
+header.site_head
+  position: fixed
+  left: 0
+  top: 0
+  right: 0
+  text-align: center
+  padding: 2vw 0
+  h1
+    a
+      font-family: $secondary-typeface
+      text-shadow: -.1rem .1rem 0 lighten($blue, 20%)
+      font-size: 6vw
+      text-transform: uppercase
+      letter-spacing: 2vw
+
+footer.site_footer
+  text-align: center
+  clear: both
+
+main
+  min-height: 60vh
+  padding: 7vw 0
+
+a
+  text-decoration: none
+  color: $blue-dark
+
+header.page_head
+  text-align: center
+  font-size: 2rem
+  padding: 1rem 4rem
+  max-width: 60vw
+  margin: 0 auto
+  +shadow

@@ -1,0 +1,13 @@
+%section#home
+  %article.post
+    %section= Phil.markup "h1 p h2 p ul h3 p"
+    %aside
+      %ul
+        %li
+          = link_to "#" do
+            more by
+            %b= Phil.name
+        - Phil.loop 1..10 do
+          - lang = %w(assembly bash clojure coffeescript css go html javascript ruby vim).sample
+          %li
+            %b= link_to "##{lang}", "#", class: lang
