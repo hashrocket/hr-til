@@ -1,7 +1,10 @@
 %section#home
   - 10.times do
     %article.post
-      %section= Phil.markup ["h1 p h2 p ul h3 p", "h1 p", "h1 p p p"].sample
+      %section
+        = Phil.markup ["h1 p h2 p ul h3 p", "h1 p", "h1 p p p"].sample
+        %footer
+          %p= Phil.date.strftime("%B %e, %Y")
       %aside
         %ul
           %li
