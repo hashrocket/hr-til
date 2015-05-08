@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'ui(/:action)', controller: 'ui'
+
   root to: 'posts#index'
 
   resources :developers, only: :update
