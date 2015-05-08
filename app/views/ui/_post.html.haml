@@ -8,6 +8,11 @@
             commodi architectofd jf djakf j fj dkasfd j
       = Phil.paragraphs 1..3
     %footer
+      - if pagination
+        %nav
+          %ul
+            %li= link_to "&larr; previous TIL".html_safe, "#"
+            %li= link_to "next TIL &rarr;".html_safe, "#"
       %p= Phil.date.strftime("%B %e, %Y")
   %aside
     %ul

@@ -59,11 +59,20 @@ a
     font-style: italic
     color: mix($dark, $blue, 30%)
     font-size: .8em
-    text-align: right
     padding: .5vw 0 1vw 0
     border-top: 2px solid  transparentize($light - #1a1a1a, .5)
+    +clearfix
     +mobile
       font-size: 1em
+    p
+      float: right
+    nav
+      float: left
+      ul, li
+        display: inline
+        padding: 0
+        li + li
+          margin-left: 2rem
   aside
     flex: 0 0 auto
     +shadow
