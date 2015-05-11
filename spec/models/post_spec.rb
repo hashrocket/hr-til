@@ -13,6 +13,11 @@ describe Post do
     expect(post).to_not be_valid
   end
 
+  it 'should require a developer' do
+    post.developer = nil
+    expect(post).to_not be_valid
+  end
+
   it 'should require a tag' do
     post.tag = nil
     expect(post).to_not be_valid

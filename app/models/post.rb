@@ -3,10 +3,12 @@ class Post < ActiveRecord::Base
   validates_presence_of :tag_id
   validates :title, presence: true, length: { maximum: 50 }
   validate :body_size, if: -> { body.present? }
-  before_create :generate_slug
+  validates_presence_of :developer
 
   belongs_to :developer
   belongs_to :tag
+
+  before_create :generate_slug
   after_commit :notify_slack, on: :create
 
   MAX_WORDS = 200
