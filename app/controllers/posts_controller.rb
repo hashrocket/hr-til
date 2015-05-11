@@ -30,7 +30,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post_days = [@post].group_by { |p| p.created_at.beginning_of_day }
     if valid_url?
       respond_to do |format|
         format.md { render text: @post.body }
