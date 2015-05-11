@@ -1,6 +1,6 @@
 %article.post
   %section
-    %h1= post.title
+    %h1= link_to post.title, post_path(post)
     = find_and_preserve markdown_render post.body
     %footer
       - if multiple_posts?

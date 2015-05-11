@@ -99,7 +99,7 @@ When 'I click on my username in the upper right' do
 end
 
 Then 'I see the post I created' do
-  within '.post_group .post' do
+  within '.post' do
     expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'I learned about Rails'
   end
@@ -280,8 +280,8 @@ When "I click that author's username" do
 end
 
 Then 'I see all the posts for that author grouped by date/time' do
-  within 'h3' do
-    expect(page).to have_content 'prolificposter (3 posts)'
+  within '#author' do
+    expect(page).to have_content '3 posts by prolificposter'
   end
 
   expect(page).to have_selector '.post', count: 3
@@ -293,7 +293,7 @@ Then 'I see all the posts for that author grouped by date/time' do
 end
 
 When 'I click on the title of the post' do
-  within '.title' do
+  within '.post' do
     click_on 'Web Development'
   end
 end

@@ -1,5 +1,4 @@
-%h3
-  = @developer.username
-  = @developer.posts_count
-
-= render 'posts/post_group'
+%section#author
+  %header.page_head
+    %h1 #{@developer.post_count} posts by #{@developer.username}
+= render @posts
