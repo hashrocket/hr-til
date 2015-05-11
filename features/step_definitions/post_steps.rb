@@ -201,9 +201,7 @@ Given 'there are TILs with that tag' do
 end
 
 When 'I click the tag' do
-  within '.post_group' do
-    first('.post').click_on '#phantomjs'
-  end
+  first('.post').click_link '#phantomjs'
 end
 
 Given 'there are no TILs with that tag' do
@@ -215,10 +213,7 @@ When "I visit '/that tag'" do
 end
 
 Then 'I see all posts tagged with that tag' do
-  within 'section#tag' do
-    expect(page).to have_content '3 posts about #phantomjs'
-  end
-
+  expect(page).to have_content '3 posts about #phantomjs'
   expect(page).to have_selector '.post', count: 3
 end
 
@@ -226,24 +221,21 @@ Then 'I see the sorted TILs' do
   within '#home:first-child' do
     expect(page).to have_content 'karatedude'
     expect(page).to have_content 'I learned about Karate'
-    # TODO Tag not implemented for posts
-    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content '#phantomjs'
     expect(page).to have_content @karate_post.created_at.strftime('%B %e, %Y')
   end
 
   within '#home:nth-child(1)' do
     expect(page).to have_content 'embergal'
     expect(page).to have_content 'I learned about Ember'
-    # TODO Tag not implemented for posts
-    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content '#phantomjs'
     expect(page).to have_content @ember_post.created_at.strftime('%B %e, %Y')
   end
 
   within '#home:last-child' do
     expect(page).to have_content 'railsguy'
     expect(page).to have_content 'I learned about Rails'
-    # TODO Tag not implemented for posts
-    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content '#phantomjs'
     expect(page).to have_content @rails_post.created_at.strftime('%B %e, %Y')
   end
 end
@@ -303,8 +295,7 @@ Then 'I see the show page for that post' do
   within '.post' do
     expect(page).to have_content @post.title
     expect(page).to have_content 'Today I learned about web development'
-    # TODO Tag not implemented in UI post body
-    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content '#phantomjs'
   end
 
   within 'aside' do
@@ -314,7 +305,7 @@ end
 
 And 'I see a unique CSS selector for that tag' do
   within '.post' do
-    expect(page).to have_selector '.phantomjs_tag'
+    expect(page).to have_selector '.phantomjs'
   end
 end
 

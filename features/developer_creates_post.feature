@@ -10,8 +10,7 @@ Feature: Developer creates post
     And I click submit
     Then I see the homepage
     And I see the post I created
-    # TODO Tag not implemented in post
-    #And I see the tag I selected
+    And I see the tag I selected
     When I click on my username in the upper right
     Then I see the post I created
     When I click on the title of the post

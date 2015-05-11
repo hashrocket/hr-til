@@ -21,8 +21,6 @@ Feature: Visitor views post
     When I click the right arrow
     Then I see the second most recent post
 
-  # TODO Tags not implemented in UI post body
-  @wip
   Scenario: Visitor clicks on post title and sees a colored tag
     Given I am a visitor
     And a post exists

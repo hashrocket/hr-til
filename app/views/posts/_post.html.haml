@@ -17,8 +17,5 @@
         = link_to developers_show_path post.developer_username do
           more by
           %b= post.developer_username
-      - Phil.loop 1..4 do
-        - lang = %w(assembly bash clojure coffeescript css go html javascript ruby vim).sample
-        %li
-          %b= link_to "##{lang}", "#", class: lang
-
+      %li
+        %b= link_to "##{post.tag_name}", tags_show_path(post.tag_name), class: post.tag_name
