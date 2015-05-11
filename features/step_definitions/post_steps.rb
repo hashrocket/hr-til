@@ -217,8 +217,8 @@ When "I visit '/that tag'" do
 end
 
 Then 'I see all posts tagged with that tag' do
-  within 'h3' do
-    expect(page).to have_content '#phantomjs (3 posts)'
+  within 'section#tag' do
+    expect(page).to have_content '3 posts about #phantomjs'
   end
 
   expect(page).to have_selector '.post', count: 3

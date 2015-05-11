@@ -1,5 +1,4 @@
-%h3
-  = "##{@tag.name}"
-  = @tag.posts_count
-
-= render 'posts/post_group'
+%section#tag
+  %header.page_head
+    %h1 #{@tag.posts_count} posts about ##{@tag.name}
+= render @posts

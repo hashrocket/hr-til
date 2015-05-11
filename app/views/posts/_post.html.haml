@@ -1,22 +1,22 @@
 %article.post
   %section
-    %h1= @post.title
-    = find_and_preserve markdown_render @post.body
+    %h1= post.title
+    = find_and_preserve markdown_render post.body
     %footer
       - if multiple_posts?
         %nav
           %ul
-            - unless oldest_post? @post
-              %li= link_to "&larr; previous TIL".html_safe, post_path(previous_post @post)
-            - unless newest_post? @post
-              %li= link_to "next TIL &rarr;".html_safe, post_path(next_post @post)
-      %p= @post.created_at.strftime("%B %e, %Y")
+            - unless oldest_post? post
+              %li= link_to "&larr; previous TIL".html_safe, post_path(previous_post post)
+            - unless newest_post? post
+              %li= link_to "next TIL &rarr;".html_safe, post_path(next_post post)
+      %p= post.created_at.strftime("%B %e, %Y")
   %aside
     %ul
       %li
-        = link_to developer_path @post.developer_username do
+        = link_to developer_path post.developer_username do
           more by
-          %b= @post.developer_username
+          %b= post.developer_username
       - Phil.loop 1..4 do
         - lang = %w(assembly bash clojure coffeescript css go html javascript ruby vim).sample
         %li
