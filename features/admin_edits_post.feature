@@ -1,3 +1,5 @@
+# TODO Edit button not implemented in UI
+@wip
 Feature: Admin edits post
 
   Scenario: Admin edits post

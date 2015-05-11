@@ -112,25 +112,25 @@ And 'I see a link to tweet' do
 end
 
 Then 'I see the markdown inline code I created' do
-  within '.post_group .post .content code' do
+  within '.post code' do
     expect(page).to have_content 'killer robot attack'
   end
 end
 
 Then 'I see the markdown fenced code I created' do
-  within '.post_group .post .content' do
+  within '.post' do
     expect(page).to have_content "first line\nsecond line\nthird line"
   end
 end
 
 Then 'I see the markdown bullets I created' do
-  within '.post_group .post .content li' do
+  within '.post section li' do
     expect(page).to have_content 'item from a list of items'
   end
 end
 
 And 'I see the tag I selected' do
-  within '.post_group .post' do
+  within '.post' do
     expect(page).to have_content '#phantomjs'
   end
 end
@@ -138,11 +138,9 @@ end
 Given 'there exist TILs for today, yesterday, and last week' do
   rails_dev    = FactoryGirl.create(:developer, username: 'railsguy')
   ember_dev    = FactoryGirl.create(:developer, username: 'embergal')
-  clojure_dev  = FactoryGirl.create(:developer, username: 'clojureman')
   karate_dev   = FactoryGirl.create(:developer, username: 'karatedude')
 
   @rails_post   = FactoryGirl.create(:post, :for_last_week, developer: rails_dev, body: 'I learned about Rails')
-  @clojure_post = FactoryGirl.create(:post, :for_yesterday, developer: clojure_dev, body: 'I learned about Clojure')
   @ember_post   = FactoryGirl.create(:post, :for_yesterday, developer: ember_dev, body: 'I learned about Ember')
   @karate_post  = FactoryGirl.create(:post, :for_today, developer: karate_dev, body: 'I learned about Karate')
 end
@@ -224,36 +222,29 @@ Then 'I see all posts tagged with that tag' do
   expect(page).to have_selector '.post', count: 3
 end
 
-Then 'I see TILs sorted and grouped by date/time' do
-  expect(current_path).to eq(root_path)
-
-  within '.post_group:first-child' do
-    expect(page).to have_content 'Today'
-
+Then 'I see the sorted TILs' do
+  within '#home:first-child' do
     expect(page).to have_content 'karatedude'
     expect(page).to have_content 'I learned about Karate'
-    expect(page).to have_content '#phantomjs'
+    # TODO Tag not implemented for posts
+    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content @karate_post.created_at.strftime('%B %e, %Y')
   end
 
-  within '.post_group:nth-child(2)' do
-    expect(page).to have_content @clojure_post.created_at.strftime('%A, %b %d')
-
-    expect(page).to have_content 'clojureman'
-    expect(page).to have_content 'I learned about Clojure'
-    expect(page).to have_content '#phantomjs'
-
+  within '#home:nth-child(1)' do
     expect(page).to have_content 'embergal'
     expect(page).to have_content 'I learned about Ember'
-    expect(page).to have_content '#phantomjs'
+    # TODO Tag not implemented for posts
+    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content @ember_post.created_at.strftime('%B %e, %Y')
   end
 
-  within '.post_group:last-child' do
-    expect(page).to have_content @rails_post.created_at.strftime('%A, %b %d')
-
+  within '#home:last-child' do
     expect(page).to have_content 'railsguy'
-    expect(page).to have_content @rails_post.created_at.strftime('%A, %b %d')
     expect(page).to have_content 'I learned about Rails'
-    expect(page).to have_content '#phantomjs'
+    # TODO Tag not implemented for posts
+    #expect(page).to have_content '#phantomjs'
+    expect(page).to have_content @rails_post.created_at.strftime('%B %e, %Y')
   end
 end
 
@@ -274,8 +265,8 @@ When "I visit the url 'http://domain/author/username'" do
 end
 
 When "I click that author's username" do
-  within '.post_group:first-child' do
-    first('.username').click_on 'prolificposter'
+  within '.post:first-child aside' do
+    click_on 'prolificposter'
   end
 end
 

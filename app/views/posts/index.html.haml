@@ -1,5 +1,4 @@
 = content_for :head, auto_discovery_link_tag(:atom, root_path(format: "atom"))
 
-= render 'shared/flash'
-.post_groups
-  = render 'post_group'
+%section#home
+  = render @posts

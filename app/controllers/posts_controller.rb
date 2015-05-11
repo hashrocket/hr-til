@@ -26,7 +26,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @post_days = Post.order(created_at: :desc).includes(:developer, :tag).group_by { |p| p.created_at.beginning_of_day }
+    @posts = Post.order(created_at: :desc).includes(:developer, :tag)
   end
 
   def show
