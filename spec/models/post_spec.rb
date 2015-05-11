@@ -61,16 +61,6 @@ describe Post do
     expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
   end
 
-  it 'should simulate posts posted yesterday' do
-    post_for_yesterday = FactoryGirl.create(:post, :for_yesterday)
-    expect(post_for_yesterday.created_at.min).to eq (Time.now - 1.day).min
-  end
-
-  it 'should simulate posts posted last week' do
-    post_for_last_week = FactoryGirl.create(:post, :for_last_week)
-    expect(post_for_last_week.created_at.min).to eq (Time.now - 1.day).min
-  end
-
   context 'it should count its words' do
     it 'with trailing spaces' do
       post = FactoryGirl.create(:post, body: 'word ' * 150)
