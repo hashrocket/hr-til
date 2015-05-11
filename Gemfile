@@ -38,7 +38,6 @@ group :development, :test do
   gem 'spring'
   gem 'test_after_commit'
   gem 'web-console', '~> 2.0'
-  gem 'webmock'
 end
 
 group :production do

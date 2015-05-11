@@ -10,6 +10,8 @@ rake db:setup
 rails s
 ```
 
+Signing up and signing in is handled by Omniauth and Google. Visit '/login' and log in with your company email address.
+
 ### Hosting
 
 Staging and production are hosted on Heroku.
