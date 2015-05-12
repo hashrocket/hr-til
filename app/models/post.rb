@@ -15,8 +15,8 @@ class Post < ActiveRecord::Base
     developer.username
   end
 
-  def developer_twitter_handle
-    developer.twitter_handle
+  def twitter_handle
+    developer_twitter_handle || 'hashrocket'
   end
 
   def tag_name
@@ -55,4 +55,9 @@ class Post < ActiveRecord::Base
   def notify_slack
     SlackNotifier.new.async.perform(self)
   end
+
+  def developer_twitter_handle
+    developer.twitter_handle
+  end
+
 end
