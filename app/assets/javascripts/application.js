@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require til
 //= require chart
+//= require google_analytics
