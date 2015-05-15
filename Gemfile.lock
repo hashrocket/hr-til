@@ -44,6 +44,9 @@ GEM
       activesupport (>= 4.0.4)
       bcrypt (~> 3.1)
       railties (~> 4.0)
+    autoprefixer-rails (5.1.11)
+      execjs
+      json
     bcrypt (3.1.10)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -323,6 +326,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   authem
+  autoprefixer-rails
   bourbon
   brakeman
   byebug
