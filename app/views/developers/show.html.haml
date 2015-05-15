@@ -1,4 +1,6 @@
 %section#author
   %header.page_head
-    %h1 #{@developer.post_count} posts by #{@developer.username}
+    %h1
+      #{pluralize @developer.post_count, "post" }
+      by #{@developer.username}
 = render @posts
