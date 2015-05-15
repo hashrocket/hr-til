@@ -317,7 +317,7 @@ Then 'I see the show page for that edited post' do
 end
 
 Then 'I see the edit page for that post' do
-  within 'h3' do
+  within '#post_edit' do
     expect(page).to have_content 'Edit Post'
   end
 
@@ -327,7 +327,7 @@ Then 'I see the edit page for that post' do
 end
 
 Then 'I see the edit page for my markdown post' do
-  within 'h3' do
+  within '#post_edit' do
     expect(page).to have_content 'Edit Post'
   end
 

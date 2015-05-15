@@ -52,6 +52,6 @@ end
 
 When 'I click edit' do
   within '.post' do
-    click_on '[edit]'
+    click_on 'edit this post'
   end
 end

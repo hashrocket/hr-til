@@ -18,8 +18,10 @@ a
     box-sizing: border-box
     padding: 3vw 3vw 0 3vw
     margin-right: 2rem
-    min-width: 30rem
+    min-width: 35rem
     +shadow
+    +mobile
+      min-width: 0
   footer
     font-style: italic
     color: mix($dark, $blue, 30%)
@@ -55,6 +57,8 @@ a
           border-left: 2px solid $blue-dark
           font-style: italic
           +lang-colors(border-color)
+          &.edit
+            border-color: $callout
           &:before
             position: absolute
             content: ''
