@@ -2,17 +2,17 @@ a
   text-decoration: none
   color: $blue-dark
 
+.box
+  +wrapper
+  article
+    +shadow
+    padding: 3vw
+
 .post
   +clearfix
-  max-width: 82rem
-  padding: 0 6vw
-  margin: 0 auto 2vw auto
+  +wrapper
   display: flex
   align-items: flex-start
-  +tablet
-    padding: 0 3vw
-  +mobile
-    display: block
   section
     flex: 0 1 auto
     box-sizing: border-box
@@ -20,42 +20,6 @@ a
     margin-right: 2rem
     min-width: 30rem
     +shadow
-    h1, h2, h3, p, ul, ol
-      margin: 0 0 1em 0
-      +mobile
-        margin-bottom: .7em
-    h1
-      font-size: 1.4em
-    h2, h3
-      font-size: 1.2em
-    p, ul, ol
-      line-height: 1.6
-    ul, ol
-      padding: 0 6vw
-    ul
-      list-style-type: disc
-    ol
-      list-style-type: decimal
-    li + li
-      margin-top: .2em
-    pre
-      margin-bottom: 1em
-      overflow: auto
-      code
-        display: block
-        background: $light
-        padding: 2em
-        width: 100%
-        box-sizing: border-box
-        line-height: 1.6
-        +mobile
-          padding: 1em
-    code
-      font-size: 95%
-    +mobile
-      margin-right: 0
-      margin-bottom: 1rem
-      font-size: .85em
   footer
     font-style: italic
     color: mix($dark, $blue, 30%)
@@ -69,6 +33,8 @@ a
       float: right
     nav
       float: left
+      ul
+        list-style-type: none
       ul, li
         display: inline
         padding: 0
@@ -113,3 +79,72 @@ a
           margin: 0 .7rem 1rem 0
           + li
             border-top: 0
+
+form
+  label
+    font-weight: bold
+    span.error
+      color: $error
+      font-size: .85em
+  dl
+    dd
+      margin-bottom: 1em
+  fieldset.actions
+    padding-top: 2rem
+  input[type='text'],
+  textarea
+    width: 100%
+    padding: .5rem
+    border: 1px solid $blue
+    font-family: $primary-typeface
+    line-height: 1.6
+    &:focus
+      border-color: $blue-dark
+      outline: none
+  input[type='submit']
+    background: $blue-dark
+    color: #fff
+    padding: 1rem 2rem
+    margin-right: 1rem
+    border: none
+    border-radius: 0
+    &:hover
+      background: lighten($blue-dark, 5%)
+
+.copy
+  h1, h2, h3, p, ul, ol
+    margin: 0 0 1em 0
+    +mobile
+      margin-bottom: .7em
+  h1
+    font-size: 1.4em
+  h2, h3
+    font-size: 1.2em
+  p, ul, ol
+    line-height: 1.6
+  ul, ol
+    padding: 0 6vw
+  ul
+    list-style-type: disc
+  ol
+    list-style-type: decimal
+  li + li
+    margin-top: .2em
+  pre
+    margin-bottom: 1em
+    overflow: auto
+    code
+      display: block
+      background: $light
+      padding: 2em
+      width: 100%
+      box-sizing: border-box
+      line-height: 1.6
+      +mobile
+        padding: 1em
+  code
+    font-size: 95%
+  +mobile
+    margin-right: 0
+    margin-bottom: 1rem
+    font-size: .85em
