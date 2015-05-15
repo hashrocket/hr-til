@@ -1,23 +1,17 @@
 = form_for @post do |f|
-  %p
-    = f.label :title
-    = f.error_message_on :title
-  %p= f.text_field :title, size: '50', placeholder: 'Enter title...'
-  %p
-    = f.label :body
-    = f.error_message_on :body
-  %p= f.text_area :body, rows: "20", placeholder: 'Enter body...'
-  .word_count
-
-  %p.label Markdown Preview
-  .post_group
-    %article.post
-      .content_preview
-
-  %p
-    = f.label :tag_id
-    = f.error_message_on :tag_id
-  %p= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
-  %p.actions
-    %span= f.submit 'Submit'
-    %span= link_to 'cancel', root_path
+  %dl
+    %dt
+      = f.label :title
+      = f.error_message_on :title
+    %dd= f.text_field :title, placeholder: 'Enter title...'
+    %dt
+      = f.label :body
+      = f.error_message_on :body
+    %dd= f.text_area :body, placeholder: 'Enter body...'
+    %dt
+      = f.label :tag_id
+      = f.error_message_on :tag_id
+    %dd= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
+  %fieldset.actions
+    = f.submit 'Submit'
+    = link_to 'cancel', root_path

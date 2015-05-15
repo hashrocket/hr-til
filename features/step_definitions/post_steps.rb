@@ -5,7 +5,7 @@ When 'I click create TIL' do
 end
 
 Then 'I see a form for TIL' do
-  within 'h3' do
+  within '#post_edit' do
     expect(page).to have_content 'Create Post'
   end
 end
@@ -392,13 +392,13 @@ When(/^I enter (\d+) words* into that form$/) do |number|
 end
 
 Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, noun|
-  within 'form' do
+  within '#post_edit' do
     expect(page).to have_content "#{number} #{noun} available"
   end
 end
 
 And 'the message is red' do
-  within 'form' do
+  within '#post_edit' do
     expect(page).to have_selector '.negative'
   end
 end

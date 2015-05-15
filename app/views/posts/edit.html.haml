@@ -1,3 +1,12 @@
-%h3 Edit Post
+%section#post_edit
+  %section.box
+    %article
+      .copy
+        %h1 Edit Post
+      = render 'form'
 
-#post_edit= render 'form'
+  %article.post
+    %section.copy
+      .content_preview
+      %footer
+        %p.word_count
