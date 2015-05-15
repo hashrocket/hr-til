@@ -1,4 +1,4 @@
 %section#tag
   %header.page_head
-    %h1 #{@tag.posts_count} posts about ##{@tag.name}
+    %h1 #{pluralize @tag.posts_count, "post"} about ##{@tag.name}
 = render @posts
