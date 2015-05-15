@@ -2,6 +2,10 @@ $(function(){
 
   $('textarea.autosize').autosize();
 
+  $(document.body).on("click", "#flash p", function() {
+    $(this).fadeOut(200);
+  });
+
   // Taken from underscore.js
   function debounce(func, wait, immediate) {
     var timeout;

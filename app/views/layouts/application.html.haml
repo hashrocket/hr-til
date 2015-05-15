@@ -13,6 +13,8 @@
     %header.site_head
       %h1= link_to SITE_NAME, root_path
 
+    = render 'shared/flash'
+
     %nav.site_nav
       %ul
         - if developer_signed_in?

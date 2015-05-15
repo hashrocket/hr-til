@@ -79,3 +79,23 @@ header.page_head
   +max
     fon-size: 4rem
     top: 16rem
+
+#flash
+  position: fixed
+  top: 0
+  +responsive(left, 15vw, $narrow: 5vw)
+  +responsive(right, 15vw, $narrow: 5vw)
+  z-index: 1000
+  text-align: center
+  p
+    background: #fff
+    border: 5px solid $blue-dark
+    border-top: 0
+    color: $blue-dark
+    padding: 2vw
+    +responsive(font-size, 1.4em, 1.2em, 1em)
+    cursor: pointer
+    opacity: .9
+    &.error
+      border-color: $error
+      color: $error
