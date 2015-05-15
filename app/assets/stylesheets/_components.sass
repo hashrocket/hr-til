@@ -81,11 +81,14 @@ a
             border-top: 0
 
 form
+  .field_with_errors
+    display: inline
+  .formError
+    display: inline
+    color: $error
+    font-size: .85em
   label
     font-weight: bold
-    span.error
-      color: $error
-      font-size: .85em
   dl
     dd
       margin-bottom: 1em
