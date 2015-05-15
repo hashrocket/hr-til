@@ -15,7 +15,7 @@
           %ul
             %li= link_to "&larr; previous TIL".html_safe, "#"
             %li= link_to "next TIL &rarr;".html_safe, "#"
-      %p= Phil.date.strftime("%B %e, %Y")
+      %p= link_to Phil.date.strftime("%B %e, %Y"), "#"
   %aside
     %ul
       %li

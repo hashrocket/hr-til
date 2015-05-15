@@ -10,7 +10,7 @@
               %li= link_to "&larr; previous TIL".html_safe, post_path(previous_post post)
             - unless newest_post? post
               %li= link_to "next TIL &rarr;".html_safe, post_path(next_post post)
-      %p= post.created_at.strftime("%B %e, %Y")
+      %p= link_to post.created_at.strftime("%B %e, %Y"), post_path(post)
   %aside
     %ul
       %li
