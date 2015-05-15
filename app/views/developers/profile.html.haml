@@ -1,8 +1,15 @@
-%h3 My Profile
+#profile_edit
+  %section.box
+    %article
+      .copy
+        %h1 My Profile
 
-= form_for @developer do |f|
-  %p
-    = f.label :twitter_handle
-    = f.error_message_on :twitter_handle
-  %p= f.text_field :twitter_handle, placeholder: 'Enter handle...'
-  %p= f.submit 'Submit'
+      = form_for @developer do |f|
+        %dl
+          %dt
+            = f.label :twitter_handle
+            = f.error_message_on :twitter_handle
+          %dd= f.text_field :twitter_handle, placeholder: 'Enter handle...'
+        %fieldset.actions
+          = f.submit 'Submit'
+          = link_to 'cancel', root_path

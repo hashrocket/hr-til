@@ -40,7 +40,7 @@ And 'I click profile' do
 end
 
 Then 'I see my profile page' do
-  within 'h3' do
+  within '#profile_edit' do
     expect(page).to have_content 'My Profile'
   end
 end
