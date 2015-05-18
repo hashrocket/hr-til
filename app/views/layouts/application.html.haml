@@ -1,7 +1,7 @@
 !!! 5
 %html(lang="en-US")
   %head
-    %title= "#{SITE_NAME}"
+    %title= [content_for(:page_title), SITE_NAME].compact.join ' - '
     = stylesheet_link_tag    'application', media: 'all'
     = javascript_include_tag 'application'
     = csrf_meta_tags

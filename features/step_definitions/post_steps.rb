@@ -292,6 +292,7 @@ end
 
 Then 'I see the show page for that post' do
   expect(current_path).to eq "/posts/#{@post.slug}-web-development"
+  expect(page.title).to eq 'Web Development - Today I Learned'
 
   within '.post' do
     expect(page).to have_content @post.title

@@ -101,3 +101,7 @@ end
 Then 'I do not see the edit button' do
   expect(page).to_not have_link '[edit]'
 end
+
+Then 'I see the site name in the title' do
+  expect(page.title).to eq SITE_NAME
+end
