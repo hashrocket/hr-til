@@ -269,6 +269,7 @@ Then 'I see all the posts for that author grouped by date/time' do
     expect(page).to have_content '3 posts by prolificposter'
   end
 
+  expect(page.title).to include 'Posts by prolificposter'
   expect(page).to have_selector '.post', count: 3
 
   within first('.post') do
