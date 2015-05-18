@@ -18,7 +18,7 @@
     %nav.site_nav
       %ul
         - if developer_signed_in?
-          %li= link_to current_developer.username, developers_show_path(current_developer.username)
+          %li= link_to current_developer.username, current_developer
           %li= link_to "Sign Out", account_signout_path
           %li= link_to "Create Post", new_post_path
           %li= link_to "Profile", edit_profile_path

@@ -4,6 +4,10 @@ class Developer < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :twitter_handle, length: { maximum: 15 }, format: { with: /\A(?=.*[a-z])[a-z\d]+\Z/i }, allow_blank: true
 
+  def to_param
+    username
+  end
+
   def twitter_handle=(handle)
     write_attribute(:twitter_handle, handle.to_s.gsub(/^@+/, ''))
   end
