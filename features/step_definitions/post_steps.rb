@@ -378,16 +378,10 @@ When 'I enter 1 word and a newline into that form' do
   end
 end
 
-When(/^I enter (\d+) words* into that form$/) do |number|
+When(/^I enter (\d+) words? into that form$/) do |number|
   within 'form' do
-    case number
-    when '0'
-      # noop
-    when '1'
-      fill_in 'Body', with: 'word'
-    else
-      fill_in 'Body', with: 'word ' * number.to_i
-    end
+    phrase = (['word'] * number.to_i).join ' '
+    fill_in 'Body', with: phrase
   end
 end
 
