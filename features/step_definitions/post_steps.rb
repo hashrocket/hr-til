@@ -106,6 +106,7 @@ Then 'I see the post I created' do
 end
 
 And 'I see a link to tweet' do
+  raise 'pending'
   within '.post_group .post' do
     expect(page).to have_link 'Tweet'
   end
@@ -349,7 +350,7 @@ Given 'no posts exist' do
 end
 
 And 'I see a markdown preview of my post' do
-  within('.post_group .post .content_preview em') do
+  within('.post .content_preview em') do
     expect(page).to have_content 'emphasis'
   end
 end
@@ -361,12 +362,12 @@ Then 'I see a markdown preview with my rendered code' do
 end
 
 And 'no post was created' do
-  expect(page).to_not have_selector '.post_group'
+  expect(page).to_not have_selector '.post'
 end
 
 And 'I see my unedited post' do
-  expect(page).to have_selector '.post_group', count: 1
-  within '.post_group' do
+  expect(page).to have_selector '.post', count: 1
+  within '.post' do
     expect(page).to have_content 'Web Development'
     expect(page).to have_content 'Today I learned about web development'
   end
