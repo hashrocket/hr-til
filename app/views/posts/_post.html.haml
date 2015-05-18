@@ -1,16 +1,20 @@
 %article.post
   %section.copy
-    %h1= link_to post.title, post_path(post)
+    %h1= link_to post.title, post
     = find_and_preserve markdown_render post.body
     %footer
       - if multiple_posts?
         %nav
           %ul
             - unless oldest_post? post
-              %li= link_to "&larr; previous TIL".html_safe, post_path(previous_post post)
+              %li
+                = link_to previous_post(post) do
+                  &larr; previous TIL
             - unless newest_post? post
-              %li= link_to "next TIL &rarr;".html_safe, post_path(next_post post)
-      %p= link_to post.created_at.strftime("%B %e, %Y"), post_path(post)
+              %li
+                = link_to next_post(post) do
+                  next TIL &rarr;
+      %p= post.created_at.strftime("%B %e, %Y")
   %aside
     %ul
       %li
@@ -23,5 +27,5 @@
             \##{post.tag_name}
       - if editable?(post)
         %li
-          = link_to edit_post_path(post), class: "edit" do
+          = link_to [:edit, post], class: "edit" do
             %b edit this post
