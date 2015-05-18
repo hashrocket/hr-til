@@ -18,7 +18,9 @@
           more by
           %b= post.developer_username
       %li
-        %b= link_to "##{post.tag_name}", tags_show_path(post.tag_name), class: post.tag_name
+        %b
+          = link_to post.tag, class: post.tag_name do
+            \##{post.tag_name}
       - if editable?(post)
         %li
           = link_to edit_post_path(post), class: "edit" do

@@ -20,7 +20,7 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'sessions#create'
 
   get 'account/signout', to: 'sessions#destroy'
-  get '/:name', to: 'tags#show', as: 'tags_show'
+  resources :tags, path: '/', only: :show
   post '/post_preview', to: 'posts#preview'
   get '/posts/:titled_slug.md', to: 'posts#show', as: 'post_text'
 end
