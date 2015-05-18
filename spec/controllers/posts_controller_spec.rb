@@ -24,4 +24,12 @@ describe PostsController do
       end
     end
   end
+
+  describe '#show' do
+    it 'is a 404 when the post is not there' do
+      expect do
+        get :show, titled_slug: 'asdf'
+      end.to raise_error ActiveRecord::RecordNotFound
+    end
+  end
 end
