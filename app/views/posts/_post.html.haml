@@ -3,17 +3,7 @@
     %h1= link_to post.title, post
     = find_and_preserve markdown_render post.body
     %footer
-      - if multiple_posts?
-        %nav
-          %ul
-            - unless oldest_post? post
-              %li
-                = link_to previous_post(post) do
-                  &larr; previous TIL
-            - unless newest_post? post
-              %li
-                = link_to next_post(post) do
-                  next TIL &rarr;
+      = content_for :post_nav
       %p= post.created_at.strftime("%B %e, %Y")
   %aside
     %ul
