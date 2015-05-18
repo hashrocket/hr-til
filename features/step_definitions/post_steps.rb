@@ -89,7 +89,7 @@ When 'I click submit' do
 end
 
 And 'I click raw' do
-  click_on '[raw]'
+  click_on 'view raw'
 end
 
 When 'I click on my username in the upper right' do

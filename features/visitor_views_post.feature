@@ -44,8 +44,6 @@ Feature: Visitor views post
     Then I see "Raw text content"
     And I should get a response with content-type "text/markdown; charset=utf-8"
 
-  # TODO Raw button not implemented in UI
-  @wip
   Scenario: Visitor views raw text of post via button
     Given I am a visitor
     And a post exists with a body "Raw text content"
