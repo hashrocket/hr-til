@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
-  before_filter :require_developer, except: [:index, :show]
-  before_filter :authorize_developer, only: [:edit]
+  before_action :require_developer, except: [:index, :show]
+  before_action :authorize_developer, only: [:edit, :update]
 
   def preview
     render layout: false
