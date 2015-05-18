@@ -1,3 +1,5 @@
+- content_for :page_title, "Posts about #{@tag.name}"
+
 %section#tag
   %header.page_head
     %h1 #{pluralize @tag.posts_count, "post"} about ##{@tag.name}

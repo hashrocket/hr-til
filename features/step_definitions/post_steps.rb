@@ -216,6 +216,7 @@ end
 Then 'I see all posts tagged with that tag' do
   expect(page).to have_content '3 posts about #phantomjs'
   expect(page).to have_selector '.post', count: 3
+  expect(page.title).to eq 'Posts about phantomjs - Today I Learned'
 end
 
 Then 'I see the sorted TILs' do
