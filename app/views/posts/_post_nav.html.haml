@@ -1,6 +1,0 @@
-.nav
-  - if multiple_posts?
-    - unless oldest_post? @post
-      = link_to '<', post_path(previous_post @post)
-    - unless newest_post? @post
-      = link_to '>', post_path(next_post @post)
