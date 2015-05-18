@@ -31,7 +31,7 @@ Then (/^I see "(.*?)"$/) do |content|
   expect(page.body).to include(content)
 end
 
-Then /^I should get a response with content-type "([^"]*)"$/ do |content_type|
+Then(/^I should get a response with content-type "([^"]*)"$/) do |content_type|
   expect(page.response_headers['Content-Type']).to eq(content_type)
 end
 
