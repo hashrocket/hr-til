@@ -13,7 +13,7 @@ class DevelopersController < ApplicationController
     if @developer.update(developer_params)
       redirect_to root_path, notice: 'Developer updated'
     else
-      flash.now[:error] = @developer.errors.full_messages
+      flash.now[:alert] = @developer.errors.full_messages
       render :edit
     end
   end

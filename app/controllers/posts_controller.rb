@@ -20,7 +20,7 @@ class PostsController < ApplicationController
       flash[:notice] = 'Post created'
       redirect_to root_path
     else
-      flash.now[:error] = @post.errors.full_messages
+      flash.now[:alert] = @post.errors.full_messages
       render :new
     end
   end
@@ -46,10 +46,9 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      flash[:notice] = 'Post updated'
-      redirect_to @post
+      redirect_to @post, notice: 'Post updated'
     else
-      flash.now[:error] = @post.errors.full_messages
+      flash.now[:alert] = @post.errors.full_messages
       render :edit
     end
   end
@@ -82,8 +81,7 @@ class PostsController < ApplicationController
 
   def authorize_developer
     unless editable?(@post)
-      flash[:error] = 'You can only edit your own posts'
-      redirect_to root_path
+      redirect_to root_path, alert: 'You can only edit your own posts'
     end
   end
 
