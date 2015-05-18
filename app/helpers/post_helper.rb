@@ -21,10 +21,6 @@ module PostHelper
     posts[posts.index(post) - 1]
   end
 
-  def editable?(post)
-    current_developer && (current_developer == post.developer || current_developer.admin?)
-  end
-
   def tweet_link(post)
     title = post.title
     handle = post.twitter_handle

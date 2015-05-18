@@ -3,8 +3,6 @@ class PostsController < ApplicationController
   before_filter :require_developer, except: [:index, :show]
   before_filter :authorize_developer, only: [:edit]
 
-  include PostHelper
-
   def preview
     render layout: false
   end

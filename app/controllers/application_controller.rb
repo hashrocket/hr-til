@@ -8,7 +8,13 @@ class ApplicationController < ActionController::Base
     http_basic_authenticate_with name: ENV['auth_name'], password: ENV['auth_password']
   end
 
+  helper_method :editable?
+
   private
+
+  def editable?(post)
+    current_developer && (current_developer == post.developer || current_developer.admin?)
+  end
 
   def require_developer
     redirect_to root_path unless current_developer
