@@ -1,24 +1,23 @@
 # To download production data instead of these seeds, run
 # rake db:restore_production_dump
-title = 'Parameters Filtering'
+title = '80 Chars'
 body = <<-HEREDOC
-Rails logs your server's activity, which is useful for development and
-debugging. However, often the server handles sensitive information that
-should not be logged.
+Eighty characters is a standard limit for code line length.
 
-A few examples are authentication credentials, personal data, and financial
-information.
+Keeping your code below eighty characters makes it more readable and
+encourages brevity.
 
-To prevent Rails from logging such data, add this to your application
-configuration:
+This is what eighty characters looks like.
 
 ```
-config.filter_parameters << :sensitive_param
+Process substitution feeds the output of a process (or processes) into the stdin
 ```
 
-When the named parameter is handled by the server, it will be logged as
-`[FILTERED]` instead of its actual value. Add this configuration by
-environment if you want to keep the parameters unfiltered in development.
+This is more than eighty characters (100 to be exact).
+
+```
+Process substitution feeds the output of a process (or processes) into the stdin of another process.
+```
 HEREDOC
 tags = %w(rails ruby javascript go html css)
 
