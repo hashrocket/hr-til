@@ -4,7 +4,7 @@
     = find_and_preserve markdown_render post.body
     %footer
       = content_for :post_nav
-      %p= post.created_at.strftime("%B %e, %Y")
+      %p= link_to post.created_at.strftime("%B %e, %Y"), post
   %aside
     %ul
       %li

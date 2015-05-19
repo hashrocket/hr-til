@@ -7,6 +7,13 @@ Feature: Visitor views post
     When I click on the title of the post
     Then I see the show page for that post
 
+  Scenario: Visitor clicks on post date
+    Given I am a visitor
+    And a post exists
+    And I visit the homepage
+    When I click on the date of the post
+    Then I see the show page for that post
+
   Scenario: Visitor clicks on 'next' and 'previous' arrows
     Given I am a visitor
     And three posts exist

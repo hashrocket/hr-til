@@ -284,6 +284,12 @@ When 'I click on the title of the post' do
   end
 end
 
+When 'I click on the date of the post' do
+  within '.post' do
+    click_on @post.created_at.strftime('%B %e, %Y')
+  end
+end
+
 When 'I visit a mangled version of the show url' do
   visit "/posts/#{@post.slug}-web-cool-tricks"
 end
