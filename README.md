@@ -10,7 +10,13 @@ rake db:setup
 rails s
 ```
 
-Signing up and signing in is handled by Omniauth and Google. Visit '/login' and log in with your company email address.
+An optional setup task is to get a copy of the production database (requires Heroku access):
+
+```
+rake db:restore_production_dump
+```
+
+Authentication is managed by Omniauth and Google. Visit '/admin' and log in with your Hashrocket email address.
 
 ### Hosting
 
