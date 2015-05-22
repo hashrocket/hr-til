@@ -55,9 +55,10 @@ a
           margin-left: 2rem
   aside
     flex: 0 0 auto
-    +shadow
     font-size: .9em
     ul
+      +shadow
+      margin-bottom: 2rem
       li
         padding: .4rem
         a
@@ -85,9 +86,10 @@ a
       li + li
         border-top: 2px solid transparentize($light - #1a1a1a, .5)
     +mobile
-      background: none
-      box-shadow: none
       ul
+        background: none
+        box-shadow: none
+        margin-bottom: 0
         li
           display: inline-block
           +shadow

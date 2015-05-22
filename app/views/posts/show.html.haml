@@ -13,5 +13,8 @@
             = link_to next_post @post do
               next TIL &rarr;
 
+- content_for :social do
+  = tweet_link(@post)
+
 %section#post_show
   = render @post
