@@ -10,38 +10,35 @@ $(function() {
     },
     handlers: {
       tagPostCounts: function(data) {
-        var datapoints = [];
-        var tags = Object.keys(data).sort(function(tag_a,tag_b){
-          return data[tag_b] - data[tag_a];
-        });
-
-        tags.forEach(function(tag){
-          datapoints.push(data[tag]);
-        });
-
-        statistics.buildChart('#my_chart_tags', tags, datapoints)
+        statistics.processData(data, '#my_chart_tags', true)
       },
       authorPostCounts: function(data) {
-        var authors = Object.keys(data).sort(function(author_a,author_b){
-          return data[author_b] - data[author_a];
-        });
-        var datapoints = [];
-        authors.forEach(function(author){
-          datapoints.push(data[author]);
-        });
-        statistics.buildChart('#my_chart_authors', authors, datapoints)
+        statistics.processData(data, '#my_chart_authors', true)
       },
       postDaysCounts: function(data) {
-        var dates = Object.keys(data);
-        var datapoints = [];
-        dates.forEach(function(date){
-          datapoints.push(data[date]);
-        });
-        statistics.buildChart('#my_chart_posts', dates, datapoints)
+        statistics.processData(data, '#my_chart_posts')
       }
     },
-    buildChart: function(id, labels, datapoints) {
-      var ctx = $(id)[0].getContext('2d');
+    processData: function(data, selector, sort) {
+
+      var datapoints = [];
+      var labels = Object.keys(data);
+
+      if (sort) {
+        labels.sort(function(a, b) {
+          return data[b] - data[a];
+        });
+      }
+
+      labels.forEach(function(item) {
+        datapoints.push(data[item]);
+      });
+
+      statistics.buildChart(selector, labels, datapoints)
+
+    },
+    buildChart: function(selector, labels, datapoints) {
+      var ctx = $(selector)[0].getContext('2d');
       return new Chart(ctx).Bar({
         labels: labels,
         datasets: [ $.extend(statistics.colors, { data: datapoints }) ]
@@ -49,7 +46,6 @@ $(function() {
         scaleLabel: " <%= value%>" // Fix scale label cropping bug
       });
     },
-
     init: function() {
       Chart.defaults.global.responsive = true;
       $.get('/statistics/tag_posts_counts', this.handlers.tagPostCounts);
