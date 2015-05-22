@@ -20,10 +20,10 @@ $(function() {
   var statistics = {
     $el: $("#statistics"),
     colors: {
-      fillColor: "#ffcccc",
-      strokeColor: "rgba(220,220,220,0.8)",
-      highlightFill: '#ffaaaa',
-      highlightStroke: "rgba(220,220,220,1)"
+      fillColor: "#a4deda",
+      strokeColor: "#a4deda",
+      highlightFill: '#94ceca',
+      highlightStroke: "#94ceca"
     },
     processChart: function(chart) {
 
