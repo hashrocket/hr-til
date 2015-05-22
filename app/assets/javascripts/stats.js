@@ -1,3 +1,5 @@
+Chart.defaults.global.responsive = true;
+
 $.get('/statistics/tag_posts_counts',function(data){
   var tags = Object.keys(data).sort(function(tag_a,tag_b){
     return data[tag_b] - data[tag_a];
@@ -6,7 +8,7 @@ $.get('/statistics/tag_posts_counts',function(data){
   tags.forEach(function(tag){
     datapoints.push(data[tag]);
   });
-  var ctx = document.getElementById("myChartTags").getContext("2d");
+  var ctx = document.getElementById("my_chart_tags").getContext("2d");
   var myBarChart = new Chart(ctx).Bar({
     labels: tags,
     datasets: [
@@ -33,7 +35,7 @@ $.get('/statistics/author_posts_counts',function(data){
     datapoints.push(data[author]);
   });
 
-  var ctx = document.getElementById("myChartAuthors").getContext("2d");
+  var ctx = document.getElementById("my_chart_authors").getContext("2d");
   var myBarChart = new Chart(ctx).Bar({
     labels: authors,
     datasets: [
@@ -58,7 +60,7 @@ $.get('/statistics/post_days_counts',function(data){
     datapoints.push(data[date]);
   });
 
-  var ctx = document.getElementById("myChartPosts").getContext("2d");
+  var ctx = document.getElementById("my_chart_posts").getContext("2d");
   var myBarChart = new Chart(ctx).Line({
     labels: dates,
     datasets: [

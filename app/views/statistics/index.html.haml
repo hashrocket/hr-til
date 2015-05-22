@@ -1,10 +1,20 @@
 = javascript_include_tag 'stats'
 
-%h3="Posts by date (last #{chart_range} days)"
-%canvas#myChartPosts
+%header.page_head
+  %h1 Statistics
 
-%h3 Tags by posts
-%canvas#myChartTags
+#statistics
+  %section
+    %h3="Posts by date (last #{chart_range} days)"
+    .chart
+      %canvas#my_chart_posts
 
-%h3 Posts by author
-%canvas#myChartAuthors
+  %section
+    %h3 Tags by posts
+    .chart
+      %canvas#my_chart_tags
+
+  %section
+    %h3 Posts by author
+    .chart
+      %canvas#my_chart_authors

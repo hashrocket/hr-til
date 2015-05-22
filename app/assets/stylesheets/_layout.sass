@@ -21,11 +21,8 @@ header.site_head
     padding: 5rem 0
   h1
     a
-      font-family: $secondary-typeface
-      color: transparentize($blue-dark, .3)
-      text-shadow: -.1rem .1rem 0 lighten($blue, 15%)
+      +shadow-text
       font-size: 7vw
-      text-transform: uppercase
       letter-spacing: 2vw
       margin-left: 2vw
       +max
@@ -68,16 +65,13 @@ header.page_head
   top: 11vw
   right: 0
   text-align: center
-  font-family: $secondary-typeface
-  text-shadow: -.1rem .1rem 0 lighten($blue, 15%)
+  +shadow-text
   color: mix($blue-dark, $light, 70%)
-  text-transform: uppercase
-  letter-spacing: .2vw
   font-size: 2vw
   +mobile
     font-size: 1.5rem
   +max
-    fon-size: 4rem
+    font-size: 4rem
     top: 16rem
 
 #flash

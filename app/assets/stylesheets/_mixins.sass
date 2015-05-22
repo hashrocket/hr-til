@@ -13,6 +13,13 @@
   +max
     box-shadow: -1rem 1rem 0 0 transparentize($blue-dark, .3)
 
+= shadow-text
+  font-family: $secondary-typeface
+  color: transparentize($blue-dark, .3)
+  text-shadow: -.1rem .1rem 0 lighten($blue, 15%)
+  text-transform: uppercase
+  letter-spacing: .2vw
+
 = lang-colors($attr)
   @each $lang, $color in $langs
     &.#{$lang}
