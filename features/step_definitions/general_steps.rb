@@ -7,8 +7,8 @@ When 'I visit the statistics page' do
 end
 
 Then 'I see statistics' do
-  expect(page).to have_content 'Tags by posts'
-  expect(page).to have_content 'Posts by author'
+  expect(page).to have_content 'TAGS BY POSTS'
+  expect(page).to have_content 'POSTS BY AUTHOR'
 end
 
 Given 'I visit the homepage' do
