@@ -6,6 +6,10 @@ When 'I visit the statistics page' do
   visit statistics_path
 end
 
+When 'I click statistics' do
+  click_link 'Stats'
+end
+
 Then 'I see statistics' do
   expect(page).to have_content 'TAGS BY POSTS'
   expect(page).to have_content 'POSTS BY AUTHOR'
