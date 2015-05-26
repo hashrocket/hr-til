@@ -30,9 +30,7 @@ Staging and production are hosted on Heroku.
 ```
 google_client_id
 google_client_secret
-basic_auth
-auth_name
-auth_password
+basic_auth_credentials # required format: username:password
 slack_post_endpoint
 ```
 

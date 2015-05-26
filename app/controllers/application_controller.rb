@@ -4,8 +4,9 @@ class ApplicationController < ActionController::Base
 
   authem_for :developer
 
-  if ENV['basic_auth']
-    http_basic_authenticate_with name: ENV['auth_name'], password: ENV['auth_password']
+  if credentials = ENV['basic_auth_credentials']
+    username, password = credentials.split(':', 2)
+    http_basic_authenticate_with name: username, password: password
   end
 
   helper_method :editable?
