@@ -6,7 +6,7 @@ class StatisticsController < ApplicationController
   end
 
   def author_posts_counts
-    render json: Developer.all.map { |developer| [developer.username, developer.posts.count] }.to_h
+    render json: Developer.joins(:posts).map { |developer| [developer.username, developer.posts.count] }.to_h
   end
 
   def post_days_counts
