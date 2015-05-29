@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150501152953) do
+ActiveRecord::Schema.define(version: 20150529190148) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,8 +33,8 @@ ActiveRecord::Schema.define(version: 20150501152953) do
   create_table "developers", force: :cascade do |t|
     t.string   "email",                          null: false
     t.string   "username",                       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
     t.string   "twitter_handle"
     t.boolean  "admin",          default: false, null: false
   end
@@ -42,11 +42,11 @@ ActiveRecord::Schema.define(version: 20150501152953) do
   create_table "posts", force: :cascade do |t|
     t.integer  "developer_id", null: false
     t.text     "body",         null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "tag_id"
-    t.string   "title"
-    t.string   "slug"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "tag_id",       null: false
+    t.string   "title",        null: false
+    t.string   "slug",         null: false
   end
 
   add_index "posts", ["developer_id"], name: "index_posts_on_developer_id", using: :btree
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20150501152953) do
 
   create_table "tags", force: :cascade do |t|
     t.text     "name",       null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
