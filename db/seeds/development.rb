@@ -19,14 +19,13 @@ This is more than eighty characters (100 to be exact).
 Process substitution feeds the output of a process (or processes) into the stdin of another process.
 ```
 HEREDOC
-channels = %w(rails ruby javascript go html css)
 
-5.times do |i|
+50.times do |i|
   puts "Creating post ##{i}"
 
   hex = SecureRandom.hex(5)
   developer = Developer.create!(username: "developer_#{hex}", email: "developer_#{hex}@hashrocket.com")
-  channel = Channel.find_or_create_by!(name: channels.sample)
+  channel = Channel.all.sample
 
   Post.create!(body: body, channel: channel, developer: developer, title: title)
 end
