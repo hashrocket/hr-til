@@ -286,7 +286,7 @@ end
 
 When 'I click on the date of the post' do
   within '.post' do
-    click_on @post.created_at.strftime('%B %e, %Y')
+    click_on @post.created_at.strftime("%B %-e, %Y")
   end
 end
 
