@@ -14,8 +14,7 @@ Feature: Developer creates post
     When I click on my username in the upper right
     Then I see the post I created
     When I click on the title of the post
-    # TODO Twitter button not implemented in UI
-    #Then I see a link to tweet
+    Then I see a link to tweet
 
   Scenario: With valid information and markdown inline code
     Given I am a signed in developer

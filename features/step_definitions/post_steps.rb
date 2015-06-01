@@ -106,8 +106,7 @@ Then 'I see the post I created' do
 end
 
 And 'I see a link to tweet' do
-  raise 'pending'
-  within '.post_group .post' do
+  within '.post' do
     expect(page).to have_link 'Tweet'
   end
 end
