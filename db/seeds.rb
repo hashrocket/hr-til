@@ -4,13 +4,13 @@ if seed_file.exist? && !ENV['NO_SEED_DATA']
   require seed_file
 end
 
-tags = %w(vim development design consulting rails
-          ruby emberjs testing bash git html css
-          javascript clojure postgres algorithms
-          coffeescript reactjs assembly devops go
-          internet android ios)
+channels = %w(vim development design consulting rails
+           ruby emberjs testing bash git html css
+           javascript clojure postgres algorithms
+           coffeescript reactjs assembly devops go
+           internet android ios)
 
-tags.each do |tag|
-  puts "Finding or creating tag: #{tag}"
-  Tag.find_or_create_by!(name: tag)
+channels.each do |channel|
+  puts "Finding or creating tag: #{channel}"
+  Channel.find_or_create_by!(name: channel)
 end

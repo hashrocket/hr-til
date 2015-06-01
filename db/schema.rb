@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150529190148) do
+ActiveRecord::Schema.define(version: 20150601191337) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -30,6 +30,12 @@ ActiveRecord::Schema.define(version: 20150529190148) do
   add_index "authem_sessions", ["expires_at", "subject_type", "subject_id"], name: "index_authem_sessions_subject", using: :btree
   add_index "authem_sessions", ["expires_at", "token"], name: "index_authem_sessions_on_expires_at_and_token", unique: true, using: :btree
 
+  create_table "channels", force: :cascade do |t|
+    t.text     "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "developers", force: :cascade do |t|
     t.string   "email",                          null: false
     t.string   "username",                       null: false
@@ -44,18 +50,12 @@ ActiveRecord::Schema.define(version: 20150529190148) do
     t.text     "body",         null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
-    t.integer  "tag_id",       null: false
     t.string   "title",        null: false
     t.string   "slug",         null: false
+    t.integer  "channel_id"
   end
 
+  add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
   add_index "posts", ["developer_id"], name: "index_posts_on_developer_id", using: :btree
-  add_index "posts", ["tag_id"], name: "index_posts_on_tag_id", using: :btree
-
-  create_table "tags", force: :cascade do |t|
-    t.text     "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
 end

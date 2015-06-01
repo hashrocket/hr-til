@@ -13,8 +13,8 @@
           %b= post.developer_username
       %li
         %b
-          = link_to post.tag, class: post.tag_name do
-            \##{post.tag_name}
+          = link_to post.channel, class: post.channel_name do
+            \##{post.channel_name}
       - if editable?(post)
         %li
           = link_to [:edit, post], class: "edit" do

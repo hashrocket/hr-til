@@ -9,9 +9,9 @@
       = f.error_message_on :body
     %dd= f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
     %dt
-      = f.label :tag_id
-      = f.error_message_on :tag_id
-    %dd= f.collection_select :tag_id, sorted_tags, :id, :name, include_blank: ""
+      = f.label :channel_id
+      = f.error_message_on :channel_id
+    %dd= f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
   %fieldset.actions
     = f.submit 'Submit'
     = link_to 'cancel', root_path

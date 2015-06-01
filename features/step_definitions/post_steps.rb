@@ -1,17 +1,17 @@
-When 'I click create TIL' do
+When 'I click create post' do
   within '.site_nav' do
     click_on 'Create Post'
   end
 end
 
-Then 'I see a form for TIL' do
+Then 'I see a form for posts' do
   within '#post_edit' do
     expect(page).to have_content 'Create Post'
   end
 end
 
-Given 'a tag exists' do
-  @tag = FactoryGirl.create(:tag)
+Given 'a channel exists' do
+  @channel = FactoryGirl.create(:channel)
 end
 
 Given 'a post exists' do
@@ -70,15 +70,15 @@ When 'I enter information with markdown bullets into that form' do
   end
 end
 
-And 'I select a tag' do
+And 'I select a channel' do
   within 'form' do
-    select @tag.name, from: 'Tag'
+    select @channel.name, from: 'Channel'
   end
 end
 
-And 'I select no tag' do
+And 'I select no channel' do
   within 'form' do
-    select '', from: 'Tag'
+    select '', from: 'Channel'
   end
 end
 
@@ -130,13 +130,13 @@ Then 'I see the markdown bullets I created' do
   end
 end
 
-And 'I see the tag I selected' do
+And 'I see the channel I selected' do
   within '.post' do
     expect(page).to have_content '#phantomjs'
   end
 end
 
-Given 'there exist TILs for today, yesterday, and last week' do
+Given 'there exist posts for today, yesterday, and last week' do
   rails_dev    = FactoryGirl.create(:developer, username: 'railsguy')
   ember_dev    = FactoryGirl.create(:developer, username: 'embergal')
   karate_dev   = FactoryGirl.create(:developer, username: 'karatedude')
@@ -197,29 +197,29 @@ When 'I click the right arrow' do
   end
 end
 
-Given 'there are TILs with that tag' do
-  FactoryGirl.create_list(:post, 3, tag: @tag)
+Given 'there are posts in that channel' do
+  FactoryGirl.create_list(:post, 3, channel: @channel)
 end
 
-When 'I click the tag' do
+When 'I click the channel' do
   first('.post').click_link '#phantomjs'
 end
 
-Given 'there are no TILs with that tag' do
+Given 'there are no posts with that channel' do
   # noop
 end
 
-When "I visit '/that tag'" do
+When "I visit '/that channel'" do
   visit '/phantomjs'
 end
 
-Then 'I see all posts tagged with that tag' do
+Then 'I see all posts with that channel' do
   expect(page).to have_content '3 posts about #phantomjs'
   expect(page).to have_selector '.post', count: 3
   expect(page.title).to eq 'Posts about phantomjs - Today I Learned'
 end
 
-Then 'I see the sorted TILs' do
+Then 'I see the sorted posts' do
   within '#home:first-child' do
     expect(page).to have_content 'karatedude'
     expect(page).to have_content 'I learned about Karate'
@@ -313,7 +313,7 @@ Then 'I see the show page for that post' do
   end
 end
 
-And 'I see a unique CSS selector for that tag' do
+And 'I see a unique CSS selector for that channel' do
   within '.post' do
     expect(page).to have_selector '.phantomjs'
   end

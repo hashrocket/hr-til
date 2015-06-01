@@ -1,7 +1,7 @@
 class DevelopersController < ApplicationController
   def show
     @developer = Developer.find_by_username!(params[:id])
-    @posts = @developer.posts.order(created_at: :desc).includes(:tag)
+    @posts = @developer.posts.order(created_at: :desc).includes(:channel)
   end
 
   def edit

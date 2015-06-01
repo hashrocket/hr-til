@@ -2,8 +2,8 @@ $(function() {
 
   var charts = [
     {
-      path: 'tag_posts_counts',
-      selector: '#my_chart_tags',
+      path: 'channel_posts_counts',
+      selector: '#my_chart_channels',
       sort: true
     },
     {

@@ -1,12 +1,12 @@
 class Post < ActiveRecord::Base
   validates_presence_of :body
-  validates_presence_of :tag_id
+  validates_presence_of :channel_id
   validates :title, presence: true, length: { maximum: 50 }
   validate :body_size, if: -> { body.present? }
   validates_presence_of :developer
 
   belongs_to :developer
-  belongs_to :tag
+  belongs_to :channel
 
   before_create :generate_slug
   after_commit :notify_slack, on: :create
@@ -21,8 +21,8 @@ class Post < ActiveRecord::Base
     developer_twitter_handle || 'hashrocket'
   end
 
-  def tag_name
-    tag.name
+  def channel_name
+    channel.name
   end
 
   def to_param

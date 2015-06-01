@@ -18,8 +18,8 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  it 'should require a tag' do
-    post.tag = nil
+  it 'should require a channel' do
+    post.channel = nil
     expect(post).to_not be_valid
   end
 

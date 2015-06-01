@@ -2,9 +2,9 @@ Feature: Visitor views posts
 
   Scenario: Posts exist
     Given I am a visitor
-    And there exist TILs for today, yesterday, and last week
+    And there exist posts for today, yesterday, and last week
     When I visit the homepage
-    Then I see the sorted TILs
+    Then I see the sorted posts
 
   Scenario: Visitor views posts by author
     Given I am a visitor

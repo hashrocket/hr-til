@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :tag do
+  factory :channel do
     name 'phantomjs'
   end
 end

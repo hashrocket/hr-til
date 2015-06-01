@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.order(created_at: :desc).includes(:developer, :tag)
+    @posts = Post.order(created_at: :desc).includes(:developer, :channel)
   end
 
   def show
@@ -51,10 +51,10 @@ class PostsController < ApplicationController
     end
   end
 
-  def sorted_tags
-    Tag.order name: :asc
+  def sorted_channels
+    Channel.order name: :asc
   end
-  helper_method :sorted_tags
+  helper_method :sorted_channels
 
   private
 
@@ -66,7 +66,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :body, :tag_id, :developer_id, :title, :slug
+    params.require(:post).permit :body, :channel_id, :developer_id, :title, :slug
   end
 
   def untitled_slug

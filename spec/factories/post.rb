@@ -3,7 +3,7 @@ FactoryGirl.define do
     title 'Web Development'
     body 'Today I learned about web development'
     developer { FactoryGirl.create(:developer) }
-    tag { FactoryGirl.create(:tag) }
+    channel { FactoryGirl.create(:channel) }
   end
 
   trait :for_today do
