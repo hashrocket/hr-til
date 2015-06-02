@@ -219,25 +219,27 @@ Then 'I see all posts with that channel' do
 end
 
 Then 'I see the sorted posts' do
+  timestamp = ->(post) {post.created_at.strftime('%B %-e, %Y')}
+
   within '#home:first-child' do
     expect(page).to have_content 'karatedude'
     expect(page).to have_content 'I learned about Karate'
     expect(page).to have_content '#phantomjs'
-    expect(page).to have_content @karate_post.created_at.strftime('%B %e, %Y')
+    expect(page).to have_content timestamp[@karate_post]
   end
 
   within '#home:nth-child(1)' do
     expect(page).to have_content 'embergal'
     expect(page).to have_content 'I learned about Ember'
     expect(page).to have_content '#phantomjs'
-    expect(page).to have_content @ember_post.created_at.strftime('%B %e, %Y')
+    expect(page).to have_content timestamp[@ember_post]
   end
 
   within '#home:last-child' do
     expect(page).to have_content 'railsguy'
     expect(page).to have_content 'I learned about Rails'
     expect(page).to have_content '#phantomjs'
-    expect(page).to have_content @rails_post.created_at.strftime('%B %e, %Y')
+    expect(page).to have_content timestamp[@rails_post]
   end
 end
 
