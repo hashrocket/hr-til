@@ -3,8 +3,8 @@ class RenameTagsToChannels < ActiveRecord::Migration
     rename_table :tags, :channels
 
     change_table :posts do |t|
-      t.remove_references :tag
-      t.belongs_to :channel, index: true
+      t.rename :tag_id, :channel_id
+      add_foreign_key :posts, :channels
     end
   end
 end

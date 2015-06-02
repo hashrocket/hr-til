@@ -50,12 +50,13 @@ ActiveRecord::Schema.define(version: 20150601191337) do
     t.text     "body",         null: false
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+    t.integer  "channel_id",   null: false
     t.string   "title",        null: false
     t.string   "slug",         null: false
-    t.integer  "channel_id"
   end
 
   add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
   add_index "posts", ["developer_id"], name: "index_posts_on_developer_id", using: :btree
 
+  add_foreign_key "posts", "channels"
 end
