@@ -62,4 +62,25 @@ class Post < ActiveRecord::Base
     developer.twitter_handle
   end
 
+  def self.search(query)
+    if query.present?
+      haystack = {'developers.username' => 'B',
+                  'channels.name' => 'B',
+                  'posts.title' => 'A',
+                  'posts.body' => 'C'
+      }.map do |column, rank|
+        "setweight(to_tsvector('english', #{column}), '#{rank}')"
+      end.join(' || ')
+
+      joins(:developer, :channel)
+        .where(<<-WHERE, query).order(<<-ORDER)
+        #{haystack} @@ plainto_tsquery('english', ?)
+      WHERE
+        ts_rank_cd(#{haystack}, plainto_tsquery('english', #{connection.quote(query)})) desc, posts.created_at desc
+      ORDER
+    else
+      order created_at: :desc
+    end
+  end
+
 end

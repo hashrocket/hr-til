@@ -212,6 +212,16 @@ When "I visit '/that channel'" do
   visit '/phantomjs'
 end
 
+When 'I search for "$query"' do |query|
+  visit "/?q=#{URI.encode(query)}"
+end
+
+Then 'I only see the "$body_fragment" post' do |body_fragment|
+  within '.post' do
+    expect(page).to have_content body_fragment
+  end
+end
+
 Then 'I see all posts with that channel' do
   expect(page).to have_content '3 posts about #phantomjs'
   expect(page).to have_selector '.post', count: 3
@@ -414,6 +424,6 @@ And 'the message is not red' do
   end
 end
 
-Given(/^a post exists with a body "(.*?)"$/) do |body|
+Given(/^a post exists with (?:a|the) body "(.*?)"$/) do |body|
   @post = FactoryGirl.create(:post, body: body)
 end
