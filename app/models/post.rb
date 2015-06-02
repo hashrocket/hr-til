@@ -64,23 +64,26 @@ class Post < ActiveRecord::Base
 
   def self.search(query)
     if query.present?
-      haystack = {'developers.username' => 'B',
-                  'channels.name' => 'B',
-                  'posts.title' => 'A',
-                  'posts.body' => 'C'
+      haystack = {
+        'posts.title'         => 'A',
+        'developers.username' => 'B',
+        'channels.name'       => 'B',
+        'posts.body'          => 'C'
       }.map do |column, rank|
         "setweight(to_tsvector('english', #{column}), '#{rank}')"
       end.join(' || ')
 
       joins(:developer, :channel)
-        .where(<<-WHERE, query).order(<<-ORDER)
-        #{haystack} @@ plainto_tsquery('english', ?)
-      WHERE
-        ts_rank_cd(#{haystack}, plainto_tsquery('english', #{connection.quote(query)})) desc, posts.created_at desc
-      ORDER
+      .joins("""
+        join lateral (
+          select
+            ts_rank_cd(#{haystack}, plainto_tsquery('english', #{connection.quote(query)})) as rank
+        ) ranks on true
+      """)
+      .where('ranks.rank > 0')
+      .order('ranks.rank desc, posts.created_at desc')
     else
       order created_at: :desc
     end
   end
-
 end
