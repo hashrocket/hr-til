@@ -430,18 +430,24 @@ end
 
 And 'the Like Count is zero' do
   within '.post' do
-    expect(page).to have_content '0 Likes'
+    expect(page).to have_link '0 Likes'
   end
 end
 
 When 'I click Like' do
   within '.post' do
-    click_link 'Like'
+    click_link '0 Likes'
   end
 end
 
 Then 'the Like count is one' do
   within '.post' do
-    expect(page).to have_content '1 Like'
+    expect(page).to have_link '1 Like'
+  end
+end
+
+And "the link is disabled" do
+  within '.post' do
+    expect(page).to have_css('a.disabled')
   end
 end

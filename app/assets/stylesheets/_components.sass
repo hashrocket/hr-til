@@ -85,6 +85,9 @@ a
             z-index: -1
           &:hover:before
             right: 0
+          &.disabled
+            pointer-events: none
+            cursor: default
       li + li
         border-top: 2px solid transparentize($light - #1a1a1a, .5)
     +mobile

@@ -11,6 +11,7 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.cookie
 //= require jquery_ujs
 //= require jquery.autosize
 //= require til
