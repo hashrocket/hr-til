@@ -18,6 +18,10 @@ Given 'a post exists' do
   @post = FactoryGirl.create(:post)
 end
 
+Given 'a post exists with 10 likes' do
+  @post = FactoryGirl.create(:post, likes: 10)
+end
+
 Given 'a post exists by another developer' do
   @others_post = FactoryGirl.create(:post)
 end
@@ -102,6 +106,12 @@ Then 'I see the post I created' do
   within '.post' do
     expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'I learned about Rails'
+  end
+end
+
+Then 'I see the likes count equals 10' do
+  within '.post' do
+    expect(page).to have_content '10 Likes'
   end
 end
 

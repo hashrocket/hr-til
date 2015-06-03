@@ -65,3 +65,12 @@ Feature: Visitor views post
     And I visit the post text page with a mangled url
     Then I see "Raw text content"
     And I should get a response with content-type "text/markdown; charset=utf-8"
+
+  @javascript
+  Scenario: Visitor sees likes
+    Given I am a visitor
+    And a post exists with 10 likes
+    And I visit the homepage
+    When I click on the title of the post
+    Then I see the show page for that post
+    And I see the likes count equals 10
