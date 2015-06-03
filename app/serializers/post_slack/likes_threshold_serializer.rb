@@ -6,12 +6,11 @@ class PostSlack::LikesThresholdSerializer < ActiveModel::Serializer
 
   def text
     likes = object.likes
-    emoji_likes = likes.times.map { emojis.sample }.join
 
-    "#{object.developer_username}'s post has #{likes} likes! #{emoji_likes} - <#{Rails.configuration.server_url}#{post_path(object)}|#{object.title}>"
+    "#{object.developer_username}'s post has #{likes} likes! #{emojis[likes.to_s.to_sym] || '😀'} - <#{Rails.configuration.server_url}#{post_path(object)}|#{object.title}>"
   end
 
   def emojis
-    %w(🎂 🎉 💥 🎁 ✨ ❤️ 👑 😀 🍕)
+    { '10': '🎉', '20': '🎂', '30': '✨', '40': '💥', '50': '❤️', '60': '🎈', '70': '👑', '80': '🎓', '90': '🏆', '100': '💯 '}
   end
 end
