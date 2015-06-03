@@ -16,3 +16,4 @@
 //= require til
 //= require chart
 //= require google_analytics
+//= require like

@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update]
-  before_action :require_developer, except: [:index, :show]
+  before_action :require_developer, except: [:index, :show, :like]
   before_action :authorize_developer, only: [:edit, :update]
 
   def preview
@@ -55,6 +55,16 @@ class PostsController < ApplicationController
     Channel.order name: :asc
   end
   helper_method :sorted_channels
+
+  def like
+    post = Post.find_by_id(params[:id])
+    respond_to do |format|
+      if post.increment_likes
+        format.json { render json: { likes: post.likes } }
+        format.html { redirect_to post }
+      end
+    end
+  end
 
   private
 

@@ -29,6 +29,11 @@ class Post < ActiveRecord::Base
     slug + '-' + slugified_title
   end
 
+  def increment_likes
+    self.likes += 1
+    self.save
+  end
+
   private
 
   def word_count

@@ -13,6 +13,10 @@ describe Post do
     expect(post).to_not be_valid
   end
 
+  it 'should have a like count that defaults to zero' do
+    expect(post.likes).to eq 0
+  end
+
   it 'should require a developer' do
     post.developer = nil
     expect(post).to_not be_valid

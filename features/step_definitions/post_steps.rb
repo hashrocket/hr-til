@@ -427,3 +427,21 @@ end
 Given(/^a post exists with (?:a|the) body "(.*?)"$/) do |body|
   @post = FactoryGirl.create(:post, body: body)
 end
+
+And 'the Like Count is zero' do
+  within '.post' do
+    expect(page).to have_content '0 Likes'
+  end
+end
+
+When 'I click Like' do
+  within '.post' do
+    click_link 'Like'
+  end
+end
+
+Then 'the Like count is one' do
+  within '.post' do
+    expect(page).to have_content '1 Like'
+  end
+end

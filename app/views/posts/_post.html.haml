@@ -22,4 +22,6 @@
       %li
         = link_to [post, format: 'md'], class: "edit", target: "_blank" do
           %b view raw
+      %li
+        = link_to pluralize(post.likes, 'Like'), post_like_path(id: post.id), class: 'js-like-action', id: post.id
     = content_for :social

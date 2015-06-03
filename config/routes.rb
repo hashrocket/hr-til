@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   resources :channels, path: '/', only: :show
   post '/post_preview', to: 'posts#preview'
   get '/posts/:titled_slug.md', to: 'posts#show', as: 'post_text'
+
+  get '/posts/:id/like', to: 'posts#like', as: 'post_like'
+  post '/posts/:id/like', to: 'posts#like'
 end
