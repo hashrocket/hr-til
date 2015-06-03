@@ -9,7 +9,8 @@ class Post < ActiveRecord::Base
   belongs_to :channel
 
   before_create :generate_slug
-  after_commit :notify_slack, on: :create
+  after_commit :notify_slack_on_create, on: :create
+  after_commit :notify_slack_on_likes_threshold, on: :update
 
   MAX_WORDS = 200
 
@@ -34,7 +35,19 @@ class Post < ActiveRecord::Base
     self.save
   end
 
+  def notify_slack_on_create
+    notify_slack('create')
+  end
+
+  def notify_slack_on_likes_threshold
+    notify_slack('likes_threshold') if tens_of_likes?
+  end
+
   private
+
+  def tens_of_likes?
+    likes % 10 == 0
+  end
 
   def word_count
     body.split(' ').size
@@ -59,8 +72,8 @@ class Post < ActiveRecord::Base
     title.downcase.strip.gsub(/\s+/, '-').gsub(/(?![a-z0-9\-])./, '')
   end
 
-  def notify_slack
-    SlackNotifier.new.async.perform(self)
+  def notify_slack(event)
+    SlackNotifier.new.async.perform(self, event)
   end
 
   def developer_twitter_handle

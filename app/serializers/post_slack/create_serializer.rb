@@ -1,4 +1,4 @@
-class PostSlackSerializer < ActiveModel::Serializer
+class PostSlack::CreateSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
   root false

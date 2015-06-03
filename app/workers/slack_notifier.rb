@@ -4,10 +4,10 @@ class SlackNotifier
 
   base_uri "https://hooks.slack.com"
 
-  def perform(post)
+  def perform(post, event)
     return if notify_endpoint.blank?
     response = self.class.post notify_endpoint,
-      body: PostSlackSerializer.new(post).to_json
+      body: "PostSlack::#{event.classify}Serializer".constantize.new(post).to_json
     unless response.success?
       raise "Sending message to slack failed with response #{response.code}"
     end
