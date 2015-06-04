@@ -111,35 +111,35 @@ describe Post do
 
   describe '.search' do
     it 'finds by developer' do
-      needle = %w[brian jake].map do |author_name|
+      needle = %w(brian jake).map do |author_name|
         FactoryGirl.create :post, developer: FactoryGirl.create(:developer, username: author_name)
       end.last
 
-      expect(described_class.search("jake")).to eq [needle]
+      expect(described_class.search('jake')).to eq [needle]
     end
 
     it 'finds by channel' do
-      needle = %w[vim ruby].map do |channel_name|
+      needle = %w(vim ruby).map do |channel_name|
         FactoryGirl.create :post, channel: FactoryGirl.create(:channel, name: channel_name)
       end.last
 
-      expect(described_class.search("ruby")).to eq [needle]
+      expect(described_class.search('ruby')).to eq [needle]
     end
 
     it 'finds by title' do
-      needle = %w[postgres sql].map do |title|
+      needle = %w(postgres sql).map do |title|
         FactoryGirl.create :post, title: title
       end.last
 
-      expect(described_class.search("sql")).to eq [needle]
+      expect(described_class.search('sql')).to eq [needle]
     end
 
     it 'finds by body' do
-      needle = %w[postgres sql].map do |body|
+      needle = %w(postgres sql).map do |body|
         FactoryGirl.create :post, body: body
       end.last
 
-      expect(described_class.search("sql")).to eq [needle]
+      expect(described_class.search('sql')).to eq [needle]
     end
 
     it 'ranks matches by title, then developer or channel, then body' do
@@ -150,7 +150,7 @@ describe Post do
         FactoryGirl.create(:post, title: 'needle')
       ].reverse
 
-      ids = described_class.search("needle").pluck(:id)
+      ids = described_class.search('needle').pluck(:id)
       expect(ids[1..-2]).to match_array posts.map(&:id)[1..-2]
       expect([ids.first, ids.last]).to eq [posts.map(&:id).first, posts.map(&:id).last]
     end
@@ -159,7 +159,7 @@ describe Post do
       FactoryGirl.create(:post, title: 'older', body: 'needle', created_at: 2.days.ago)
       FactoryGirl.create(:post, title: 'newer', body: 'needle')
 
-      expect(described_class.search('needle').map(&:title)).to eq %w[newer older]
+      expect(described_class.search('needle').map(&:title)).to eq %w(newer older)
     end
   end
 end

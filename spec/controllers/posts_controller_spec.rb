@@ -9,7 +9,7 @@ describe PostsController do
     context 'as a developer' do
       it 'only allows me to update my own posts' do
         expect do
-          patch :update, titled_slug: a_post.to_param, post: {title: 'HAXORD'}
+          patch :update, titled_slug: a_post.to_param, post: { title: 'HAXORD' }
         end.to_not change { a_post.reload.title }
       end
     end
@@ -19,7 +19,7 @@ describe PostsController do
 
       it 'allows me to update anyones post' do
         expect do
-          patch :update, titled_slug: a_post.to_param, post: {title: 'this is ok'}
+          patch :update, titled_slug: a_post.to_param, post: { title: 'this is ok' }
         end.to change { a_post.reload.title }
       end
     end
