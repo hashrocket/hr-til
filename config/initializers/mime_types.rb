@@ -1,1 +1,1 @@
-Mime::Type.register "text/markdown", :md
+Mime::Type.register 'text/markdown', :md

@@ -1,5 +1,4 @@
 Rails.application.configure do
-
   config.cache_classes = true
   config.eager_load = true
 
@@ -19,7 +18,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_controller.default_url_options = {
-    host: "til.hashrocket.com",
-    protocol: "http://"
+    host: 'til.hashrocket.com',
+    protocol: 'http://'
   }
 end

@@ -1,5 +1,4 @@
 Rails.application.configure do
-
   config.cache_classes = true
   config.eager_load = false
   config.serve_static_files   = true
@@ -14,7 +13,7 @@ Rails.application.configure do
   config.active_support.deprecation = :stderr
 
   config.action_controller.default_url_options = {
-    host: "www.example.com",
-    protocol: "http://"
+    host: 'www.example.com',
+    protocol: 'http://'
   }
 end
