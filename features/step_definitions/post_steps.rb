@@ -239,7 +239,7 @@ Then 'I see all posts with that channel' do
 end
 
 Then 'I see the sorted posts' do
-  timestamp = ->(post) {post.created_at.strftime('%B %-e, %Y')}
+  timestamp = ->(post) { post.created_at.strftime('%B %-e, %Y') }
 
   within '#home:first-child' do
     expect(page).to have_content 'karatedude'
@@ -307,7 +307,7 @@ end
 
 When 'I click on the date of the post' do
   within '.post' do
-    click_on @post.created_at.strftime("%B %-e, %Y")
+    click_on @post.created_at.strftime('%B %-e, %Y')
   end
 end
 
@@ -456,7 +456,7 @@ Then 'the Like count is one' do
   end
 end
 
-And "the link is disabled" do
+And 'the link is disabled' do
   within '.post' do
     expect(page).to have_css('a.disabled')
   end
