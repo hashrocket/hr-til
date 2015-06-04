@@ -32,7 +32,7 @@ class Post < ActiveRecord::Base
 
   def increment_likes
     self.likes += 1
-    self.save
+    save
   end
 
   def notify_slack_on_create
