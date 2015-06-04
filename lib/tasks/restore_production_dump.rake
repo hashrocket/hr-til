@@ -4,7 +4,7 @@ namespace :db do
 
   def verify_exec(command)
     system(command)
-    raise 'Command failed' unless $?.exitstatus.zero?
+    fail 'Command failed' unless $CHILD_STATUS.exitstatus.zero?
   end
 
   file dump_file do
