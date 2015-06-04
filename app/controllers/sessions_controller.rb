@@ -5,13 +5,11 @@ class SessionsController < ApplicationController
       new_developer.username = oauth_info.username
     end
     sign_in developer
-    flash[:notice] = 'Signed in'
-    redirect_to root_path
+    redirect_to root_path, notice: 'Signed in'
   end
 
   def destroy
     sign_out_developer
-    flash[:notice] = 'Signed out'
-    redirect_to root_path
+    redirect_to root_path, notice: 'Signed out'
   end
 end
