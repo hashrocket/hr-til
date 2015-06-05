@@ -6,6 +6,10 @@ $(function(){
     $(this).fadeOut(200);
   });
 
+  $(".site_search").on("click", "a", function() {
+    $(this).closest('.site_search').toggleClass('open');
+  });
+
   // Taken from underscore.js
   function debounce(func, wait, immediate) {
     var timeout;

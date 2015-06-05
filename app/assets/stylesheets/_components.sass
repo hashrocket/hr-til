@@ -119,6 +119,7 @@ form
   fieldset.actions
     padding-top: 2rem
   input[type='text'],
+  input[type='search'],
   textarea
     width: 100%
     padding: .5rem
@@ -126,20 +127,25 @@ form
     font-family: $primary-typeface
     line-height: 1.6
     box-sizing: border-box
+    border-radius: 0
     &:focus
       border-color: $blue-dark
       outline: none
   textarea.autosize
     resize: none
   input[type='submit']
-    background: $blue-dark
     color: #fff
-    padding: 1rem 2rem
+    +responsive(padding, 1rem 2rem, 1rem)
     margin-right: 1rem
     border: none
     border-radius: 0
+    +shadow-text
+    background: transparentize($blue, .5)
+    &:active,
+    &:focus,
     &:hover
-      background: lighten($blue-dark, 5%)
+      background: transparentize($blue, .6)
+      outline: none
 
 .copy
   h1, h2, h3, p, ul, ol

@@ -30,7 +30,7 @@ header.site_head
 
 nav.site_nav
   position: absolute
-  right: 2vh
+  left: 2vh
   top: 0
   li
     display: inline-block
@@ -41,6 +41,52 @@ nav.site_nav
       font-size: .9em
       &:hover
         color: $dark
+
+aside.site_search
+  +shadow
+  position: fixed
+  bottom: 3vw
+  right: 3vw
+  text-align: center
+  opacity: .9
+  +transition(opacity .2s)
+  +mobile
+    bottom: 0
+    right: 0
+  &:hover
+    opacity: 1
+  .search_fields
+    max-width: 0
+    overflow: hidden
+    white-space: nowrap
+    +transition(max-width .3s)
+    +responsive(margin-left, 6rem, 5rem)
+  input[type='submit']
+    +responsive(margin, 1rem 1rem 1rem 0, .5rem .5rem .5rem 0)
+  input[type='search']
+    +responsive(width, 15rem, 13rem)
+    width: 15rem
+    background: transparentize($light, .5)
+    +responsive(margin, 1rem 0, .5rem 0)
+  a
+    +responsive(width, 6rem, 5rem)
+    text-indent: -9327px
+    position: absolute
+    left: 0
+    display: block
+    bottom: 0
+    top: 0
+    background: url("/assets/icon_search.png") center no-repeat
+    background-size: 60% auto
+    opacity: .7
+    +transition(opacity .2s)
+    &:hover
+      opacity: 1
+  &.open
+    opacity: 1
+    background: $light
+    .search_fields
+      max-width: 50rem
 
 footer.site_footer
   text-align: center
