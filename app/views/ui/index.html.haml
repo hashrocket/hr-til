@@ -2,7 +2,7 @@
   %header.page_head
     %h1 The UI Directory
   .post
-    %section
+    %section.copy
       %ul
         - Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
           - wireframe = File.basename(file,'.html.haml')
