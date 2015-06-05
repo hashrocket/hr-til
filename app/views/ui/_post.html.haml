@@ -26,8 +26,13 @@
         - lang = %w(assembly bash clojure coffeescript css go html javascript ruby vim).sample
         %li
           %b= link_to "##{lang}", "#", class: lang
+      %li
+        = link_to "#", class: "like #{Phil.sometimes("liked")}" do
+          liked
+          - times = Phil.pick 0..5
+          %b= pluralize(times, "time")
+
       - Phil.sometimes do
         %li
           = link_to "#" do
             %b edit this post
-
