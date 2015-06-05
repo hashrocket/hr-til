@@ -21,7 +21,6 @@ end
 Then 'I am signed in' do
   expect(current_path).to eq root_path
   expect(page).to have_content 'johnsmith'
-  expect(page).to_not have_content 'Sign In'
   @developer = Developer.last
 end
 

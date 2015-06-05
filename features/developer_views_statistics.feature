@@ -9,7 +9,8 @@ Feature: Developer views statistcs
   @javascript
   Scenario: Developer views statistics via button
     Given I am a signed in developer
-    When I click statistics
+    When I visit the homepage
+    And I click statistics
     Then I see statistics
 
   @javascript

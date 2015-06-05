@@ -86,7 +86,8 @@ Feature: Developer creates post
   Scenario: Markdown preview
     Given I am a signed in developer
     And a channel exists
-    When I click create post
+    When I visit the homepage
+    And I click create post
     Then I see a form for posts
     When I enter information with markdown inline code into that form
     Then I see a markdown preview with my rendered code
@@ -95,7 +96,8 @@ Feature: Developer creates post
   Scenario: Developer sees updating word count
     Given I am a signed in developer
     And a channel exists
-    When I click create post
+    When I visit the homepage
+    And I click create post
     Then I see a form for posts
     When I enter 0 words into that form
     Then I see a message saying I have 200 words left
