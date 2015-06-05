@@ -10,5 +10,3 @@ Feature: Visitor likes post
     And the Like Count is zero
     When I click Like
     Then the Like count is one
-    And the link is disabled
-

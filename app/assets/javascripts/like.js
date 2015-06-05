@@ -5,7 +5,7 @@ $(document).ready(function() {
     var id = link.id;
     var liked = $.cookie(id);
     if (liked) {
-      $('#' + id).addClass('disabled');
+      $('#' + id).addClass('liked');
     }
   });
 
@@ -16,8 +16,8 @@ $(document).ready(function() {
     var liked = $.cookie(id);
     if (!liked) {
       $.post("/posts/" + id + "/like.json", function(result){
-        var like_text = result.likes > 1 ? "Likes" : "Like";
-        $('#' + id).addClass('disabled').text(result.likes + " " + like_text);
+        var like_text = result.likes > 1 ? " times" : " time";
+        $('#' + id).addClass('liked').html('liked <b>' + result.likes + like_text + '</b>');
         $.cookie(id, true, { expires: 3600 });
       });
     }
