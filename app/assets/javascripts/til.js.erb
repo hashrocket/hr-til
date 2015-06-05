@@ -2,11 +2,13 @@ $(function(){
 
   $('textarea.autosize').autosize();
 
-  $(document.body).on("click", "#flash p", function() {
+  $(document.body).on("click", "#flash p", function(e) {
+    e.preventDefault();
     $(this).fadeOut(200);
   });
 
-  $(".site_search").on("click", "a", function() {
+  $(".site_search").on("click", "a", function(e) {
+    e.preventDefault();
     $(this).closest('.site_search').toggleClass('open');
   });
 
