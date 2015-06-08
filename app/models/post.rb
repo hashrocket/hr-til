@@ -35,6 +35,11 @@ class Post < ActiveRecord::Base
     save
   end
 
+  def decrement_likes
+    self.likes -= 1 if self.likes != 0
+    save
+  end
+
   def notify_slack_on_create
     notify_slack('create')
   end

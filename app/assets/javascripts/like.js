@@ -9,16 +9,21 @@ $(document).ready(function() {
     }
   });
 
-
   $likeActionEl.click(function(e) {
     e.preventDefault();
     var id = this.id;
     var liked = $.cookie(id);
-    if (!liked) {
+    if (liked) {
+      $.post("/posts/" + id + "/unlike.json", function(result){
+        var like_text = result.likes == 1 ? " time" : " times";
+        $('#' + id).removeClass('liked').html('liked <b>' + result.likes + like_text + '</b>');
+        $.removeCookie(id);
+      });
+    } else {
       $.post("/posts/" + id + "/like.json", function(result){
-        var like_text = result.likes > 1 ? " times" : " time";
+        var like_text = result.likes == 1 ? " time" : " times";
         $('#' + id).addClass('liked').html('liked <b>' + result.likes + like_text + '</b>');
-        $.cookie(id, true, { expires: 3600 });
+        $.cookie(id, 'liked', { expires: 3600 });
       });
     }
   });

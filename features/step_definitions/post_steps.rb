@@ -438,15 +438,15 @@ Given(/^a post exists with (?:a|the) body "(.*?)"$/) do |body|
   @post = FactoryGirl.create(:post, body: body)
 end
 
-And 'the Like Count is zero' do
+And 'the Like count is zero' do
   within '.post' do
     expect(page).to have_link 'liked 0 times'
   end
 end
 
-When 'I click Like' do
+When 'I click the Like count' do
   within '.post' do
-    click_link 'liked 0 times'
+    click_link 'like'
   end
 end
 
