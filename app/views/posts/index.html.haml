@@ -1,4 +1,11 @@
 = content_for :head, auto_discovery_link_tag(:atom, root_path(format: "atom"))
 
+- if params[:q].present?
+  %section#search
+    %header.page_head
+      %h1
+        #{pluralize @posts.count, "post"}
+        about #{params[:q]}
+
 %section#home
   = render @posts

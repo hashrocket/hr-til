@@ -50,17 +50,13 @@ Then 'I see my profile page' do
 end
 
 When 'I enter my twitter handle' do
-  within 'form' do
-    fill_in 'Twitter handle', with: 'hashrocket'
-    click_on 'Submit'
-  end
+  fill_in 'Twitter handle', with: 'hashrocket'
+  click_on 'Submit'
 end
 
 When 'I enter an invalid twitter handle' do
-  within 'form' do
-    fill_in 'Twitter handle', with: 'a.!&'
-    click_on 'Submit'
-  end
+  fill_in 'Twitter handle', with: 'a.!&'
+  click_on 'Submit'
 end
 
 And 'my twitter handle is set' do
@@ -103,9 +99,23 @@ Then 'I see an Atom feed' do
 end
 
 Then 'I do not see the edit button' do
-  expect(page).to_not have_link '[edit]'
+  expect(page).to_not have_link 'edit this post'
 end
 
 Then 'I see the site name in the title' do
   expect(page.title).to eq SITE_NAME
+end
+
+Then(/^I am on the homepage$/) do
+  expect(current_path).to eq root_path
+end
+
+Then(/^I see a header "(.*?)"$/) do |header|
+  within '.page_head h1' do
+    expect(page.text).to match /#{header}/i
+  end
+end
+
+And "I don't see a search header" do
+  expect(page).to_not have_selector ".page_head"
 end

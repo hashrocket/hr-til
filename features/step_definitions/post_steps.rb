@@ -31,65 +31,47 @@ When 'I visit the edit page for that post' do
 end
 
 When 'I enter information into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'Web Development'
-    fill_in 'Body', with: 'I learned about Rails'
-  end
+  fill_in 'Title', with: 'Web Development'
+  fill_in 'Body', with: 'I learned about Rails'
 end
 
 When 'I enter new information into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'I changed the header'
-    fill_in 'Body', with: 'I learned about changing content'
-  end
+  fill_in 'Title', with: 'I changed the header'
+  fill_in 'Body', with: 'I learned about changing content'
 end
 
 When 'I edit the post to no longer have a body' do
-  within 'form' do
-    fill_in 'Body', with: ''
-  end
+  fill_in 'Body', with: ''
 end
 
 When 'I enter information with markdown inline code into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'Codified'
-    markdown_content = '`killer robot attack`'
-    fill_in 'Body', with: markdown_content
-  end
+  fill_in 'Title', with: 'Codified'
+  markdown_content = '`killer robot attack`'
+  fill_in 'Body', with: markdown_content
 end
 
 When 'I enter information with markdown fenced code into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'Fenced'
-    markdown_content = "```first line\nsecond line\nthird line\n```"
-    fill_in 'Body', with: markdown_content
-  end
+  fill_in 'Title', with: 'Fenced'
+  markdown_content = "```first line\nsecond line\nthird line\n```"
+  fill_in 'Body', with: markdown_content
 end
 
 When 'I enter information with markdown bullets into that form' do
-  within 'form' do
-    fill_in 'Title', with: 'Bulletized'
-    markdown_content = '* item from a list of items'
-    fill_in 'Body', with: markdown_content
-  end
+  fill_in 'Title', with: 'Bulletized'
+  markdown_content = '* item from a list of items'
+  fill_in 'Body', with: markdown_content
 end
 
 And 'I select a channel' do
-  within 'form' do
-    select @channel.name, from: 'Channel'
-  end
+  select @channel.name, from: 'Channel'
 end
 
 And 'I select no channel' do
-  within 'form' do
-    select '', from: 'Channel'
-  end
+  select '', from: 'Channel'
 end
 
 When 'I click submit' do
-  within 'form' do
-    click_on 'Submit'
-  end
+  click_on 'Submit'
 end
 
 And 'I click raw' do
@@ -222,14 +204,22 @@ When "I visit '/that channel'" do
   visit '/phantomjs'
 end
 
-When 'I search for "$query"' do |query|
+When 'I search for "$query" in the address bar' do |query|
   visit "/?q=#{URI.encode(query)}"
 end
 
-Then 'I only see the "$body_fragment" post' do |body_fragment|
-  within '.post' do
-    expect(page).to have_content body_fragment
-  end
+When 'I search for "$query" in the search bar' do |query|
+  click_link "search"
+  fill_in 'q', with: query
+  click_on 'Search'
+end
+
+Then 'I see the "$body_fragment" post' do |body_fragment|
+  expect(page.text).to match /#{body_fragment}/i
+end
+
+Then 'I do not see the "$body_fragment" post' do |body_fragment|
+  expect(page.text).to_not match /#{body_fragment}/i
 end
 
 Then 'I see all posts with that channel' do
@@ -325,12 +315,9 @@ Then 'I see the show page for that post' do
 
   within '.post' do
     expect(page).to have_content @post.title
+    expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
     expect(page).to have_content '#phantomjs'
-  end
-
-  within 'aside' do
-    expect(page).to have_content @post.developer_username
   end
 end
 
@@ -404,16 +391,12 @@ And 'I see my unedited post' do
 end
 
 When 'I enter 1 word and a newline into that form' do
-  within 'form' do
-    fill_in 'Body', with: "word \n"
-  end
+  fill_in 'Body', with: "word \n"
 end
 
 When(/^I enter (\d+) words? into that form$/) do |number|
-  within 'form' do
-    phrase = (['word'] * number.to_i).join ' '
-    fill_in 'Body', with: phrase
-  end
+  phrase = (['word'] * number.to_i).join ' '
+  fill_in 'Body', with: phrase
 end
 
 Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, noun|
@@ -429,13 +412,15 @@ And 'the message is red' do
 end
 
 And 'the message is not red' do
-  within 'form' do
-    expect(page).to_not have_selector '.negative'
-  end
+  expect(page).to_not have_selector '.negative'
 end
 
 Given(/^a post exists with (?:a|the) body "(.*?)"$/) do |body|
   @post = FactoryGirl.create(:post, body: body)
+end
+
+When 'I visit the most recent post show page' do
+  visit post_path Post.last
 end
 
 And 'the Like count is zero' do
