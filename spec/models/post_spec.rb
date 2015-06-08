@@ -162,4 +162,17 @@ describe Post do
       expect(described_class.search('needle').map(&:title)).to eq %w(newer older)
     end
   end
+
+  it 'knows if its likes count is a factor of ten, ignoring zeroes' do
+    method = :tens_of_likes?
+
+    post.likes = 10
+    expect(post.send(method)).to eq true
+
+    post.likes = 11
+    expect(post.send(method)).to eq false
+
+    post.likes = 0
+    expect(post.send(method)).to eq false
+  end
 end

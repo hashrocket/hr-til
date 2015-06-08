@@ -51,7 +51,7 @@ class Post < ActiveRecord::Base
   private
 
   def tens_of_likes?
-    likes % 10 == 0
+    !likes.zero? && likes % 10 == 0
   end
 
   def word_count
