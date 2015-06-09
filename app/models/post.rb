@@ -10,7 +10,7 @@ class Post < ActiveRecord::Base
 
   before_create :generate_slug
   after_commit :notify_slack_on_create, on: :create
-  after_commit :notify_slack_on_likes_threshold, on: :update
+  after_update :notify_slack_on_likes_threshold, if: :likes_changed?
 
   MAX_WORDS = 200
 
