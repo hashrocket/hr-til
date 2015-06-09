@@ -9,7 +9,7 @@ class Post < ActiveRecord::Base
   belongs_to :channel
 
   before_create :generate_slug
-  after_commit :notify_slack_on_create, on: :create
+  after_create :notify_slack_on_create
   after_update :notify_slack_on_likes_threshold, if: :likes_changed?
 
   MAX_WORDS = 200
