@@ -17,7 +17,6 @@ class PostsController < ApplicationController
     if @post.save
       redirect_to root_path, notice: 'Post created'
     else
-      flash.now[:alert] = @post.errors.full_messages
       render :new
     end
   end
@@ -45,7 +44,6 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       redirect_to @post, notice: 'Post updated'
     else
-      flash.now[:alert] = @post.errors.full_messages
       render :edit
     end
   end
