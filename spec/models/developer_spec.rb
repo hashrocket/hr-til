@@ -47,5 +47,10 @@ describe Developer do
       developer.twitter_handle = '@@@@hashrocket'
       expect(developer.twitter_handle).to eq 'hashrocket'
     end
+
+    it 'should not allow blank' do
+      developer.twitter_handle = ''
+      expect(developer).to_not be_valid
+    end
   end
 end
