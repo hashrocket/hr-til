@@ -10,7 +10,7 @@ class StatisticsController < ApplicationController
   end
 
   def post_days_counts
-    posts = Post.where('posts.created_at BETWEEN ? AND ?', start_date, end_date)
+    posts = Post.where('cast(posts.created_at as date) between ? and ?', start_date, end_date)
     posts_by_date = posts.group_by { |post| post.created_at.to_date }
     @posts_by_day = (start_date..end_date).each_with_object({}) do |date, hash|
       hash[date] = posts_by_date[date] ? posts_by_date[date].count : 0
@@ -26,7 +26,7 @@ class StatisticsController < ApplicationController
   private
 
   def start_date
-    Date.today - 1.month
+    Date.today - 30.days
   end
 
   def end_date
