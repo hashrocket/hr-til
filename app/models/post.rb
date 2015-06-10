@@ -1,10 +1,11 @@
 class Post < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :channel_id
+  validates_presence_of :developer
+
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validate :body_size, if: -> { body.present? }
-  validates_presence_of :developer
 
   belongs_to :developer
   belongs_to :channel
