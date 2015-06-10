@@ -24,6 +24,6 @@ Rails.application.routes.draw do
   post '/post_preview', to: 'posts#preview'
   get '/posts/:titled_slug.md', to: 'posts#show', as: 'post_text'
 
-  post '/posts/:id/like', to: 'posts#like'
-  post '/posts/:id/unlike', to: 'posts#unlike'
+  post '/posts/:slug/like', to: 'posts#like'
+  post '/posts/:slug/unlike', to: 'posts#unlike'
 end

@@ -91,9 +91,9 @@ Then 'I see the post I created' do
   end
 end
 
-Then 'I see the likes count equals 10' do
+Then(/^I see the likes count equals (\d+)$/) do |num|
   within '.post' do
-    expect(page).to have_content 'liked 10 times'
+    expect(page).to have_content "liked #{num} time"
   end
 end
 
@@ -423,20 +423,12 @@ When 'I visit the most recent post show page' do
   visit post_path Post.last
 end
 
-And 'the Like count is zero' do
-  within '.post' do
-    expect(page).to have_link 'liked 0 times'
-  end
-end
-
 When 'I click the Like count' do
   within '.post' do
     click_link 'like'
   end
 end
 
-Then 'the Like count is one' do
-  within '.post' do
-    expect(page).to have_link 'liked 1 time'
-  end
+Then 'the post has still been liked by me' do
+  expect(page).to have_selector '.liked'
 end

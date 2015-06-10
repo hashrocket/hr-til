@@ -54,7 +54,7 @@ class PostsController < ApplicationController
   helper_method :sorted_channels
 
   def like
-    post = Post.find_by_id(params[:id])
+    post = Post.find_by_slug(params[:slug])
     respond_to do |format|
       if post.increment_likes
         format.json { render json: { likes: post.likes } }
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   end
 
   def unlike
-    post = Post.find_by_id(params[:id])
+    post = Post.find_by_slug(params[:slug])
     respond_to do |format|
       if post.decrement_likes
         format.json { render json: { likes: post.likes } }
