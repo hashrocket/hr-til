@@ -175,4 +175,10 @@ describe Post do
     post.likes = 0
     expect(post.send(method)).to eq false
   end
+
+  it 'should never have a negative like count' do
+    post.likes = -1
+
+    expect(post).to_not be_valid
+  end
 end
