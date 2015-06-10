@@ -29,7 +29,7 @@
 
     %aside.site_search
       .search_fields
-        = form_tag root_path, method: 'get', enforce_utf8: false do
+        = form_tag root_path, method: 'get' do
           = search_field_tag :q
           = submit_tag 'Search', name: nil
         = link_to "search", "#"
