@@ -11,7 +11,7 @@ When 'I click statistics' do
 end
 
 Then 'I see statistics' do
-  expect(page).to have_content 'CHANNELS BY POSTS'
+  expect(page).to have_content 'POSTS BY CHANNEL'
   expect(page).to have_content 'POSTS BY AUTHOR'
 end
 
