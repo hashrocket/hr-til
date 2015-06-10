@@ -36,5 +36,5 @@ slack_post_endpoint
 
 ### Slack Integration
 
-1. Create an incoming hook in the API
-2. Set `slack_post_endpoint` to the path of the hook url, e.g. the part of the url after the domain
+1. We have two incoming webhooks in the API, 'tilbot' (posts to #til, production only) and 'tilbot-testbot' (posts to #testing, all other environments)
+2. Set `slack_post_endpoint` to the path of the webhook (e.g. the part after the domain) for the appropriate bot
