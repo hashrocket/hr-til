@@ -13,7 +13,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                        )
     end
 
-    let(:serializer) { PostSlackSerializer.new(post) }
+    let(:serializer) { PostSlack::CreateSerializer.new(post) }
 
     let(:serialized) do
       JSON.parse(serializer.to_json)['text']
