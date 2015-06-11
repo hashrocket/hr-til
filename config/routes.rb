@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'ui(/:action)', controller: 'ui'
+  get 'ui(/:action)', controller: 'ui' unless Rails.env.production?
 
   root to: 'posts#index'
 
