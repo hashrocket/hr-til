@@ -6,7 +6,7 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
-    %link(href='http://fonts.googleapis.com/css?family=Raleway:900' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
     %link(href='http://fonts.googleapis.com/css?family=Rosario:400,700italic,700,400italic' rel='stylesheet' type='text/css')
     = yield :head
   %body
@@ -25,6 +25,12 @@
         %li= link_to "create post", "#"
 
     %main= yield
+
+    %aside.site_about
+      = link_to "?", "#", class: "site_about_toggle"
+      .copy
+        :markdown
+          TIL is a project by [Hashrocket](http://hashrocket.com) to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
 
     %aside.site_search
       %form<

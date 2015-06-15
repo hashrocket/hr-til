@@ -42,6 +42,48 @@ nav.site_nav
       &:hover
         color: $dark
 
+aside.site_about
+  position: fixed
+  bottom: 3vw
+  left: 3vw
+  a.site_about_toggle
+    +shadow
+    +responsive(width, 6rem, 5rem)
+    +responsive(height, 6rem, 5rem)
+    +responsive(line-height, 6rem, 5rem)
+    display: block
+    opacity: .9
+    text-align: center
+    font-size: 2.7em
+    +transition(opacity .2s, color .2s)
+    font-family: $secondary-typeface
+    font-weight: 700
+    color: transparentize($blue-dark, .3)
+  a.site_about_toggle:hover,
+  &.open a.site_about_toggle
+    opacity: 1
+    color: $blue-dark
+  .copy
+    position: absolute
+    left: 0
+    bottom: 100%
+    margin-bottom: 1.5vw
+    +shadow
+    padding: 2em 2em 1em 2em
+    font-style: italic
+    width: 30rem
+    background: $light
+    display: none
+    font-size: .9em
+  &.open
+    .copy
+      display: block
+  +mobile
+    bottom: 2vw
+    left: 2vw
+    .copy
+      width: 20rem
+
 aside.site_search
   +shadow
   position: fixed
@@ -51,8 +93,8 @@ aside.site_search
   opacity: .9
   +transition(opacity .2s)
   +mobile
-    bottom: 0
-    right: 0
+    bottom: 2vw
+    right: 2vw
   &:hover
     opacity: 1
   .search_fields
