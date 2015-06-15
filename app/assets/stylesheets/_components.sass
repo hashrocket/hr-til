@@ -8,6 +8,28 @@ a
     +shadow
     padding: 3vw
 
+nav.pagination
+  +wrapper
+  +clearfix
+  margin: 4rem auto
+  a
+    float: left
+    +shadow
+    display: block
+    position: relative
+    padding: .8rem 1rem
+    font-style: italic
+    font-weight: bold
+    font-size: .9em
+    +transition(opacity .2s, color .2s)
+    opacity: .9
+    color: transparentize($blue-dark, .3)
+    &:hover
+      opacity: 1
+      color: $blue-dark
+    &.pagination_older
+      float: right
+
 .post
   +clearfix
   +wrapper
