@@ -231,21 +231,21 @@ end
 Then 'I see the sorted posts' do
   timestamp = ->(post) { post.created_at.strftime('%B %-e, %Y') }
 
-  within '#home:first-child' do
+  within '.post:first-child' do
     expect(page).to have_content 'karatedude'
     expect(page).to have_content 'I learned about Karate'
     expect(page).to have_content '#phantomjs'
     expect(page).to have_content timestamp[@karate_post]
   end
 
-  within '#home:nth-child(1)' do
+  within '.post:nth-child(2)' do
     expect(page).to have_content 'embergal'
     expect(page).to have_content 'I learned about Ember'
     expect(page).to have_content '#phantomjs'
     expect(page).to have_content timestamp[@ember_post]
   end
 
-  within '#home:last-child' do
+  within '.post:last-child' do
     expect(page).to have_content 'railsguy'
     expect(page).to have_content 'I learned about Rails'
     expect(page).to have_content '#phantomjs'
@@ -431,4 +431,24 @@ end
 
 Then 'the post has still been liked by me' do
   expect(page).to have_selector '.liked'
+end
+
+Given(/^(\d+) posts exist$/) do |num|
+  FactoryGirl.create_list(:post, num.to_i)
+end
+
+Then(/^I should see (\d+) posts$/) do |num|
+  expect(page).to have_selector '.post', count: num.to_i
+end
+
+Then(/^I should see a "(.*?)" button$/) do |arg|
+  expect(page).to have_link arg
+end
+
+Then(/^I should not see a "(.*?)" button$/) do |arg|
+  expect(page).to_not have_link arg
+end
+
+When(/^I click "(.*?)"$/) do |arg|
+  click_link arg
 end

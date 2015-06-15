@@ -18,3 +18,19 @@ Feature: Visitor views posts
     When I visit the homepage
     And I click that author's username
     Then I see all the posts for that author grouped by date/time
+
+  Scenario: Visitor sees pagination
+    Given I am a visitor
+    And 150 posts exist
+    When I visit the homepage
+    Then I should see 50 posts
+    And I should see a "older TILs" button
+    And I should not see a "newer TILs" button
+    When I click "older TILs"
+    Then I should see 50 posts
+    And I should see a "older TILs" button
+    And I should see a "newer TILs" button
+    When I click "older TILs"
+    Then I should see 50 posts
+    And I should see a "newer TILs" button
+    And I should not see a "older TILs" button

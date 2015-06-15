@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:developer, :channel).search(params[:q])
+    @posts = Post.includes(:developer, :channel).search(params[:q]).page(params[:page]).per(50)
   end
 
   def show
