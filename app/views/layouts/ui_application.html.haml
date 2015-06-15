@@ -27,7 +27,7 @@
     %main= yield
 
     %aside.site_about
-      = link_to "?", "#", class: "site_about_toggle"
+      = link_to "?", "#", class: "aside_toggle"
       .copy
         :markdown
           TIL is a project by [Hashrocket](http://hashrocket.com) to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
@@ -37,7 +37,7 @@
         .search_fields
           %input(type='search')
           %input(type='submit' value='search')
-        = link_to "search", "#"
+        = link_to "search", "#", class: "aside_toggle"
 
     %footer.site_footer
       %p

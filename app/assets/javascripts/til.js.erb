@@ -7,14 +7,9 @@ $(function(){
     $(this).fadeOut(200);
   });
 
-  $(".site_about").on("click", ".site_about_toggle", function(e) {
+  $(".site_about, .site_search").on("click", ".aside_toggle", function(e) {
     e.preventDefault();
-    $(this).closest('.site_about').toggleClass('open');
-  });
-
-  $(".site_search").on("click", "a", function(e) {
-    e.preventDefault();
-    $(this).closest('.site_search').toggleClass('open');
+    $(this).closest('aside').toggleClass('open');
   });
 
   // Taken from underscore.js

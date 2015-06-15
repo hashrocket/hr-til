@@ -42,27 +42,26 @@ nav.site_nav
       &:hover
         color: $dark
 
+a.aside_toggle
+  +responsive(width, 6rem, 5rem)
+  +responsive(height, 6rem, 5rem)
+  +responsive(line-height, 6rem, 5rem)
+  display: block
+  +transition(opacity .2s, color .2s)
+
 aside.site_about
   position: fixed
-  bottom: 3vw
-  left: 3vw
-  a.site_about_toggle
+  +responsive(bottom, 3vw, 2vw)
+  +responsive(left, 3vw, 2vw)
+  a.aside_toggle
     +shadow
-    +responsive(width, 6rem, 5rem)
-    +responsive(height, 6rem, 5rem)
-    +responsive(line-height, 6rem, 5rem)
-    display: block
-    opacity: .9
-    text-align: center
     font-size: 2.7em
-    +transition(opacity .2s, color .2s)
+    text-align: center
     font-family: $secondary-typeface
     font-weight: 700
     color: transparentize($blue-dark, .3)
-  a.site_about_toggle:hover,
-  &.open a.site_about_toggle
-    opacity: 1
-    color: $blue-dark
+    &:hover
+      color: $blue-dark
   .copy
     position: absolute
     left: 0
@@ -79,24 +78,16 @@ aside.site_about
     .copy
       display: block
   +mobile
-    bottom: 2vw
-    left: 2vw
     .copy
       width: 20rem
 
 aside.site_search
   +shadow
   position: fixed
-  bottom: 3vw
-  right: 3vw
-  text-align: center
+  +responsive(bottom, 3vw, 2vw)
+  +responsive(right, 3vw, 2vw)
   opacity: .9
   +transition(opacity .2s)
-  +mobile
-    bottom: 2vw
-    right: 2vw
-  &:hover
-    opacity: 1
   .search_fields
     max-width: 0
     overflow: hidden
@@ -110,18 +101,15 @@ aside.site_search
     width: 15rem
     background: transparentize($light, .5)
     +responsive(margin, 1rem 0, .5rem 0)
-  a
-    +responsive(width, 6rem, 5rem)
+  a.aside_toggle
     text-indent: -9327px
     position: absolute
     left: 0
-    display: block
     bottom: 0
     top: 0
     background: image-url("icon_search.png") center no-repeat
     background-size: 60% auto
     opacity: .7
-    +transition(opacity .2s)
     &:hover
       opacity: 1
   &.open

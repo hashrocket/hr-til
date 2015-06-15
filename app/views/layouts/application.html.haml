@@ -32,7 +32,7 @@
         = form_tag root_path, method: 'get' do
           = search_field_tag :q
           = submit_tag 'Search', name: nil
-        = link_to "search", "#"
+        = link_to "search", "#", class: "aside_toggle"
 
     %footer.site_footer
       %p
