@@ -452,3 +452,11 @@ end
 When(/^I click "(.*?)"$/) do |arg|
   click_link arg
 end
+
+Then 'I should see the About Us text' do
+  expect(page).to have_selector '.site_about', visible: true
+end
+
+Then 'I should not see the About Us text' do
+  expect(page).to have_selector '.site_about', visible: false
+end
