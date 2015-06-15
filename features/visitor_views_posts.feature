@@ -35,10 +35,10 @@ Feature: Visitor views posts
     And I should see a "newer TILs" button
     And I should not see a "older TILs" button
 
-  Scenario: Visitor sees no pagination when less than 50 post
+  Scenario: Visitor sees no pagination when less than 51 posts
     Given I am a visitor
-    And 40 posts exist
+    And 50 posts exist
     When I visit the homepage
-    Then I should see 40 posts
+    Then I should see 50 posts
     And I should not see a "newer TILs" button
     And I should not see a "older TILs" button
