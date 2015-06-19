@@ -137,6 +137,48 @@ nav.pagination
           + li
             border-top: 0
 
+ul.post_list
+  li
+    padding: .4rem
+    margin: .2rem 0
+    +shadow
+    background: mix($light, $blue, 80%)
+    a
+      display: flex
+      position: relative
+      align-items: center
+      padding: .5rem
+      color: $dark
+      font-weight: bold
+      +lang-colors(border-color)
+      z-index: 1
+      justify-content: space-between
+      b
+        flex: 1
+      small
+        flex: 0 0 auto
+        font-style: italic
+        color: $blue-dark
+        float: right
+        text-align: right
+        white-space: nowrap
+        padding-left: 1rem
+        span
+          opacity: .5
+          margin: 0 .3rem
+      &:before
+        position: absolute
+        content: ''
+        top: 0
+        left: 0
+        bottom: 0
+        right: 100%
+        background: #fff
+        +transition(right .1s)
+        z-index: -1
+      &:hover:before
+        right: 0
+
 form
   .field_with_errors
     display: inline

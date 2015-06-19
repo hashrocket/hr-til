@@ -1,7 +1,8 @@
 #author,
 #search,
 #tag,
-#ui
+#ui,
+#statistics
   padding-top: 2vw
   +mobile
     padding-top: 1.5rem
@@ -24,14 +25,93 @@
         color: $error
 
 #statistics
-  padding: 2rem 0
-  section
+  +clearfix
+  margin-bottom: 3rem
+  .wrapper
     +wrapper
+  .stats_column
+    box-sizing: border-box
+    width: 50%
+    float: left
+    padding-right: 1vw
+    &.right
+      float: right
+      padding-right: 0
+      padding-left: 1vw
+    +mobile
+      &, &.right
+        width: auto
+        float: none
+        padding: 0
+  article
+    margin-bottom: 3vw
+    header
+      +shadow
+      background: transparentize($light, .6)
+      padding: 1.5rem
+      margin-bottom: .2rem
+      h1
+        text-align: center
+        font-size: 1.6rem
+        +shadow-text
+  ul.activity_chart
     +shadow
-    margin-bottom: 4rem
-    h3
-      text-align: center
-      +shadow-text
-      text-shadow: none
-      font-size: 2rem
-      padding: 2rem 0
+    background: mix($light, $blue, 80%)
+    padding: 3rem 3vw
+    display: flex
+    height: 10vw
+    min-height: 10rem
+    align-items: stretch
+    li
+      flex: 1 1
+      position: relative
+      background: mix($light, $blue, 40%)
+      border: 1px solid mix($light, $blue, 80%)
+      +transition(background-color, .1s)
+      .activity_chart_bar
+        position: absolute
+        right: 0
+        bottom: 0
+        left: 0
+        background: $blue-dark
+        +transition(background-color, .1s)
+      &:after,
+      &:before
+        display: none
+        position: absolute
+        color: $blue-dark
+        font-style: italic
+        font-weight: bold
+        font-size: .8em
+        left: 50%
+        margin-left: -5rem
+        width: 10rem
+        text-align: center
+      &:after
+        margin-top: .5rem
+        top: 100%
+        content: attr(data-amount) " posts"
+      &:before
+        bottom: 100%
+        margin-bottom: .5rem
+        content: attr(data-date)
+      &:nth-child(-n+5)
+        &:after,
+        &:before
+          left: 0
+          margin-left: 0
+          text-align: left
+      &:nth-child(n+25)
+        &:after,
+        &:before
+          text-align: right
+          margin-left: 0
+          right: 0
+          left: auto
+      &:hover
+        background: mix($light, $blue, 60%)
+        .activity_chart_bar
+          background: lighten($blue-dark, 10%)
+        &:after,
+        &:before
+          display: block
