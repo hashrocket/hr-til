@@ -9,7 +9,9 @@ $(function(){
 
   $(".site_about, .site_search").on("click", ".aside_toggle", function(e) {
     e.preventDefault();
-    $(this).closest('aside').toggleClass('open');
+    $(this).closest('aside')
+      .toggleClass('open')
+      .filter('.open').find(":input:visible").eq(0).focus();
   });
 
   // Taken from underscore.js
