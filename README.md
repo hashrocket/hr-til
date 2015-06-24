@@ -1,6 +1,8 @@
 # HR-TIL
 
-Welcome to the Hashrocket 'Today I Learned' repository. The purpose of this project is to document our learning and publish it to the world through concise blog posts.
+Welcome to the Hashrocket 'Today I Learned' repository.
+
+TIL is a project by Hashrocket to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute.
 
 ### Install
 
@@ -10,7 +12,7 @@ rake db:setup
 rails s
 ```
 
-An optional setup task is to get a copy of the production database (requires Heroku access):
+An optional setup task is to restore a copy of the production database (requires Heroku access):
 
 ```
 rake db:restore_production_dump
