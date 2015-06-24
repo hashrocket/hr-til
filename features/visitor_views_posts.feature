@@ -19,6 +19,7 @@ Feature: Visitor views posts
     And I click that author's username
     Then I see all the posts for that author grouped by date/time
 
+  @javascript
   Scenario: Visitor sees pagination
     Given I am a visitor
     And 150 posts exist

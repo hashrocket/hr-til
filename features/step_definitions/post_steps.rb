@@ -450,7 +450,7 @@ Then(/^I should not see a "(.*?)" button$/) do |arg|
 end
 
 When(/^I click "(.*?)"$/) do |arg|
-  click_link arg
+  find('a', text: arg).trigger 'click'
 end
 
 Then 'I should see the About Us text' do
