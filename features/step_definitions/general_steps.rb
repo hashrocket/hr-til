@@ -11,8 +11,7 @@ When 'I click statistics' do
 end
 
 Then 'I see statistics' do
-  expect(page).to have_content 'POSTS BY CHANNEL'
-  expect(page).to have_content 'POSTS BY AUTHOR'
+  expect(current_path).to eq statistics_path
 end
 
 Given 'I visit the homepage' do

@@ -1,5 +1,4 @@
 class StatisticsController < ApplicationController
-  before_filter :require_developer
 
   def channel_posts_counts
     render json: Channel.all.map { |channel| [channel.name, channel.posts.count] }.to_h
