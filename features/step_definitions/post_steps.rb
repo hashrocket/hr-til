@@ -200,10 +200,6 @@ When 'I click the channel' do
   first('.post').click_link '#phantomjs'
 end
 
-Given 'there are no posts with that channel' do
-  # noop
-end
-
 When "I visit '/that channel'" do
   visit '/phantomjs'
 end
@@ -372,10 +368,6 @@ end
 
 When 'I try to edit that post' do
   visit edit_post_path(@post)
-end
-
-Given 'no posts exist' do
-  # noop
 end
 
 And 'I see a markdown preview of my post' do
