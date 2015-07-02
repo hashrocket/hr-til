@@ -18,6 +18,10 @@ Given 'a post exists' do
   @post = FactoryGirl.create(:post)
 end
 
+Given 'a post exists with a punctuated title' do
+  @post = FactoryGirl.create(:post, :with_punctuated_title)
+end
+
 Given 'a post exists with 10 likes' do
   @post = FactoryGirl.create(:post, likes: 10)
 end
@@ -319,6 +323,14 @@ Then 'I see the show page for that post' do
     expect(page).to have_content 'Today I learned about web development'
     expect(page).to have_content '#phantomjs'
   end
+end
+
+When 'I visit the show page for that post' do
+  visit post_path @post
+end
+
+Then 'I see the sanitized title' do
+  expect(page).to have_title "It's Friday"
 end
 
 And 'I see a unique CSS selector for that channel' do

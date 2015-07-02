@@ -7,6 +7,12 @@ Feature: Visitor views post
     When I click on the title of the post
     Then I see the show page for that post
 
+  Scenario: Visitor sees sanitized HTML
+    Given I am a visitor
+    And a post exists with a punctuated title
+    When I visit the show page for that post
+    Then I see the sanitized title
+
   Scenario: Visitor clicks on post date
     Given I am a visitor
     And a post exists

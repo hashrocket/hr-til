@@ -17,4 +17,8 @@ FactoryGirl.define do
   trait :for_last_week do
     created_at Time.now - 1.week
   end
+
+  trait :with_punctuated_title do
+    title "It's Friday"
+  end
 end
