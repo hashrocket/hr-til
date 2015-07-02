@@ -7,13 +7,7 @@ Rails.application.routes.draw do
   resources :developers, path: '/author', only: 'show'
 
   resources :posts, except: :destroy, param: :titled_slug
-  resources :statistics, only: :index do
-    collection do
-      get 'channel_posts_counts'
-      get 'author_posts_counts'
-      get 'post_days_counts'
-    end
-  end
+  resources :statistics, only: :index
 
   get '/admin' => redirect('/auth/google_oauth2')
   get '/auth/google_oauth2', as: 'google_oauth2'

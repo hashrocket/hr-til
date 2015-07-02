@@ -1,31 +1,23 @@
 class StatisticsController < ApplicationController
+  def index
+    @authors = Developer.joins(:posts).uniq.sort_by { |p| p.post_count }.reverse
+    @channels = Channel.joins(:posts).uniq.sort_by { |c| c.posts_count }.reverse
+    @top_ten = Post.order(likes: :desc).take(10)
 
-  def channel_posts_counts
-    render json: Channel.all.map { |channel| [channel.name, channel.posts.count] }.to_h
-  end
-
-  def author_posts_counts
-    render json: Developer.joins(:posts).map { |developer| [developer.username, developer.posts.count] }.to_h
-  end
-
-  def post_days_counts
-    posts = Post.where('cast(posts.created_at as date) between ? and ?', start_date, end_date)
-    posts_by_date = posts.group_by { |post| post.created_at.to_date }
-    @posts_by_day = (start_date..end_date).each_with_object({}) do |date, hash|
-      hash[date] = posts_by_date[date] ? posts_by_date[date].count : 0
+    posts = Post.where('cast(posts.created_at as date) between ? and ?', start_date, end_date).group('date(created_at)').count
+    @posts_per_day = (start_date..end_date).each_with_object({}) do |date, hash|
+      hash[date] = posts[date] ? posts[date] : 0
     end
-    render json: @posts_by_day
   end
-
-  def chart_range
-    (end_date - start_date).to_i
-  end
-  helper_method :chart_range
 
   private
 
+  helper_method def highest_count_last_30_days
+    @posts_per_day.values.max + 1
+  end
+
   def start_date
-    Date.today - 30.days
+    Date.today - 29.days
   end
 
   def end_date

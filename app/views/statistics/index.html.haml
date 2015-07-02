@@ -1,20 +1,48 @@
-= javascript_include_tag 'stats'
+- content_for :page_title, 'Statistics'
 
-%header.page_head
-  %h1 Statistics
+%section#statistics
+  %header.page_head
+    %h1 Statistics
+  .wrapper
+    %article
+      %header
+        %h1 Last 30 days
+      %ul.activity_chart#activity
+        - @posts_per_day.each do |date, count|
+          - date = date.strftime("%b %e")
+          %li(data-date=date data-amount=count)
+            .activity_chart_bar(style="height: #{(count.to_f/highest_count_last_30_days) * 100}%")
+    %article
+      %header
+        %h1 Most liked TILs
+      %ul.post_list#top-ten
+        - @top_ten.each do |ttpbl|
+          %li
+            = link_to post_path ttpbl do
+              %b
+                = ttpbl.title
+              %small
+                \##{ttpbl.channel.name}
+                %span •
+                #{ttpbl.likes} likes
+    .stats_column
+      %article
+        %header
+          %h1 All channels
+        %ul.post_list#channels
+          - @channels.each do |channel|
+            %li
+              = link_to channel_path channel do
+                %b ##{channel.name}
+                %small #{channel.posts_count} posts
 
-#statistics
-  %section
-    %h3="Posts by date (last #{chart_range} days)"
-    .chart
-      %canvas#my_chart_posts
-
-  %section
-    %h3 Posts by channel
-    .chart
-      %canvas#my_chart_channels
-
-  %section
-    %h3 Posts by author
-    .chart
-      %canvas#my_chart_authors
+    .stats_column.right
+      %article
+        %header
+          %h1 All authors
+        %ul.post_list#authors
+          - @authors.each do |author|
+            %li
+              = link_to developer_path author do
+                %b= author.username
+                %small #{author.post_count} posts

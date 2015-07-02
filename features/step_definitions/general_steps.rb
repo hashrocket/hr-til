@@ -6,12 +6,35 @@ When 'I visit the statistics page' do
   visit statistics_path
 end
 
+Given(/^a post exists for each of the last (\d+) days$/) do |count|
+  Date.today.downto(Date.today - (count.to_i - 1)) do |date|
+    FactoryGirl.create(:post, created_at: date)
+  end
+end
+
 When 'I click statistics' do
-  click_link 'Stats'
+  click_link "Stats"
 end
 
 Then 'I see statistics' do
   expect(current_path).to eq statistics_path
+  expect(page).to have_title 'Statistics'
+
+  within '#activity' do
+    expect(page).to have_selector 'li', count: 30
+  end
+
+  within '#top-ten' do
+    expect(page).to have_selector 'li', count: 10
+  end
+
+  within '#channels' do
+    expect(page).to have_selector 'li', count: 35
+  end
+
+  within '#authors' do
+    expect(page).to have_selector 'li', count: 35
+  end
 end
 
 Given 'I visit the homepage' do
