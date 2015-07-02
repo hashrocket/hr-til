@@ -25,9 +25,9 @@
     .stats_column
       %article
         %header
-          %h1 Most popular channels
+          %h1 All channels
         %ul.post_list
-          - Phil.loop(10) do
+          - Phil.loop(5..15) do
             %li
               = link_to "#" do
                 %b ##{Phil.words(1)}
@@ -36,9 +36,9 @@
     .stats_column.right
       %article
         %header
-          %h1 Most prolific authors
+          %h1 All authors
         %ul.post_list
-          - Phil.loop(10) do
+          - Phil.loop(5..15) do
             %li
               = link_to "#" do
                 %b= Phil.name
