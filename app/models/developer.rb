@@ -12,7 +12,7 @@ class Developer < ActiveRecord::Base
     write_attribute(:twitter_handle, handle.to_s.gsub(/^@+/, ''))
   end
 
-  def post_count
+  def posts_count
     posts.count
   end
 end
