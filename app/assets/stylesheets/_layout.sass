@@ -49,6 +49,25 @@ a.aside_toggle
   display: block
   +transition(opacity .2s, color .2s)
 
+aside.site_statistics
+  position: fixed
+  +shadow
+  +responsive(bottom, 3vw, 2vw)
+  +responsive(left, 3vw, 2vw)
+  +responsive(margin-left, 7.5rem, 0)
+  +responsive(margin-bottom, 0, 6.5rem)
+  z-index: 999
+  +mobile
+    background: $light
+  a.aside_toggle
+    background: image-url("icon_statistics.png") center no-repeat
+    +hide-text
+    background-size: 60% auto
+    opacity: .8
+    +transition(opacity .2s)
+    &:hover
+      opacity: 1
+
 aside.site_about
   z-index: 1000
   position: fixed
@@ -61,6 +80,8 @@ aside.site_about
     font-family: $secondary-typeface
     font-weight: 700
     color: transparentize($blue-dark, .3)
+    +mobile
+      background: $light
     &:hover
       color: $blue-dark
   .copy
@@ -88,8 +109,8 @@ aside.site_search
   position: fixed
   +responsive(bottom, 3vw, 2vw)
   +responsive(right, 3vw, 2vw)
-  opacity: .9
-  +transition(opacity .2s)
+  +mobile
+    background: $light
   .search_fields
     max-width: 0
     overflow: hidden
@@ -115,8 +136,6 @@ aside.site_search
     &:hover
       opacity: 1
   &.open
-    opacity: 1
-    background: $light
     .search_fields
       max-width: 50rem
 
