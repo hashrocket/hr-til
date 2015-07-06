@@ -12,10 +12,6 @@ Given(/^a post exists for each of the last (\d+) days$/) do |count|
   end
 end
 
-When 'I click statistics' do
-  click_link "Stats"
-end
-
 Then 'I see statistics' do
   expect(current_path).to eq statistics_path
   expect(page).to have_title 'Statistics'
