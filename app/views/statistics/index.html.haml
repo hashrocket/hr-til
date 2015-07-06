@@ -16,15 +16,15 @@
       %header
         %h1 Most liked TILs
       %ul.post_list#top-ten
-        - @top_ten.each do |ttpbl|
+        - @top_ten.each do |tt|
           %li
-            = link_to post_path ttpbl do
+            = link_to post_path tt do
               %b
-                = ttpbl.title
+                = tt.title
               %small
-                \##{ttpbl.channel.name}
+                \##{tt.channel.name}
                 %span •
-                #{ttpbl.likes} likes
+                #{pluralize(tt.likes, 'like')}
     .stats_column
       %article
         %header
@@ -34,7 +34,7 @@
             %li
               = link_to channel_path channel do
                 %b ##{channel.name}
-                %small #{channel.posts_count} posts
+                %small #{pluralize(channel.posts_count, 'post')}
 
     .stats_column.right
       %article
@@ -45,4 +45,4 @@
             %li
               = link_to developer_path author do
                 %b= author.username
-                %small #{author.posts_count} posts
+                %small #{pluralize(author.posts_count, 'post')}
