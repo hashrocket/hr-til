@@ -1,7 +1,7 @@
 class StatisticsController < ApplicationController
   def index
-    @authors = Developer.joins(:posts).uniq.sort_by { |p| p.posts_count }.reverse
-    @channels = Channel.joins(:posts).uniq.sort_by { |c| c.posts_count }.reverse
+    @authors = Developer.joins(:posts).uniq.sort_by(&:posts_count).reverse
+    @channels = Channel.joins(:posts).uniq.sort_by(&:posts_count).reverse
     @top_ten = Post.order(likes: :desc).take(10)
 
     sql = <<-SQL
