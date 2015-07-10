@@ -8,7 +8,7 @@ class StatisticsController < ApplicationController
       select count(*),
       date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as creation_date
       from posts
-      where (created_at at time zone 'UTC' at time zone 'America/New_York') between (now() - make_interval(days:=30))
+      where (created_at at time zone 'UTC' at time zone 'America/New_York') between (now() - '30 days'::interval)
         and now() group by creation_date;
       SQL
 
