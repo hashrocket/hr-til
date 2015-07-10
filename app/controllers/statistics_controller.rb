@@ -4,23 +4,24 @@ class StatisticsController < ApplicationController
     @channels = Channel.joins(:posts).uniq.sort_by { |c| c.posts_count }.reverse
     @top_ten = Post.order(likes: :desc).take(10)
 
-    posts = Post.where('cast(posts.created_at as date) between ? and ?', start_date, end_date).group('date(created_at)').count
-    @posts_per_day = (start_date..end_date).each_with_object({}) do |date, hash|
-      hash[date] = posts[date] ? posts[date] : 0
-    end
+    sql = <<-SQL
+      select count(*),
+      date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as creation_date
+      from posts
+      where (created_at at time zone 'UTC' at time zone 'America/New_York') between (now() - make_interval(days:=30))
+        and now() group by creation_date;
+      SQL
+
+    posts = ActiveRecord::Base.connection.execute(sql)
+    posts_per_day = {}
+
+    posts.each { |p| posts_per_day[p['creation_date'].to_date] = p['count'].to_i }
+    @posts_per_day = posts_per_day.sort
   end
 
   private
 
   helper_method def highest_count_last_30_days
-    @posts_per_day.values.max + 1
-  end
-
-  def start_date
-    Date.today - 29.days
-  end
-
-  def end_date
-    Date.today
+    @posts_per_day.map { |_, v| v }.max + 1
   end
 end
