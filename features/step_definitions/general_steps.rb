@@ -13,6 +13,7 @@ Given(/^a post exists for each of the last (\d+) days$/) do |count|
 end
 
 Then 'I see statistics' do
+  sleep 0.25
   expect(current_path).to eq statistics_path
   expect(page).to have_title 'Statistics'
 
