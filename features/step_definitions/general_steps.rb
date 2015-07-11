@@ -8,7 +8,7 @@ end
 
 Given(/^a post exists for each of the last (\d+) days$/) do |count|
   Date.today.downto(Date.today - (count.to_i - 1)) do |date|
-    FactoryGirl.create(:post, created_at: date)
+    FactoryGirl.create(:post, created_at: date.end_of_day)
   end
 end
 
