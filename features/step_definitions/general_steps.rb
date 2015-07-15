@@ -12,6 +12,10 @@ Given(/^a post exists for each of the last (\d+) days$/) do |count|
   end
 end
 
+When(/^(\d+) posts exist more than thirty days old$/) do |count|
+  FactoryGirl.create_list(:post, count.to_i, :for_last_year)
+end
+
 Then 'I see statistics' do
   sleep 0.25
   expect(current_path).to eq statistics_path

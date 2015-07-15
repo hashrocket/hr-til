@@ -8,15 +8,14 @@
       %header
         %h1 Last 30 days
       %ul.activity_chart#activity
-        - @posts_per_day.each do |date, count|
-          - date = date.strftime("%b %e")
-          %li(data-date=date data-amount=count)
-            .activity_chart_bar(style="height: #{(count.to_f/highest_count_last_30_days) * 100}%")
+        - posts_per_day.each do |ppd|
+          %li(data-date="#{ppd.date}" data-amount="#{ppd.count}")
+            .activity_chart_bar(style="height: #{(ppd.count.to_f/highest_count_last_30_days) * 100}%")
     %article
       %header
         %h1 Most liked TILs
       %ul.post_list#top-ten
-        - @top_ten.each do |tt|
+        - top_ten.each do |tt|
           %li
             = link_to post_path tt do
               %b
@@ -30,7 +29,7 @@
         %header
           %h1 All channels
         %ul.post_list#channels
-          - @channels.each do |channel|
+          - channels.each do |channel|
             %li
               = link_to channel_path channel do
                 %b ##{channel.name}
@@ -41,7 +40,7 @@
         %header
           %h1 All authors
         %ul.post_list#authors
-          - @authors.each do |author|
+          - authors.each do |author|
             %li
               = link_to developer_path author do
                 %b= author.username

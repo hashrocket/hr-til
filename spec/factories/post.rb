@@ -18,6 +18,10 @@ FactoryGirl.define do
     created_at Time.now - 1.week
   end
 
+  trait :for_last_year do
+    created_at Time.now - 1.year
+  end
+
   trait :with_punctuated_title do
     title "It's Friday"
   end

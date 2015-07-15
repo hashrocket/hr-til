@@ -1,27 +1,46 @@
 class StatisticsController < ApplicationController
-  def index
-    @authors = Developer.joins(:posts).uniq.sort_by(&:posts_count).reverse
-    @channels = Channel.joins(:posts).uniq.sort_by(&:posts_count).reverse
-    @top_ten = Post.order(likes: :desc).take(10)
 
-    sql = <<-SQL
-      select count(*),
-      date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as creation_date
-      from posts
-      where (created_at at time zone 'UTC' at time zone 'America/New_York') between (now() - '30 days'::interval)
-        and now() group by creation_date;
-      SQL
-
-    posts = ActiveRecord::Base.connection.execute(sql)
-    posts_per_day = {}
-
-    posts.each { |p| posts_per_day[p['creation_date'].to_date] = p['count'].to_i }
-    @posts_per_day = posts_per_day.sort
-  end
+  helper_method :top_ten, :authors, :channels, :highest_count_last_30_days, :posts_per_day
 
   private
 
-  helper_method def highest_count_last_30_days
-    @posts_per_day.map { |_, v| v }.max + 1
+  def top_ten
+    Post.order(likes: :desc).take(10)
+  end
+
+  def authors
+    Developer.joins(:posts).uniq.sort_by(&:posts_count).reverse
+  end
+
+  def channels
+    Channel.joins(:posts).uniq.sort_by(&:posts_count).reverse
+  end
+
+  def highest_count_last_30_days
+    posts_per_day.map(&:count).max + 1
+  end
+
+  DayStat = Struct.new(:date, :count)
+  def posts_per_day
+    sql = <<-SQL
+      with posts as (
+           select date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as post_date
+              from posts
+      )
+      select dates_table.date, count(posts.post_date) from (
+           select (generate_series(now()::date - '29 day'::interval, now()::date, '1 day'::interval))::date as date
+      ) as dates_table
+      left outer join posts
+      on posts.post_date=dates_table.date
+      group by dates_table.date
+      order by dates_table.date;
+    SQL
+
+    ppd = []
+    posts = ActiveRecord::Base.connection.execute(sql)
+    posts.values.each do |day|
+      ppd << DayStat.new(day[0].to_date.strftime("%b %e"), day[1].to_i)
+    end
+    ppd
   end
 end
