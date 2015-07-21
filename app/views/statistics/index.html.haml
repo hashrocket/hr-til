@@ -9,7 +9,7 @@
         %h1 Last 30 days
       %ul.activity_chart#activity
         - posts_per_day.each do |ppd|
-          %li(data-date="#{ppd.date}" data-amount="#{ppd.count}")
+          %li(data-date="#{ppd.date}" data-amount="#{ppd.count}" class="#{if ppd.count == 1 then 'singular' end}")
             .activity_chart_bar(style="height: #{(ppd.count.to_f/highest_count_last_30_days) * 100}%")
     %article
       %header
