@@ -326,7 +326,7 @@ When 'I visit the show page for that post' do
 end
 
 Then 'I see the sanitized title' do
-  expect(page).to have_title "It's Friday"
+  expect(page).to have_title "It's Friday & Stuff"
 end
 
 And 'I see a unique CSS selector for that channel' do

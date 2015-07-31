@@ -23,6 +23,6 @@ FactoryGirl.define do
   end
 
   trait :with_punctuated_title do
-    title "It's Friday"
+    title "It's Friday & Stuff"
   end
 end
