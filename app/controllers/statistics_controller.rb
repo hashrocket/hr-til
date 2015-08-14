@@ -39,7 +39,7 @@ class StatisticsController < ApplicationController
     ppd = []
     posts = ActiveRecord::Base.connection.execute(sql)
     posts.values.each do |day|
-      ppd << DayStat.new(day[0].to_date.strftime("%b %e"), day[1].to_i)
+      ppd << DayStat.new(day[0].to_date.strftime("%a, %b %e"), day[1].to_i)
     end
     ppd
   end
