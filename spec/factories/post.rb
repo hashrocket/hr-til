@@ -25,4 +25,12 @@ FactoryGirl.define do
   trait :with_punctuated_title do
     title "It's Friday & Stuff"
   end
+
+  trait :published do
+    published true
+  end
+
+  trait :draft do
+    published false
+  end
 end

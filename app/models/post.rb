@@ -14,6 +14,8 @@ class Post < ActiveRecord::Base
   after_create :notify_slack_on_create
   after_update :notify_slack_on_likes_threshold, if: :likes_changed?
 
+  scope :published, -> { where(published: true) }
+
   MAX_WORDS = 200
 
   def developer_username
