@@ -12,6 +12,14 @@ describe PostsController do
           patch :update, titled_slug: a_post.to_param, post: { title: 'HAXORD' }
         end.to_not change { a_post.reload.title }
       end
+
+      it 'lists drafts' do
+        FactoryGirl.create_list :post, 3, :draft
+        FactoryGirl.create :post, :published
+        get :drafts
+
+        expect(assigns(:posts).length).to eq(3)
+      end
     end
 
     context 'as an admin' do

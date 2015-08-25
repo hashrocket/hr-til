@@ -22,7 +22,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = Post.includes(:developer, :channel).published.search(params[:q]).page(params[:page]).per(51)
+    @posts = posts_with_developer_and_channel.published.search(params[:q])
   end
 
   def show
@@ -73,8 +73,16 @@ class PostsController < ApplicationController
     end
   end
 
+  def drafts
+    @posts = posts_with_developer_and_channel.drafts
+    render :index
+  end
+
   private
 
+  def posts_with_developer_and_channel
+    Post.includes(:developer, :channel).page(params[:page]).per(51)
+  end
   def redirect_to_valid_slug
     respond_to do |format|
       format.md { redirect_to post_text_path(@post) }
@@ -83,7 +91,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :body, :channel_id, :developer_id, :title, :slug
+    params.require(:post).permit :body, :channel_id, :developer_id, :title, :slug, :published
   end
 
   def untitled_slug

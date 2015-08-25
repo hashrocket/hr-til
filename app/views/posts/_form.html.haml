@@ -12,6 +12,9 @@
       = f.label :channel_id
       = f.error_message_on :channel_id
     %dd= f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
+    %dt
+      = f.check_box :published
+      = f.label :published, 'Publish?'
   %fieldset.actions
     = f.submit 'Submit'
     = link_to 'cancel', root_path

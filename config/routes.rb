@@ -14,10 +14,14 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2/callback', to: 'sessions#create'
 
   get 'account/signout', to: 'sessions#destroy'
+  get '/posts_drafts', to: 'posts#drafts', as: :drafts
+
   resources :channels, path: '/', only: :show
   post '/post_preview', to: 'posts#preview'
+
   get '/posts/:titled_slug.md', to: 'posts#show', as: 'post_text'
 
   post '/posts/:slug/like', to: 'posts#like'
   post '/posts/:slug/unlike', to: 'posts#unlike'
+
 end

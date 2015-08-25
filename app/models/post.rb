@@ -15,6 +15,7 @@ class Post < ActiveRecord::Base
   after_update :notify_slack_on_likes_threshold, if: :likes_changed?
 
   scope :published, -> { where(published: true) }
+  scope :drafts, -> { where(published: false) }
 
   MAX_WORDS = 200
 

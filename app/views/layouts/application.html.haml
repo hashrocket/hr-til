@@ -22,6 +22,7 @@
           %li= link_to current_developer.username, current_developer
           %li= link_to "Sign Out", account_signout_path
           %li= link_to "Create Post", new_post_path
+          %li= link_to "Drafts", drafts_path
           %li= link_to "Profile", edit_profile_path
 
     %main= yield
