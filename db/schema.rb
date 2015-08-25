@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150610145829) do
+ActiveRecord::Schema.define(version: 20150825183004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,18 +46,20 @@ ActiveRecord::Schema.define(version: 20150610145829) do
   end
 
   create_table "posts", force: :cascade do |t|
-    t.integer  "developer_id",             null: false
-    t.text     "body",                     null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "channel_id",               null: false
-    t.string   "title",                    null: false
-    t.string   "slug",                     null: false
-    t.integer  "likes",        default: 0, null: false
+    t.integer  "developer_id",                 null: false
+    t.text     "body",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "channel_id",                   null: false
+    t.string   "title",                        null: false
+    t.string   "slug",                         null: false
+    t.integer  "likes",        default: 0,     null: false
+    t.boolean  "published",    default: false, null: false
   end
 
   add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
   add_index "posts", ["developer_id"], name: "index_posts_on_developer_id", using: :btree
+  add_index "posts", ["published", "developer_id"], name: "index_posts_on_published_and_developer_id", unique: true, where: "(published = false)", using: :btree
 
   add_foreign_key "posts", "channels"
   add_foreign_key "posts", "developers"

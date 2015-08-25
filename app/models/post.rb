@@ -50,6 +50,10 @@ class Post < ActiveRecord::Base
     notify_slack('likes_threshold') if tens_of_likes?
   end
 
+  def publish
+    update(published: true)
+  end
+
   private
 
   def tens_of_likes?

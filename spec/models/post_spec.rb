@@ -181,4 +181,27 @@ describe Post do
 
     expect(post).to_not be_valid
   end
+
+  context 'publish drafts' do
+    describe '.published' do
+      it 'returns false on new records' do
+        expect(post.published).to eq(false)
+      end
+
+      it 'cannot create more than one darft per developer' do
+        post = FactoryGirl.create(:post, published: false)
+        expect do
+          Post.create(post.attributes)
+        end.to raise_error(ActiveRecord::RecordNotUnique)
+      end
+    end
+
+    describe '#publish' do
+      it 'sets the post to published = true' do
+        post.publish
+        expect(post.published).to eq(true)
+      end
+    end
+
+  end
 end
