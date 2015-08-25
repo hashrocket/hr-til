@@ -59,7 +59,6 @@ ActiveRecord::Schema.define(version: 20150825183004) do
 
   add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree
   add_index "posts", ["developer_id"], name: "index_posts_on_developer_id", using: :btree
-  add_index "posts", ["published", "developer_id"], name: "index_posts_on_published_and_developer_id", unique: true, where: "(published = false)", using: :btree
 
   add_foreign_key "posts", "channels"
   add_foreign_key "posts", "developers"
