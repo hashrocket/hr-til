@@ -83,6 +83,7 @@ class PostsController < ApplicationController
   def posts_with_developer_and_channel
     Post.includes(:developer, :channel).page(params[:page]).per(50)
   end
+
   def redirect_to_valid_slug
     respond_to do |format|
       format.md { redirect_to post_text_path(@post) }
