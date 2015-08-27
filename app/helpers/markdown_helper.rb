@@ -1,3 +1,5 @@
+require 'red_carpet_code_highlighter'
+
 module MarkdownHelper
   def markdown
     @markdown ||= Redcarpet::Markdown.new(

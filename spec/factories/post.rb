@@ -4,6 +4,7 @@ FactoryGirl.define do
     body 'Today I learned about web development'
     developer { FactoryGirl.create(:developer) }
     channel { FactoryGirl.create(:channel) }
+    published true
   end
 
   trait :for_today do

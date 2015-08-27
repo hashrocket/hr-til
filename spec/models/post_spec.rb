@@ -184,11 +184,7 @@ describe Post do
 
   context 'publish drafts' do
     describe '.published' do
-      it 'returns false on new records' do
-        expect(post.published).to eq(false)
-      end
-
-      it 'cannot create more than one darft per developer' do
+      it 'cannot create more than one draft per developer' do
         post = FactoryGirl.create(:post, published: false)
         expect do
           Post.create(post.attributes)
