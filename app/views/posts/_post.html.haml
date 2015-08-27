@@ -3,7 +3,8 @@
     %h1= link_to post.title, post
     = find_and_preserve markdown_render post.body
     %footer
-      .tag draft
+      - unless post.published?
+        .tag draft
       = content_for :post_nav
       %p= link_to post.created_at.strftime("%B %-e, %Y"), post
   %aside
