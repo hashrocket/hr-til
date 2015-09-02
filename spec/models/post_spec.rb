@@ -46,13 +46,18 @@ describe Post do
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
+  it 'should create a slug without multiple dashes' do
+    post.title = 'Today I learned --- about clojure'
+    expect(post.send(:slugified_title)).to eq valid_title
+  end
+
   it 'should remove whitespace from slug' do
     post.title = '  Today I             learned about clojure   '
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
   it 'should not allow punctuation in slug' do
-    post.title = 'Today I! learned? about #clojure'
+    post.title = 'Today I! learned? & $ % about #clojure'
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
