@@ -198,6 +198,35 @@ describe Post do
         expect(post.published).to eq(true)
       end
     end
+  end
 
+  context 'slack integration on publication' do
+    describe 'new post, published is true' do
+      it 'should notify slack' do
+        post = FactoryGirl.build(:post, published: true)
+
+        expect(post).to receive(:notify_slack)
+        post.save
+      end
+    end
+
+    describe 'new post, published is false' do
+      it 'should not notify slack' do
+        post = FactoryGirl.build(:post, published: false)
+
+        expect(post).to_not receive(:notify_slack)
+        post.save
+      end
+    end
+
+    describe 'existing post, published changes to true' do
+      it 'should notify slack' do
+        post = FactoryGirl.create(:post, published: false)
+        post.published = true
+
+        expect(post).to receive(:notify_slack)
+        post.save
+      end
+    end
   end
 end

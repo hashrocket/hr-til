@@ -2,7 +2,6 @@ class Post < ActiveRecord::Base
   validates_presence_of :body
   validates_presence_of :channel_id
   validates_presence_of :developer
-
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validate :body_size, if: -> { body.present? }
@@ -11,8 +10,8 @@ class Post < ActiveRecord::Base
   belongs_to :channel
 
   before_create :generate_slug
-  after_create :notify_slack_on_create
-  after_update :notify_slack_on_likes_threshold, if: :likes_changed?
+  after_save :notify_slack_on_publication, if: -> { published? && published_changed? }
+  after_update :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
 
   scope :published, -> { where(published: true) }
   scope :drafts, -> { where(published: false) }
@@ -45,12 +44,12 @@ class Post < ActiveRecord::Base
     save
   end
 
-  def notify_slack_on_create
+  def notify_slack_on_publication
     notify_slack('create')
   end
 
   def notify_slack_on_likes_threshold
-    notify_slack('likes_threshold') if tens_of_likes?
+    notify_slack('likes_threshold')
   end
 
   def publish
