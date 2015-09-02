@@ -1,6 +1,7 @@
 - pagination ||= false
+- draft ||= false
 
-%article.post
+%article.post{ :class => if draft then 'draft' end }
   %section.copy
     = Phil.markup ["h1 p", "h1 p h2", "h1 p h3", "h1 ul"].sample
     - Phil.sometimes do
@@ -16,7 +17,10 @@
     - Phil.sometimes do
       = Phil.paragraphs 1..2
     %footer
-      - if pagination
+      - if draft
+        %nav
+          %p Draft Post
+      - elsif pagination
         %nav
           %ul
             %li= link_to "&larr; previous TIL".html_safe, "#"
