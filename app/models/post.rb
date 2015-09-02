@@ -56,6 +56,10 @@ class Post < ActiveRecord::Base
     update(published: true)
   end
 
+  def publishable?
+    !published? || !persisted?
+  end
+
   private
 
   def tens_of_likes?

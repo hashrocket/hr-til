@@ -464,3 +464,17 @@ end
 Then 'I should not see the About Us text' do
   expect(page).to have_selector '.site_about', visible: false
 end
+
+Given(/^I have an existing published post$/) do
+  @post = FactoryGirl.create :post, developer: @developer
+end
+
+When(/^I edit the post to be published$/) do
+  @post.published = true
+  @post.save
+end
+
+Then(/^I do not see a publish checkbox$/) do
+  visit edit_post_path @post
+  expect(page).to_not have_content 'Publish?'
+end

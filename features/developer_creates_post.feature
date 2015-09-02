@@ -113,3 +113,9 @@ Feature: Developer creates post
     When I enter 300 words into that form
     Then I see a message saying I have -100 words left
     And the message is red
+
+  Scenario: Developer cannot unpublish a post
+    Given I am a signed in developer
+    And   I have an existing published post
+    When  I edit the post to be published
+    Then  I do not see a publish checkbox
