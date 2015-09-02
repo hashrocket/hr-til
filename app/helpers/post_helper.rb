@@ -4,20 +4,20 @@ module PostHelper
   end
 
   def newest_post?(post)
-    post == Post.order(created_at: :desc).first
+    post == Post.published.order(created_at: :desc).first
   end
 
   def oldest_post?(post)
-    post == Post.order(created_at: :desc).last
+    post == Post.published.order(created_at: :desc).last
   end
 
   def previous_post(post)
-    posts = Post.order created_at: :desc
+    posts = Post.published.order created_at: :desc
     posts[posts.index(post) + 1]
   end
 
   def next_post(post)
-    posts = Post.order created_at: :desc
+    posts = Post.published.order created_at: :desc
     posts[posts.index(post) - 1]
   end
 

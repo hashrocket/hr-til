@@ -147,6 +147,12 @@ Given 'three posts exist' do
   @third_post   = FactoryGirl.create(:post, body: 'Third')
 end
 
+Given 'three posts exist, one a draft' do
+  @first_post   = FactoryGirl.create(:post, body: 'First')
+  @second_post  = FactoryGirl.create(:post, published: false, body: 'Second')
+  @third_post   = FactoryGirl.create(:post, body: 'Third')
+end
+
 When 'I go to the most recent post' do
   visit post_path @third_post
 end

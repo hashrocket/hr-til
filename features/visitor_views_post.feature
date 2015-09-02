@@ -34,6 +34,15 @@ Feature: Visitor views post
     When I click the right arrow
     Then I see the second most recent post
 
+  Scenario: Visitor clicks on 'previous' arrow with a draft post
+    Given I am a visitor
+    And three posts exist, one a draft
+    When I go to the most recent post
+    Then I see only a left arrow
+    When I click the left arrow
+    Then I see the least recent post
+    And I see only a right arrow
+
   Scenario: Visitor clicks on post title and sees a colored channel
     Given I am a visitor
     And a post exists
