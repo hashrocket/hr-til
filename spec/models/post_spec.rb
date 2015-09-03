@@ -13,8 +13,8 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  it 'should have a like count that defaults to zero' do
-    expect(post.likes).to eq 0
+  it 'should have a like count that defaults to one' do
+    expect(post.likes).to eq 1
   end
 
   it 'should require a developer' do

@@ -7,9 +7,9 @@ Feature: Visitor likes post
     And I visit the homepage
     When I click on the title of the post
     Then I see the show page for that post
-    And I see the likes count equals 0
+    And I see the likes count equals 1
     When I click the Like count
-    Then I see the likes count equals 1
+    Then I see the likes count equals 2
 
   @javascript
   Scenario: Visitor toggles like
@@ -18,11 +18,11 @@ Feature: Visitor likes post
     And I visit the homepage
     When I click on the title of the post
     Then I see the show page for that post
-    And I see the likes count equals 0
+    And I see the likes count equals 1
+    When I click the Like count
+    Then I see the likes count equals 2
     When I click the Like count
     Then I see the likes count equals 1
-    When I click the Like count
-    Then I see the likes count equals 0
 
   @javascript
   Scenario: Visitor toggles like with multiple likes
