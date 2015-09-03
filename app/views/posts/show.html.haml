@@ -1,17 +1,16 @@
 - content_for :page_title, @post.title
 
 - content_for :post_nav do
-  - if multiple_posts?
-    %nav
-      %ul
-        - unless oldest_post? @post
-          %li
-            = link_to previous_post @post do
-              &larr; previous TIL
-        - unless newest_post? @post
-          %li
-            = link_to next_post @post do
-              next TIL &rarr;
+  - if @post.published? && multiple_posts?
+    %ul
+      - unless oldest_post? @post
+        %li
+          = link_to previous_post @post do
+            &larr; previous TIL
+      - unless newest_post? @post
+        %li
+          = link_to next_post @post do
+            next TIL &rarr;
 
 - content_for :social do
   = tweet_link(@post)
