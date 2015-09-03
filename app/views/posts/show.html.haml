@@ -13,7 +13,8 @@
             next TIL &rarr;
 
 - content_for :social do
-  = tweet_link(@post)
+  - if @post.published?
+    = tweet_link(@post)
 
 %section#post_show
   = render @post
