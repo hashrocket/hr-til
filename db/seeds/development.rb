@@ -1,31 +1,18 @@
 # To download production data instead of these seeds, run
 # rake db:restore_production_dump
-title = '80 Chars'
-body = <<-HEREDOC
-Eighty characters is a standard limit for code line length.
 
-Keeping your code below eighty characters makes it more readable and
-encourages brevity.
+5.times do
+  Developer.create(username: Phil.name.downcase.delete(' '), email: Phil.email)
+end
 
-This is what eighty characters looks like.
-
-```
-Process substitution feeds the output of a process (or processes) into the stdin
-```
-
-This is more than eighty characters (100 to be exact).
-
-```
-Process substitution feeds the output of a process (or processes) into the stdin of another process.
-```
-HEREDOC
-
-50.times do |i|
-  puts "Creating post ##{i}"
-
-  hex = SecureRandom.hex(5)
-  developer = Developer.create!(username: "developer_#{hex}", email: "developer_#{hex}@hashrocket.com")
+40.times do |i|
+  puts "Creating post ##{i + 1}"
   channel = Channel.all.sample
 
-  Post.create!(body: body, channel: channel, developer: developer, title: title)
+  Post.create(body: Phil.words(100).capitalize,
+    channel: channel,
+    developer: Developer.all.sample,
+    title: Phil.words(5).capitalize,
+    likes: rand(1..10),
+    created_at: Date.today - rand(30).days)
 end
