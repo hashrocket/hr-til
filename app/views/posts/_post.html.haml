@@ -25,8 +25,9 @@
       %li
         = link_to [post, format: 'md'], class: "edit", target: "_blank" do
           %b view raw
-      %li
-        = link_to post_path(post), class: "js-like-action like", id: post.slug do
-          liked
-          %b= pluralize(post.likes, "time")
+      - unless post.draft?
+        %li
+          = link_to post_path(post), class: "js-like-action like", id: post.slug do
+            liked
+            %b= pluralize(post.likes, "time")
     = content_for :social

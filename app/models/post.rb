@@ -60,6 +60,10 @@ class Post < ActiveRecord::Base
     !published? || !persisted?
   end
 
+  def draft?
+    !published?
+  end
+
   private
 
   def tens_of_likes?

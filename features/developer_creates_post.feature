@@ -116,6 +116,12 @@ Feature: Developer creates post
 
   Scenario: Developer cannot unpublish a post
     Given I am a signed in developer
-    And   I have an existing published post
+    And   I have an existing unpublished post
     When  I edit the post to be published
     Then  I do not see a publish checkbox
+
+  Scenario: Developer creates draft
+    Given I am a signed in developer
+    And   I have an existing unpublished post
+    When  I visit the posts page
+    Then  I see the draft

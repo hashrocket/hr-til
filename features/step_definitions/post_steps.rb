@@ -471,8 +471,8 @@ Then 'I should not see the About Us text' do
   expect(page).to have_selector '.site_about', visible: false
 end
 
-Given(/^I have an existing published post$/) do
-  @post = FactoryGirl.create :post, developer: @developer
+Given(/^I have an existing unpublished post$/) do
+  @post = FactoryGirl.create(:post, published: false, developer: @developer)
 end
 
 When(/^I edit the post to be published$/) do
@@ -483,4 +483,22 @@ end
 Then(/^I do not see a publish checkbox$/) do
   visit edit_post_path @post
   expect(page).to_not have_content 'Publish?'
+end
+
+When 'I visit the posts page' do
+  visit post_path @post
+end
+
+Then 'I see the draft' do
+  within '.post' do
+    expect(page).to have_content 'johnsmith'
+    expect(page).to have_content 'Today I learned about web development'
+    expect(page).to have_content 'Draft Post'
+    expect(page).to_not have_content 'previous TIL'
+    expect(page).to_not have_content 'next TIL'
+  end
+
+  within '.post:first-child aside' do
+    expect(page).to_not have_content 'like'
+  end
 end
