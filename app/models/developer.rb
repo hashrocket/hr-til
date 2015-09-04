@@ -13,6 +13,6 @@ class Developer < ActiveRecord::Base
   end
 
   def posts_count
-    posts.count
+    posts.published.count
   end
 end

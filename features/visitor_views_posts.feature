@@ -12,6 +12,12 @@ Feature: Visitor views posts
     When I visit the url 'http://domain/author/username'
     Then I see all the posts for that author grouped by date/time
 
+  Scenario: Visitor views published posts by author
+    Given I am a visitor
+    And two posts exist for a given author, one a draft
+    When I visit that author's posts page
+    Then I see only 1 published post
+
   Scenario: Visitor views posts by author via link
     Given I am a visitor
     And posts exist for a given author

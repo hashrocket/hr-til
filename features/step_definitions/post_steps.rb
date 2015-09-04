@@ -167,8 +167,10 @@ When 'I visit the channel page' do
   visit channel_path @channel
 end
 
-Then(/^I see only (\d+) published posts$/) do |num|
-  expect(page).to have_content "#{pluralize(num.to_i, 'post')} about #foo"
+Then(/^I see only (\d+) published posts?$/) do |num|
+  within '.page_head h1' do
+    expect(page).to have_content "#{pluralize(num.to_i, 'post')}"
+  end
   expect(page).to have_selector('.post', count: num.to_i)
 end
 
@@ -288,6 +290,16 @@ Given 'posts exist for a given author' do
   FactoryGirl.create(:post, :for_last_week, developer: developer)
   FactoryGirl.create(:post, :for_yesterday, developer: developer)
   @newest_post = FactoryGirl.create(:post, developer: developer, title: 'Newest post')
+end
+
+Given 'two posts exist for a given author, one a draft' do
+  @developer = FactoryGirl.create(:developer, username: 'prolificposter')
+  FactoryGirl.create(:post, published: false, developer: @developer)
+  FactoryGirl.create(:post, published: true, developer: @developer)
+end
+
+When "I visit that author's posts page" do
+  visit developer_path @developer
 end
 
 When "I visit the url 'http://domain/author/username'" do
