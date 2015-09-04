@@ -15,7 +15,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.developer = current_developer
     if @post.save
-      redirect_to root_path, notice: 'Post created'
+      redirect_to root_path, notice: display_name(@post) + 'created'
     else
       render :new
     end
@@ -42,7 +42,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to @post, notice: 'Post updated'
+      redirect_to @post, notice: display_name(@post) + 'updated'
     else
       render :edit
     end
@@ -111,5 +111,9 @@ class PostsController < ApplicationController
 
   def valid_url?
     @post.to_param == params[:titled_slug]
+  end
+
+  def display_name(post)
+    post.published? ? 'Post ' : 'Draft '
   end
 end
