@@ -1,3 +1,5 @@
+include ActionView::Helpers::TextHelper
+
 When 'I click create post' do
   within '.site_nav' do
     click_on 'Create Post'
@@ -151,6 +153,23 @@ Given 'three posts exist, one a draft' do
   @first_post   = FactoryGirl.create(:post, body: 'First')
   @second_post  = FactoryGirl.create(:post, published: false, body: 'Second')
   @third_post   = FactoryGirl.create(:post, body: 'Third')
+end
+
+Given 'three posts exist, one a draft, in the same channel' do
+  @channel = FactoryGirl.create :channel, name: 'foo'
+
+  @first_post   = FactoryGirl.create(:post, body: 'First', channel: @channel)
+  @second_post  = FactoryGirl.create(:post, published: false, body: 'Second', channel: @channel)
+  @third_post   = FactoryGirl.create(:post, body: 'Third', channel: @channel)
+end
+
+When 'I visit the channel page' do
+  visit channel_path @channel
+end
+
+Then(/^I see only (\d+) published posts$/) do |num|
+  expect(page).to have_content "#{pluralize(num.to_i, 'post')} about #foo"
+  expect(page).to have_selector('.post', count: num.to_i)
 end
 
 When 'I go to the most recent post' do
