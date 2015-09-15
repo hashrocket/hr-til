@@ -15,6 +15,5 @@
 //= require jquery_ujs
 //= require jquery.autosize
 //= require til
-//= require chart
 //= require google_analytics
 //= require like
