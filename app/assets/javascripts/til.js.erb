@@ -38,23 +38,27 @@ $(function(){
         post_form.$preview.html(result);
       });
     },
-    renderWordCount: function() {
+    renderWordCounts: function() {
       var max = <%= Post::MAX_WORDS %>,
         words = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
         remaining_words = max - words,
-        copy = remaining_words === 1 ? ' word available' : ' words available'
+        pluralized_word = remaining_words === 1 ? ' word' : ' words'
 
       post_form.$word_count
         .toggleClass('negative', remaining_words < 0)
-        .html(remaining_words + copy);
+        .text(words + ' total ' + pluralized_word);
+      post_form.$word_limit
+        .toggleClass('negative', remaining_words < 0)
+        .text(remaining_words + pluralized_word + ' available');
 
     },
     init: function() {
       this.$preview = this.$el.find('.content_preview');
       this.$word_count = this.$el.find('.word_count');
+      this.$word_limit = this.$el.find('.word_limit');
       this.$textarea = this.$el.find('#post_body');
 
-      this.$textarea.on('keyup', this.renderWordCount);
+      this.$textarea.on('keyup', this.renderWordCounts);
       this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
       this.$textarea.trigger('keyup');
     }

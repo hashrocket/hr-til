@@ -188,17 +188,32 @@ ul.post_list
         right: 0
 
 form
-  .field_with_errors
-    display: inline
   .formError
     display: inline
     color: $error
     font-size: .85em
   label
     font-weight: bold
+    .field_with_errors
+      display: inline
+    &.checkbox
+      display: block
+      margin-bottom: 1.5em
+      input[type='checkbox']
+        margin-right: 1rem
   dl
+    dt
+      +clearfix
+      margin-bottom: .5rem
+      small
+        float: right
+        font-weight: bold
+        font-size: .85em
+        color: $blue-dark
+        &.negative
+          color: $error
     dd
-      margin-bottom: 1em
+      margin-bottom: 1.5em
   fieldset.actions
     padding-top: 2rem
   input[type='text'],

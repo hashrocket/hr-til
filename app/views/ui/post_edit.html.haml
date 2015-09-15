@@ -1,26 +1,37 @@
-%section.box
-  %article
-    .copy
-      %h1 Edit Post
-    %form
-      %dl
-        %dt
-          %label
-            Title
-            %span.error can't be blank
-        %dd
-          %input(type='text' placeholder='Enter title ...')
-        %dt
-          %label Body
-        %dd
-          %textarea(placeholder='Enter body ...')
-      %dl
-        %dt
-          %label Tag
-        %dd
-          %select
-            %option Foo
-      %fieldset.actions
-        %input(type='submit' value='Save Changes')
-        = link_to "cancel", "#"
-= render "post"
+%section#post_edit
+  %section.box
+    %article
+      .copy
+        %h1 Edit Post
+      %form
+        %dl
+          %dt
+            %label
+              Title
+            -# .formError can't be blank
+            .formError is over 50 characters
+          %dd
+            %input(type='text' placeholder='Enter title ...')
+          %dt
+            %label Body
+            .formError can't be blank
+            %small 198 words available
+          %dd
+            %textarea.autosize(placeholder='Enter body ...')
+        %dl
+          %dt
+            %label Tag
+          %dd
+            %select
+              %option Foo
+        %label.checkbox
+          %input(type='checkbox')
+          Publish this post
+        %fieldset.actions
+          %input(type='submit' value='Save Changes')
+          = link_to "cancel", "#"
+  %article.post
+    %section.copy
+      .content_preview= Phil.markup 'h1 p p h3 p'
+      %footer
+        %p 155 total words

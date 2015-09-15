@@ -7,15 +7,16 @@
     %dt
       = f.label :body
       = f.error_message_on :body
+      %small.word_limit
     %dd= f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
     %dt
       = f.label :channel_id
       = f.error_message_on :channel_id
     %dd= f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
     - if @post.publishable?
-      %dt
+      %label.checkbox
         = f.check_box :published
-        = f.label :published, 'Publish?'
+        = f.label :published, 'Publish this post'
   %fieldset.actions
     = f.submit 'Submit'
     = link_to 'cancel', root_path
