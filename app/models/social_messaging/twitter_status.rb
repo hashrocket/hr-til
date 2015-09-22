@@ -10,7 +10,8 @@ module SocialMessaging
       title = post.title
       name  = post.developer.twitter_handle || post.developer_username
       category = post.channel.name
-      "#{title} - from @#{name} #til ##{category}"
+      host = ENV['host']
+      "#{title} - from @#{name} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} #til ##{category}"
     end
 
     def post_to_twitter
