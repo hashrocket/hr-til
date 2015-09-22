@@ -63,6 +63,7 @@ GEM
       ruby_parser (~> 3.6.2)
       sass (~> 3.0)
       terminal-table (~> 1.4)
+    buftok (0.2.0)
     builder (3.2.2)
     byebug (4.0.1)
       columnize (= 0.9.0)
@@ -104,6 +105,7 @@ GEM
     diff-lcs (1.2.5)
     docile (1.1.5)
     dynamic_form (1.1.4)
+    equalizer (0.0.11)
     erubis (2.7.0)
     execjs (2.4.0)
     factory_girl (4.5.0)
@@ -138,6 +140,9 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    http (0.6.4)
+      http_parser.rb (~> 0.6.0)
+    http_parser.rb (0.6.0)
     httparty (0.13.3)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -160,6 +165,8 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
+    memoizable (0.4.2)
+      thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
     mime-types (2.4.3)
     mini_portile (0.6.2)
@@ -168,6 +175,7 @@ GEM
     multi_test (0.1.2)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    naught (1.0.0)
     newrelic_rpm (3.11.2.286)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
@@ -272,6 +280,7 @@ GEM
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
     sexp_processor (4.5.0)
+    simple_oauth (0.3.1)
     simplecov (0.10.0)
       docile (~> 1.1.0)
       json (~> 1.8)
@@ -298,6 +307,17 @@ GEM
     tilt (1.4.1)
     timers (4.0.1)
       hitimes
+    twitter (5.14.0)
+      addressable (~> 2.3)
+      buftok (~> 0.2.0)
+      equalizer (~> 0.0.9)
+      faraday (~> 0.9.0)
+      http (~> 0.6.0)
+      http_parser.rb (~> 0.6.0)
+      json (~> 1.8)
+      memoizable (~> 0.4.0)
+      naught (~> 1.0)
+      simple_oauth (~> 0.3.0)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.7.1)
@@ -356,6 +376,10 @@ DEPENDENCIES
   spring
   sucker_punch (~> 1.0)
   test_after_commit
+  twitter
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
   webmock
+
+BUNDLED WITH
+   1.10.6

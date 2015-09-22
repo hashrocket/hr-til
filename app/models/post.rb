@@ -4,14 +4,15 @@ class Post < ActiveRecord::Base
   validates_presence_of :developer
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
-  validate :body_size, if: -> { body.present? }
+  validate  :body_size, if: -> { body.present? }
 
   belongs_to :developer
   belongs_to :channel
 
+  before_save   :post_to_twitter, if: :qualify_for_twitter?
   before_create :generate_slug
-  after_save :notify_slack_on_publication, if: -> { published? && published_changed? }
-  after_update :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
+  after_update  :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
+  after_save    :notify_slack_on_publication, if: -> { published? && published_changed? }
 
   scope :published, -> { where(published: true) }
   scope :drafts, -> { where(published: false) }
@@ -44,6 +45,11 @@ class Post < ActiveRecord::Base
     save
   end
 
+  def post_to_twitter
+    SocialMessaging::TwitterStatus.new(self).post_to_twitter
+    self.tweeted = true
+  end
+
   def notify_slack_on_publication
     notify_slack('create')
   end
@@ -54,6 +60,10 @@ class Post < ActiveRecord::Base
 
   def publish
     update(published: true)
+  end
+
+  def qualify_for_twitter?
+    published? && !tweeted
   end
 
   def publishable?
