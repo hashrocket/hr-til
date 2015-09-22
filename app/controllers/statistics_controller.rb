@@ -8,11 +8,19 @@ class StatisticsController < ApplicationController
   end
 
   def authors
-    Developer.joins(:posts).uniq.sort_by(&:posts_count).reverse
+    Developer.joins(:posts)
+      .where('published is true')
+      .uniq
+      .sort_by(&:posts_count)
+      .reverse
   end
 
   def channels
-    Channel.joins(:posts).uniq.sort_by(&:posts_count).reverse
+    Channel.joins(:posts)
+      .where('published is true')
+      .uniq
+      .sort_by(&:posts_count)
+      .reverse
   end
 
   def highest_count_last_30_days
