@@ -15,9 +15,11 @@ module SocialMessaging
 
     def post_to_twitter
       return if post.draft? || post.tweeted
-      TwitterClient.update(status)
-      post.tweeted = true
-      post.save
+      if ENV['update_twitter_with_post']
+        TwitterClient.update(status)
+        post.tweeted = true
+        post.save
+      end
     end
 
   end
