@@ -1,6 +1,6 @@
 TwitterClient = Twitter::REST::Client.new do |config|
-  config.consumer_key        = ENV["HRTIL_TWITTER_CONSUMER_KEY"]
-  config.consumer_secret     = ENV["HRTIL_TWITTER_CONSUMER_SECRET"]
-  config.access_token        = ENV["HRTIL_TWITTER_ACCESS_TOKEN"]
-  config.access_token_secret = ENV["HRTIL_TWITTER_ACCESS_TOKEN_SECRET"]
+  config.consumer_key        = ENV["twitter_consumer_key"]
+  config.consumer_secret     = ENV["twitter_consumer_secret"]
+  config.access_token        = ENV["twitter_access_token"]
+  config.access_token_secret = ENV["twitter_access_token_secret"]
 end
