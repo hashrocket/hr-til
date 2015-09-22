@@ -9,7 +9,6 @@ class Post < ActiveRecord::Base
   belongs_to :developer
   belongs_to :channel
 
-  before_save   :post_to_twitter, if: :qualify_for_twitter?
   before_create :generate_slug
   after_update  :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
   after_save    :notify_slack_on_publication, if: -> { published? && published_changed? }
@@ -45,11 +44,6 @@ class Post < ActiveRecord::Base
     save
   end
 
-  def post_to_twitter
-    SocialMessaging::TwitterStatus.new(self).post_to_twitter
-    self.tweeted = true
-  end
-
   def notify_slack_on_publication
     notify_slack('create')
   end
@@ -60,10 +54,6 @@ class Post < ActiveRecord::Base
 
   def publish
     update(published: true)
-  end
-
-  def qualify_for_twitter?
-    published? && !tweeted
   end
 
   def publishable?

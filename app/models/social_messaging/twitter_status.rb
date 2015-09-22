@@ -14,7 +14,10 @@ module SocialMessaging
     end
 
     def post_to_twitter
+      return if post.draft? || post.tweeted
       TwitterClient.update(status)
+      post.tweeted = true
+      post.save
     end
 
   end
