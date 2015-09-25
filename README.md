@@ -29,11 +29,24 @@ Staging and production are hosted on Heroku.
 
 ### Environmental Variables
 
+These environmental variables are needed in development for some features to work:
+
 ```
-google_client_id
-google_client_secret
+host: 'http://localhost:3000'
+google_client_id:
+google_client_secret:
+slack_post_endpoint:
+update_twitter_with_post: "false"
+twitter_consumer_key:
+twitter_consumer_secret:
+twitter_access_token:
+twitter_access_token_secret:
+```
+
+And this variable toggles basic auth:
+
+```
 basic_auth_credentials # required format: username:password
-slack_post_endpoint
 ```
 
 ### Slack Integration

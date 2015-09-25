@@ -3,7 +3,7 @@ development: &default
   google_client_id:
   google_client_secret:
   slack_post_endpoint:
-  update_twitter_with_post: false
+  update_twitter_with_post: "false"
   twitter_consumer_key:
   twitter_consumer_secret:
   twitter_access_token:
@@ -12,4 +12,4 @@ test:
   <<: *default
   host: 'http://localhost:3000'
   slack_post_endpoint:
-  update_twitter_with_post: false
+  update_twitter_with_post: "false"
