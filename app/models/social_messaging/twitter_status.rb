@@ -10,7 +10,7 @@ module SocialMessaging
       title = post.title
       name  = post.twitter_handle
       category = post.channel_name
-      host = ENV['host']
+      host = ENV.fetch('host')
       "#{title} - from @#{name} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} #til ##{category}"
     end
 
@@ -22,6 +22,5 @@ module SocialMessaging
         post.save
       end
     end
-
   end
 end
