@@ -8,8 +8,8 @@ module SocialMessaging
 
     def status
       title = post.title
-      name  = post.developer.twitter_handle || post.developer_username
-      category = post.channel.name
+      name  = post.twitter_handle
+      category = post.channel_name
       host = ENV['host']
       "#{title} - from @#{name} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} #til ##{category}"
     end
