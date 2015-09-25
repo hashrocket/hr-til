@@ -5,7 +5,6 @@ FactoryGirl.define do
     developer { FactoryGirl.create(:developer) }
     channel { FactoryGirl.create(:channel) }
     published true
-    tweeted false
   end
 
   trait :for_today do
