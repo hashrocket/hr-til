@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-ruby '2.2.2'
+ruby '2.2.3'
 
-gem 'rails', '4.2.0'
+gem 'rails', '4.2.4'
 
 gem 'active_model_serializers'
 gem 'authem'
