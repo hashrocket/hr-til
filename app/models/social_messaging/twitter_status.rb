@@ -6,6 +6,17 @@ module SocialMessaging
       @post = post
     end
 
+    def post_to_twitter
+      return if post.draft? || post.tweeted
+      if ENV['update_twitter_with_post'] == 'true'
+        TwitterClient.update(status)
+        post.tweeted = true
+        post.save
+      end
+    end
+
+    private
+
     def title
       post.title
     end
@@ -24,15 +35,6 @@ module SocialMessaging
 
     def status
       "#{title} - from @#{name} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} #til ##{category}"
-    end
-
-    def post_to_twitter
-      return if post.draft? || post.tweeted
-      if ENV['update_twitter_with_post'] == 'true'
-        TwitterClient.update(status)
-        post.tweeted = true
-        post.save
-      end
     end
   end
 end
