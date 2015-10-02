@@ -8,13 +8,14 @@ class PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new(published: true)
+    @post = Post.new
   end
 
   def create
     @post = Post.new(post_params)
     @post.developer = current_developer
     if @post.save
+      @post.publish if params[:published]
       SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       redirect_to root_path, notice: display_name(@post) + 'created'
     else
@@ -43,6 +44,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
+      @post.publish if params[:published] && !@post.published?
       SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       redirect_to @post, notice: display_name(@post) + 'updated'
     else
@@ -94,7 +96,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :body, :channel_id, :developer_id, :title, :slug, :published
+    params.require(:post).permit :body, :channel_id, :developer_id, :title, :slug
   end
 
   def untitled_slug

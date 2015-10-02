@@ -33,7 +33,7 @@ class StatisticsController < ApplicationController
       with posts as (
            select date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as post_date
               from posts
-              where published is true
+              where published_at is not null
       )
       select dates_table.date, count(posts.post_date) from (
            select (generate_series(now()::date - '29 day'::interval, now()::date, '1 day'::interval))::date as date

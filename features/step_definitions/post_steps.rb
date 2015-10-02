@@ -151,7 +151,7 @@ end
 
 Given 'three posts exist, one a draft' do
   @first_post   = FactoryGirl.create(:post, body: 'First')
-  @second_post  = FactoryGirl.create(:post, published: false, body: 'Second')
+  @second_post  = FactoryGirl.create(:post, :draft, body: 'Second')
   @third_post   = FactoryGirl.create(:post, body: 'Third')
 end
 
@@ -159,7 +159,7 @@ Given 'three posts exist, one a draft, in the same channel' do
   @channel = FactoryGirl.create :channel, name: 'foo'
 
   @first_post   = FactoryGirl.create(:post, body: 'First', channel: @channel)
-  @second_post  = FactoryGirl.create(:post, published: false, body: 'Second', channel: @channel)
+  @second_post  = FactoryGirl.create(:post, :draft, body: 'Second', channel: @channel)
   @third_post   = FactoryGirl.create(:post, body: 'Third', channel: @channel)
 end
 
@@ -256,7 +256,7 @@ Then 'I see all posts with that channel' do
 end
 
 Then 'I see the sorted posts' do
-  timestamp = ->(post) { post.created_at.strftime('%B %-e, %Y') }
+  timestamp = ->(post) { post.published_at.strftime('%B %-e, %Y') }
 
   within '.post:first-child' do
     expect(page).to have_content 'karatedude'
@@ -294,8 +294,8 @@ end
 
 Given 'two posts exist for a given author, one a draft' do
   @developer = FactoryGirl.create(:developer, username: 'prolificposter')
-  FactoryGirl.create(:post, published: false, developer: @developer)
-  FactoryGirl.create(:post, published: true, developer: @developer)
+  FactoryGirl.create(:post, :draft, developer: @developer)
+  FactoryGirl.create(:post, developer: @developer)
 end
 
 When "I visit that author's posts page" do
@@ -503,11 +503,11 @@ Then 'I should not see the About Us text' do
 end
 
 Given(/^I have an existing unpublished post$/) do
-  @post = FactoryGirl.create(:post, published: false, developer: @developer)
+  @post = FactoryGirl.create(:post, :draft, developer: @developer)
 end
 
 When(/^I edit the post to be published$/) do
-  @post.published = true
+  @post.published_at = Time.now
   @post.save
 end
 

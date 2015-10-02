@@ -190,7 +190,7 @@ describe Post do
   context 'publish drafts' do
     describe '.published' do
       it 'cannot create more than one draft per developer' do
-        post = FactoryGirl.create(:post, published: false)
+        post = FactoryGirl.create(:post, :draft)
         expect do
           Post.create(post.attributes)
         end.to raise_error(ActiveRecord::RecordNotUnique)
@@ -200,7 +200,7 @@ describe Post do
     describe '#publish' do
       it 'sets the post to published = true' do
         post.publish
-        expect(post.published).to eq(true)
+        expect(post.published_at).to be
       end
     end
   end
@@ -208,7 +208,7 @@ describe Post do
   context 'slack integration on publication' do
     describe 'new post, published is true' do
       it 'should notify slack' do
-        post = FactoryGirl.build(:post, published: true)
+        post = FactoryGirl.build(:post)
 
         expect(post).to receive(:notify_slack)
         post.save
@@ -217,7 +217,7 @@ describe Post do
 
     describe 'new post, published is false' do
       it 'should not notify slack' do
-        post = FactoryGirl.build(:post, published: false)
+        post = FactoryGirl.build(:post, :draft)
 
         expect(post).to_not receive(:notify_slack)
         post.save
@@ -226,8 +226,8 @@ describe Post do
 
     describe 'existing post, published changes to true' do
       it 'should notify slack' do
-        post = FactoryGirl.create(:post, published: false)
-        post.published = true
+        post = FactoryGirl.create(:post, :draft)
+        post.published_at = Time.now
 
         expect(post).to receive(:notify_slack)
         post.save

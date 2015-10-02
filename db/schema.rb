@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150925155814) do
+ActiveRecord::Schema.define(version: 20151001212705) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(version: 20150925155814) do
     t.string   "title",                        null: false
     t.string   "slug",                         null: false
     t.integer  "likes",        default: 1,     null: false
-    t.boolean  "published",    default: false, null: false
     t.boolean  "tweeted",      default: false, null: false
+    t.datetime "published_at"
   end
 
   add_index "posts", ["channel_id"], name: "index_posts_on_channel_id", using: :btree

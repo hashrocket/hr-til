@@ -15,7 +15,7 @@ describe PostsController do
 
       it 'lists drafts' do
         FactoryGirl.create_list :post, 3, :draft
-        FactoryGirl.create :post, :published
+        FactoryGirl.create :post
         get :drafts
 
         expect(assigns(:posts).length).to eq(3)
@@ -43,11 +43,11 @@ describe PostsController do
 
   describe '#index' do
     it 'returns a list of published posts' do
-      FactoryGirl.create_list(:post, 3, :published)
+      FactoryGirl.create_list(:post, 3)
       FactoryGirl.create(:post, :draft)
 
       get :index
-      expect(assigns(:posts).map(&:published).uniq == [true]).to eq(true)
+      expect(assigns(:posts).map(&:published?).uniq == [true]).to eq(true)
     end
   end
 end

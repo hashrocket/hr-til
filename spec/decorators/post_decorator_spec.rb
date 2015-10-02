@@ -9,7 +9,7 @@ describe PostDecorator do
     end
 
     it 'returns the post title without (draft) when post is published' do
-      post = FactoryGirl.build(:post, :published, title: 'test')
+      post = FactoryGirl.build(:post, title: 'test')
       decorator = described_class.new(post)
       expect(decorator.title).to eq('test')
     end

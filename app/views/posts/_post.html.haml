@@ -7,7 +7,7 @@
         = content_for :post_nav
         - unless post.published?
           %p Draft Post
-      %p= link_to post.created_at.strftime("%B %-e, %Y"), post
+      %p= link_to post.display_date.strftime("%B %-e, %Y"), post
   %aside
     %ul
       %li

@@ -11,12 +11,20 @@ class Post < ActiveRecord::Base
 
   before_create :generate_slug
   after_update  :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
-  after_save    :notify_slack_on_publication, if: -> { published? && published_changed? }
+  after_save    :notify_slack_on_publication, if: -> { published_at? && published_at_changed? }
 
-  scope :published, -> { where(published: true) }
-  scope :drafts, -> { where(published: false) }
+  scope :published, -> { where('published_at is not null') }
+  scope :drafts, -> { where('published_at is null') }
 
   MAX_WORDS = 200
+
+  def published?
+    !!published_at?
+  end
+
+  def display_date
+    published_at || created_at
+  end
 
   def developer_username
     developer.username
@@ -53,7 +61,7 @@ class Post < ActiveRecord::Base
   end
 
   def publish
-    update(published: true)
+    update(published_at: Time.now)
   end
 
   def publishable?
