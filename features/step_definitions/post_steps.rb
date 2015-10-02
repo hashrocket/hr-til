@@ -144,23 +144,29 @@ Given 'there exist posts for today, yesterday, and last week' do
 end
 
 Given 'three posts exist' do
-  @first_post   = FactoryGirl.create(:post, body: 'First')
-  @second_post  = FactoryGirl.create(:post, body: 'Second')
-  @third_post   = FactoryGirl.create(:post, body: 'Third')
+  @oldest_post = FactoryGirl.create :post, :for_last_week
+  @older_post  = FactoryGirl.create :post, :for_yesterday
+  @newest_post = FactoryGirl.create :post
 end
 
 Given 'three posts exist, one a draft' do
-  @first_post   = FactoryGirl.create(:post, body: 'First')
-  @second_post  = FactoryGirl.create(:post, :draft, body: 'Second')
-  @third_post   = FactoryGirl.create(:post, body: 'Third')
+  @oldest_post = FactoryGirl.create :post, :for_yesterday
+  @older_post  = FactoryGirl.create :post, :draft
+  @newest_post = FactoryGirl.create :post
+end
+
+Given 'three posts exist, with publication dates in a different order than creation dates' do
+  @newest_post = FactoryGirl.create :post
+  @older_post  = FactoryGirl.create :post, :for_yesterday
+  @oldest_post = FactoryGirl.create :post, :for_last_week
 end
 
 Given 'three posts exist, one a draft, in the same channel' do
-  @channel = FactoryGirl.create :channel, name: 'foo'
+  @channel = FactoryGirl.create :channel
 
-  @first_post   = FactoryGirl.create(:post, body: 'First', channel: @channel)
-  @second_post  = FactoryGirl.create(:post, :draft, body: 'Second', channel: @channel)
-  @third_post   = FactoryGirl.create(:post, body: 'Third', channel: @channel)
+  @oldest_post = FactoryGirl.create :post, channel: @channel
+  @older_post  = FactoryGirl.create :post, :draft, channel: @channel
+  @newest_post = FactoryGirl.create :post, channel: @channel
 end
 
 When 'I visit the channel page' do
@@ -175,7 +181,7 @@ Then(/^I see only (\d+) published posts?$/) do |num|
 end
 
 When 'I go to the most recent post' do
-  visit post_path @third_post
+  visit post_path @newest_post
 end
 
 When 'I see only a left arrow' do
@@ -192,7 +198,7 @@ When 'I click the left arrow' do
 end
 
 Then 'I see the second most recent post' do
-  expect(current_path).to eq(post_path(@second_post))
+  expect(current_path).to eq(post_path(@older_post))
 end
 
 And 'I see a right arrow and a left arrow' do
@@ -203,7 +209,7 @@ And 'I see a right arrow and a left arrow' do
 end
 
 Then 'I see the least recent post' do
-  expect(current_path).to eq(post_path(@first_post))
+  expect(current_path).to eq(post_path(@oldest_post))
 end
 
 When 'I see only a right arrow' do
