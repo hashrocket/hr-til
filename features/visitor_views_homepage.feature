@@ -3,8 +3,8 @@ Feature: Visitor views homepage
   Scenario: Visitor sees company information
     Given I am a visitor
     And I visit the homepage
-    Then I see copyright and company information
     And I see the site name in the title
+    Then I see the footer information
 
   Scenario: Visitor sees Atom feed
     Given I am a visitor

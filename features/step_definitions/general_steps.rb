@@ -104,9 +104,8 @@ Then(/^I see a message "(.*?)"$/) do |message|
   expect(page).to have_content message
 end
 
-Then 'I see copyright and company information' do
+Then 'I see the footer information' do
   within 'footer' do
-    expect(page).to have_content "© #{Date.today.year}"
     expect(page).to have_link 'Hashrocket', href: 'http://hashrocket.com'
   end
 end
