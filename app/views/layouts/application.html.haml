@@ -38,6 +38,9 @@
       .copy
         :markdown
           TIL is a project by [Hashrocket](http://hashrocket.com) to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
+
+          Also: follow [@hashrockettil](http://twitter.com/hashrockettil) to inject your Twitter feed with knowledge.
+
     %aside.site_statistics
       = link_to "statistics", statistics_path, class: "aside_toggle"
 
@@ -49,10 +52,11 @@
         = link_to "search", "#", class: "aside_toggle"
 
     %footer.site_footer
+      %p.twitter
+        follow us on Twitter:
+        = link_to "@hashrockettil", "http://twitter.com/hashrockettil"
       %p
-        &copy;
-        = Date.today.year
-      %p maintained with love from Jacksonville and Chicago
-      %p
+        curated in Jacksonville and Chicago
+        %br/
         by
         = link_to 'Hashrocket', 'http://hashrocket.com'
