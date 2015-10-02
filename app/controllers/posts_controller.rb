@@ -24,7 +24,7 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = posts_with_developer_and_channel.published.search(params[:q])
+    @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
   end
 
   def show
