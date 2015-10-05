@@ -31,6 +31,5 @@ namespace :db do
     else
       puts 'All published posts have been touched!'
     end
-
   end
 end

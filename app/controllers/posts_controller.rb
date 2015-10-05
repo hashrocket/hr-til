@@ -16,7 +16,6 @@ class PostsController < ApplicationController
     @post.developer = current_developer
     if @post.save
       @post.publish if params[:published]
-      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       redirect_to root_path, notice: display_name(@post) + 'created'
     else
       render :new
@@ -45,7 +44,6 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       @post.publish if params[:published] && !@post.published?
-      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       redirect_to @post, notice: display_name(@post) + 'updated'
     else
       render :edit
