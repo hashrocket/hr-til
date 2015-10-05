@@ -16,6 +16,7 @@ class Post < ActiveRecord::Base
   scope :published, -> { where('published_at is not null') }
   scope :drafts, -> { where('published_at is null') }
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
+  scope :published_and_untweeted, -> { published.where('tweeted is false') }
 
   MAX_WORDS = 200
 
