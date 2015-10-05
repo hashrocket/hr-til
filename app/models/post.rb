@@ -12,7 +12,7 @@ class Post < ActiveRecord::Base
   before_create :generate_slug
   after_update  :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
   after_save    :notify_slack_on_publication, if: -> { published_at? && published_at_changed? }
-  after_commit  :notify_twitter
+  after_commit  :notify_twitter, unless: -> { draft? || tweeted }
 
   scope :published, -> { where('published_at is not null') }
   scope :drafts, -> { where('published_at is null') }
