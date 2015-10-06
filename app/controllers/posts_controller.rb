@@ -102,7 +102,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find_by_slug!(untitled_slug)
+    @post = Post.includes(:developer).find_by_slug!(untitled_slug)
   end
 
   def authorize_developer

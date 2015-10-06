@@ -29,6 +29,7 @@ gem 'twitter'
 
 group :development do
   gem 'brakeman', require: false
+  gem 'bullet'
 end
 
 group :development, :test do
