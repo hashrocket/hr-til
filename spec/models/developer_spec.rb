@@ -27,7 +27,7 @@ describe Developer do
     expect(developer.admin).to eq false
   end
 
-  context 'twitter username should be valid' do
+  context 'twitter username should be validated' do
     it 'should be alphanumeric' do
       developer.twitter_handle = 'abc...'
       expect(developer).to_not be_valid
@@ -36,6 +36,18 @@ describe Developer do
     it 'should not be all numbers' do
       developer.twitter_handle = '999'
       expect(developer).to_not be_valid
+    end
+
+    context 'is valid if it contains at least one alphabet character' do
+      specify 'at the end' do
+        developer.twitter_handle = '999a'
+        expect(developer).to be_valid
+      end
+
+      specify 'at the beginning' do
+        developer.twitter_handle = 'a999'
+        expect(developer).to be_valid
+      end
     end
 
     it 'should not be more than 15 characters' do
@@ -51,6 +63,18 @@ describe Developer do
     it 'should not allow blank' do
       developer.twitter_handle = ''
       expect(developer).to_not be_valid
+    end
+
+    context 'can contain an underscore' do
+      specify 'as the leading character' do
+        developer.twitter_handle = '_writer'
+        expect(developer).to be_valid
+      end
+
+      specify 'anywhere else in the handle' do
+        developer.twitter_handle = 'code_writer'
+        expect(developer).to be_valid
+      end
     end
   end
 end
