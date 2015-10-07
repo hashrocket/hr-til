@@ -4,7 +4,7 @@ class StatisticsController < ApplicationController
   private
 
   def top_ten
-    Post.published.order(likes: :desc).take(10)
+    Post.published.includes(:channel).order(likes: :desc).take(10)
   end
 
   def authors
