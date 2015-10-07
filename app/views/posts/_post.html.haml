@@ -1,34 +1,33 @@
-- cache post.updated_at do
-  %article.post{ :class => unless post.published? then 'draft' end }
-    %section.copy
-      %h1= link_to post.title, post
-      = find_and_preserve markdown_render post.body
-      %footer
-        %nav
-          = content_for :post_nav
-          - unless post.published?
-            %p Draft Post
-        %p= link_to post.display_date.strftime("%B %-e, %Y"), post
-    %aside
-      %ul
+%article.post{ :class => unless post.published? then 'draft' end }
+  %section.copy
+    %h1= link_to post.title, post
+    = find_and_preserve markdown_render post.body
+    %footer
+      %nav
+        = content_for :post_nav
+        - unless post.published?
+          %p Draft Post
+      %p= link_to post.display_date.strftime("%B %-e, %Y"), post
+  %aside
+    %ul
+      %li
+        = link_to post.developer do
+          more by
+          %b= post.developer_username
+      %li
+        %b
+          = link_to post.channel, class: post.channel_name do
+            \##{post.channel_name}
+      - if editable?(post)
         %li
-          = link_to post.developer do
-            more by
-            %b= post.developer_username
+          = link_to [:edit, post], class: "edit" do
+            %b edit this post
+      %li
+        = link_to [post, format: 'md'], class: "edit", target: "_blank" do
+          %b view raw
+      - unless post.draft?
         %li
-          %b
-            = link_to post.channel, class: post.channel_name do
-              \##{post.channel_name}
-        - if editable?(post)
-          %li
-            = link_to [:edit, post], class: "edit" do
-              %b edit this post
-        %li
-          = link_to [post, format: 'md'], class: "edit", target: "_blank" do
-            %b view raw
-        - unless post.draft?
-          %li
-            = link_to post_path(post), class: "js-like-action like", id: post.slug do
-              liked
-              %b= pluralize(post.likes, "time")
-      = content_for :social
+          = link_to post_path(post), class: "js-like-action like", id: post.slug do
+            liked
+            %b= pluralize(post.likes, "time")
+    = content_for :social
