@@ -72,6 +72,10 @@ And 'I select a channel' do
   select @channel.name, from: 'Channel'
 end
 
+When(/^I check "(.*?)"$/) do |label|
+  check label
+end
+
 And 'I select no channel' do
   select '', from: 'Channel'
 end

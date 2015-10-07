@@ -15,7 +15,7 @@
     %dd= f.collection_select :channel_id, sorted_channels, :id, :name, include_blank: ""
     - if @post.publishable?
       %label.checkbox
-        = check_box_tag :published, "true", @post.new_record?
+        = check_box_tag :published, "true", false
         = label_tag :published, 'Publish this post'
   %fieldset.actions
     = f.submit 'Submit'

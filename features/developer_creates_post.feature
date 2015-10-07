@@ -7,6 +7,7 @@ Feature: Developer creates post
     Then I see a form for posts
     When I enter information into that form
     And I select a channel
+    And I check "Publish this post"
     And I click submit
     Then I see the homepage
     And I see the post I created
@@ -23,6 +24,7 @@ Feature: Developer creates post
     Then I see a form for posts
     When I enter information with markdown inline code into that form
     And I select a channel
+    And I check "Publish this post"
     And I click submit
     Then I see the homepage
     And I see the markdown inline code I created
@@ -34,6 +36,7 @@ Feature: Developer creates post
     Then I see a form for posts
     When I enter information with markdown fenced code into that form
     And I select a channel
+    And I check "Publish this post"
     And I click submit
     Then I see the homepage
     And I see the markdown fenced code I created
@@ -45,6 +48,7 @@ Feature: Developer creates post
     Then I see a form for posts
     When I enter information with markdown bullets into that form
     And I select a channel
+    And I check "Publish this post"
     And I click submit
     Then I see the homepage
     And I see the markdown bullets I created
