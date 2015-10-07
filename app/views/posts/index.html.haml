@@ -8,7 +8,8 @@
         about #{params[:q]}
 
 %section#home
-  = render @posts
+  - cache @posts.maximum(:updated_at) do
+    = render @posts
 
 %nav.pagination
   = link_to_previous_page @posts, "&larr; newer TILs".html_safe, class: "pagination_newer"
