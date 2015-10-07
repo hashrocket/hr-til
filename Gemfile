@@ -9,6 +9,7 @@ gem 'authem'
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.1.0'
+gem 'dalli'
 gem 'dynamic_form'
 gem 'haml-rails'
 gem 'httparty'
@@ -49,8 +50,8 @@ end
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'poltergeist'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'webmock'
 end
