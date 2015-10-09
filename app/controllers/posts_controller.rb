@@ -76,7 +76,7 @@ class PostsController < ApplicationController
   end
 
   def drafts
-    @posts = posts_with_developer_and_channel.drafts
+    @posts = posts_with_developer_and_channel.drafts.where(developer: current_developer)
     render :index
   end
 

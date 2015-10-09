@@ -13,8 +13,9 @@ describe PostsController do
         end.to_not change { a_post.reload.title }
       end
 
-      it 'lists drafts' do
-        FactoryGirl.create_list :post, 3, :draft
+      it 'lists only my own drafts' do
+        FactoryGirl.create_list :post, 3, :draft, developer: developer
+        FactoryGirl.create_list :post, 3, :draft, developer: FactoryGirl.create(:developer)
         FactoryGirl.create :post
         get :drafts
 
