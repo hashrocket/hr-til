@@ -15,8 +15,12 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.developer = current_developer
     if @post.save
-      @post.publish if params[:published]
-      redirect_to root_path, notice: display_name(@post) + 'created'
+      if params[:published]
+        @post.publish
+        redirect_to root_path, notice: display_name(@post) + 'created'
+      else
+        redirect_to drafts_path, notice: display_name(@post) + '[draft] created'
+      end
     else
       render :new
     end
