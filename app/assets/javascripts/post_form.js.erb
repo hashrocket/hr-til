@@ -8,6 +8,10 @@ $(function(){
         post_form.$preview.html(result);
       });
     },
+    renderTitle: function() {
+      var txt = post_form.$titletextfield.val();
+      post_form.$title_preview.text(txt);
+    },
     renderWordCounts: function() {
       var max = <%= Post::MAX_WORDS %>,
         words = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
@@ -27,11 +31,14 @@ $(function(){
       this.$el.find('textarea.autosize').autosize();
 
       this.$preview = this.$el.find('.content_preview');
+      this.$title_preview = this.$el.find('.title_preview');
       this.$word_count = this.$el.find('.word_count');
       this.$word_limit = this.$el.find('.word_limit');
       this.$textarea = this.$el.find('#post_body');
+      this.$titletextfield = this.$el.find('#post_title');
 
       this.$textarea.on('keyup', this.renderWordCounts);
+      this.$titletextfield.on('keyup', this.renderTitle);
       this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
       this.$textarea.trigger('keyup');
     }
