@@ -450,8 +450,18 @@ When(/^I enter (\d+) words? into that form$/) do |number|
   fill_in 'Body', with: phrase
 end
 
-Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, noun|
-  within '#post_edit' do
+When(/^I enter (\d+) characters? into the title field$/) do |number|
+  fill_in 'Title', with: 'a' * number.to_i
+end
+
+Then(/^I see a message saying I have (\-?\d+) (words?) left$/) do |number, noun|
+  within '.body_word_limit' do
+    expect(page).to have_content "#{number} #{noun} available"
+  end
+end
+
+Then(/^I see a message saying I have (\-?\d+) (characters?) left$/) do |number, noun|
+  within '.title_word_limit' do
     expect(page).to have_content "#{number} #{noun} available"
   end
 end
@@ -464,6 +474,12 @@ end
 
 And 'the message is not red' do
   expect(page).to_not have_selector '.negative'
+end
+
+And 'the title message is not red' do
+  within '.title_word_limit' do
+    expect(page).to_not have_selector '.negative'
+  end
 end
 
 Given(/^a post exists with (?:a|the) body "(.*?)"$/) do |body|

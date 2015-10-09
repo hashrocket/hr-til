@@ -3,37 +3,57 @@ $(function(){
   var post_form = {
     $el: $("#post_edit"),
     renderMarkdown: function() {
-      var txt = post_form.$textarea.val();
+      var txt = post_form.$bodytextarea.val();
       $.post("/post_preview", { body: txt }, function(result){
         post_form.$preview.html(result);
       });
     },
-    renderWordCounts: function() {
-      var max = <%= Post::MAX_WORDS %>,
-        words = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
+
+    renderBodyWordCounts: function() {
+      var max = <%= Post::MAX_BODY_WORDS %>,
+        words = post_form.$bodytextarea.val().split(/\s+|\n/).filter(Boolean).length,
         remaining_words = max - words,
         pluralized_word = remaining_words === 1 ? ' word' : ' words'
 
       post_form.$word_count
         .toggleClass('negative', remaining_words < 0)
         .text(words + ' total ' + pluralized_word);
-      post_form.$word_limit
+      post_form.$body_word_limit
         .toggleClass('negative', remaining_words < 0)
         .text(remaining_words + pluralized_word + ' available');
 
     },
+
+    renderTitleWordCount: function() {
+      var max = <%= Post::MAX_TITLE_CHARS %>,
+        words = post_form.$titletextfield.val().length,
+        remaining_words = max - words,
+        pluralized_word = remaining_words === 1 ? ' character' : ' characters'
+
+      post_form.$title_word_limit
+        .toggleClass('negative', remaining_words < 0)
+        .text(remaining_words + pluralized_word + ' available');
+
+    },
+
     init: function() {
       if (!this.$el.length) { return; }
       this.$el.find('textarea.autosize').autosize();
 
       this.$preview = this.$el.find('.content_preview');
       this.$word_count = this.$el.find('.word_count');
-      this.$word_limit = this.$el.find('.word_limit');
-      this.$textarea = this.$el.find('#post_body');
 
-      this.$textarea.on('keyup', this.renderWordCounts);
-      this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
-      this.$textarea.trigger('keyup');
+      this.$body_word_limit = this.$el.find('.body_word_limit');
+      this.$title_word_limit = this.$el.find('.title_word_limit');
+      this.$bodytextarea = this.$el.find('#post_body');
+      this.$titletextfield = this.$el.find('#post_title');
+
+      this.$bodytextarea.on('keyup', this.renderBodyWordCounts);
+      this.$titletextfield.on('keyup', this.renderTitleWordCount);
+      this.$bodytextarea.on('keyup', debounce(this.renderMarkdown, 350));
+
+      this.$bodytextarea.trigger('keyup');
+      this.$titletextfield.trigger('keyup');
     }
   }
 

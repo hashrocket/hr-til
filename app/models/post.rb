@@ -19,7 +19,8 @@ class Post < ActiveRecord::Base
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
   scope :published_and_untweeted, -> { published.where('tweeted is false') }
 
-  MAX_WORDS = 200
+  MAX_BODY_WORDS  = 200
+  MAX_TITLE_CHARS = 50
 
   def published?
     !!published_at?
@@ -90,11 +91,11 @@ class Post < ActiveRecord::Base
   end
 
   def words_remaining
-    MAX_WORDS - word_count
+    MAX_BODY_WORDS - word_count
   end
 
   def body_size
-    if word_count > MAX_WORDS
+    if word_count > MAX_BODY_WORDS
       words_remaining_abs = words_remaining.abs
       errors.add :body, "of this post is too long. It is #{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} over the limit of 200 words"
     end
