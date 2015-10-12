@@ -90,8 +90,8 @@ class PostsController < ApplicationController
 
   def process_post
     if params[:published]
-      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       @post.publish
+      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       root_path
     else
       drafts_path
