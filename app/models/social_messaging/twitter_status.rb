@@ -7,6 +7,7 @@ module SocialMessaging
     end
 
     def post_to_twitter
+      return if post.draft? || post.tweeted
       if ENV['update_twitter_with_post'] == 'true'
         TwitterClient.update(status)
         post.tweeted = true

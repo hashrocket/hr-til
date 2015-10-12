@@ -15,12 +15,8 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.developer = current_developer
     if @post.save
-      if params[:published]
-        @post.publish
-        redirect_to root_path, notice: display_name(@post) + 'created'
-      else
-        redirect_to drafts_path, notice: display_name(@post) + '[draft] created'
-      end
+      path = process_post
+      redirect_to path, notice: display_name(@post) + 'created'
     else
       render :new
     end
@@ -48,6 +44,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       @post.publish if params[:published] && !@post.published?
+      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
       redirect_to @post, notice: display_name(@post) + 'updated'
     else
       render :edit
@@ -90,6 +87,16 @@ class PostsController < ApplicationController
   end
 
   private
+
+  def process_post
+    if params[:published]
+      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
+      @post.publish
+      root_path
+    else
+      drafts_path
+    end
+  end
 
   def posts_with_developer_and_channel
     Post.includes(:developer, :channel).page(params[:page]).per(50)
