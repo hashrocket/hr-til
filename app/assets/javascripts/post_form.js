@@ -12,31 +12,31 @@ $(function(){
       var txt = post_form.$titletextfield.val();
       post_form.$title_preview.text(txt);
     },
-    renderCharacterCounts: function() {
-      var max = +post_form.$character_limit.data('limit'),
-        chars = post_form.$titletextfield.val().length,
-        remaining_chars = max - chars,
-        pluralized_char = remaining_chars === 1 ? ' character' : ' characters';
-      post_form.$character_limit
-        .toggleClass('negative', remaining_chars < 0)
-        .text(remaining_chars + ' ' + pluralized_char + ' available');
+    renderCharacterLimit: function() {
+      post_form.renderCountMessage(
+        post_form.$character_limit,
+        post_form.title_max - post_form.$titletextfield.val().length,
+        'character'
+      );
     },
-    renderWordCounts: function() {
-      var max = +post_form.$word_limit.data('limit'),
-        words = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
-        remaining_words = max - words,
-        pluralized_word = remaining_words === 1 ? ' word' : ' words'
-
-      post_form.$word_count
-        .toggleClass('negative', remaining_words < 0)
-        .text('word count: ' + words);
-      post_form.$word_limit
-        .toggleClass('negative', remaining_words < 0)
-        .text(remaining_words + pluralized_word + ' available');
-
+    renderWordLimit: function() {
+      post_form.word_count = post_form.$textarea.val().split(/\s+|\n/).filter(Boolean).length,
+      post_form.renderCountMessage(
+        post_form.$word_limit,
+        post_form.max - post_form.word_count,
+        'word'
+      );
+      post_form.$word_count.text("word count: " + post_form.word_count);
+    },
+    renderCountMessage: function($el, amount, noun) {
+      var plural = amount === 1 ? '' : 's';
+      $el
+        .toggleClass('negative', amount < 0)
+        .text(amount + ' ' + noun + plural + ' available');
     },
     init: function() {
       if (!this.$el.length) { return; }
+
       this.$el.find('textarea.autosize').autosize();
 
       this.$preview = this.$el.find('.content_preview');
@@ -45,13 +45,16 @@ $(function(){
       this.$word_limit = this.$el.find('.word_limit');
       this.$character_limit = this.$el.find('.character_limit');
 
+      this.max = +this.$word_limit.data('limit');
+      this.title_max = +this.$character_limit.data('limit');
+
       this.$textarea = this.$el.find('#post_body');
       this.$titletextfield = this.$el.find('#post_title');
 
-      this.$titletextfield.on('keyup', this.renderCharacterCounts);
+      this.$titletextfield.on('keyup', this.renderCharacterLimit);
       this.$titletextfield.on('keyup', this.renderTitle);
 
-      this.$textarea.on('keyup', this.renderWordCounts);
+      this.$textarea.on('keyup', this.renderWordLimit);
       this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
 
       this.$textarea.add(this.$titletextfield).trigger('keyup');
