@@ -2,21 +2,25 @@ require 'rails_helper'
 
 describe PostsController do
   describe '#update' do
-    let(:a_post) { FactoryGirl.create :post }
-    let(:developer) { FactoryGirl.create :developer }
-    before { controller.sign_in developer }
+    let(:not_my_post) { FactoryGirl.create :post }
 
     context 'as a developer' do
+      let(:developer) { FactoryGirl.create :developer }
+
+      before do
+        controller.sign_in developer
+      end
+
       it 'only allows me to update my own posts' do
         expect do
-          patch :update, titled_slug: a_post.to_param, post: { title: 'HAXORD' }
-        end.to_not change { a_post.reload.title }
+          patch :update, titled_slug: not_my_post.to_param, post: { title: 'HAXORD' }
+        end.to_not change { not_my_post.reload.title }
       end
 
       it 'lists only my own drafts' do
         FactoryGirl.create_list :post, 3, :draft, developer: developer
-        FactoryGirl.create_list :post, 3, :draft, developer: FactoryGirl.create(:developer)
-        FactoryGirl.create :post
+        FactoryGirl.create_list :post, 3, developer: developer
+        FactoryGirl.create_list :post, 3, :draft
         get :drafts
 
         expect(assigns(:posts).length).to eq(3)
@@ -24,12 +28,16 @@ describe PostsController do
     end
 
     context 'as an admin' do
-      let(:developer) { FactoryGirl.create :developer, admin: true }
+      let(:admin) { FactoryGirl.create :developer, admin: true }
+
+      before do
+        controller.sign_in admin
+      end
 
       it 'allows me to update anyones post' do
         expect do
-          patch :update, titled_slug: a_post.to_param, post: { title: 'this is ok' }
-        end.to change { a_post.reload.title }
+          patch :update, titled_slug: not_my_post.to_param, post: { title: 'this is ok' }
+        end.to change { not_my_post.reload.title }
       end
     end
   end
@@ -49,6 +57,37 @@ describe PostsController do
 
       get :index
       expect(assigns(:posts).map(&:published?).uniq == [true]).to eq(true)
+    end
+  end
+
+  describe '#drafts' do
+    before do
+      controller.sign_in developer
+    end
+
+    context 'when I am a non-admin developer' do
+      let(:developer) { FactoryGirl.create :developer }
+
+      it 'lists only my own drafts' do
+        FactoryGirl.create_list :post, 3, :draft, developer: developer
+        FactoryGirl.create_list :post, 3, developer: developer
+        FactoryGirl.create_list :post, 3, :draft
+        get :drafts
+
+        expect(assigns(:posts).length).to eq(3)
+      end
+    end
+
+    context 'when I am an admin developer' do
+      let(:developer) { FactoryGirl.create :developer, admin: true }
+
+      it 'lists all drafts' do
+        FactoryGirl.create_list :post, 3, :draft, developer: developer
+        FactoryGirl.create_list :post, 3, :draft
+        get :drafts
+
+        expect(assigns(:posts).length).to eq(6)
+      end
     end
   end
 end

@@ -80,7 +80,12 @@ class PostsController < ApplicationController
   end
 
   def drafts
-    @posts = posts_with_developer_and_channel.drafts.where(developer: current_developer)
+    @posts = posts_with_developer_and_channel.drafts
+
+    unless current_developer.admin?
+      @posts = @posts.where(developer: current_developer)
+    end
+
     render :index
   end
 
