@@ -26,3 +26,10 @@ Feature: Visitor views statistics
     And 35 posts exist in 5 channels
     When I visit the statistics page
     Then I see "35 posts in 5 channels"
+
+  Scenario: Visitors views post total counts
+    Given I am a visitor
+    And there are 6 authors who have authored posts
+    And there are 2 authors who have not authored posts
+    When I visit the statistics page
+    Then I see "6 authors"

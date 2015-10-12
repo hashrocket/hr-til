@@ -27,7 +27,7 @@
     .stats_column
       %article
         %header
-          %h1= "#{pluralize posts.count, "post"} in #{pluralize channels.count, "channel"}"
+          %h1 #{pluralize posts.count, "post"} in #{pluralize channels.count, "channel"}
         %ul.post_list#channels
           - channels.each do |channel|
             %li
@@ -38,7 +38,7 @@
     .stats_column.right
       %article
         %header
-          %h1 All authors
+          %h1 #{pluralize authors.count, "author"}
         %ul.post_list#authors
           - authors.each do |author|
             %li

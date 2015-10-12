@@ -23,6 +23,15 @@ When(/^(\d+) posts exist more than thirty days old$/) do |count|
   FactoryGirl.create_list(:post, count.to_i, :for_last_year)
 end
 
+When(/there are (\d+) authors who (have|have not) authored posts/) do |count, authored|
+  count.to_i.times do
+    dev = FactoryGirl.create(:developer)
+    if (authored == "have")
+      FactoryGirl.create(:post, developer: dev)
+    end
+  end
+end
+
 Then 'I see statistics' do
   sleep 0.25
   expect(current_path).to eq statistics_path
