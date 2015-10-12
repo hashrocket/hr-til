@@ -453,6 +453,12 @@ When(/^I enter (\d+) words? into that form$/) do |number|
   fill_in 'Body', with: phrase
 end
 
+Then(/^I see a message saying I have entered (\-?\d+) (word|words)$/) do |number, noun|
+  within '#post_edit' do
+    expect(page).to have_content "word count: #{number}"
+  end
+end
+
 Then(/^I see a message saying I have (\-?\d+) (word|words) left$/) do |number, noun|
   within '#post_edit' do
     expect(page).to have_content "#{number} #{noun} available"

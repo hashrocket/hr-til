@@ -107,15 +107,20 @@ Feature: Developer creates post
     Then I see a message saying I have 200 words left
     And the message is not red
     When I enter 1 word and a newline into that form
-    Then I see a message saying I have 199 words left
+    Then I see a message saying I have entered 1 word
+    And I see a message saying I have 199 words left
     When I enter 1 word into that form
-    Then I see a message saying I have 199 words left
+    Then I see a message saying I have entered 1 word
+    And I see a message saying I have 199 words left
     When I enter 50 words into that form
-    Then I see a message saying I have 150 words left
+    Then I see a message saying I have entered 50 words
+    And I see a message saying I have 150 words left
     When I enter 200 words into that form
-    Then I see a message saying I have 0 words left
+    Then I see a message saying I have entered 200 words
+    And I see a message saying I have 0 words left
     When I enter 300 words into that form
-    Then I see a message saying I have -100 words left
+    Then I see a message saying I have entered 300 words
+    And I see a message saying I have -100 words left
     And the message is red
 
   Scenario: Developer cannot unpublish a post

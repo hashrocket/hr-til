@@ -20,7 +20,7 @@ $(function(){
 
       post_form.$word_count
         .toggleClass('negative', remaining_words < 0)
-        .text(words + ' total ' + pluralized_word);
+        .text('word count: ' + words);
       post_form.$word_limit
         .toggleClass('negative', remaining_words < 0)
         .text(remaining_words + pluralized_word + ' available');
