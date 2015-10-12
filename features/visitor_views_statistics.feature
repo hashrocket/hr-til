@@ -20,3 +20,9 @@ Feature: Visitor views statistics
     And 35 posts exist more than thirty days old
     And I click "statistics"
     Then I see statistics
+
+  Scenario: Visitors views post total counts
+    Given I am a visitor
+    And 35 posts exist in 5 channels
+    When I visit the statistics page
+    Then I see "35 posts in 5 channels"

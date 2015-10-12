@@ -1,7 +1,12 @@
 class StatisticsController < ApplicationController
-  helper_method :top_ten, :authors, :channels, :highest_count_last_30_days, :posts_per_day
+  helper_method :top_ten, :authors, :channels,
+    :highest_count_last_30_days, :posts_per_day, :posts
 
   private
+
+  def posts
+    Post.published
+  end
 
   def top_ten
     Post.published.includes(:channel).order(likes: :desc).take(10)
