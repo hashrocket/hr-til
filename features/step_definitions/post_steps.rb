@@ -424,6 +424,9 @@ And 'I see a markdown preview of my post' do
 end
 
 Then 'I see a markdown preview with my rendered code' do
+  within('.post .title_preview') do
+    expect(page).to have_content 'Codified'
+  end
   within('.post .content_preview code') do
     expect(page).to have_content 'killer robot attack'
   end
