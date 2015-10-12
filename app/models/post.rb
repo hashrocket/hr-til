@@ -18,6 +18,7 @@ class Post < ActiveRecord::Base
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
   scope :published_and_untweeted, -> { published.where('tweeted is false') }
 
+  MAX_TITLE_CHARS = 50
   MAX_WORDS = 200
 
   def published?

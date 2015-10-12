@@ -134,3 +134,19 @@ Feature: Developer creates post
     And   I have an existing unpublished post
     When  I visit the posts page
     Then  I see the draft
+
+  @javascript
+  Scenario: Developer sees updating title char count
+    Given I am a signed in developer
+    When  I visit the homepage
+    And   I click create post
+    Then  I see a form for posts
+    When  I enter 0 characters into the title field
+    Then  I see a message saying I have 50 characters left
+    And   the message is not red
+    When  I enter 1 character into the title field
+    Then  I see a message saying I have 49 characters left
+    And   the message is not red
+    When  I enter 51 characters into the title field
+    Then  I see a message saying I have -1 characters left
+    And   the message is red

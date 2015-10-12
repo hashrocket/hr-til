@@ -453,6 +453,16 @@ When(/^I enter (\d+) words? into that form$/) do |number|
   fill_in 'Body', with: phrase
 end
 
+When(/^I enter (\d+) characters? into the title field$/) do |number|
+  fill_in 'Title', with: 'a' * number.to_i
+end
+
+Then(/^I see a message saying I have (\-?\d+) (character|characters) left$/) do |number, noun|
+  within '.character_limit' do
+    expect(page).to have_content "#{number} #{noun} available"
+  end
+end
+
 Then(/^I see a message saying I have entered (\-?\d+) (word|words)$/) do |number, noun|
   within '#post_edit' do
     expect(page).to have_content "word count: #{number}"

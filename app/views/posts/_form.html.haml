@@ -3,11 +3,12 @@
     %dt
       = f.label :title
       = f.error_message_on :title
+      %small.character_limit(data-limit="#{Post::MAX_TITLE_CHARS}")
     %dd= f.text_field :title, placeholder: 'Enter title...'
     %dt
       = f.label :body
       = f.error_message_on :body
-      %small.word_limit
+      %small.word_limit(data-limit="#{Post::MAX_WORDS}")
     %dd= f.text_area :body, placeholder: 'Enter body...', class: 'autosize'
     %dt
       = f.label :channel_id
