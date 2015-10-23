@@ -5,6 +5,6 @@ class PostSlack::CreateSerializer < ActiveModel::Serializer
   attributes :text
 
   def text
-    "#{object.developer_username} created a new post - <#{Rails.configuration.server_url}#{post_path(object)}|#{object.title}>"
+    "#{object.developer_username} created a new post - <#{Rails.configuration.server_url}#{post_path(object)}|#{object.title}> ##{object.channel_name}"
   end
 end

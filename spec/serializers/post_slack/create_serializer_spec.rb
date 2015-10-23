@@ -9,7 +9,8 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                         slug: 'sluggishslug',
                         body: 'learned some things',
                         developer: developer,
-                        title: 'entitled title'
+                        title: 'entitled title',
+                        channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
     end
 
@@ -20,7 +21,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
     end
 
     it 'is serialized correctly' do
-      expected_text = 'tpope created a new post - <http://www.example.com/posts/sluggishslug-entitled-title|entitled title>'
+      expected_text = 'tpope created a new post - <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
       expect(serialized).to eql(expected_text)
     end
   end
