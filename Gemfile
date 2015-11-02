@@ -33,14 +33,10 @@ group :development do
 end
 
 group :development, :test do
-  gem 'byebug'
   gem 'factory_girl_rails'
   gem 'figaro'
   gem 'pry-rails'
   gem 'rspec-rails'
-  gem 'spring'
-  gem 'test_after_commit'
-  gem 'web-console', '~> 2.0'
 end
 
 group :production do
