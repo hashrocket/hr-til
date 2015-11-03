@@ -46,8 +46,8 @@ end
 group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
-  gem 'poltergeist'
   gem 'launchy'
+  gem 'poltergeist'
   gem 'simplecov', require: false
   gem 'webmock'
 end
