@@ -1,6 +1,6 @@
-- content_for :page_title, "Posts about #{@channel.name}"
+- content_for :page_title, "Posts about #{channel.name}"
 
 %section#tag
   %header.page_head
-    %h1 #{pluralize @channel.posts_count, "post"} about ##{@channel.name}
-= render @posts
+    %h1 #{pluralize channel.posts_count, "post"} about ##{channel.name}
+= render posts
