@@ -7,9 +7,11 @@ TIL is a project by Hashrocket to catalogue the sharing & accumulation of knowle
 ### Install
 
 ```
-git clone https://github.com/hashrocket.com/hr-til
+git clone https://github.com/hashrocket/hr-til
 cd hr-til
 rake db:setup
+cp config/application.yml{.example,}
+cp config/secrets.yml{.example,}
 rails s
 ```
 
@@ -36,6 +38,7 @@ twitter_consumer_key:
 twitter_consumer_secret:
 twitter_access_token:
 twitter_access_token_secret:
+secret_key_base:
 ```
 
 And this variable toggles basic auth:
