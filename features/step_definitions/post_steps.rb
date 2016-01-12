@@ -463,7 +463,7 @@ Then(/^I see a message saying I have (\-?\d+) (character|characters) left$/) do 
   end
 end
 
-Then(/^I see a message saying I have entered (\-?\d+) (word|words)$/) do |number, noun|
+Then(/^I see a message saying I have entered (\-?\d+) (word|words)$/) do |number, _noun|
   within '#post_edit' do
     expect(page).to have_content "word count: #{number}"
   end

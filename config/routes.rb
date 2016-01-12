@@ -23,5 +23,4 @@ Rails.application.routes.draw do
 
   post '/posts/:slug/like', to: 'posts#like'
   post '/posts/:slug/unlike', to: 'posts#unlike'
-
 end
