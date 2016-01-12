@@ -7,18 +7,13 @@ TIL is a project by Hashrocket to catalogue the sharing & accumulation of knowle
 ### Install
 
 ```
-hclone hr-til
+git clone https://github.com/hashrocket.com/hr-til
+cd hr-til
 rake db:setup
 rails s
 ```
 
-An optional setup task is to restore a copy of the production database (requires Heroku access):
-
-```
-rake db:restore_production_dump
-```
-
-Authentication is managed by Omniauth and Google. Visit '/admin' and log in with your Hashrocket email address.
+Authentication is managed by Omniauth and Google. Visit '/admin' and log in with your company email address.
 
 ### Hosting
 
@@ -36,7 +31,7 @@ host: 'http://localhost:3000'
 google_client_id:
 google_client_secret:
 slack_post_endpoint:
-update_twitter_with_post: "false"
+update_twitter_with_post: 'false'
 twitter_consumer_key:
 twitter_consumer_secret:
 twitter_access_token:
@@ -51,5 +46,8 @@ basic_auth_credentials # required format: username:password
 
 ### Slack Integration
 
-1. We have two incoming webhooks in the API, 'tilbot' (production) and 'tilbot-testbot' (all other environments)
-2. Set `slack_post_endpoint` to the path of the webhook (e.g. the part after the domain) for the appropriate bot
+Set `slack_post_endpoint` to the path of the webhook (e.g. the part after the domain) for the appropriate bot.
+
+### Contributing
+
+Please open an issue or submit a pull request if you'd like to contribute. Code should be accompanied by tests.
