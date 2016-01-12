@@ -288,6 +288,13 @@ form
     display: block
     max-width: 100%
     height: auto
+  blockquote
+    +responsive(margin-bottom, 1.4em, 1.1em)
+    background: $light
+    color: darken($blue, 50%)
+    padding: 1em 1.5em .1em 1.5em
+    font-size: .9em
+    box-shadow: -0.4em 0.4em 0 0 transparentize($blue, .5)
   +mobile
     margin-right: 0
     margin-bottom: 1rem

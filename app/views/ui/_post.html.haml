@@ -3,7 +3,7 @@
 
 %article.post{ :class => if draft then 'draft' end }
   %section.copy
-    = Phil.markup ["h1 p", "h1 p h2", "h1 p h3", "h1 ul"].sample
+    = Phil.markup "h1 p h2 p h3 p ul p blockquote p"
     - Phil.sometimes do
       %pre
         %code
