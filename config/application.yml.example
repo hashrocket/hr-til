@@ -9,6 +9,8 @@ development: &default
   twitter_access_token:
   twitter_access_token_secret:
   secret_key_base: c30fec64dfa9ed2c072be79fa5fb37d986897e7d00102501be3930fdaaa5bd99c25361422637b2d9dac2020bd5c31dba0c34de6f81e18e0db84738b88a8a8a7d
+  heroku_production_app_name:
+
 test:
   <<: *default
   host: 'http://localhost:3000'

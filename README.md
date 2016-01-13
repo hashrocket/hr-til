@@ -44,6 +44,7 @@ twitter_consumer_secret:
 twitter_access_token:
 twitter_access_token_secret:
 secret_key_base:
+heroku_production_app_name:
 ```
 
 And this variable toggles basic auth:
