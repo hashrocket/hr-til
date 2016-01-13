@@ -8,7 +8,7 @@ This site was open sourced as a window into our development process, as well as 
 
 ### Install
 
-If you are creating your own version of the site, fork the repository. For everybody else, follow these setup steps:
+If you are creating your own version of the site, fork the repository. Then, follow these setup steps:
 
 ```
 git clone https://github.com/hashrocket/hr-til
@@ -18,7 +18,6 @@ cp config/application.yml{.example,}
 cp config/secrets.yml{.example,}
 rails s
 ```
-
 
 Authentication is managed by Omniauth and Google. Visit '/admin' and log in with your email address.
 
@@ -31,23 +30,7 @@ Staging and production for Hashrocket's TIL is located here:
 
 ### Environmental Variables
 
-These environmental variables are needed in development for some features to work:
-
-```
-host: 'http://localhost:3000'
-google_client_id:
-google_client_secret:
-slack_post_endpoint:
-update_twitter_with_post: 'false'
-twitter_consumer_key:
-twitter_consumer_secret:
-twitter_access_token:
-twitter_access_token_secret:
-secret_key_base:
-heroku_production_app_name:
-```
-
-And this variable toggles basic auth:
+`basic_auth_credentials` toggles basic authentication:
 
 ```
 basic_auth_credentials # required format: username:password
