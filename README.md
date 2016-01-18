@@ -46,4 +46,4 @@ Please open an issue or submit a pull request if you'd like to contribute. Code 
 
 ### License
 
-See `LICENSE` for details.
+TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
