@@ -33,10 +33,9 @@ below to the domain of users you're allowing to post:
 
 Rails.application.config.middleware.use OmniAuth::Builder do
   provider :google_oauth2,
-    ENV['google_client_id'],
-    ENV['google_client_secret'],
+    ...
     hd: 'hashrocket.com',
-    access_type: 'online'
+    ...
 end
 ```
 
@@ -55,7 +54,9 @@ Staging and production for Hashrocket's TIL is located here:
 `basic_auth_credentials` toggles basic authentication:
 
 ```
-basic_auth_credentials # required format: username:password
+# config/application.yml
+
+basic_auth_credentials: username:password
 ```
 
 ### Slack Integration
