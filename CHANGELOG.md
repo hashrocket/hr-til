@@ -1,3 +1,7 @@
+* Revert `secret_key_base` as env var pattern in test and development.
+
+  *Jake Worth*
+
 * Check in new Gemfile.lock.
 
   *Jake Worth*
