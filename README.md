@@ -2,9 +2,9 @@
 
 Welcome to the Hashrocket 'Today I Learned' repository.
 
-TIL is a project by Hashrocket to catalogue the sharing & accumulation of
-knowledge as it happens day-to-day. Posts have a 200-word limit and any
-Hashrocket team member can contribute.
+> TIL is a project by Hashrocket to catalogue the sharing & accumulation of
+> knowledge as it happens day-to-day. Posts have a 200-word limit and any
+> Hashrocket team member can contribute.
 
 This site was open sourced as a window into our development process, as well as
 to allow people to experiment with the site on their own and contribute the
