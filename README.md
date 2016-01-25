@@ -16,11 +16,12 @@ If you are creating your own version of the site, fork the repository. Then,
 follow these setup steps:
 
 ```
-git clone https://github.com/hashrocket/hr-til
-cd hr-til
-rake db:setup
-cp config/application.yml{,.example}
-rails s
+$ git clone https://github.com/hashrocket/hr-til
+$ cd hr-til
+$ bundle install
+$ rake db:setup
+$ cp config/application.yml{,.example}
+$ rails s
 ```
 
 Authentication is managed by Omniauth and Google. Once you've set up an app in
