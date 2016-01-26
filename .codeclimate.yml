@@ -11,6 +11,14 @@ engines:
     enabled: true
   scsslint:
     enabled: true
+  fixme:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
 ratings:
   paths:
   - app/**
