@@ -4,6 +4,10 @@ class Developer < ActiveRecord::Base
   validates :username, presence: true, uniqueness: true
   validates :twitter_handle, length: { maximum: 15 }, format: { with: /\A(?=.*[a-z])[a-z_\d]+\Z/i }, allow_nil: true
 
+  def self.editor_options
+    ['Text Field', 'Ace (w/ Vim)', 'Ace'].freeze
+  end
+
   def to_param
     username
   end

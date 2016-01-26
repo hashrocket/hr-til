@@ -24,6 +24,11 @@ class DevelopersController < ApplicationController
   end
 
   def developer_params
-    params.require(:developer).permit :email, :username, :twitter_handle
+    params.require(:developer).permit(
+      :email,
+      :username,
+      :editor,
+      :twitter_handle
+    )
   end
 end
