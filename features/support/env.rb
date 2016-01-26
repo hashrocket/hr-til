@@ -1,15 +1,8 @@
 require 'simplecov'
 require 'cucumber/rails'
-require 'capybara/poltergeist'
-
 require 'webmock/cucumber'
+
 WebMock.disable_net_connect!(allow_localhost: true)
-
-Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, debug: false)
-end
-
-Capybara.javascript_driver = :poltergeist
 
 OmniAuth.config.test_mode = true
 
