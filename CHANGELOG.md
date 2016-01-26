@@ -1,3 +1,7 @@
+* Allow developers to use the Ace editor with Vim keybindings
+
+  *Dorian Karter*
+
 * Style site description as block quote.
 
   *Jake Worth*
