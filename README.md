@@ -1,5 +1,7 @@
 # HR-TIL
 
+[![Circle CI](https://circleci.com/gh/hashrocket/hr-til.svg?style=svg)](https://circleci.com/gh/hashrocket/hr-til)
+
 Welcome to the Hashrocket 'Today I Learned' repository.
 
 > TIL is a project by Hashrocket to catalogue the sharing & accumulation of
