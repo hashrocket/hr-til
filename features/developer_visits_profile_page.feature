@@ -19,6 +19,14 @@ Feature: Developer visits profile page
     And I click the "Submit" button
     Then I see an error message "Twitter handle is invalid"
 
+  Scenario: Can submit form without entering a Twitter handle
+    Given I am a signed in developer
+    When I visit the homepage
+    And I click profile
+    Then I see my profile page
+    And I click the "Submit" button
+    Then I see the homepage
+
   @javascript
   Scenario: Sets editor to Ace editor
     Given I am a signed in developer
@@ -26,7 +34,6 @@ Feature: Developer visits profile page
     And I click profile
     Then I see my profile page
     When I change my editor to "Ace"
-    And I enter my twitter handle
     And I click the "Submit" button
     Then I see the homepage
     When I visit the new post page
@@ -40,7 +47,6 @@ Feature: Developer visits profile page
     And I click profile
     Then I see my profile page
     When I change my editor to "Ace (w/ Vim)"
-    And I enter my twitter handle
     And I click the "Submit" button
     Then I see the homepage
     When I visit the new post page
@@ -54,7 +60,6 @@ Feature: Developer visits profile page
     And I click profile
     Then I see my profile page
     When I change my editor to "Text Field"
-    And I enter my twitter handle
     And I click the "Submit" button
     Then I see the homepage
     When I visit the new post page

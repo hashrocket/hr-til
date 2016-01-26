@@ -62,7 +62,8 @@ describe Developer do
 
     it 'should not allow blank' do
       developer.twitter_handle = ''
-      expect(developer).to_not be_valid
+      expect(developer).to be_valid
+      expect(developer.twitter_handle).to eq nil
     end
 
     context 'can contain an underscore' do
