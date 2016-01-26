@@ -10,6 +10,7 @@ development:
 test: &test
   <<: *default
   database: hr-til_test
+  user: postgres
 
 cucumber:
   <<: *test

@@ -3,3 +3,5 @@ rvm:
   - 2.3.0
 services:
   - postgresql
+before_script:
+  - bundle exec rake db:create db:migrate db:test:prepare
