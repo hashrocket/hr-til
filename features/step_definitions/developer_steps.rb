@@ -45,6 +45,25 @@ Then 'I should not see my username in the upper right' do
   expect(page).to_not have_content 'johnsmith'
 end
 
+When(/^I change my editor to "(.*)"$/) do |editor_name|
+  select editor_name, from: 'Editor'
+end
+
+Then(/^the editor is set to "(.*)"$/) do |editor_name|
+  if editor_name == 'Ace'
+    expect(page).to have_selector('textarea#post_body', visible: false)
+    expect(page).to have_selector('.ace_editor')
+  elsif editor_name == 'Ace (w/ Vim)'
+    expect(page).to have_selector('.ace_editor.normal-mode', visible: true)
+    expect(page).to have_selector('textarea#post_body', visible: false)
+  elsif editor_name == 'Text Field'
+    expect(page).to have_selector('textarea#post_body', visible: true)
+    expect(page).to have_selector('#editor', visible: false)
+  else
+    fail 'Unknown editor'
+  end
+end
+
 And 'I do not see the signout link' do
   expect(page).to_not have_link 'Sign Out'
 end

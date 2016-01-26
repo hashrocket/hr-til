@@ -49,6 +49,7 @@ $(function(){
       this.title_max = +this.$character_limit.data('limit');
 
       this.$textarea = this.$el.find('#post_body');
+      this.$ace_editor = this.$el.find('#editor');
       this.$titletextfield = this.$el.find('#post_title');
 
       this.$titletextfield.on('keyup', this.renderCharacterLimit);
@@ -56,8 +57,32 @@ $(function(){
 
       this.$textarea.on('keyup', this.renderWordLimit);
       this.$textarea.on('keyup', debounce(this.renderMarkdown, 350));
+      this.$textarea.on('change', this.renderWordLimit);
+      this.$textarea.on('change', debounce(this.renderMarkdown, 350));
 
       this.$textarea.add(this.$titletextfield).trigger('keyup');
+
+      var that = this;
+
+      // initialize ace editor
+      if (!!TIL.editor.match(/Ace/)) {
+        var editor = ace.edit('editor');
+        ace.config.set('workerPath', '/assets/javascripts/ace');
+        editor.setTheme('ace/theme/kuroir');
+        editor.getSession().setMode('ace/mode/markdown');
+        editor.setFontSize(16);
+        editor.getSession().on('change', function() {
+          var value = editor.session.getValue();
+          that.$textarea.val(value).trigger('change');
+        });
+
+        if (TIL.editor === 'Ace (w/ Vim)') {
+          editor.setKeyboardHandler('ace/keyboard/vim');
+        }
+
+        this.$ace_editor.show();
+        this.$textarea.hide();
+      }
     }
   }
 

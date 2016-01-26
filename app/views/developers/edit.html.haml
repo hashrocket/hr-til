@@ -10,6 +10,11 @@
             = f.label :twitter_handle
             = f.error_message_on :twitter_handle
           %dd= f.text_field :twitter_handle, placeholder: 'Enter handle...'
+          %dt
+            = f.label :editor
+            = f.error_message_on :editor
+          %dd= f.select :editor, options_for_select(Developer.editor_options, selected: developer.editor)
         %fieldset.actions
           = f.submit 'Submit'
           = link_to 'cancel', root_path
+

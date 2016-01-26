@@ -6,6 +6,7 @@ Feature: Developer visits profile page
     And I click profile
     Then I see my profile page
     When I enter my twitter handle
+    And I click the "Submit" button
     Then I see the homepage
     And my twitter handle is set
 
@@ -15,4 +16,47 @@ Feature: Developer visits profile page
     And I click profile
     Then I see my profile page
     When I enter an invalid twitter handle
+    And I click the "Submit" button
     Then I see an error message "Twitter handle is invalid"
+
+  @javascript
+  Scenario: Sets editor to Ace editor
+    Given I am a signed in developer
+    When I visit the homepage
+    And I click profile
+    Then I see my profile page
+    When I change my editor to "Ace"
+    And I enter my twitter handle
+    And I click the "Submit" button
+    Then I see the homepage
+    When I visit the new post page
+    Then I see a form for posts
+    And the editor is set to "Ace"
+
+  @javascript
+  Scenario: Sets editor to Ace editor with VIM
+    Given I am a signed in developer
+    When I visit the homepage
+    And I click profile
+    Then I see my profile page
+    When I change my editor to "Ace (w/ Vim)"
+    And I enter my twitter handle
+    And I click the "Submit" button
+    Then I see the homepage
+    When I visit the new post page
+    Then I see a form for posts
+    And the editor is set to "Ace (w/ Vim)"
+
+  @javascript
+  Scenario: Sets editor to a Text Field
+    Given I am a signed in developer
+    When I visit the homepage
+    And I click profile
+    Then I see my profile page
+    When I change my editor to "Text Field"
+    And I enter my twitter handle
+    And I click the "Submit" button
+    Then I see the homepage
+    When I visit the new post page
+    Then I see a form for posts
+    And the editor is set to "Text Field"

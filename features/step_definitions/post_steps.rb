@@ -519,8 +519,12 @@ Then(/^I should not see a "(.*?)" button$/) do |arg|
   expect(page).to_not have_link arg
 end
 
-When(/^I click "(.*?)"$/) do |arg|
-  find('a', text: arg).trigger 'click'
+When(/^I click (the )?"(.*?)"( button)?$/) do |_, text, is_button|
+  if is_button
+    click_button(text)
+  else
+    click_link(text)
+  end
 end
 
 Then 'I should see the About Us text' do
@@ -547,6 +551,10 @@ end
 
 When 'I visit the posts page' do
   visit post_path @post
+end
+
+When 'I visit the new post page' do
+  visit new_post_path
 end
 
 Then 'I see the draft' do

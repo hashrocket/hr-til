@@ -93,12 +93,10 @@ end
 
 When 'I enter my twitter handle' do
   fill_in 'Twitter handle', with: 'hashrocket'
-  click_on 'Submit'
 end
 
 When 'I enter an invalid twitter handle' do
   fill_in 'Twitter handle', with: 'a.!&'
-  click_on 'Submit'
 end
 
 And 'my twitter handle is set' do

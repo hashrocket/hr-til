@@ -6,6 +6,9 @@
 !/log/.keep
 /tmp
 /config/application.yml
+/vendor/bundle
 
 coverage
 lastest.dump
+
+.ruby-version
