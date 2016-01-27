@@ -25,6 +25,8 @@ ratings:
   - lib/**
   - "**.rb"
 exclude_paths:
-- public/assets/javascripts/ace/**/*
 - db/schema.rb
+- features/**/*
 - lib/tasks/cucumber.rake
+- public/assets/javascripts/ace/**/*
+- spec/**/*
