@@ -2,8 +2,6 @@
 
 [![Circle CI](https://circleci.com/gh/hashrocket/hr-til.svg?style=svg)](https://circleci.com/gh/hashrocket/hr-til) [![Code Climate](https://codeclimate.com/github/hashrocket/hr-til/badges/gpa.svg)](https://codeclimate.com/github/hashrocket/hr-til)
 
-Welcome to the Hashrocket 'Today I Learned' repository.
-
 > TIL is a project by Hashrocket to catalogue the sharing & accumulation of
 > knowledge as it happens day-to-day. Posts have a 200-word limit and any
 > Hashrocket team member can contribute.
@@ -43,6 +41,10 @@ end
 
 With this in place, you can visit '/admin' and log in with an email address from
 the domain you've allowed.
+
+### Dependencies
+
+The `selenium-webdriver` gem requires the Firefox browser.
 
 ### Hosting
 
