@@ -16,7 +16,6 @@ gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'omniauth-google-oauth2'
 gem 'pg'
-gem 'phil'
 gem 'puma'
 gem 'redcarpet'
 gem 'rouge'
@@ -29,6 +28,7 @@ gem 'twitter'
 group :development do
   gem 'brakeman', require: false
   gem 'bullet'
+  gem 'phil'
 end
 
 group :development, :test do
