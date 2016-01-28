@@ -67,11 +67,16 @@ $(function(){
       // initialize ace editor
       if (!!TIL.editor.match(/Ace/)) {
         var editor = ace.edit('editor');
+        var session = editor.getSession();
         ace.config.set('workerPath', '/assets/javascripts/ace');
         editor.setTheme('ace/theme/kuroir');
-        editor.getSession().setMode('ace/mode/markdown');
         editor.setFontSize(16);
-        editor.getSession().on('change', function() {
+
+        session.setMode('ace/mode/markdown');
+        session.setUseWrapMode(true);
+        session.setUseSoftTabs(true);
+        session.setTabSize(2);
+        session.on('change', function() {
           var value = editor.session.getValue();
           that.$textarea.val(value).trigger('change');
         });
