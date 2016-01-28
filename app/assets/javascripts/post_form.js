@@ -81,6 +81,8 @@ $(function(){
           that.$textarea.val(value).trigger('change');
         });
 
+        editor.setValue(this.$textarea.val());
+
         if (TIL.editor === 'Ace (w/ Vim)') {
           editor.setKeyboardHandler('ace/keyboard/vim');
         }
