@@ -91,6 +91,10 @@ Then 'I see my profile page' do
   end
 end
 
+Then(/^I see my email "([^"]*)"$/) do |email|
+  expect(page).to have_content(email)
+end
+
 When 'I enter my twitter handle' do
   fill_in 'Twitter handle', with: 'hashrocket'
 end

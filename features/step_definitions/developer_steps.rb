@@ -13,8 +13,20 @@ Given 'I am a signed in developer' do
     )
 end
 
+Given(/^I am a signed in developer with email "([^"]*)"$/) do |email|
+  steps %(
+    Given I try to sign up or sign in with email "#{email}"
+    Then I am signed in
+    )
+end
+
 And 'I try to sign up or sign in with valid credentials' do
   OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@hashrocket.com' })
+  visit google_oauth2_path
+end
+
+Given(/^I try to sign up or sign in with email "([^"]*)"$/) do |email|
+  OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: email })
   visit google_oauth2_path
 end
 

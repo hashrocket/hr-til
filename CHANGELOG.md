@@ -1,3 +1,7 @@
+* Add email address to the developer's profile page.
+
+  *Dorian Karter & Jake Worth*
+
 * Restrict user creation to whitelisted domains.
 
   *Dorian Karter & Jake Worth*

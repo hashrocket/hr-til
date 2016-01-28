@@ -4,8 +4,12 @@
       .copy
         %h1 My Profile
 
+
       = form_for developer, url: profile_path do |f|
         %dl
+          %dt
+            = label_tag :email
+            %dd= developer.email
           %dt
             = f.label :twitter_handle
             = f.error_message_on :twitter_handle
