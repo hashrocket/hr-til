@@ -15,7 +15,7 @@ project.
 If you are creating your own version of the site, fork the repository. Then,
 follow these setup steps:
 
-```
+```sh
 $ git clone https://github.com/hashrocket/hr-til
 $ cd hr-til
 $ bundle install
@@ -24,19 +24,12 @@ $ cp config/application.yml{,.example}
 $ rails s
 ```
 
-Authentication is managed by Omniauth and Google. Once you've set up an app in
-the Google Developer's Console API manager, change `hashrocket.com` in the code
-below to the domain of users you're allowing to post:
+Authentication is managed by Omniauth and Google. To whitelist a domain or multiple domains, add the domain name to your environmental variables:
 
-```ruby
-# config/initializers/omniauth.rb
+```yml
+# config/application.yml
 
-Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :google_oauth2,
-    ...
-    hd: 'hashrocket.com',
-    ...
-end
+permitted_domains: 'hashrocket.com|hshrckt.com'
 ```
 
 With this in place, you can visit '/admin' and log in with an email address from

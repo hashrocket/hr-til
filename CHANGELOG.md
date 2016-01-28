@@ -1,3 +1,7 @@
+* Restrict user creation to whitelisted domains.
+
+  *Dorian Karter & Jake Worth*
+
 * Allow developers to use the Ace editor with Vim keybindings
 
   *Dorian Karter*

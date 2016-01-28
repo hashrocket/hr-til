@@ -17,6 +17,29 @@ describe Developer do
     expect(developer).to_not be_valid
   end
 
+  context 'validates email domains' do
+    before do
+      @prev_permitted_domains = ENV['permitted_domains']
+      ENV['permitted_domains'] = 'hashrocket.com|hshrcket.com'
+    end
+
+    after do
+      ENV['permitted_domains'] = @prev_permitted_domains
+    end
+
+    it 'and allows whitelisted domains' do
+      developer.email = 'foo@hashrocket.com'
+      expect(developer).to be_valid
+      developer.email = 'foo@hshrckt.com'
+      expect(developer).to be_valid
+    end
+
+    it 'should deny an email from a non-whitelisted domain' do
+      developer.email = 'foo@example.com'
+      expect(developer).to_not be_valid, message: 'Email is not valid'
+    end
+  end
+
   it 'should validate username uniqueness' do
     dup_developer = FactoryGirl.build(:developer, username: developer.username)
     expect(dup_developer).to_not be_valid
