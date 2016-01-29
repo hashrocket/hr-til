@@ -44,7 +44,7 @@ The `selenium-webdriver` gem requires the Firefox browser.
 Staging and production for Hashrocket's TIL is located here:
 
 * http://hr-til-staging.herokuapp.com
-* http://til.hashrocket.com
+* https://til.hashrocket.com
 
 ### Environmental Variables
 

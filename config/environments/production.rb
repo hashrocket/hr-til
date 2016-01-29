@@ -19,6 +19,6 @@ Rails.application.configure do
 
   config.action_controller.default_url_options = {
     host: 'til.hashrocket.com',
-    protocol: 'http://'
+    protocol: 'https://'
   }
 end
