@@ -124,7 +124,7 @@ end
 
 Then 'I see the footer information' do
   within 'footer' do
-    expect(page).to have_link 'Hashrocket', href: 'http://hashrocket.com'
+    expect(page).to have_link 'Hashrocket', href: 'https://hashrocket.com'
   end
 end
 

@@ -36,7 +36,8 @@ describe Developer do
 
     it 'should deny an email from a non-whitelisted domain' do
       developer.email = 'foo@example.com'
-      expect(developer).to_not be_valid, message: 'Email is not valid'
+      expect(developer).to_not be_valid
+      expect(developer.errors.messages[:email]).to eq ['is invalid']
     end
   end
 
