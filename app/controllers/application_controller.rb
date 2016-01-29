@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_cache_header
+  force_ssl if: :ssl_configured?
 
   authem_for :developer
 
@@ -12,6 +13,10 @@ class ApplicationController < ActionController::Base
   helper_method :editable?
 
   private
+
+  def ssl_configured?
+    Rails.env.production?
+  end
 
   def editable?(post)
     current_developer && (current_developer == post.developer || current_developer.admin?)
