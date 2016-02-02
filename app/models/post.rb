@@ -46,7 +46,8 @@ class Post < ActiveRecord::Base
   end
 
   def decrement_likes
-    self.likes -= 1 if self.likes != 0
+    return if self.likes.zero?
+    self.likes -= 1
     save
   end
 
