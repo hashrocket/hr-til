@@ -6,6 +6,9 @@ class Post < ActiveRecord::Base
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validate  :body_size, if: -> { body.present? }
 
+  delegate :username, to: :developer, prefix: true
+  delegate :name, to: :channel, prefix: true
+
   belongs_to :developer
   belongs_to :channel
 
@@ -29,16 +32,8 @@ class Post < ActiveRecord::Base
     published_at || created_at
   end
 
-  def developer_username
-    developer.username
-  end
-
   def twitter_handle
     developer_twitter_handle || 'hashrocket'
-  end
-
-  def channel_name
-    channel.name
   end
 
   def to_param
