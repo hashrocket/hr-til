@@ -85,10 +85,12 @@ class Post < ActiveRecord::Base
   end
 
   def body_size
-    if word_count > MAX_WORDS
-      words_remaining_abs = words_remaining.abs
-      errors.add :body, "of this post is too long. It is #{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} over the limit of 200 words"
-    end
+    return true if word_count < MAX_WORDS
+
+    words_remaining_abs = words_remaining.abs
+    errors.add :body, "of this post is too long. It is "\
+      "#{words_remaining_abs} #{'word'.pluralize(words_remaining_abs)} "\
+      "over the limit of 200 words"
   end
 
   def generate_slug
