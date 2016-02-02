@@ -25,7 +25,7 @@ class Post < ActiveRecord::Base
   MAX_WORDS = 200
 
   def published?
-    !!published_at?
+    published_at?
   end
 
   def display_date
