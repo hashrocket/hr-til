@@ -10,6 +10,7 @@ development: &default
   twitter_access_token_secret:
   heroku_production_app_name:
   permitted_domains: 'hashrocket.com|hshrckt.com'
+  default_twitter_handle: 'hashrocket'
 
 test:
   <<: *default

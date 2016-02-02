@@ -6,8 +6,9 @@ class Post < ActiveRecord::Base
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
   validate :body_size, if: -> { body.present? }
 
-  delegate :username, to: :developer, prefix: true
   delegate :name, to: :channel, prefix: true
+  delegate :twitter_handle, to: :developer, prefix: true
+  delegate :username, to: :developer, prefix: true
 
   belongs_to :developer
   belongs_to :channel
@@ -33,7 +34,7 @@ class Post < ActiveRecord::Base
   end
 
   def twitter_handle
-    developer_twitter_handle || 'hashrocket'
+    developer_twitter_handle || ENV['default_twitter_handle']
   end
 
   def to_param
@@ -104,10 +105,6 @@ class Post < ActiveRecord::Base
 
   def notify_slack(event)
     SlackNotifier.new.async.perform(self, event)
-  end
-
-  def developer_twitter_handle
-    developer.twitter_handle
   end
 
   def self.search(query)
