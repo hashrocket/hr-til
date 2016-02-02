@@ -1,10 +1,10 @@
 class Post < ActiveRecord::Base
-  validates_presence_of :body
-  validates_presence_of :channel_id
-  validates_presence_of :developer
+  validates :body, presence: true
+  validates :channel_id, presence: true
+  validates :developer, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
-  validate  :body_size, if: -> { body.present? }
+  validate :body_size, if: -> { body.present? }
 
   delegate :username, to: :developer, prefix: true
   delegate :name, to: :channel, prefix: true
@@ -13,8 +13,8 @@ class Post < ActiveRecord::Base
   belongs_to :channel
 
   before_create :generate_slug
-  after_update  :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
-  after_save    :notify_slack_on_publication, if: -> { published_at? && published_at_changed? }
+  after_update :notify_slack_on_likes_threshold, if: -> { tens_of_likes? && likes_changed? }
+  after_save :notify_slack_on_publication, if: -> { published_at? && published_at_changed? }
 
   scope :published, -> { where('published_at is not null') }
   scope :drafts, -> { where('published_at is null') }
