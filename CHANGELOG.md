@@ -1,3 +1,7 @@
+* Add keydown listening.
+
+  *Jake Worth*
+
 * Add email address to the developer's profile page.
 
   *Dorian Karter & Jake Worth*

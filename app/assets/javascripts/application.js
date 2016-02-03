@@ -22,3 +22,4 @@
 //= require like
 //= require post_form
 //= require til
+//= require easter
