@@ -20,4 +20,8 @@ class Developer < ActiveRecord::Base
   def posts_count
     posts.published.count
   end
+
+  def slack_display_name
+    slack_name || username
+  end
 end

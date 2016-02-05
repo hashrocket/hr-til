@@ -2,26 +2,41 @@ require 'rails_helper'
 
 RSpec.describe PostSlack::CreateSerializer, type: :serializer do
   context 'Individual Resource Representation' do
-    let(:post) do
-      developer = FactoryGirl.build(:developer,
-                                    username: 'tpope')
-      FactoryGirl.build(:post,
+    it 'is serialized correctly' do
+      developer = FactoryGirl.build(:developer, username: 'tpope')
+      post = FactoryGirl.build(:post,
                         slug: 'sluggishslug',
                         body: 'learned some things',
                         developer: developer,
                         title: 'entitled title',
                         channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
+
+      serializer = PostSlack::CreateSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
+
+      expected_text = 'tpope created a new post - <http://www.example.com/'\
+      'posts/sluggishslug-entitled-title|entitled title> #hacking'
+
+      expect(serialized).to eql(expected_text)
     end
 
-    let(:serializer) { PostSlack::CreateSerializer.new(post) }
+    it 'is serialized and includes Slack display name' do
+      developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
+      post = FactoryGirl.build(:post,
+                        slug: 'sluggishslug',
+                        body: 'learned some things',
+                        developer: developer,
+                        title: 'entitled title',
+                        channel: FactoryGirl.create(:channel, name: 'hacking')
+                       )
 
-    let(:serialized) do
-      JSON.parse(serializer.to_json)['text']
-    end
+      serializer = PostSlack::CreateSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
 
-    it 'is serialized correctly' do
-      expected_text = 'tpope created a new post - <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
+      expected_text = 'Tim Pope created a new post - <http://www.example.com/'\
+      'posts/sluggishslug-entitled-title|entitled title> #hacking'
+
       expect(serialized).to eql(expected_text)
     end
   end

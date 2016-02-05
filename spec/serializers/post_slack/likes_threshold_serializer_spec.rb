@@ -2,27 +2,43 @@ require 'rails_helper'
 
 RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
   context 'Individual Resource Representation' do
-    let(:post) do
+    it 'is serialized correctly' do
       developer = FactoryGirl.build(:developer,
                                     username: 'tpope')
-      FactoryGirl.build(:post,
+      post = FactoryGirl.build(:post,
                         slug: 'sluggishslug',
                         body: 'learned some things',
                         developer: developer,
                         title: 'entitled title',
                         likes: 10
                        )
+
+      serializer = PostSlack::LikesThresholdSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
+
+      result = "tpope's post has 10 likes! 🎉 - <http://www.example.com/"\
+      "posts/sluggishslug-entitled-title|entitled title>"
+
+      expect(serialized).to eq result
     end
 
-    let(:serializer) { PostSlack::LikesThresholdSerializer.new(post) }
+    it 'is serialized correctly and includes Slack display name' do
+      developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
+      post = FactoryGirl.build(:post,
+                        slug: 'sluggishslug',
+                        body: 'learned some things',
+                        developer: developer,
+                        title: 'entitled title',
+                        likes: 10
+                       )
 
-    let(:serialized) do
-      JSON.parse(serializer.to_json)['text']
-    end
+      serializer = PostSlack::LikesThresholdSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
 
-    it 'is serialized correctly' do
-      expected_text = /tpope's post has 10 likes! - <http:\/\/www.example.com\/posts\/sluggishslug-entitled-title|entitled title>/
-      expect(serialized).to match expected_text
+      result = "Tim Pope's post has 10 likes! 🎉 - <http://www.example.com/"\
+      "posts/sluggishslug-entitled-title|entitled title>"
+
+      expect(serialized).to eq result
     end
   end
 end

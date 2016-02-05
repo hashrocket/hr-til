@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   delegate :name, to: :channel, prefix: true
   delegate :twitter_handle, to: :developer, prefix: true
   delegate :username, to: :developer, prefix: true
+  delegate :slack_display_name, to: :developer, prefix: true
 
   belongs_to :developer
   belongs_to :channel
