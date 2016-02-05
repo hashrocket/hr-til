@@ -1,3 +1,7 @@
+* Add slack name as an optional attribute for developers.
+
+  *Jake Worth*
+
 * Add keydown listening.
 
   *Jake Worth*
