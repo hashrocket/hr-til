@@ -66,3 +66,14 @@ Feature: Developer visits profile page
     When I visit the new post page
     Then I see a form for posts
     And the editor is set to "Text Field"
+
+  Scenario: Adds a Slack name
+    Given I am a signed in developer
+    When I visit the homepage
+    And I click profile
+    Then I see my profile page
+    When I enter a Slack name
+    And I click the "Submit" button
+    Then I see "Developer updated"
+    And I click profile
+    Then I see my Slack name

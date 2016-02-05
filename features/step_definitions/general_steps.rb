@@ -91,6 +91,14 @@ Then 'I see my profile page' do
   end
 end
 
+When "I enter a Slack name" do
+  fill_in "Slack name", with: 'l33t 10x programmer'
+end
+
+Then "I see my Slack name" do
+  expect(page).to have_selector("input[value='l33t 10x programmer']")
+end
+
 Then(/^I see my email "([^"]*)"$/) do |email|
   expect(page).to have_content(email)
 end

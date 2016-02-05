@@ -11,6 +11,9 @@
             = label_tag :email
             %dd= developer.email
           %dt
+            = f.label :slack_name
+            %dd= f.text_field :slack_name, placeholder: 'Enter name...'
+          %dt
             = f.label :twitter_handle
             = f.error_message_on :twitter_handle
           %dd= f.text_field :twitter_handle, placeholder: 'Enter handle...'
@@ -21,4 +24,3 @@
         %fieldset.actions
           = f.submit 'Submit'
           = link_to 'cancel', root_path
-

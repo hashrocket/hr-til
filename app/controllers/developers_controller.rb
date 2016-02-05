@@ -28,7 +28,8 @@ class DevelopersController < ApplicationController
       :email,
       :username,
       :editor,
-      :twitter_handle
+      :twitter_handle,
+      :slack_name
     )
   end
 end
