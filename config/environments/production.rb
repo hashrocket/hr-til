@@ -19,7 +19,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.action_controller.default_url_options = {
-    host: 'til.hashrocket.com',
+    host: ENV['host'],
     protocol: 'https://'
   }
 end
