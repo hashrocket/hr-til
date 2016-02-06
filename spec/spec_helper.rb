@@ -14,4 +14,10 @@ RSpec.configure do |config|
   end
 
   config.default_formatter = 'doc' if config.files_to_run.one?
+
+  config.before(:each) do
+    stub_const('ENV', {
+      'permitted_domains' => 'example.com'
+    })
+  end
 end

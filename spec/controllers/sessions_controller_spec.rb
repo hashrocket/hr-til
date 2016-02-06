@@ -3,10 +3,10 @@ describe SessionsController do
   describe '#create' do
     context 'with oauth' do
       it 'signs in existing developer by email' do
-        developer = FactoryGirl.create :developer, email: 'jake@hashrocket.com'
+        developer = FactoryGirl.create :developer, email: 'jake@example.com'
         request.env['omniauth.auth'] = {
           'info' => {
-            'email' => 'jake@hashrocket.com'
+            'email' => 'jake@example.com'
           }
         }
 
@@ -20,7 +20,7 @@ describe SessionsController do
       it 'signs up a new developer by email' do
         request.env['omniauth.auth'] = {
           'info' => {
-            'email' => 'newdev@hashrocket.com',
+            'email' => 'newdev@example.com',
             'name'  => 'John Smith'
           }
         }

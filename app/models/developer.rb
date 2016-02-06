@@ -1,6 +1,6 @@
 class Developer < ActiveRecord::Base
   has_many :posts
-  validates :email, presence: true, format: { with: /\A.+@(#{ENV['permitted_domains']})\z/ }
+  validates :email, presence: true, format: { with: Proc.new { /\A.+@(#{ENV['permitted_domains']})\z/ } }
   validates :username, presence: true, uniqueness: true
   validates :twitter_handle, length: { maximum: 15 }, format: { with: /\A(?=.*[a-z])[a-z_\d]+\Z/i }, allow_blank: true
 
