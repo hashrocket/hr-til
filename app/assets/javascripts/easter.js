@@ -11,8 +11,8 @@ $(function(){
     kkeys.push(e.keyCode);
     if(kkeys.toString().indexOf(colorz) >= 0) {
       kkeys = [];
-      var Colors = ['#BDA3DE', '#DEA3A8', '#C4DEA3', '#DEA3BA', '#DEB3A3', '#D9A3DE', '#DED9A3'];
-      var randomColor = Colors[Math.floor(Math.random() * Colors.length)];
+      var colors = ['#BDA3DE', '#DEA3A8', '#C4DEA3', '#DEA3BA', '#DEB3A3', '#D9A3DE', '#DED9A3'];
+      var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
       $('body').css('background', (randomColor));
 
