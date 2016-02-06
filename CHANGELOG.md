@@ -1,3 +1,7 @@
+* Add hot posts and and developer scores database tables.
+
+  *Josh Davey*
+
 * Add slack name as an optional attribute for developers.
 
   *Jake Worth*
