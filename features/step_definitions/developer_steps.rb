@@ -3,7 +3,7 @@ Given 'I am not already a developer' do
 end
 
 Given 'I am already a developer' do
-  @developer = FactoryGirl.create(:developer, email: 'johnsmith@hashrocket.com', username: 'johnsmith')
+  @developer = FactoryGirl.create(:developer, email: 'johnsmith@example.com', username: 'johnsmith')
 end
 
 Given 'I am a signed in developer' do
@@ -21,7 +21,7 @@ Given(/^I am a signed in developer with email "([^"]*)"$/) do |email|
 end
 
 And 'I try to sign up or sign in with valid credentials' do
-  OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@hashrocket.com' })
+  OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@example.com' })
   visit google_oauth2_path
 end
 

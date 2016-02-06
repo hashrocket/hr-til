@@ -1,11 +1,11 @@
 Feature: Developer visits profile page
 
   Scenario: Adds a twitter handle
-    Given I am a signed in developer with email "foo@hashrocket.com"
+    Given I am a signed in developer with email "foo@example.com"
     When I visit the homepage
     And I click profile
     Then I see my profile page
-    And I see my email "foo@hashrocket.com"
+    And I see my email "foo@example.com"
     When I enter my twitter handle
     And I click the "Submit" button
     Then I see the homepage

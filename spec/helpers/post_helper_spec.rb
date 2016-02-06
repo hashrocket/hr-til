@@ -3,7 +3,7 @@ require 'rails_helper'
 describe PostHelper do
   describe '#tweet_link' do
     it 'returns a link to twitter' do
-      stub_const('ENV', { 'default_twitter_handle' => 'twitter_handle' })
+      stub_const('ENV', ENV.merge('default_twitter_handle' => 'twitter_handle'))
 
       @post = FactoryGirl.create(:post)
       @post.slug = '1234'

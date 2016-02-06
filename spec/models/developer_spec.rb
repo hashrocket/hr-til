@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe Developer do
-  let(:developer) { FactoryGirl.create(:developer) }
+  let(:developer) { FactoryGirl.build(:developer) }
 
   it 'should have a valid factory' do
     expect(developer).to be_valid
@@ -19,12 +19,9 @@ describe Developer do
 
   context 'validates email domains' do
     before do
-      @prev_permitted_domains = ENV['permitted_domains']
-      ENV['permitted_domains'] = 'hashrocket.com|hshrcket.com'
-    end
-
-    after do
-      ENV['permitted_domains'] = @prev_permitted_domains
+      stub_const('ENV', {
+        'permitted_domains' => 'hashrocket.com|hshrckt.com'
+      })
     end
 
     it 'and allows whitelisted domains' do
@@ -42,6 +39,7 @@ describe Developer do
   end
 
   it 'should validate username uniqueness' do
+    FactoryGirl.create(:developer, username: developer.username)
     dup_developer = FactoryGirl.build(:developer, username: developer.username)
     expect(dup_developer).to_not be_valid
     expect(dup_developer.errors.messages[:username]).to eq ['has already been taken']
