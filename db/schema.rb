@@ -47,17 +47,16 @@ ActiveRecord::Schema.define(version: 20160205153837) do
     t.string   "slack_name"
   end
 
-  create_table "posts", id: false, force: :cascade do |t|
-    t.integer  "id",           default: "nextval('posts_id_seq'::regclass)", null: false
-    t.integer  "developer_id",                                               null: false
-    t.text     "body",                                                       null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-    t.integer  "channel_id",                                                 null: false
-    t.string   "title",                                                      null: false
-    t.string   "slug",                                                       null: false
-    t.integer  "likes",        default: 1,                                   null: false
-    t.boolean  "tweeted",      default: false,                               null: false
+  create_table "posts", force: :cascade do |t|
+    t.integer  "developer_id",                 null: false
+    t.text     "body",                         null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "channel_id",                   null: false
+    t.string   "title",                        null: false
+    t.string   "slug",                         null: false
+    t.integer  "likes",        default: 1,     null: false
+    t.boolean  "tweeted",      default: false, null: false
     t.datetime "published_at"
   end
 
@@ -66,25 +65,6 @@ ActiveRecord::Schema.define(version: 20160205153837) do
 
   add_foreign_key "posts", "channels"
   add_foreign_key "posts", "developers"
-
-  create_view :developer_scores,  sql_definition: <<-SQL
-      SELECT developers.id,
-      developers.username,
-      stats.posts,
-      stats.likes,
-      round(((stats.likes)::numeric / (stats.posts)::numeric), 2) AS avg_likes,
-      round(log((2)::numeric, ((((1022)::double precision * ((developer_scores.score - min(developer_scores.score) OVER ()) / (max(developer_scores.score) OVER () - min(developer_scores.score) OVER ()))) + (2)::double precision))::numeric), 1) AS hotness
-     FROM ((developers
-       JOIN ( SELECT hot_posts.developer_id AS id,
-              sum(hot_posts.score) AS score
-             FROM hot_posts
-            GROUP BY hot_posts.developer_id) developer_scores USING (id))
-       JOIN ( SELECT posts.developer_id AS id,
-              count(*) AS posts,
-              sum(posts.likes) AS likes
-             FROM posts
-            GROUP BY posts.developer_id) stats USING (id));
-  SQL
 
   create_view :hot_posts,  sql_definition: <<-SQL
       WITH posts_with_age AS (
@@ -119,4 +99,24 @@ ActiveRecord::Schema.define(version: 20160205153837) do
      FROM posts_with_age
     ORDER BY ((posts_with_age.likes)::double precision / (posts_with_age.hour_age ^ (0.8)::double precision)) DESC;
   SQL
+
+  create_view :developer_scores,  sql_definition: <<-SQL
+      SELECT developers.id,
+      developers.username,
+      stats.posts,
+      stats.likes,
+      round(((stats.likes)::numeric / (stats.posts)::numeric), 2) AS avg_likes,
+      round(log((2)::numeric, ((((1022)::double precision * ((developer_scores.score - min(developer_scores.score) OVER ()) / (max(developer_scores.score) OVER () - min(developer_scores.score) OVER ()))) + (2)::double precision))::numeric), 1) AS hotness
+     FROM ((developers
+       JOIN ( SELECT hot_posts.developer_id AS id,
+              sum(hot_posts.score) AS score
+             FROM hot_posts
+            GROUP BY hot_posts.developer_id) developer_scores USING (id))
+       JOIN ( SELECT posts.developer_id AS id,
+              count(*) AS posts,
+              sum(posts.likes) AS likes
+             FROM posts
+            GROUP BY posts.developer_id) stats USING (id));
+  SQL
+
 end
