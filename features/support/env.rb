@@ -2,8 +2,6 @@ require 'simplecov'
 require 'cucumber/rails'
 require 'webmock/cucumber'
 
-ENV['permitted_domains'] = 'example.com'
-
 WebMock.disable_net_connect!(allow_localhost: true)
 
 OmniAuth.config.test_mode = true

@@ -1,19 +1,20 @@
 development: &default
-  host: 'http://localhost:3000'
+  default_twitter_handle: 'hashrocket'
   google_client_id:
   google_client_secret:
+  heroku_production_app_name:
+  host: 'http://localhost:3000'
+  permitted_domains: 'hashrocket.com|hshrckt.com'
   slack_post_endpoint:
-  update_twitter_with_post: "false"
-  twitter_consumer_key:
-  twitter_consumer_secret:
   twitter_access_token:
   twitter_access_token_secret:
-  heroku_production_app_name:
-  permitted_domains: 'hashrocket.com|hshrckt.com'
-  default_twitter_handle: 'hashrocket'
+  twitter_consumer_key:
+  twitter_consumer_secret:
+  update_twitter_with_post: "false"
 
 test:
   <<: *default
   host: 'http://localhost:3000'
+  permitted_domains: 'example.com'
   slack_post_endpoint:
   update_twitter_with_post: "false"
