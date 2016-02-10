@@ -20,7 +20,7 @@ $ git clone https://github.com/hashrocket/hr-til
 $ cd hr-til
 $ bundle install
 $ rake db:setup
-$ cp config/application.yml{,.example}
+$ cp config/application.yml{.example,}
 $ rails s
 ```
 
