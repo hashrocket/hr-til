@@ -168,16 +168,13 @@ describe Post do
     end
   end
 
-  it 'knows if its likes count is a factor of ten, ignoring zeroes' do
-    method = :tens_of_likes?
+  it 'knows if its max likes count is a factor of ten' do
+    method = :likes_threshold?
 
-    post.likes = 10
+    post.max_likes = 10
     expect(post.send(method)).to eq true
 
-    post.likes = 11
-    expect(post.send(method)).to eq false
-
-    post.likes = 0
+    post.max_likes = 11
     expect(post.send(method)).to eq false
   end
 
@@ -231,6 +228,21 @@ describe Post do
 
         expect(post).to receive(:notify_slack)
         post.save
+      end
+    end
+  end
+
+  context 'slack integration on tens of likes' do
+    describe 'reaches the milestone more than once' do
+      it 'should notify slack only once' do
+        post = FactoryGirl.create(:post, likes: 9, max_likes: 9)
+
+        expect(post).to receive(:notify_slack).once
+        post.increment_likes # 10
+        post.increment_likes # 11
+        post.decrement_likes # 10
+        post.decrement_likes # 9
+        post.increment_likes # 10
       end
     end
   end
