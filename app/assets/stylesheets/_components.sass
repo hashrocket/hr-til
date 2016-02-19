@@ -105,12 +105,11 @@ nav.pagination
             border-color: $callout
           &.like
             border-color: transparentize($blue-dark, .5)
-            background: image-url("icon_like.png") right center no-repeat
-            background-size: auto 70%
-            +transition(background-image .2s, border-color .2s)
+            background: svg-url(heart, $blue) 95% center no-repeat
+            background-size: auto 50%
             &:hover,
             &.liked
-              background-image: image-url("icon_like_active.png")
+              background-image: svg-url(heart, $red)
               border-color: #d84536
           &:before
             position: absolute
