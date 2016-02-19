@@ -1,3 +1,11 @@
+* Only post to Slack on likes thresholds once.
+
+  *Jake Worth*
+
+* Add SVG footer icons.
+
+  * Cameron Daigle*
+
 * Add hot posts and and developer scores database tables.
 
   *Josh Davey*
