@@ -84,24 +84,44 @@ aside.site_about
       background: $light
     &:hover
       color: $blue-dark
-  .copy
+  .site_about__content
+    display: none
     position: absolute
     left: 0
     bottom: 100%
     margin-bottom: 1.5vw
     +shadow
-    padding: 2em 2em 1em 2em
+    padding: 2em
     font-style: italic
     width: 30rem
     background: $light
-    display: none
     font-size: .9em
   &.open
-    .copy
+    .site_about__content
       display: block
+  ul.social
+    li
+      width: 50%
+      float: left
+      box-sizing: border-box
+    a.social_twitter,
+    a.social_github
+      display: block
+      padding-left: 3rem
+      line-height: 3rem
+      background: left center no-repeat
+      background-size: 2.5rem auto
+    a.social_twitter
+      background-image: svg-url(twitter, $blue-dark)
+      &:hover
+        background-image: svg-url(twitter, #55acee)
+    a.social_github
+      background-image: svg-url(github, $blue-dark)
+      &:hover
+        background-image: svg-url(github, #4b4b4b)
   +mobile
-    .copy
-      width: 20rem
+    .site_about__content
+      width: 28rem
 
 aside.site_search
   z-index: 1000
@@ -144,15 +164,31 @@ footer.site_footer
   clear: both
   font-style: italic
   color: darken($blue-dark, 10%)
-  background: center bottom image-url("logo_footer.png") no-repeat
-  background-size: 2rem 2rem
   padding: 3rem 0
   margin: 3rem 0
   line-height: 1.6
   margin-bottom: 1rem
-  p:last-child
-    margin-top: 2rem
-    font-size: .8em
+  font-size: .8em
+  p
+    margin: 1rem 0
+  .site_footer_social
+    a
+      display: inline-block
+      +hide_text
+      width: 5rem
+      height: 2.5rem
+      opacity: .8
+      transition: opacity .2s
+      background: center no-repeat
+      background-size: auto 100%
+      &:hover
+        opacity: 1
+      &.footer_hashrocket
+        background-image: image-url("logo_footer.png")
+      &.footer_twitter
+        background-image: svg-url(twitter, $blue-dark)
+      &.footer_github
+        background-image: svg-url(github, $blue-dark)
 
 main
   min-height: 60vh
