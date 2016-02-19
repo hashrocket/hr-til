@@ -4,7 +4,7 @@
 
 * Add SVG footer icons.
 
-  * Cameron Daigle*
+  *Cameron Daigle*
 
 * Add hot posts and and developer scores database tables.
 
