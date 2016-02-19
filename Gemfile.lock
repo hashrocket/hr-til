@@ -48,9 +48,6 @@ GEM
       execjs
       json
     bcrypt (3.1.10)
-    bourbon (4.2.6)
-      sass (~> 3.4)
-      thor (~> 0.19)
     brakeman (3.1.5)
       erubis (~> 2.6)
       fastercsv (~> 1.5)
@@ -371,7 +368,6 @@ DEPENDENCIES
   active_model_serializers
   authem
   autoprefixer-rails
-  bourbon
   brakeman
   bullet
   coffee-rails (~> 4.1.0)

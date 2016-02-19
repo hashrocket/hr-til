@@ -47,7 +47,7 @@ a.aside_toggle
   +responsive(height, 6rem, 5rem)
   +responsive(line-height, 6rem, 5rem)
   display: block
-  +transition(opacity .2s, color .2s)
+  transition: opacity .2s, color .2s
 
 aside.site_statistics
   position: fixed
@@ -64,7 +64,7 @@ aside.site_statistics
     +hide-text
     background-size: 60% auto
     opacity: .8
-    +transition(opacity .2s)
+    transition: opacity .2s
     &:hover
       opacity: 1
 
@@ -115,7 +115,7 @@ aside.site_search
     max-width: 0
     overflow: hidden
     white-space: nowrap
-    +transition(max-width .3s)
+    transition: max-width .3s
     +responsive(margin-left, 6rem, 5rem)
   input[type='submit']
     +responsive(margin, 1rem 1rem 1rem 0, .5rem .5rem .5rem 0)
