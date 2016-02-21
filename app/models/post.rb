@@ -40,8 +40,8 @@ class Post < ActiveRecord::Base
   end
 
   def increment_likes
+    self.max_likes += 1 if self.max_likes == self.likes
     self.likes += 1
-    self.max_likes += 1
     notify_slack_on_likes_threshold if likes_threshold?
     save
   end

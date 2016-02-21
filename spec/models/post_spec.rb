@@ -232,6 +232,34 @@ describe Post do
     end
   end
 
+  context 'incrementing likes' do
+    it 'increments max likes when likes equals max likes' do
+      post = FactoryGirl.create(:post, likes: 5, max_likes: 5)
+
+      post.increment_likes
+      expect(post.likes).to eq 6
+      expect(post.max_likes).to eq 6
+    end
+
+    it 'does not change max likes when likes are less than max likes' do
+      post = FactoryGirl.create(:post, likes: 3, max_likes: 5)
+
+      post.increment_likes
+      expect(post.likes).to eq 4
+      expect(post.max_likes).to eq 5
+    end
+  end
+
+  context 'decrementing likes' do
+    it 'does not change max likes' do
+      post = FactoryGirl.create(:post, likes: 5, max_likes: 5)
+
+      post.decrement_likes
+      expect(post.likes).to eq 4
+      expect(post.max_likes).to eq 5
+    end
+  end
+
   context 'slack integration on tens of likes' do
     describe 'reaches the milestone more than once' do
       it 'should notify slack only once' do
