@@ -75,7 +75,7 @@ class Post < ActiveRecord::Base
   private
 
   def likes_threshold?
-    max_likes % 10 == 0
+    max_likes % 10 == 0 && max_likes_changed?
   end
 
   def publishing?

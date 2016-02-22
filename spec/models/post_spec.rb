@@ -267,10 +267,11 @@ describe Post do
 
         expect(post).to receive(:notify_slack).once
         post.increment_likes # 10
-        post.increment_likes # 11
-        post.decrement_likes # 10
         post.decrement_likes # 9
         post.increment_likes # 10
+
+        post.increment_likes # 11
+        post.decrement_likes # 10
       end
     end
   end
