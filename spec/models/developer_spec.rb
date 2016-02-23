@@ -88,6 +88,22 @@ describe Developer do
       expect(developer.twitter_handle).to eq nil
     end
 
+    context '#slack_username' do
+      it 'returns a slack_username when not a blank string' do
+        developer.slack_name = 'slack-guy'
+        developer.username = 'standard-guy'
+
+        expect(developer.slack_display_name).to eq 'slack-guy'
+      end
+
+      it 'returns a username when a blank string' do
+        developer.slack_name = ''
+        developer.username = 'standard-guy'
+
+        expect(developer.slack_display_name).to eq 'standard-guy'
+      end
+    end
+
     context 'can contain an underscore' do
       specify 'as the leading character' do
         developer.twitter_handle = '_writer'
