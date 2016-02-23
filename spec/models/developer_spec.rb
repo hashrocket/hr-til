@@ -88,15 +88,22 @@ describe Developer do
       expect(developer.twitter_handle).to eq nil
     end
 
-    context '#slack_username' do
-      it 'returns a slack_username when not a blank string' do
+    context '#slack_name=' do
+      it 'saves nil when argument is blank' do
+        developer.slack_name = ''
+        expect(developer.slack_name).to eq nil
+      end
+    end
+
+    context '#slack_display_name' do
+      it 'returns a slack_name when not nil' do
         developer.slack_name = 'slack-guy'
         developer.username = 'standard-guy'
 
         expect(developer.slack_display_name).to eq 'slack-guy'
       end
 
-      it 'returns a username when a blank string' do
+      it 'returns a username when slack_name is nil' do
         developer.slack_name = ''
         developer.username = 'standard-guy'
 
