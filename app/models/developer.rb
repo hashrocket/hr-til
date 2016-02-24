@@ -17,6 +17,10 @@ class Developer < ActiveRecord::Base
     write_attribute(:twitter_handle, twitter_handle)
   end
 
+  def slack_name=(name)
+    self[:slack_name] = name.presence
+  end
+
   def posts_count
     posts.published.count
   end
