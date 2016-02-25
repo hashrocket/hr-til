@@ -56,7 +56,7 @@
         +shadow-text
   ul.activity_chart
     +shadow
-    background: mix($light, $blue, 80%)
+    background: mix($light, $accent, 80%)
     padding: 3rem 3vw
     display: flex
     height: 10vw
@@ -65,21 +65,21 @@
     li
       flex: 1 1
       position: relative
-      background: mix($light, $blue, 40%)
-      border: 1px solid mix($light, $blue, 80%)
+      background: mix($light, $accent, 40%)
+      border: 1px solid mix($light, $accent, 80%)
       transition: background-color, .1s
       .activity_chart_bar
         position: absolute
         right: 0
         bottom: 0
         left: 0
-        background: $blue-dark
+        background: $accent-dark
         transition: background-color, .1s
       &:after,
       &:before
         display: none
         position: absolute
-        color: $blue-dark
+        color: $accent-dark
         font-style: italic
         font-weight: bold
         font-size: .8em
@@ -111,9 +111,9 @@
           right: 0
           left: auto
       &:hover
-        background: mix($light, $blue, 60%)
+        background: mix($light, $accent, 60%)
         .activity_chart_bar
-          background: lighten($blue-dark, 10%)
+          background: lighten($accent-dark, 10%)
         &:after,
         &:before
           display: block

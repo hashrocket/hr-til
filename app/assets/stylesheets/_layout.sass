@@ -4,7 +4,7 @@ html
 body
   -webkit-text-size-adjust: none
   -webkit-font-smoothing: antialiased
-  background: $blue
+  background: $accent
   color: $dark
   font-family: $primary-typeface
   font-size: 1.6em
@@ -60,7 +60,7 @@ aside.site_statistics
   +mobile
     background: $light
   a.aside_toggle
-    background: svg-url(stats, $blue-dark) center no-repeat
+    background: svg-url(stats, $accent-dark) center no-repeat
     +hide-text
     background-size: 60% auto
     opacity: .8
@@ -79,11 +79,11 @@ aside.site_about
     text-align: center
     font-family: $secondary-typeface
     font-weight: 700
-    color: transparentize($blue-dark, .3)
+    color: transparentize($accent-dark, .3)
     +mobile
       background: $light
     &:hover
-      color: $blue-dark
+      color: $accent-dark
   .site_about__content
     display: none
     position: absolute
@@ -112,11 +112,11 @@ aside.site_about
       background: left center no-repeat
       background-size: 2.5rem auto
     a.social_twitter
-      background-image: svg-url(twitter, $blue-dark)
+      background-image: svg-url(twitter, $accent-dark)
       &:hover
         background-image: svg-url(twitter, #55acee)
     a.social_github
-      background-image: svg-url(github, $blue-dark)
+      background-image: svg-url(github, $accent-dark)
       &:hover
         background-image: svg-url(github, #4b4b4b)
   +mobile
@@ -150,7 +150,7 @@ aside.site_search
     left: 0
     bottom: 0
     top: 0
-    background: svg-url(search, $blue-dark) center no-repeat
+    background: svg-url(search, $accent-dark) center no-repeat
     background-size: 60% auto
     opacity: .7
     &:hover
@@ -163,7 +163,7 @@ footer.site_footer
   text-align: center
   clear: both
   font-style: italic
-  color: darken($blue-dark, 10%)
+  color: darken($accent-dark, 10%)
   padding: 3rem 0
   margin: 3rem 0
   line-height: 1.6
@@ -186,9 +186,9 @@ footer.site_footer
       &.footer_hashrocket
         background-image: image-url("logo_footer.png")
       &.footer_twitter
-        background-image: svg-url(twitter, $blue-dark)
+        background-image: svg-url(twitter, $accent-dark)
       &.footer_github
-        background-image: svg-url(github, $blue-dark)
+        background-image: svg-url(github, $accent-dark)
 
 main
   min-height: 60vh
@@ -204,7 +204,7 @@ header.page_head
   right: 0
   text-align: center
   +shadow-text
-  color: mix($blue-dark, $light, 70%)
+  color: mix($accent-dark, $light, 70%)
   font-size: 2vw
   +mobile
     font-size: 1.5rem
@@ -221,9 +221,9 @@ header.page_head
   text-align: center
   p
     background: #fff
-    border: 5px solid $blue-dark
+    border: 5px solid $accent-dark
     border-top: 0
-    color: $blue-dark
+    color: $accent-dark
     padding: 2vw
     +responsive(font-size, 1.4em, 1.2em, 1em)
     cursor: pointer

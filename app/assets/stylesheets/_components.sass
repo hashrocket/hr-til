@@ -1,6 +1,6 @@
 a
   text-decoration: none
-  color: $blue-dark
+  color: $accent-dark
 
 .box
   +wrapper
@@ -23,10 +23,10 @@ nav.pagination
     font-size: .9em
     transition: opacity .2s, color .2s
     opacity: .9
-    color: transparentize($blue-dark, .3)
+    color: transparentize($accent-dark, .3)
     &:hover
       opacity: 1
-      color: $blue-dark
+      color: $accent-dark
     &.pagination_older
       float: right
 
@@ -37,8 +37,8 @@ nav.pagination
   align-items: flex-start
   &.draft
     section
-      background: mix($light, $blue-dark, 80%)
-      color: mix($dark, $blue-dark, 70%)
+      background: mix($light, $accent-dark, 80%)
+      color: mix($dark, $accent-dark, 70%)
   .tag
     background: #333
     color: #fff
@@ -60,10 +60,10 @@ nav.pagination
         display: block
         transition: color .1s
         &:hover
-          color: $blue-dark
+          color: $accent-dark
   footer
     font-style: italic
-    color: mix($dark, $blue, 30%)
+    color: mix($dark, $accent, 30%)
     font-size: .8em
     padding: .5vw 0 1vw 0
     border-top: 2px solid  transparentize($light - #1a1a1a, .5)
@@ -98,14 +98,14 @@ nav.pagination
           position: relative
           padding: .8rem .5rem
           color: $dark
-          border-left: 2px solid $blue-dark
+          border-left: 2px solid $accent-dark
           font-style: italic
           +lang-colors(border-color)
           &.edit
             border-color: $callout
           &.like
-            border-color: transparentize($blue-dark, .5)
-            background: svg-url(heart, $blue) 95% center no-repeat
+            border-color: transparentize($accent-dark, .5)
+            background: svg-url(heart, $accent) 95% center no-repeat
             background-size: auto 50%
             &:hover,
             &.liked
@@ -149,7 +149,7 @@ ul.post_list
     padding: .4rem
     margin: .2rem 0
     +shadow
-    background: mix($light, $blue, 80%)
+    background: mix($light, $accent, 80%)
     a
       display: flex
       position: relative
@@ -165,7 +165,7 @@ ul.post_list
       small
         flex: 0 0 auto
         font-style: italic
-        color: $blue-dark
+        color: $accent-dark
         float: right
         text-align: right
         white-space: nowrap
@@ -208,7 +208,7 @@ form
         float: right
         font-weight: bold
         font-size: .85em
-        color: $blue-dark
+        color: $accent-dark
         &.negative
           color: $error
     dd
@@ -220,13 +220,13 @@ form
   textarea
     width: 100%
     padding: .5rem
-    border: 1px solid $blue
+    border: 1px solid $accent
     font-family: $primary-typeface
     line-height: 1.6
     box-sizing: border-box
     border-radius: 0
     &:focus
-      border-color: $blue-dark
+      border-color: $accent-dark
       outline: none
   #editor
     height: 300px
@@ -241,11 +241,11 @@ form
     border: none
     border-radius: 0
     +shadow-text
-    background: transparentize($blue, .5)
+    background: transparentize($accent, .5)
     &:active,
     &:focus,
     &:hover
-      background: transparentize($blue, .6)
+      background: transparentize($accent, .6)
       outline: none
 
 .copy
@@ -294,10 +294,10 @@ form
   blockquote
     +responsive(margin-bottom, 1.4em, 1.1em)
     background: $light
-    color: darken($blue, 50%)
+    color: darken($accent, 50%)
     padding: 1em 1.5em .1em 1.5em
     font-size: .9em
-    box-shadow: -0.4em 0.4em 0 0 transparentize($blue, .5)
+    box-shadow: -0.4em 0.4em 0 0 transparentize($accent, .5)
   +mobile
     margin-right: 0
     margin-bottom: 1rem
