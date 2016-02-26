@@ -176,6 +176,35 @@ header.site_head
       &:focus
         background: #fff
 
+.admin_panel
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  font-family: $secondary-typeface
+  font-size: .8em
+  text-align: center
+  z-index: 999
+  ul
+    display: inline-block
+    +box-outline
+    border-top: none
+    +mobile
+      display: block
+  li
+    display: inline-block
+    a
+      display: block
+      padding: .5rem 1rem
+      color: $blue
+      line-height: 1.5rem
+      &:hover
+        color: $red
+  + .site_head
+    margin-top: 2.5rem
+    + main
+      padding-top: 2.5rem
+
 main
   position: relative
   min-height: 60vh

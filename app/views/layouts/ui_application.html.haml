@@ -10,21 +10,21 @@
     = yield :head
   %body
 
+    %nav.admin_panel
+      %ul
+        %li= link_to Phil.name, "#"
+        %li= link_to "create post", "#"
+        %li= link_to "drafts", "#"
+        %li= link_to "sign out", "#"
+
     %header.site_head
       %div
         %h1= link_to "Today I learned", "#"
         %h2= link_to "A Hashrocket project", "#"
 
     -# #flash
-      -# %p.notice= Phil.words 20
-      -# %p.error= Phil.words 20
-
-    -# %nav.site_nav
-    -#   %ul
-    -#     %li= link_to Phil.name, "#"
-    -#     %li= link_to "sign out", "#"
-    -#     %li= link_to "create post", "#"
-    -#     %li= link_to "drafts", "#"
+    -#   %p.notice= Phil.words 20
+    -#   %p.error= Phil.words 20
 
     %main= yield
 
