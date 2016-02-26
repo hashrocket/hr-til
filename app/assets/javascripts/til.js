@@ -5,11 +5,11 @@ $(function(){
     $(this).fadeOut(200);
   });
 
-  $(".site_about, .site_search").on("click", ".aside_toggle", function(e) {
+  $(".site_nav__search, .site_nav__about").on("click", ".site_nav__link", function(e) {
     e.preventDefault();
-    $(this).closest('aside')
-      .toggleClass('open')
-      .filter('.open').find(":input:visible").eq(0).focus();
+    $(this).closest('li')
+      .toggleClass('site_nav--open')
+      .find(":input:visible").eq(0).focus();
   });
 
 });

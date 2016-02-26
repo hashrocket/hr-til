@@ -53,7 +53,7 @@
       h1
         text-align: center
         font-size: 1.6rem
-        +shadow-text
+        +header-text
   ul.activity_chart
     +shadow
     background: mix($light, $accent, 80%)
@@ -73,13 +73,13 @@
         right: 0
         bottom: 0
         left: 0
-        background: $accent-dark
+        background: $accent
         transition: background-color, .1s
       &:after,
       &:before
         display: none
         position: absolute
-        color: $accent-dark
+        color: $accent
         font-style: italic
         font-weight: bold
         font-size: .8em
@@ -113,7 +113,7 @@
       &:hover
         background: mix($light, $accent, 60%)
         .activity_chart_bar
-          background: lighten($accent-dark, 10%)
+          background: lighten($accent, 10%)
         &:after,
         &:before
           display: block

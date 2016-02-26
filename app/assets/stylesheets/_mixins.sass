@@ -7,21 +7,19 @@
   +mobile
     display: block
 
-= shadow
-  background-color: transparentize($light, .2)
-  box-shadow: -0.8vw 0.8vw 0 0 transparentize($accent-dark, .3)
-  +max
-    box-shadow: -1rem 1rem 0 0 transparentize($accent-dark, .3)
+= shadow($shadow: $accent)
+  // background-color: mix($shadow, #fff, 15%)
+  // box-shadow: -0.8vw 0.8vw 0 0 transparentize($shadow, .5)
+  // +max
+  //   box-shadow: -1rem 1rem 0 0 transparentize($shadow, .5)
 
-= shadow-text
+= header-text
   font-family: $secondary-typeface
-  color: transparentize($accent-dark, .3)
-  text-shadow: -.1rem .1rem 0 lighten($accent, 15%)
   text-transform: uppercase
-  letter-spacing: .2vw
+  letter-spacing: .2em
   font-weight: 900
 
-= lang-colors($attr)
-  @each $lang, $color in $langs
-    &.#{$lang}
-      #{$attr}: unquote($color)
+// = lang-colors($attr)
+//   @each $lang, $color in $langs
+//     &.#{$lang}
+//       #{$attr}: unquote($color)
