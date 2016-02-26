@@ -9,26 +9,27 @@ a
     padding: 3vw
 
 nav.pagination
-  +wrapper
-  +clearfix
+  max-width: 40rem
   margin: 4rem auto
-  a
+  li
+    box-sizing: border-box
     float: left
-    +shadow
+    width: 50%
+    padding: 0 1rem
+    text-align: center
+  a
+    +box-outline
     display: block
     position: relative
     padding: .8rem 1rem
-    font-style: italic
+    font-family: $secondary-typeface
+    text-transform: uppercase
     font-weight: bold
-    font-size: .9em
+    font-size: .8em
     transition: opacity .2s, color .2s
-    opacity: .9
-    color: transparentize($accent, .3)
+    color: $blue
     &:hover
-      opacity: 1
-      color: $accent
-    &.pagination_older
-      float: right
+      background: #fff
 
 .post
   +clearfix
@@ -46,8 +47,7 @@ nav.pagination
     box-sizing: border-box
     min-width: 35rem
     max-width: 60%
-    background: transparentize(#fff, .3)
-    border: 2px solid transparentize(#fff, .1)
+    +box-outline
     +mobile
       max-width: none
       min-width: none
@@ -125,10 +125,9 @@ nav.pagination
 
 ul.post_list
   li
-    padding: .4rem
+    padding: .2rem
     margin: .2rem 0
-    +shadow
-    background: mix($light, $accent, 80%)
+    +box-outline
     a
       display: flex
       position: relative
@@ -143,11 +142,11 @@ ul.post_list
       small
         flex: 0 0 auto
         font-style: italic
-        color: $accent
         float: right
         text-align: right
         white-space: nowrap
         padding-left: 1rem
+        color: $blue
         span
           opacity: .5
           margin: 0 .3rem
@@ -200,14 +199,14 @@ form
     vertical-align: middle
     width: 100%
     padding: .5rem
-    border: 1px solid $accent
+    border: 1px solid $light
     font-family: $primary-typeface
     box-sizing: border-box
     border-radius: 0
     height: 4rem
     line-height: 3rem
     &:focus
-      border-color: $accent
+      border-color: $blue
       outline: none
   #editor
     height: 300px
@@ -224,13 +223,14 @@ form
     +responsive(padding, 1rem 2rem, 1rem)
     border: none
     border-radius: 0
-    background: transparentize(#fff, .8)
+    background: $accent
     height: 4rem
     font-weight: 700
     font-family: $secondary-typeface
     letter-spacing: .1em
     text-transform: uppercase
     transform: background .1s
+    margin-right: 2rem
     &:active,
     &:focus,
     &:hover

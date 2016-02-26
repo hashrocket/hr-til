@@ -32,22 +32,27 @@ header.site_head
   h2
     position: absolute
     right: 0
-    top: 100%
+    top: 90%
     a
       text-align: right
       color: $red
       font-size: 1.4rem
       font-weight: 700
       margin-right: 1vw
+      background: left 55% no-repeat url(/assets/logo_footer.png)
+      background-size: 1.8rem auto
+      padding: 1rem 0 1rem 2.5rem
   +mobile
     z-index: 100
     background: #fff
     text-align: right
-    background: transparentize(#fff, .2)
-    border-bottom: 2px solid transparentize(#fff, .1)
+    +box_outline
     padding-right: 1rem
+    padding-bottom: 0
     h2
       position: static
+      float: right
+      margin-top: -1rem
 
 .site_nav
   position: fixed
@@ -162,9 +167,8 @@ header.site_head
   .site_nav__toggle
     white-space: nowrap
     +responsive(margin-top, 1rem, .5rem)
-    button
-      background: $navy
-      color: #fff
+    button[type='submit']
+      margin: 0
     input[type='search']
       width: 15rem
       background: transparentize(#fff, .2)
@@ -177,20 +181,17 @@ main
   min-height: 60vh
   margin: 14vw 0 7rem 0
   z-index: 2
+  +tablet
+    margin-top: 16vw
+  +mobile
+    margin-top: 18vw
 
 header.page_head
-  position: fixed
-  display: none
-  z-index: -1
-  left: 0
-  top: 11vw
-  right: 0
   text-align: center
-  +max
-    top: 16rem
   h1
-    +header-text
     +responsive(font-size, 3rem, 2rem, 1.5rem)
+    margin-bottom: 1em
+    color: $navy
 
 #flash
   position: fixed

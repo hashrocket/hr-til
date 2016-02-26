@@ -1,9 +1,7 @@
 - pagination ||= false
 - draft ||= false
 
-- if draft then klass = " draft" end
-
-%article.post{ :class => klass }
+%article.post{ :class => if draft then "draft" end }
   %section
     .post__content.copy
       %h1= link_to Phil.words 1..5
@@ -25,14 +23,8 @@
           = link_to Phil.name, "#"
           %br
           = link_to Phil.date.strftime("%B %e, %Y"), "#", class: 'post__permalink'
-      -# - if draft
-      -#   %nav
-      -#     %p Draft Post
-      -# - elsif pagination
-      -#   %nav
-      -#     %ul
-      -#       %li= link_to "&larr; previous TIL".html_safe, "#"
-      -#       %li= link_to "next TIL &rarr;".html_safe, "#"
+          - if draft
+            (draft)
     %aside
       %ul
         %li= link_to "##{Phil.words(1)}", "#", class: 'post__tag-link'
@@ -44,3 +36,8 @@
           = link_to "#", class: "post__like-link #{Phil.sometimes("liked")}" do
             = Phil.pick 0..120
             %span likes
+- if pagination
+  %nav.pagination
+    %ul
+      %li= link_to "previous TIL".html_safe, "#"
+      %li.pagination_older= link_to "next TIL".html_safe, "#"

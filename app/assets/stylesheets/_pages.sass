@@ -1,12 +1,3 @@
-#author,
-#search,
-#tag,
-#ui,
-#statistics
-  padding-top: 2vw
-  +mobile
-    padding-top: 1.5rem
-
 #ui
   .post
     section
@@ -46,17 +37,14 @@
   article
     margin-bottom: 3vw
     header
-      +shadow
-      background: transparentize($light, .6)
       padding: 1.5rem
       margin-bottom: .2rem
       h1
         text-align: center
-        font-size: 1.6rem
-        +header-text
+        font-size: 1.2em
+        color: $accent
   ul.activity_chart
-    +shadow
-    background: mix($light, $accent, 80%)
+    +box-outline
     padding: 3rem 3vw
     display: flex
     height: 10vw
@@ -65,15 +53,15 @@
     li
       flex: 1 1
       position: relative
-      background: mix($light, $accent, 40%)
-      border: 1px solid mix($light, $accent, 80%)
-      transition: background-color, .1s
+      &:nth-of-type(2n)
+        .activity_chart_bar
+          background: lighten($blue, 10%)
       .activity_chart_bar
         position: absolute
         right: 0
         bottom: 0
         left: 0
-        background: $accent
+        background: $blue
         transition: background-color, .1s
       &:after,
       &:before
@@ -111,9 +99,9 @@
           right: 0
           left: auto
       &:hover
-        background: mix($light, $accent, 60%)
+        background: #fff
         .activity_chart_bar
-          background: lighten($accent, 10%)
+          background: $accent
         &:after,
         &:before
           display: block
