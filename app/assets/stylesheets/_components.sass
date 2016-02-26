@@ -113,10 +113,15 @@ nav.pagination
             height: 1.5rem
             width: 1.5rem
             margin-right: 1rem
-            background: svg-url(heart, $pink) center no-repeat
+            background: svg-url(heart, darken($light, 10%)) center no-repeat
             background-size: contain
           span.post__like-label
             display: none
+          &.liked
+            color: $red
+            border-color: $red
+            &:before
+              background-image: svg-url(heart, $red)
 
 ul.post_list
   li
