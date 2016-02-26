@@ -5,17 +5,12 @@ a
 nav.pagination
   max-width: 40rem
   margin: 4rem auto
-  li
-    box-sizing: border-box
-    float: left
-    width: 50%
-    padding: 0 1rem
-    text-align: center
+  text-align: center
   a
     +box-outline
-    display: block
-    position: relative
-    padding: .8rem 1rem
+    display: inline-block
+    padding: .8rem 2rem
+    margin: 0 .5rem
     font-family: $secondary-typeface
     text-transform: uppercase
     font-weight: bold
@@ -53,13 +48,19 @@ nav.pagination
         color: inherit
         display: block
         transition: color .1s
+        &:hover
+          color: $red
   footer
     font-style: italic
     text-align: right
     margin-top: 2em
+    +clearfix
     p
+      float: right
       margin: 0
       line-height: 1
+      &.post__social
+        float: left
     a
       color: inherit
       &.post__permalink
@@ -114,7 +115,7 @@ nav.pagination
             margin-right: 1rem
             background: svg-url(heart, $pink) center no-repeat
             background-size: contain
-          span
+          span.post__like-label
             display: none
 
 ul.post_list

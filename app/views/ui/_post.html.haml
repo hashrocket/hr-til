@@ -38,6 +38,5 @@
             %span likes
 - if pagination
   %nav.pagination
-    %ul
-      %li= link_to "previous TIL".html_safe, "#"
-      %li.pagination_older= link_to "next TIL".html_safe, "#"
+    = link_to "previous TIL".html_safe, "#"
+    = link_to "next TIL".html_safe, "#"

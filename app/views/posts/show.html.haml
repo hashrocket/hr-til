@@ -2,15 +2,13 @@
 
 - content_for :post_nav do
   - if @post.published? && multiple_posts?
-    %ul
+    %nav.pagination
       - unless oldest_post? @post
-        %li
-          = link_to previous_post @post do
-            &larr; previous TIL
+        = link_to previous_post(@post), class: "pagination_newer" do
+          previous TIL
       - unless newest_post? @post
-        %li
-          = link_to next_post @post do
-            next TIL &rarr;
+        = link_to next_post(@post), class: "pagination_older" do
+          next TIL
 
 - content_for :social do
   - if @post.published?

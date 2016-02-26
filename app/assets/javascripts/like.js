@@ -3,6 +3,7 @@ $(function(){
   function LikeButton(el) {
     this.id = el.id;
     this.$el = $(el);
+    this.$count = this.$el.find('.post__like-count')
     this.$el.on("click", $.proxy(this.toggle, this));
     this.updateClass();
   };
@@ -35,8 +36,7 @@ $(function(){
   }
 
   LikeButton.prototype.updateText = function(result) {
-    like_text = result.likes === 1 ? " time" : " times";
-    this.$el.html('liked <b>' + result.likes + like_text + '</b>');
+    this.$count.text(result.likes);
   };
 
   LikeButton.prototype.isLiked = function() {

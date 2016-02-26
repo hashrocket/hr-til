@@ -121,9 +121,9 @@ header.site_head
   &.site_nav--open
     .site_nav__toggle
       .copy
-        width: 36rem
+        width: 40rem
         +mobile
-          width: 32rem
+          width: 30rem
   ul.social
     list-style-type: none
     margin: 0
@@ -135,6 +135,9 @@ header.site_head
       box-sizing: border-box
       margin: 0
       padding: 0
+      +mobile
+        width: auto
+        float: none
     a.social_twitter,
     a.social_github
       display: block
@@ -143,6 +146,7 @@ header.site_head
       background: left center no-repeat
       background-size: 2.5rem auto
       font-family: $secondary-typeface
+      font-weight: 700
       font-style: normal
       color: $base
       +mobile
@@ -184,6 +188,7 @@ header.site_head
   left: 0
   right: 0
   font-family: $secondary-typeface
+  font-weight: 700
   font-size: .8em
   text-align: center
   z-index: 999
