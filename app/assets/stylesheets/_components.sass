@@ -1,155 +1,133 @@
 a
   text-decoration: none
-  color: $blue-dark
-
-.box
-  +wrapper
-  article
-    +shadow
-    padding: 3vw
+  color: $red
 
 nav.pagination
-  +wrapper
-  +clearfix
+  max-width: 40rem
   margin: 4rem auto
+  text-align: center
   a
-    float: left
-    +shadow
-    display: block
-    position: relative
-    padding: .8rem 1rem
-    font-style: italic
+    +box-outline
+    display: inline-block
+    padding: .8rem 2rem
+    margin: 0 .5rem
+    font-family: $secondary-typeface
+    text-transform: uppercase
     font-weight: bold
-    font-size: .9em
+    font-size: .8em
     transition: opacity .2s, color .2s
-    opacity: .9
-    color: transparentize($blue-dark, .3)
+    color: $blue
     &:hover
-      opacity: 1
-      color: $blue-dark
-    &.pagination_older
-      float: right
+      background: #fff
 
 .post
   +clearfix
-  +wrapper
   display: flex
   align-items: flex-start
+  margin-bottom: 3vw
+  justify-content: center
+  +mobile
+    display: block
+    padding: 0 1rem
   &.draft
-    section
-      background: mix($light, $blue-dark, 80%)
-      color: mix($dark, $blue-dark, 70%)
-  .tag
-    background: #333
-    color: #fff
-    padding: 2px
+    opacity: .8
   section
     flex: 0 1 auto
     box-sizing: border-box
-    padding: 3vw 3vw 0 3vw
-    margin-right: 2rem
     min-width: 35rem
-    overflow: auto
-    +shadow
+    max-width: 60%
+    +box-outline
     +mobile
-      min-width: 0
-      margin-right: 0
+      max-width: none
+      min-width: none
+  .post__content
+    overflow: auto
+    padding: 4vw
     h1:first-of-type
       a
         color: inherit
         display: block
         transition: color .1s
         &:hover
-          color: $blue-dark
+          color: $red
   footer
     font-style: italic
-    color: mix($dark, $blue, 30%)
-    font-size: .8em
-    padding: .5vw 0 1vw 0
-    border-top: 2px solid  transparentize($light - #1a1a1a, .5)
+    text-align: right
+    margin-top: 2em
     +clearfix
-    +mobile
-      font-size: 1em
     p
       float: right
-      a
-        color: inherit
-        &:hover
-          text-decoration: underline
-    nav
-      float: left
-      ul
-        list-style-type: none
-      ul, li
-        display: inline
-        padding: 0
-        li + li
-          margin-left: 2rem
+      margin: 0
+      line-height: 1
+      &.post__social
+        float: left
+    a
+      color: inherit
+      &.post__permalink
+        font-size: .8em
+      &:hover
+        text-decoration: underline
   aside
-    flex: 0 0 auto
-    font-size: .9em
     ul
-      +shadow
-      margin-bottom: 2rem
+      display: flex
+      width: 100%
+      white-space: nowrap
+      flex-wrap: wrap
       li
-        padding: .4rem
-        a
-          display: block
-          position: relative
-          padding: .8rem .5rem
-          color: $dark
-          border-left: 2px solid $blue-dark
-          font-style: italic
-          +lang-colors(border-color)
-          &.edit
-            border-color: $callout
-          &.like
-            border-color: transparentize($blue-dark, .5)
-            background: svg-url(heart, $blue) 95% center no-repeat
-            background-size: auto 50%
-            &:hover,
-            &.liked
-              background-image: svg-url(heart, $red)
-              border-color: #d84536
+        flex: 1 1 auto
+        padding: 0 .2rem
+      a
+        display: block
+        padding: 1rem 2rem
+        text-transform: uppercase
+        font-weight: 700
+        font-size: 1.3rem
+        font-family: $secondary-typeface
+        transition: padding-left .1s
+        border-top: .2rem solid $med
+        text-align: center
+        line-height: 2rem
+        background: transparent
+        transition: background .1s
+        &:hover
+          background-color: #fff
+        &.post__raw-link
+          border-color: $cyan
+          color: $cyan
+        &.post__tag-link
+          border-color: $green
+          color: $green
+        &.post__permalink
+          border-color: $blue
+          color: $blue
+        &.post__edit-link
+          border-color: #aaa
+          color: #aaa
+        &.post__like-link
+          border-color: $pink
+          color: $pink
           &:before
-            position: absolute
             content: ''
-            top: 0
-            left: 0
-            bottom: 0
-            right: 100%
-            background: #fff
-            transition: right .1s
-            z-index: -1
-          &:hover:before
-            right: 0
-          &.disabled
-            pointer-events: none
-            cursor: default
-      li + li
-        border-top: 2px solid transparentize($light - #1a1a1a, .5)
-    +mobile
-      ul
-        background: none
-        box-shadow: none
-        margin-bottom: 0
-        li
-          display: inline-block
-          +shadow
-          margin: 0 .7rem 1rem 0
-          a
-            padding: .5rem
-            &.like
-              padding-right: 2.5rem
-          + li
-            border-top: 0
+            display: inline-block
+            vertical-align: middle
+            height: 1.5rem
+            width: 1.5rem
+            margin-right: 1rem
+            background: svg-url(heart, darken($light, 10%)) center no-repeat
+            background-size: contain
+          span.post__like-label
+            display: none
+          &.liked
+            color: $red
+            border-color: $red
+            &:before
+              background-image: svg-url(heart, $red)
 
 ul.post_list
   li
-    padding: .4rem
+    padding: .2rem
     margin: .2rem 0
-    +shadow
-    background: mix($light, $blue, 80%)
+    +box-outline
     a
       display: flex
       position: relative
@@ -157,7 +135,6 @@ ul.post_list
       padding: .5rem
       color: $dark
       font-weight: bold
-      +lang-colors(border-color)
       z-index: 1
       justify-content: space-between
       b
@@ -165,11 +142,11 @@ ul.post_list
       small
         flex: 0 0 auto
         font-style: italic
-        color: $blue-dark
         float: right
         text-align: right
         white-space: nowrap
         padding-left: 1rem
+        color: $blue
         span
           opacity: .5
           margin: 0 .3rem
@@ -208,7 +185,7 @@ form
         float: right
         font-weight: bold
         font-size: .85em
-        color: $blue-dark
+        color: $accent
         &.negative
           color: $error
     dd
@@ -218,15 +195,18 @@ form
   input[type='text'],
   input[type='search'],
   textarea
+    display: inline-block
+    vertical-align: middle
     width: 100%
     padding: .5rem
-    border: 1px solid $blue
+    border: 1px solid $light
     font-family: $primary-typeface
-    line-height: 1.6
     box-sizing: border-box
     border-radius: 0
+    height: 4rem
+    line-height: 3rem
     &:focus
-      border-color: $blue-dark
+      border-color: $blue
       outline: none
   #editor
     height: 300px
@@ -234,27 +214,38 @@ form
     display: none
   textarea.autosize
     resize: none
-  input[type='submit']
+  input[type='submit'],
+  button[type='submit']
     color: #fff
+    display: inline-block
+    vertical-align: middle
+    box-sizing: border-box
     +responsive(padding, 1rem 2rem, 1rem)
-    margin-right: 1rem
     border: none
     border-radius: 0
-    +shadow-text
-    background: transparentize($blue, .5)
+    background: $accent
+    height: 4rem
+    font-weight: 700
+    font-family: $secondary-typeface
+    letter-spacing: .1em
+    text-transform: uppercase
+    transform: background .1s
+    margin-right: 2rem
     &:active,
     &:focus,
     &:hover
-      background: transparentize($blue, .6)
+      background: $red
       outline: none
 
 .copy
+  +mobile
+    font-size: .85em
   h1, h2, h3, p, ul, ol
-    margin: 0 0 1em 0
+    margin: 0 0 1.2em 0
     +mobile
       margin-bottom: .7em
   h1
-    font-size: 1.4em
+    font-size: 1.6em
   h2, h3
     font-size: 1.2em
   p, ul, ol
@@ -268,7 +259,7 @@ form
   li + li
     margin-top: .2em
   code
-    background: $light
+    background: #fff
     padding: 0 .4em
     margin: 0 .2em
   pre
@@ -293,12 +284,6 @@ form
     height: auto
   blockquote
     +responsive(margin-bottom, 1.4em, 1.1em)
-    background: $light
-    color: darken($blue, 50%)
-    padding: 1em 1.5em .1em 1.5em
+    border-left: .4rem solid $light
+    padding: 1em 0 .1em 3vw
     font-size: .9em
-    box-shadow: -0.4em 0.4em 0 0 transparentize($blue, .5)
-  +mobile
-    margin-right: 0
-    margin-bottom: 1rem
-    font-size: .85em

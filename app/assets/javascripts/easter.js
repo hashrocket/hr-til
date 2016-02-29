@@ -11,7 +11,23 @@ $(function(){
     kkeys.push(e.keyCode);
     if(kkeys.toString().indexOf(colorz) >= 0) {
       kkeys = [];
-      var colors = ['#BDA3DE', '#DEA3A8', '#C4DEA3', '#DEA3BA', '#DEB3A3', '#D9A3DE', '#DED9A3'];
+      var colors = [
+        '#D5E9F5',
+        '#F5E0D6',
+        '#F5D6D6',
+        '#F5EBD6',
+        '#F5D6E8',
+        '#E8F5D6',
+        '#F2D6F5',
+        '#D9F5D6',
+        '#D6DBF5',
+        '#D6F5F5',
+        '#D6E3F5',
+        '#D6DEF5',
+        '#D6D9F5',
+        '#D6D6F5'
+      ];
+
       var randomColor = colors[Math.floor(Math.random() * colors.length)];
 
       $('body').css('background', (randomColor));

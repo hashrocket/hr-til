@@ -3,57 +3,49 @@
   %head
     %title= "#{SITE_NAME}"
     = stylesheet_link_tag 'application', media: 'all'
-    = javascript_include_tag 'application'
     = csrf_meta_tags
     %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
     %link(href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
-    %link(href='http://fonts.googleapis.com/css?family=Rosario:400,700italic,700,400italic' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
     = yield :head
   %body
 
-    %header.site_head
-      %h1= link_to "Today I learned", "#"
-
-    -# #flash
-      -# %p.notice= Phil.words 20
-      -# %p.error= Phil.words 20
-
-    %nav.site_nav
+    %nav.admin_panel
       %ul
         %li= link_to Phil.name, "#"
-        %li= link_to "sign out", "#"
         %li= link_to "create post", "#"
         %li= link_to "drafts", "#"
+        %li= link_to "sign out", "#"
+
+    %header.site_head
+      %div
+        %h1= link_to "Today I learned", "#"
+        %h2= link_to "A Hashrocket project", "#"
+
+    -# #flash
+    -#   %p.notice= Phil.words 20
+    -#   %p.error= Phil.words 20
 
     %main= yield
 
-    %aside.site_about
-      = link_to "?", "#", class: "aside_toggle"
-      .site_about__content
-        .copy
-          :markdown
-            TIL is an open-source project by the team at [Hashrocket](http://hashrocket.com) that catalogues the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
-        %ul.social
-          %li= link_to "/hashrockettil", "http://twitter.com/hashrockettil", class: "social_twitter"
-          %li= link_to "/hashrockettil", "http://github.com/hashrockettil", class: "social_github"
+    %nav.site_nav
+      %ul
+        %li.site_nav__about
+          = link_to "About TIL", "#", class: "site_nav__link"
+          .site_nav__toggle
+            .copy
+              :markdown
+                TIL is an open-source project by the team at [Hashrocket](http://hashrocket.com) that catalogues the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
+              %ul.social
+                %li= link_to "/hashrockettil", "http://twitter.com/hashrockettil", class: "social_twitter"
+                %li= link_to "/hashrockettil", "http://github.com/hashrockettil", class: "social_github"
+        %li.site_nav__statistics
+          = link_to "statistics", "#", class: "site_nav__link"
+        %li.site_nav__search
+          %form<
+            = link_to "search", "#", class: "site_nav__link"
+            .site_nav__toggle
+              %input(type='search')
+              %input(type='submit' value='Search')
 
-    %aside.site_statistics
-      = link_to "statistics", "#", class: "aside_toggle"
-
-    %aside.site_search
-      %form<
-        .search_fields
-          %input(type='search')
-          %input(type='submit' value='search')
-        = link_to "search", "#", class: "aside_toggle"
-
-    %footer.site_footer
-      %p.site_footer_social
-        = link_to "Hashrocket TIL on Twitter", "http://twitter.com/hashrockettil", class: 'footer_twitter'
-        = link_to 'Hashrocket', 'http://hashrocket.com', class: 'footer_hashrocket'
-        = link_to "Hashrocket TIL on Github", "http://github.com/hashrockettil", class: 'footer_github'
-      %p
-        curated in Jacksonville and Chicago
-        %br/
-        by
-        = link_to 'Hashrocket', 'http://hashrocket.com'
+    = javascript_include_tag 'application'

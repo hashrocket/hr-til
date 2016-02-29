@@ -4,7 +4,7 @@ html
 body
   -webkit-text-size-adjust: none
   -webkit-font-smoothing: antialiased
-  background: $blue
+  background: $light
   color: $dark
   font-family: $primary-typeface
   font-size: 1.6em
@@ -12,98 +12,132 @@ body
 header.site_head
   position: fixed
   left: 0
-  top: 0
   right: 0
-  text-align: center
-  padding: 3vw 0
-  z-index: -1
-  +max
-    padding: 5rem 0
-  h1
-    a
-      +shadow-text
-      font-size: 7vw
-      letter-spacing: 2vw
-      margin-left: 2vw
-      +max
-        font-size: 9rem
-
-nav.site_nav
-  position: absolute
-  left: 2vh
   top: 0
-  li
+  z-index: 1
+  padding: 2vw 6vw
+  text-align: center
+  div
     display: inline-block
+    position: relative
+  a
+    display: block
+    font-family: $secondary-typeface
+    text-transform: uppercase
+    color: $navy
+    letter-spacing: .1em
+    font-weight: 900
+    font-size: 7vw
+    line-height: 1
+  h2
+    position: absolute
+    right: 0
+    top: 90%
     a
-      display: block
-      padding: .2rem .5rem
-      background: $light
-      font-size: .9em
-      &:hover
-        color: $dark
+      text-align: right
+      color: $red
+      font-size: 1.4rem
+      font-weight: 700
+      margin-right: 1vw
+      background: left 55% no-repeat url(/assets/logo_footer.png)
+      background-size: 1.8rem auto
+      padding: 1rem 0 1rem 2.5rem
+  +mobile
+    z-index: 100
+    background: #fff
+    text-align: right
+    +box_outline
+    padding-right: 1rem
+    padding-bottom: 0
+    h2
+      position: static
+      float: right
+      margin-top: -1rem
 
-a.aside_toggle
+.site_nav
+  position: fixed
+  bottom: 0
+  left: 0
+  z-index: 100
+  > ul
+    +clearfix
+    +mobile
+      background: transparentize(#fff, .2)
+      border-top: 2px solid transparentize(#fff, .1)
+    > li
+      clear: left
+      float: left
+      +mobile
+        clear: none
+      &.site_nav--open
+        .site_nav__link
+          opacity: 1
+        .site_nav__toggle
+          width: auto
+          opacity: 1
+          box-shadow: 0 0 3rem transparentize($navy, .8)
+
+.site_nav__link
+  display: inline-block
   +responsive(width, 6rem, 5rem)
   +responsive(height, 6rem, 5rem)
-  +responsive(line-height, 6rem, 5rem)
-  display: block
-  transition: opacity .2s, color .2s
+  transition: opacity .2s
+  border: none
+  +hide-text
+  background: transparent center no-repeat
+  background-size: 60% auto
+  opacity: .7
+  &:hover
+    opacity: 1
 
-aside.site_statistics
-  position: fixed
-  +shadow
-  +responsive(bottom, 3vw, 2vw)
-  +responsive(left, 3vw, 2vw)
-  +responsive(margin-left, 7.5rem, 0)
-  +responsive(margin-bottom, 0, 6.5rem)
-  z-index: 999
+.site_nav__toggle
+  position: absolute
+  left: 100%
+  bottom: 0
+  width: 0
+  overflow: hidden
+  transition: opacity .2s
+  opacity: 0
   +mobile
-    background: $light
-  a.aside_toggle
-    background: svg-url(stats, $blue-dark) center no-repeat
-    +hide-text
-    background-size: 60% auto
-    opacity: .8
-    transition: opacity .2s
-    &:hover
-      opacity: 1
-
-aside.site_about
-  z-index: 1000
-  position: fixed
-  +responsive(bottom, 3vw, 2vw)
-  +responsive(left, 3vw, 2vw)
-  a.aside_toggle
-    +shadow
-    font-size: 2.7em
-    text-align: center
-    font-family: $secondary-typeface
-    font-weight: 700
-    color: transparentize($blue-dark, .3)
-    +mobile
-      background: $light
-    &:hover
-      color: $blue-dark
-  .site_about__content
-    display: none
-    position: absolute
-    left: 0
     bottom: 100%
-    margin-bottom: 1.5vw
-    +shadow
-    padding: 2em
-    font-style: italic
-    width: 30rem
-    background: $light
-    font-size: .9em
-  &.open
-    .site_about__content
-      display: block
+    left: 0
+    margin-bottom: 1rem
+
+.site_nav__statistics
+  a.site_nav__link
+    background-image: svg-url(stats, $accent)
+
+.site_nav__about
+  position: relative
+  a.site_nav__link
+    background-image: svg-url(help, $accent)
+  .site_nav__toggle
+    .copy
+      box-sizing: border-box
+      padding: 2em
+      font-style: italic
+      background: #fff
+      font-size: .9em
+  &.site_nav--open
+    .site_nav__toggle
+      .copy
+        width: 40rem
+        +mobile
+          width: 30rem
   ul.social
+    list-style-type: none
+    margin: 0
+    padding: 0
+    +clearfix
     li
       width: 50%
       float: left
       box-sizing: border-box
+      margin: 0
+      padding: 0
+      +mobile
+        width: auto
+        float: none
     a.social_twitter,
     a.social_github
       display: block
@@ -111,106 +145,91 @@ aside.site_about
       line-height: 3rem
       background: left center no-repeat
       background-size: 2.5rem auto
+      font-family: $secondary-typeface
+      font-weight: 700
+      font-style: normal
+      color: $base
+      +mobile
+        font-size: .9em
     a.social_twitter
-      background-image: svg-url(twitter, $blue-dark)
+      background-image: svg-url(twitter, $accent)
       &:hover
         background-image: svg-url(twitter, #55acee)
+        color: #55acee
     a.social_github
-      background-image: svg-url(github, $blue-dark)
+      background-image: svg-url(github, $accent)
       &:hover
         background-image: svg-url(github, #4b4b4b)
-  +mobile
-    .site_about__content
-      width: 28rem
+        color: #4b4b4b
 
-aside.site_search
-  z-index: 1000
-  +shadow
-  position: fixed
-  +responsive(bottom, 3vw, 2vw)
-  +responsive(right, 3vw, 2vw)
-  +mobile
-    background: $light
-  .search_fields
-    max-width: 0
-    overflow: hidden
+.site_nav__search
+  position: relative
+  .site_nav__link
+    background-image: svg-url(search, $accent)
+  .site_nav__toggle
+    background: #fff
     white-space: nowrap
-    transition: max-width .3s
-    +responsive(margin-left, 6rem, 5rem)
-  input[type='submit']
-    +responsive(margin, 1rem 1rem 1rem 0, .5rem .5rem .5rem 0)
-  input[type='search']
-    +responsive(width, 15rem, 13rem)
-    width: 15rem
-    background: transparentize($light, .5)
-    +responsive(margin, 1rem 0, .5rem 0)
-  a.aside_toggle
-    text-indent: -9327px
-    position: absolute
-    left: 0
-    bottom: 0
     top: 0
-    background: svg-url(search, $blue-dark) center no-repeat
-    background-size: 60% auto
-    opacity: .7
-    &:hover
-      opacity: 1
-  &.open
-    .search_fields
-      max-width: 50rem
+    bottom: auto
+    +responsive(margin-top, 1rem, .5rem)
+    button[type='submit']
+      margin: 0
+    input[type='search']
+      width: 15rem
+      background: transparentize(#fff, .2)
+      border: none
+      &:focus
+        background: #fff
+    +mobile
+      top: auto
+      bottom: 100%
 
-footer.site_footer
-  text-align: center
-  clear: both
-  font-style: italic
-  color: darken($blue-dark, 10%)
-  padding: 3rem 0
-  margin: 3rem 0
-  line-height: 1.6
-  margin-bottom: 1rem
+.admin_panel
+  position: fixed
+  top: 0
+  left: 0
+  right: 0
+  font-family: $secondary-typeface
+  font-weight: 700
   font-size: .8em
-  p
-    margin: 1rem 0
-  .site_footer_social
+  text-align: center
+  z-index: 999
+  ul
+    display: inline-block
+    +box-outline
+    border-top: none
+    +mobile
+      display: block
+  li
+    display: inline-block
     a
-      display: inline-block
-      +hide_text
-      width: 5rem
-      height: 2.5rem
-      opacity: .8
-      transition: opacity .2s
-      background: center no-repeat
-      background-size: auto 100%
+      display: block
+      padding: .5rem 1rem
+      color: $blue
+      line-height: 1.5rem
       &:hover
-        opacity: 1
-      &.footer_hashrocket
-        background-image: image-url("logo_footer.png")
-      &.footer_twitter
-        background-image: svg-url(twitter, $blue-dark)
-      &.footer_github
-        background-image: svg-url(github, $blue-dark)
+        color: $red
+  + .site_head
+    margin-top: 2.5rem
+    + main
+      padding-top: 2.5rem
 
 main
+  position: relative
   min-height: 60vh
-  margin: 14vw 0 3vw 0
-  +max
-    margin: 20rem 0 6rem 0
+  margin: 14vw 0 7rem 0
+  z-index: 2
+  +tablet
+    margin-top: 16vw
+  +mobile
+    margin-top: 18vw
 
 header.page_head
-  position: fixed
-  z-index: -1
-  left: 0
-  top: 11vw
-  right: 0
   text-align: center
-  +shadow-text
-  color: mix($blue-dark, $light, 70%)
-  font-size: 2vw
-  +mobile
-    font-size: 1.5rem
-  +max
-    font-size: 4rem
-    top: 16rem
+  h1
+    +responsive(font-size, 3rem, 2rem, 1.5rem)
+    margin-bottom: 1em
+    color: $navy
 
 #flash
   position: fixed
@@ -221,9 +240,9 @@ header.page_head
   text-align: center
   p
     background: #fff
-    border: 5px solid $blue-dark
+    border: 5px solid $accent
     border-top: 0
-    color: $blue-dark
+    color: $accent
     padding: 2vw
     +responsive(font-size, 1.4em, 1.2em, 1em)
     cursor: pointer

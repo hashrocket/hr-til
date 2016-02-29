@@ -1,13 +1,12 @@
 %section#post_edit
-  %section.box
-    %article
-      .copy
-        %h1 Create Post
-      = render 'form'
+  %header.page_head
+    %h1 Create Post
+  = render 'form'
 
   %article.post
-    %section.copy
-      %h1.title_preview
-      .content_preview
-      %footer
-        %p.word_count
+    %section
+      .post__content.copy
+        %h1.title_preview
+        .content_preview
+        %footer
+          %p.word_count

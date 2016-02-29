@@ -1,7 +1,7 @@
 include ActionView::Helpers::TextHelper
 
 When 'I click create post' do
-  within '.site_nav' do
+  within '.admin_panel' do
     click_on 'Create Post'
   end
 end
@@ -88,8 +88,8 @@ And 'I click raw' do
   click_on 'view raw'
 end
 
-When 'I click on my username in the upper right' do
-  within '.site_nav' do
+When 'I click on my username in the admin panel' do
+  within '.admin_panel' do
     click_on @developer.username
   end
 end
@@ -102,8 +102,8 @@ Then 'I see the post I created' do
 end
 
 Then(/^I see the likes count equals (\d+)$/) do |num|
-  within '.post' do
-    expect(page).to have_content "liked #{num} time"
+  within '.post__like-count' do
+    expect(page).to have_content num
   end
 end
 
@@ -126,7 +126,7 @@ Then 'I see the markdown fenced code I created' do
 end
 
 Then 'I see the markdown bullets I created' do
-  within '.post section li' do
+  within '.post__content li' do
     expect(page).to have_content 'item from a list of items'
   end
 end
@@ -188,15 +188,15 @@ When 'I go to the most recent post' do
   visit post_path @newest_post
 end
 
-When 'I see only a left arrow' do
-  within 'footer nav' do
+When 'I see only a previous TIL link' do
+  within '.pagination' do
     expect(page).to have_link 'previous TIL'
     expect(page).to_not have_link 'next TIL'
   end
 end
 
-When 'I click the left arrow' do
-  within 'footer nav' do
+When 'I click the previous TIL link' do
+  within '.pagination' do
     click_on 'previous TIL'
   end
 end
@@ -205,8 +205,8 @@ Then 'I see the second most recent post' do
   expect(current_path).to eq(post_path(@older_post))
 end
 
-And 'I see a right arrow and a left arrow' do
-  within 'footer nav' do
+And 'I see a next TIL link and a previous TIL link' do
+  within '.pagination' do
     expect(page).to have_link 'next TIL'
     expect(page).to have_link 'previous TIL'
   end
@@ -216,15 +216,15 @@ Then 'I see the least recent post' do
   expect(current_path).to eq(post_path(@oldest_post))
 end
 
-When 'I see only a right arrow' do
-  within 'footer nav' do
+When 'I see only a next TIL link' do
+  within '.pagination' do
     expect(page).to have_link 'next TIL'
     expect(page).to_not have_link 'previous TIL'
   end
 end
 
-When 'I click the right arrow' do
-  within 'footer nav' do
+When 'I click the next TIL link' do
+  within '.pagination' do
     click_on 'next TIL'
   end
 end
@@ -317,7 +317,7 @@ When "I visit the url 'http://domain/author/username'" do
 end
 
 When "I click that author's username" do
-  within '.post:first-child aside' do
+  within '.post:first-child footer' do
     click_on 'prolificposter'
   end
 end
@@ -364,7 +364,7 @@ Then 'I see the show page for that post' do
     expect(page).to have_content @post.title
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
-    expect(page).to have_content '#phantomjs'
+    expect(page.body).to match(/#phantomjs/i)
   end
 end
 
@@ -374,12 +374,6 @@ end
 
 Then 'I see the sanitized title' do
   expect(page).to have_title "It's Friday & Stuff"
-end
-
-And 'I see a unique CSS selector for that channel' do
-  within '.post' do
-    expect(page).to have_selector '.phantomjs'
-  end
 end
 
 Then 'I see the show page for that edited post' do
@@ -528,11 +522,11 @@ When(/^I click (the )?"(.*?)"( button)?$/) do |_, text, is_button|
 end
 
 Then 'I should see the About Us text' do
-  expect(page).to have_selector '.site_about', visible: true
+  expect(page).to have_selector '.site_nav__about .site_nav__toggle', visible: true
 end
 
 Then 'I should not see the About Us text' do
-  expect(page).to have_selector '.site_about', visible: false
+  expect(page).to have_selector '.site_nav__about .site_nav__toggle', visible: false
 end
 
 Given(/^I have an existing unpublished post$/) do
@@ -561,7 +555,7 @@ Then 'I see the draft' do
   within '.post' do
     expect(page).to have_content 'johnsmith'
     expect(page).to have_content 'Today I learned about web development'
-    expect(page).to have_content 'Draft Post'
+    expect(page).to have_content 'draft'
     expect(page).to_not have_content 'previous TIL'
     expect(page).to_not have_content 'next TIL'
   end

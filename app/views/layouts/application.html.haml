@@ -6,8 +6,8 @@
     = javascript_include_tag 'application'
     = csrf_meta_tags
     %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
-    %link(href='//fonts.googleapis.com/css?family=Raleway:900' rel='stylesheet' type='text/css')
-    %link(href='//fonts.googleapis.com/css?family=Rosario:400,700italic,700,400italic' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
+    %link(href='http://fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
     = favicon_link_tag 'favicon.png'
     = yield :head
     %meta(name="twitter:card" content="summary_large_image")
@@ -17,49 +17,43 @@
     %meta(name="twitter:description" content="TIL is a project by Hashrocket to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.")
     %meta(name="twitter:image" content="//til.hashrocket.com/assets/til_twittercard.png")
   %body
-    %header.site_head
-      %h1= link_to SITE_NAME, root_path
-
-    = render 'shared/flash'
-
-    %nav.site_nav
-      %ul
-        - if developer_signed_in?
+    - if developer_signed_in?
+      %nav.admin_panel
+        %ul
           %li= link_to current_developer.username, current_developer
           %li= link_to "Sign Out", account_signout_path
           %li= link_to "Create Post", new_post_path
           %li= link_to "Drafts", drafts_path
           %li= link_to "Profile", edit_profile_path
 
+    %header.site_head
+      %div
+        %h1= link_to SITE_NAME, root_path
+        %h2= link_to "A Hashrocket project", "https://hashrocket.com"
+
+    = render 'shared/flash'
+
     %main= yield
 
-    %aside.site_about
-      = link_to "?", "#", class: "aside_toggle"
-      .site_about__content
-        .copy
-          :markdown
-            TIL is an open-source project by the team at [Hashrocket](https://hashrocket.com) that catalogues the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
-        %ul.social
-          %li= link_to "/hashrockettil", "https://twitter.com/hashrockettil", class: "social_twitter"
-          %li= link_to "/hashrocket/hr-til", "https://github.com/hashrocket/hr-til", class: "social_github"
+    %nav.site_nav
+      %ul
+        %li.site_nav__about
+          = link_to "?", "#", class: "site_nav__link"
+          .site_nav__toggle
+            .copy
+              :markdown
+                TIL is an open-source project by the team at [Hashrocket](https://hashrocket.com) that catalogues the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit and any Hashrocket team member can contribute. We hope you enjoy learning along with us.
+              %ul.social
+                %li= link_to "/hashrockettil", "https://twitter.com/hashrockettil", class: "social_twitter"
+                %li= link_to "/hashrocket/hr-til", "https://github.com/hashrocket/hr-til", class: "social_github"
 
-    %aside.site_statistics
-      = link_to "statistics", statistics_path, class: "aside_toggle"
+        %li.site_nav__statistics
+          = link_to "statistics", statistics_path, class: "site_nav__link"
 
-    %aside.site_search
-      .search_fields
-        = form_tag root_path, method: 'get' do
-          = search_field_tag :q
-          = submit_tag 'Search', name: nil
-        = link_to "search", "#", class: "aside_toggle"
+        %li.site_nav__search
+          = link_to "search", "#", class: "site_nav__link"
+          .site_nav__toggle>
+            = form_tag root_path, method: 'get' do
+              = search_field_tag :q
+              = button_tag 'Search', name: nil
 
-    %footer.site_footer
-      %p.site_footer_social
-        = link_to "Hashrocket TIL on Twitter", "https://twitter.com/hashrockettil", class: 'footer_twitter'
-        = link_to 'Hashrocket', 'https://hashrocket.com', class: 'footer_hashrocket'
-        = link_to "Hashrocket TIL on Github", "https://github.com/hashrocket/hr-til", class: 'footer_github'
-      %p
-        curated in Jacksonville and Chicago
-        %br/
-        by
-        = link_to 'Hashrocket', 'https://hashrocket.com'

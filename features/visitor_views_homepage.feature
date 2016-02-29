@@ -4,7 +4,7 @@ Feature: Visitor views homepage
     Given I am a visitor
     And I visit the homepage
     And I see the site name in the title
-    Then I see the footer information
+    Then I see the company branding
 
   Scenario: Visitor sees Atom feed
     Given I am a visitor

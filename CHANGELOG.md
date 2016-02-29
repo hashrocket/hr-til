@@ -2,6 +2,10 @@
 
   *Jake Worth*
 
+* Redesign Today I Learned.
+
+  *Cameron Daigle*
+
 * Only post to Slack on likes thresholds once.
 
   *Jake Worth*

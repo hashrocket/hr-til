@@ -12,7 +12,7 @@ Feature: Developer creates post
     Then I see the homepage
     And I see the post I created
     And I see the channel I selected
-    When I click on my username in the upper right
+    When I click on my username in the admin panel
     Then I see the post I created
     When I click on the title of the post
     Then I see a link to tweet
