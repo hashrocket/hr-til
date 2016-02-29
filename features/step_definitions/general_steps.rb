@@ -130,8 +130,8 @@ Then(/^I see a message "(.*?)"$/) do |message|
   expect(page).to have_content message
 end
 
-Then 'I see the footer information' do
-  within 'footer' do
+Then 'I see the company branding' do
+  within '.site_head' do
     expect(page).to have_link 'Hashrocket', href: 'https://hashrocket.com'
   end
 end

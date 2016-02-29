@@ -24,46 +24,38 @@ Feature: Visitor views post
     Given I am a visitor
     And three posts exist
     When I go to the most recent post
-    Then I see only a left arrow
-    When I click the left arrow
+    Then I see only a previous TIL link
+    When I click the previous TIL link
     Then I see the second most recent post
-    And I see a right arrow and a left arrow
-    When I click the left arrow
+    And I see a next TIL link and a previous TIL link
+    When I click the previous TIL link
     Then I see the least recent post
-    And I see only a right arrow
-    When I click the right arrow
+    And I see only a next TIL link
+    When I click the next TIL link
     Then I see the second most recent post
 
   Scenario: Visitor clicks on 'previous' arrow with a draft post
     Given I am a visitor
     And three posts exist, one a draft
     When I go to the most recent post
-    Then I see only a left arrow
-    When I click the left arrow
+    Then I see only a previous TIL link
+    When I click the previous TIL link
     Then I see the least recent post
-    And I see only a right arrow
+    And I see only a next TIL link
 
   Scenario: Visitor clicks on 'previous' arrow with a draft post
     Given I am a visitor
     And three posts exist, with publication dates in a different order than creation dates
     When I go to the most recent post
-    Then I see only a left arrow
-    When I click the left arrow
+    Then I see only a previous TIL link
+    When I click the previous TIL link
     Then I see the second most recent post
-    And I see a right arrow and a left arrow
-    When I click the left arrow
+    And I see a next TIL link and a previous TIL link
+    When I click the previous TIL link
     Then I see the least recent post
-    And I see only a right arrow
-    When I click the right arrow
+    And I see only a next TIL link
+    When I click the next TIL link
     Then I see the second most recent post
-
-  Scenario: Visitor clicks on post title and sees a colored channel
-    Given I am a visitor
-    And a post exists
-    And I visit the homepage
-    When I click on the title of the post
-    Then I see the show page for that post
-    And I see a unique CSS selector for that channel
 
   Scenario: Visitor mangles url
     Given I am a visitor
