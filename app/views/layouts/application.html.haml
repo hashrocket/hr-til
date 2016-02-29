@@ -52,8 +52,8 @@
 
         %li.site_nav__search
           = link_to "search", "#", class: "site_nav__link"
-          .site_nav__toggle
+          .site_nav__toggle>
             = form_tag root_path, method: 'get' do
               = search_field_tag :q
-              = submit_tag 'Search', name: nil
+              = button_tag 'Search', name: nil
 

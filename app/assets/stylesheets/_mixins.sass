@@ -8,22 +8,11 @@
     display: block
 
 = box-outline
-  background: transparentize(#fff, .3)
+  background: transparentize(#fff, .2)
   border: .2rem solid transparentize(#fff, .1)
-
-= shadow($shadow: $accent)
-  // background-color: mix($shadow, #fff, 15%)
-  // box-shadow: -0.8vw 0.8vw 0 0 transparentize($shadow, .5)
-  // +max
-  //   box-shadow: -1rem 1rem 0 0 transparentize($shadow, .5)
 
 = header-text
   font-family: $secondary-typeface
   text-transform: uppercase
   letter-spacing: .2em
   font-weight: 900
-
-// = lang-colors($attr)
-//   @each $lang, $color in $langs
-//     &.#{$lang}
-//       #{$attr}: unquote($color)
