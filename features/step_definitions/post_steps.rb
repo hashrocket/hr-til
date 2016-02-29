@@ -364,7 +364,7 @@ Then 'I see the show page for that post' do
     expect(page).to have_content @post.title
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
-    expect(page).to have_content '#PHANTOMJS'
+    expect(page.body).to match(/#phantomjs/i)
   end
 end
 
