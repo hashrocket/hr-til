@@ -19,8 +19,8 @@ follow these setup steps:
 $ git clone https://github.com/hashrocket/hr-til
 $ cd hr-til
 $ bundle install
-$ rake db:setup
 $ cp config/application.yml{.example,}
+$ rake db:setup
 $ rails s
 ```
 
