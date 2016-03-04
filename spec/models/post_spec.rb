@@ -61,18 +61,33 @@ describe Post do
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
-  it 'should not allow a body longer than 200 words' do
-    post.body = 'word ' * 201
-    expect(post).to_not be_valid
-    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
+  describe '#body_size' do
+    it 'should return true when the post is equal or below 200 words' do
+      post.body = 'word ' * 200
+      expect(post.send(:body_size)).to be
+    end
 
-    post.body = 'word ' * 300
-    expect(post).to_not be_valid
-    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 100 words over the limit of 200 words']
+    it 'should return false when the post is above 200 words' do
+      post.body = 'word ' * 201
+      expect(post.send(:body_size)).to eq false
+    end
 
-    post.body = 'word ' * 400
-    expect(post).to_not be_valid
-    expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
+    it 'should behave like a validation and return an appropriate messsage' do
+      post.body = 'word ' * 200
+      expect(post).to be_valid
+
+      post.body = 'word ' * 201
+      expect(post).to_not be_valid
+      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
+
+      post.body = 'word ' * 300
+      expect(post).to_not be_valid
+      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 100 words over the limit of 200 words']
+
+      post.body = 'word ' * 400
+      expect(post).to_not be_valid
+      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
+    end
   end
 
   context 'it should count its words' do
