@@ -1,3 +1,7 @@
+* Remove developer_id from posts params.
+
+  *Dillon Hafer & Jake Worth*
+
 * Add new channels and merge retiring channels.
 
   *Jake Worth*
