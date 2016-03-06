@@ -4,6 +4,8 @@ class StatisticsController < ApplicationController
 
   private
 
+  CountStat = Struct.new(:label, :count)
+
   def posts
     Post.published
   end
@@ -13,27 +15,30 @@ class StatisticsController < ApplicationController
   end
 
   def authors
-    Developer.joins(:posts)
+    @authors ||= Developer.joins(:posts)
       .merge(Post.published)
-      .uniq
-      .sort_by(&:posts_count)
-      .reverse
+      .group(:username)
+      .order('count_all desc')
+      .count.map {|row| CountStat.new(row[0], row[1]) }
   end
 
   def channels
-    Channel.joins(:posts)
+    @channels ||= Channel.joins(:posts)
       .merge(Post.published)
-      .uniq
-      .sort_by(&:posts_count)
-      .reverse
+      .group(:name, :channel_id)
+      .order('count_all desc')
+      .count.map {|row| CountStat.new(row[0][0], row[1]) }
   end
 
   def highest_count_last_30_days
     posts_per_day.map(&:count).max + 1
   end
 
-  DayStat = Struct.new(:date, :count)
   def posts_per_day
+    @posts_per_day ||= find_posts_per_day
+  end
+
+  def find_posts_per_day
     sql = <<-SQL
       with posts as (
            select date((created_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as post_date
@@ -49,11 +54,9 @@ class StatisticsController < ApplicationController
       order by dates_table.date;
     SQL
 
-    ppd = []
     posts = ActiveRecord::Base.connection.execute(sql)
-    posts.values.each do |day|
-      ppd << DayStat.new(day[0].to_date.strftime("%a, %b %e"), day[1].to_i)
+    posts.values.map do |day|
+      CountStat.new(day[0].to_date.strftime("%a, %b %e"), day[1].to_i)
     end
-    ppd
   end
 end
