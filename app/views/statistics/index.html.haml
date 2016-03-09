@@ -9,7 +9,7 @@
         %h1 Last 30 days
       %ul.activity_chart#activity
         - posts_per_day.each do |ppd|
-          %li(data-date="#{ppd.date}" data-amount="#{ppd.count}" class="#{if ppd.count == 1 then 'singular' end}")
+          %li(data-date="#{ppd.label}" data-amount="#{ppd.count}" class="#{if ppd.count == 1 then 'singular' end}")
             .activity_chart_bar(style="height: #{(ppd.count.to_f/highest_count_last_30_days) * 100}%")
     %article
       %header
@@ -27,21 +27,21 @@
     .stats_column
       %article
         %header
-          %h1 #{pluralize posts.count, "post"} in #{pluralize channels.count, "channel"}
+          %h1 #{pluralize channels.sum(&:count), "post"} in #{pluralize channels.count, "channel"}
         %ul.post_list#channels
-          - channels.each do |channel|
+          - channels.each do |stat|
             %li
-              = link_to channel_path channel do
-                %b ##{channel.name}
-                %small #{pluralize(channel.posts_count, 'post')}
+              = link_to channel_path stat.label do
+                %b ##{stat.label}
+                %small #{pluralize(stat.count, 'post')}
 
     .stats_column.right
       %article
         %header
           %h1 #{pluralize authors.count, "author"}
         %ul.post_list#authors
-          - authors.each do |author|
+          - authors.each do |stat|
             %li
-              = link_to developer_path author do
-                %b= author.username
-                %small #{pluralize(author.posts_count, 'post')}
+              = link_to developer_path stat.label do
+                %b= stat.label
+                %small #{pluralize(stat.count, 'post')}
