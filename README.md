@@ -8,7 +8,7 @@
 > enjoy learning along with us.
 
 This site was open sourced as a window into our development process, as well as
-to allow people to experiment with the site on their own and contribute the
+to allow people to experiment with the site on their own and contribute to the
 project.
 
 ### Install
