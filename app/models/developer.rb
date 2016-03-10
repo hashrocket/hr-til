@@ -7,6 +7,7 @@ class Developer < ActiveRecord::Base
   def self.editor_options
     ['Text Field', 'Ace (w/ Vim)', 'Ace'].freeze
   end
+  validates :editor, inclusion: { in: editor_options, message: "%{value} is not a valid editor" }
 
   def to_param
     username

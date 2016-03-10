@@ -123,4 +123,16 @@ describe Developer do
       end
     end
   end
+
+  context 'editor should be validated' do
+    it 'should only allow defined editor options' do
+      developer.editor = 'not vim'
+      expect(developer).to be_invalid
+    end
+
+    it 'can use defined editor options' do
+      developer.editor = described_class.editor_options.sample
+      expect(developer).to be_valid
+    end
+  end
 end
