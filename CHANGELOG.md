@@ -1,3 +1,7 @@
+* Remove n + 1 from statistics page.
+
+  *Dillon Hafer*
+
 * Remove developer_id from posts params.
 
   *Dillon Hafer & Jake Worth*
