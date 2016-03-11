@@ -564,3 +564,15 @@ Then 'I see the draft' do
     expect(page).to_not have_content 'like'
   end
 end
+
+Then 'I see the twitter share button' do
+  within 'article.post' do
+    expect(page).to have_selector('.post__social')
+  end
+end
+
+Then 'I do not see the twitter share button' do
+  within 'article.post' do
+    expect(page).to_not have_selector('.post__social')
+  end
+end
