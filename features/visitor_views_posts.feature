@@ -18,6 +18,12 @@ Feature: Visitor views posts
     When I visit that author's posts page
     Then I see only 1 published post
 
+  Scenario: Visitor does not view a twitter share Post button
+    Given I am a visitor
+    And a post exists
+    When I visit the homepage
+    Then I do not see the twitter share button
+
   Scenario: Visitor views posts by author via link
     Given I am a visitor
     And posts exist for a given author

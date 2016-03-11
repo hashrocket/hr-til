@@ -20,6 +20,12 @@ Feature: Visitor views post
     When I click on the date of the post
     Then I see the show page for that post
 
+  Scenario: Visitor views a twitter share Post button
+    Given I am a visitor
+    And a post exists
+    When I visit the show page for that post
+    Then I see the twitter share button
+
   Scenario: Visitor clicks on 'next' and 'previous' arrows
     Given I am a visitor
     And three posts exist
