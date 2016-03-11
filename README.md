@@ -2,10 +2,11 @@
 
 [![Circle CI](https://circleci.com/gh/hashrocket/hr-til.svg?style=svg)](https://circleci.com/gh/hashrocket/hr-til) [![Code Climate](https://codeclimate.com/github/hashrocket/hr-til/badges/gpa.svg)](https://codeclimate.com/github/hashrocket/hr-til) [![Issue Count](https://codeclimate.com/github/hashrocket/hr-til/badges/issue_count.svg)](https://codeclimate.com/github/hashrocket/hr-til)
 
-> TIL is an open-source project by the team at Hashrocket that catalogues the
-> sharing & accumulation of knowledge as it happens day-to-day. Posts have a
-> 200-word limit and any Hashrocket team member can contribute. We hope you
-> enjoy learning along with us.
+> TIL is an open-source project by the team at
+> [Hashrocket](https://hashrocket.com/) that catalogues the sharing &
+> accumulation of knowledge as it happens day-to-day. Posts have a 200-word
+> limit and any Hashrocket team member can contribute. We hope you enjoy
+> learning along with us.
 
 This site was open sourced as a window into our development process, as well as
 to allow people to experiment with the site on their own and contribute to the
