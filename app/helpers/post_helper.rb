@@ -24,11 +24,18 @@ module PostHelper
   def tweet_link(post)
     title = post.title
     handle = post.twitter_handle
-    channel = post.channel_name
+    channel = post.channel_name.delete('-')
+
     url = Rails.configuration.server_url + post_path(post)
 
-    content_tag(:a, 'Tweet', href: 'http://twitter.com/share', class: 'twitter-share-button',
-                             'data-text': "Today I learned: #{title}", 'data-via': "#{handle}",
-                             'data-hashtags': "#{channel}", 'data-url': "#{url}")
+    content_tag(:a,
+      'Tweet',
+      href: 'http://twitter.com/share',
+      class: 'twitter-share-button',
+      'data-text': "Today I learned: #{title}",
+      'data-via': "#{handle}",
+      'data-hashtags': "#{channel}",
+      'data-url': "#{url}"
+    )
   end
 end
