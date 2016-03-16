@@ -26,7 +26,7 @@ module SocialMessaging
     end
 
     def category
-      post.channel_name
+      post.channel_name.delete('-')
     end
 
     def host
