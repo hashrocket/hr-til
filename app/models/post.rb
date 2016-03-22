@@ -101,7 +101,7 @@ class Post < ActiveRecord::Base
   end
 
   def generate_slug
-    self.slug = SecureRandom.hex(5)
+    self[:slug] ||= SecureRandom.hex(5)
   end
 
   def slugified_title

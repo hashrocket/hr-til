@@ -37,8 +37,15 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  it 'should create a slug' do
-    expect(post.slug).to be
+  context '#generate_slug' do
+    it 'should create a slug' do
+      expect(post.slug).to be
+    end
+
+    it 'should allow a custom slug' do
+      custom_slugged_post = FactoryGirl.create(:post, slug: '1234')
+      expect(custom_slugged_post.slug).to eq '1234'
+    end
   end
 
   it 'should create a slug with dashes' do
