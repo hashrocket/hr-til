@@ -39,5 +39,24 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
 
       expect(serialized).to eql(expected_text)
     end
+
+    it 'encodes 3 special Slack characters as HTML entities' do
+      developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
+      post = FactoryGirl.build(:post,
+                        slug: '38fe87b97c',
+                        body: 'learned some things',
+                        developer: developer,
+                        title: 'The `<picture>` & `<div>` elements are here to stay!',
+                        channel: FactoryGirl.create(:channel, name: 'hacking')
+                       )
+
+      serializer = PostSlack::CreateSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
+
+      expected_text = 'Tim Pope created a new post - <http://www.example.com/'\
+      'posts/38fe87b97c-the-picture-div-elements-are-here-to-stay|The `&lt;picture&gt;` &amp; `&lt;div&gt;` elements are here to stay!> #hacking'
+
+      expect(serialized).to eql(expected_text)
+    end
   end
 end
