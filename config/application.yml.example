@@ -3,8 +3,9 @@ development: &default
   google_client_id:
   google_client_secret:
   heroku_production_app_name:
-  host: 'http://localhost:3000'
-  permitted_domains: 'hashrocket.com|hshrckt.com'
+  host: 'www.example.com'
+  protocol: 'http://'
+  permitted_domains: 'hashrocket.com|hshrckt.com|example.com'
   slack_post_endpoint:
   twitter_access_token:
   twitter_access_token_secret:
@@ -14,7 +15,3 @@ development: &default
 
 test:
   <<: *default
-  host: 'http://localhost:3000'
-  permitted_domains: 'example.com'
-  slack_post_endpoint:
-  update_twitter_with_post: "false"
