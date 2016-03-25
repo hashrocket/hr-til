@@ -312,8 +312,8 @@ When "I visit that author's posts page" do
   visit developer_path @developer
 end
 
-When "I visit the url 'http://domain/author/username'" do
-  visit 'author/prolificposter'
+When "I visit the url 'http://domain/authors/username'" do
+  visit 'authors/prolificposter'
 end
 
 When "I click that author's username" do

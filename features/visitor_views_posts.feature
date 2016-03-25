@@ -9,7 +9,7 @@ Feature: Visitor views posts
   Scenario: Visitor views posts by author
     Given I am a visitor
     And posts exist for a given author
-    When I visit the url 'http://domain/author/username'
+    When I visit the url 'http://domain/authors/username'
     Then I see all the posts for that author grouped by date/time
 
   Scenario: Visitor views published posts by author

@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   root to: 'posts#index'
 
   resource :profile, controller: 'developers', only: %i(update edit)
-  resources :developers, path: '/author', only: 'show'
+  resources :developers, path: '/authors', only: 'show'
 
   resources :posts, except: :destroy, param: :titled_slug
   resources :statistics, only: :index
