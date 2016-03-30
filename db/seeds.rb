@@ -11,6 +11,7 @@ channels = %w(
   javascript
   mobile
   rails
+  react
   ruby
   sql
   testing
