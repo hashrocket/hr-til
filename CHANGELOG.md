@@ -1,3 +1,7 @@
+* Add guest post feature.
+
+  *Jake Worth*
+
 * Remove n + 1 from statistics page.
 
   *Dillon Hafer*
