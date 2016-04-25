@@ -7,8 +7,8 @@ class SessionsController < ApplicationController
       end
       sign_in developer
       redirect_to root_path, notice: 'Signed in'
-    rescue ActiveRecord::RecordInvalid
-      redirect_to root_path, notice: 'Your email address is not allowed'
+    rescue ActiveRecord::RecordInvalid => e
+      redirect_to root_path, notice: e.message
     end
   end
 
