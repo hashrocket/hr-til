@@ -85,3 +85,14 @@ When 'I click edit' do
     click_on 'edit'
   end
 end
+
+Given 'I try to sign up with a white-listed guest email address' do
+  OmniAuth.config.add_mock(:google_oauth2, info: { name: 'John Smith', email: 'johnsmith@whitelisted-guest.com' })
+  visit google_oauth2_path
+end
+
+And 'a guest user is created' do
+  expect(@developer).to be
+  expect(@developer.email).to eq 'johnsmith@whitelisted-guest.com'
+  expect(@developer.username).to eq 'johnsmith'
+end

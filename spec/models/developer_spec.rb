@@ -18,10 +18,9 @@ describe Developer do
   end
 
   context 'validates email domains' do
-    before do
-      stub_const('ENV', {
-        'permitted_domains' => 'hashrocket.com|hshrckt.com'
-      })
+    it 'and allows whitelisted email addresses' do
+      developer.email = 'johnsmith@whitelisted-guest.com'
+      expect(developer).to be_valid
     end
 
     it 'and allows whitelisted domains' do
@@ -32,7 +31,7 @@ describe Developer do
     end
 
     it 'should deny an email from a non-whitelisted domain' do
-      developer.email = 'foo@example.com'
+      developer.email = 'foo@haxor.net'
       expect(developer).to_not be_valid
       expect(developer.errors.messages[:email]).to eq ['is invalid']
     end

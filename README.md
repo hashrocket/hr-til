@@ -5,8 +5,8 @@
 > TIL is an open-source project by the team at
 > [Hashrocket](https://hashrocket.com/) that catalogues the sharing &
 > accumulation of knowledge as it happens day-to-day. Posts have a 200-word
-> limit and any Hashrocket team member can contribute. We hope you enjoy
-> learning along with us.
+> limit, and posting is open to any Rocketeer as well as select friends of the
+> team. We hope you enjoy learning along with us.
 
 This site was open sourced as a window into our development process, as well as
 to allow people to experiment with the site on their own and contribute to the
@@ -26,16 +26,19 @@ $ rake db:setup
 $ rails s
 ```
 
-Authentication is managed by Omniauth and Google. To whitelist a domain or multiple domains, add the domain name to your environmental variables:
+Authentication is managed by Omniauth and Google. To whitelist a domain,
+multiple domains, or a specific email, add those configurations to your
+environmental variables:
 
 ```yml
 # config/application.yml
 
 permitted_domains: 'hashrocket.com|hshrckt.com'
+permitted_emails: 'friend@whitelist.com'
 ```
 
-With this in place, you can visit '/admin' and log in with an email address from
-the domain you've allowed.
+With this in place, you can visit '/admin' and log in with an email address or
+domain you've allowed.
 
 ### Dependencies
 
