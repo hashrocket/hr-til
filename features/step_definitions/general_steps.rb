@@ -41,11 +41,6 @@ Then 'I see statistics' do
     expect(page).to have_selector 'li', count: 30
   end
 
-  within '#top-ten' do
-    expect(page).to have_link 'li', count: 10
-    expect(page).to have_content 'Web Development', count: 10
-  end
-
   within '#channels' do
     expect(page).to have_link 'a', count: 35
     expect(page).to have_content 'phantomjs', count: 35

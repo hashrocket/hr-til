@@ -1,6 +1,11 @@
 class StatisticsController < ApplicationController
-  helper_method :top_ten, :authors, :channels,
-    :highest_count_last_30_days, :posts_per_day, :posts
+  helper_method :authors,
+    :channels,
+    :highest_count_last_30_days,
+    :hot_posts,
+    :posts,
+    :posts_per_day,
+    :top_ten
 
   private
 
@@ -8,6 +13,14 @@ class StatisticsController < ApplicationController
 
   def posts
     Post.published
+  end
+
+  def hot_posts
+    hot_posts = ActiveRecord::Base.connection.execute('select id from hot_posts limit 10;')
+
+    hot_posts.map do |hot_post|
+      Post.find(hot_post['id'])
+    end
   end
 
   def top_ten
