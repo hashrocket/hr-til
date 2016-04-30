@@ -1,4 +1,4 @@
-* Add most liked TILs.
+* Add hottest TILs.
 
   *Jake Worth & Josh Davey*
 
