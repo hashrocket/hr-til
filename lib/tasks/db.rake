@@ -32,33 +32,4 @@ namespace :db do
       puts 'All published posts have been tweeted!'
     end
   end
-
-  desc 'Merge retiring channels'
-  task merge_channels: :environment do
-    Channel.transaction do
-      print 'Creating #workflow channel'
-      workflow = Channel.create!(name: 'workflow')
-      puts ' ...done.'
-
-      print 'Creating #command-line channel'
-      command_line = Channel.create!(name: 'command-line')
-      puts ' ...done.'
-
-      print 'Updating retired channels\' posts'
-      Channel.where(name: %w(internet consulting development)).map(&:posts).flatten.each do |post|
-        post.channel = workflow
-        post.save!
-      end
-
-      Channel.find_by(name: 'bash').posts.each do |post|
-        post.channel = command_line
-        post.save!
-      end
-      puts ' ...done.'
-
-      print 'Destroying retired channels'
-      Channel.where(name: %w(internet consulting development bash)).destroy_all
-      puts ' ...done.'
-    end
-  end
 end
