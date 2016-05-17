@@ -1,7 +1,3 @@
-* Upgrade to latest Ruby and Rails.
-
-  *Jake Worth*
-
 * Notify slack on post milestones (100ths of posts).
 
   *Jake Worth*
