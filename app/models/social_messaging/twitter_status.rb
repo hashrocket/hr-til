@@ -34,7 +34,7 @@ module SocialMessaging
     end
 
     def status
-      "#{title} - from @#{name} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} #til ##{category}"
+      "#{title} #{Rails.application.routes.url_helpers.post_url(titled_slug: post.to_param, host: host)} via @#{name} #til ##{category}"
     end
   end
 end
