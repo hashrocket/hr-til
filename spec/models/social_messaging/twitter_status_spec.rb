@@ -17,7 +17,7 @@ describe SocialMessaging::TwitterStatus do
 
   describe '#status' do
     it 'returns a Twitter status' do
-      expected = "Cool post - from @handle http://www.example.com/posts/1234-cool-post #til #dreamwave"
+      expected = "Cool post http://www.example.com/posts/1234-cool-post via @handle #til #dreamwave"
       actual = twitter_status.send(:status)
 
       expect(actual).to eq expected
