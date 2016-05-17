@@ -22,9 +22,13 @@ $ git clone https://github.com/hashrocket/hr-til
 $ cd hr-til
 $ bundle install
 $ cp config/application.yml{.example,}
-$ rake db:setup
+$ rake db:create db:migrate db:seed
 $ rails s
 ```
+
+In development, `db:seed` will load seed data for channels, developers, and
+posts. Omit this command to opt-out of the seed step, or create your own seeds
+by altering `db/seeds/development.rb`.
 
 Authentication is managed by Omniauth and Google. To whitelist a domain,
 multiple domains, or a specific email, add those configurations to your
