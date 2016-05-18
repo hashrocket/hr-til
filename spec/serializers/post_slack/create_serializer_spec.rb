@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe PostSlack::CreateSerializer, type: :serializer do
+
+  def serialize_post(post)
+    serializer = PostSlack::CreateSerializer.new(post)
+    JSON.parse(serializer.to_json)['text']
+  end
+
   context 'Serialized resource' do
     it 'is correct' do
       developer = FactoryGirl.build(:developer, username: 'tpope')
@@ -12,9 +18,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                         channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
 
-      serializer = PostSlack::CreateSerializer.new(post)
-      serialized = JSON.parse(serializer.to_json)['text']
-
+      serialized = serialize_post(post)
       expected_text = 'tpope created a new post - <http://www.example.com/'\
       'posts/sluggishslug-entitled-title|entitled title> #hacking'
 
@@ -31,9 +35,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                         channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
 
-      serializer = PostSlack::CreateSerializer.new(post)
-      serialized = JSON.parse(serializer.to_json)['text']
-
+      serialized = serialize_post(post)
       expected_text = 'Tim Pope created a new post - <http://www.example.com/'\
       'posts/sluggishslug-entitled-title|entitled title> #hacking'
 
@@ -50,9 +52,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                         channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
 
-      serializer = PostSlack::CreateSerializer.new(post)
-      serialized = JSON.parse(serializer.to_json)['text']
-
+      serialized = serialize_post(post)
       expected_text = 'Tim Pope created a new post - <http://www.example.com/'\
       'posts/38fe87b97c-the-picture-div-elements-are-here-to-stay|The `&lt;picture&gt;` &amp; `&lt;div&gt;` elements are here to stay!> #hacking'
 
@@ -71,9 +71,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
                         channel: FactoryGirl.create(:channel, name: 'hacking')
                        )
 
-      serializer = PostSlack::CreateSerializer.new(post)
-      serialized = JSON.parse(serializer.to_json)['text']
-
+      serialized = serialize_post(post)
       expected_text = 'This is the 100th post to Today I Learned! Tim Pope created a new post '\
       '- <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
 
@@ -84,9 +82,7 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
       developer = FactoryGirl.build(:developer, username: 'tpope')
       post = FactoryGirl.create(:post, title: 'Let me prepare you a "quote"')
 
-      serializer = PostSlack::CreateSerializer.new(post)
-      serialized = JSON.parse(serializer.to_json)['text']
-
+      serialized = serialize_post(post)
       expected_text = 'Let me prepare you a "quote"'
 
       expect(serialized).to include(expected_text)
