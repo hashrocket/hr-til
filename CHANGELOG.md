@@ -1,3 +1,7 @@
+* Narrow scope of Slack HTML escaping.
+
+  *Jake Worth*
+
 * Upgrade Rails.
 
   *Jake Worth*

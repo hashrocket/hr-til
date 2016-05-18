@@ -64,5 +64,17 @@ RSpec.describe PostSlack::LikesThresholdSerializer, type: :serializer do
 
       expect(serialized).to eql(expected_text)
     end
+
+    it 'is serialized with escaped quotes' do
+      developer = FactoryGirl.build(:developer, username: 'tpope')
+      post = FactoryGirl.create(:post, title: 'Let me prepare you a "quote"')
+
+      serializer = PostSlack::LikesThresholdSerializer.new(post)
+      serialized = JSON.parse(serializer.to_json)['text']
+
+      expected_text = 'Let me prepare you a "quote"'
+
+      expect(serialized).to include(expected_text)
+    end
   end
 end
