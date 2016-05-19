@@ -46,7 +46,7 @@
 
   *Cameron Daigle*
 
-* Add hot posts and and developer scores database tables.
+* Add hot posts and developer scores database tables.
 
   *Josh Davey*
 
