@@ -29,7 +29,7 @@ class PostsController < ApplicationController
   def show
     if valid_url?
       respond_to do |format|
-        format.md { render text: @post.body }
+        format.md
         format.html
       end
     else

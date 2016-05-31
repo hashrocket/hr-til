@@ -60,6 +60,26 @@ describe PostsController do
     end
   end
 
+  describe '#show' do
+    render_views
+
+    it 'returns raw content when requested' do
+      developer = FactoryGirl.create(:developer, username: 'jackdonaghy')
+
+      raw_post = FactoryGirl.create(:post,
+        body: 'Raw content here',
+        published_at: Time.new(2016, 01, 01, 12),
+        developer: developer,
+        title: 'Plaintext Title'
+      )
+
+      get :show, titled_slug: raw_post.to_param, format: 'md'
+
+      expected = "Plaintext Title\n\nRaw content here\n\njackdonaghy\nJanuary 1, 2016\n"
+      expect(response.body).to eq expected
+    end
+  end
+
   describe '#drafts' do
     before do
       controller.sign_in developer
