@@ -303,6 +303,11 @@ When 'I enter a long body into that form' do
   fill_in 'Body', with: long_body
 end
 
+Given 'I visit the author page of an author with a Twitter handle' do
+  developer = FactoryGirl.create(:developer, twitter_handle: 'sqlfan')
+  visit developer_path(developer)
+end
+
 Given 'posts exist for a given author' do
   developer = FactoryGirl.create(:developer, username: 'prolificposter')
   FactoryGirl.create(:post, :for_last_week, developer: developer)
@@ -589,5 +594,11 @@ end
 Then 'I do not see the twitter share button' do
   within 'article.post' do
     expect(page).to_not have_selector('.post__social')
+  end
+end
+
+Then 'I see the author\'s Twitter link' do
+  within 'header.page_head' do
+    expect(page).to have_link '@sqlfan', href: 'https://twitter.com/sqlfan'
   end
 end

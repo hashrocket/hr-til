@@ -31,6 +31,11 @@ Feature: Visitor views posts
     And I click that author's username
     Then I see all the posts for that author grouped by date/time
 
+  Scenario: Visitor views author page with a Twitter handle set
+    Given I am a visitor
+    When I visit the author page of an author with a Twitter handle
+    Then I see the author's Twitter link
+
   @javascript
   Scenario: Visitor sees pagination
     Given I am a visitor
