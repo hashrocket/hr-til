@@ -1,6 +1,6 @@
-<%= @post.title %>
+<%= sanitize @post.title %>
 
-<%= @post.body %>
+<%= sanitize @post.body %>
 
 <%= @post.developer_username %>
 <%= @post.display_date.strftime("%B %-e, %Y") %>

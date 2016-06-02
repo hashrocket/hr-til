@@ -63,20 +63,54 @@ describe PostsController do
   describe '#show' do
     render_views
 
-    it 'returns raw content when requested' do
-      developer = FactoryGirl.create(:developer, username: 'jackdonaghy')
+    context 'with markdown extension' do
+      it 'returns raw content' do
+        developer = FactoryGirl.create(:developer, username: 'jackdonaghy')
 
-      raw_post = FactoryGirl.create(:post,
-        body: 'Raw content here',
-        published_at: Time.new(2016, 01, 01, 12),
-        developer: developer,
-        title: 'Plaintext Title'
-      )
+        raw_post = FactoryGirl.create(:post,
+          body: 'Raw content here',
+          published_at: Time.new(2016, 01, 01, 12),
+          developer: developer,
+          title: 'Plaintext Title'
+        )
 
-      get :show, titled_slug: raw_post.to_param, format: 'md'
+        get :show, titled_slug: raw_post.to_param, format: 'md'
 
-      expected = "Plaintext Title\n\nRaw content here\n\njackdonaghy\nJanuary 1, 2016\n"
-      expect(response.body).to eq expected
+        expected = <<-RAW
+Plaintext Title
+
+Raw content here
+
+jackdonaghy
+January 1, 2016
+RAW
+
+        expect(response.body).to eq expected
+      end
+
+      it 'returns sanitized characters' do
+        developer = FactoryGirl.create(:developer, username: 'jackdonaghy')
+
+        raw_post = FactoryGirl.create(:post,
+          body: 'Raw "quotes" here',
+          published_at: Time.new(2016, 01, 01, 12),
+          developer: developer,
+          title: '"Quotable" Title'
+        )
+
+        get :show, titled_slug: raw_post.to_param, format: 'md'
+
+        expected = <<-RAW
+"Quotable" Title
+
+Raw "quotes" here
+
+jackdonaghy
+January 1, 2016
+RAW
+
+        expect(response.body).to eq expected
+      end
     end
   end
 
