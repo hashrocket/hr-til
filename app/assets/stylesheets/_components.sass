@@ -278,6 +278,20 @@ form
       +mobile
         padding: .5em
         font-size: .9em
+    &.highlight
+      &:before
+        display: block
+        content: attr(data-language)
+        color: #fff
+        background-color: #333
+        font-weight: bold
+        font-size: .7em
+        text-transform: uppercase
+        padding: .2rem .5rem
+        text-align: right
+        color: #aaa
+        font-family: $secondary-typeface
+
   code
     font-size: 95%
   img

@@ -21,5 +21,6 @@
 //= require autorefresh
 //= require like
 //= require post_form
+//= require syntax_label
 //= require til
 //= require easter

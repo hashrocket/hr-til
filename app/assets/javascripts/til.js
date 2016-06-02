@@ -12,4 +12,6 @@ $(function(){
       .find(":input:visible").eq(0).focus();
   });
 
+  $('.post').syntaxLabel();
+
 });

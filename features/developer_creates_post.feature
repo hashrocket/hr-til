@@ -40,6 +40,7 @@ Feature: Developer creates post
     And I click submit
     Then I see the homepage
     And I see the markdown fenced code I created
+    And I see the fenced code labeled accurately
 
   Scenario: With valid information and markdown bullets
     Given I am a signed in developer
@@ -93,8 +94,9 @@ Feature: Developer creates post
     When I visit the homepage
     And I click create post
     Then I see a form for posts
-    When I enter information with markdown inline code into that form
-    Then I see a markdown preview with my rendered code
+    When I enter information with markdown fenced code into that form
+    Then I see a markdown preview with my fenced code
+    And I see the fenced code labeled accurately
 
   @javascript
   Scenario: Developer sees updating word count

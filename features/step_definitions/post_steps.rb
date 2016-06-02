@@ -58,7 +58,7 @@ end
 
 When 'I enter information with markdown fenced code into that form' do
   fill_in 'Title', with: 'Fenced'
-  markdown_content = "```first line\nsecond line\nthird line\n```"
+  markdown_content = "```javascript\nfirst line\nsecond line\nthird line\n```"
   fill_in 'Body', with: markdown_content
 end
 
@@ -66,6 +66,10 @@ When 'I enter information with markdown bullets into that form' do
   fill_in 'Title', with: 'Bulletized'
   markdown_content = '* item from a list of items'
   fill_in 'Body', with: markdown_content
+end
+
+And 'I see the fenced code labeled accurately' do
+  expect(page).to have_selector "[data-language='javascript']"
 end
 
 And 'I select a channel' do
@@ -414,6 +418,13 @@ end
 And 'I see a markdown preview of my post' do
   within('.post .content_preview em') do
     expect(page).to have_content 'emphasis'
+  end
+end
+
+Then 'I see a markdown preview with my fenced code' do
+  within('.post .content_preview') do
+    expect(page).to_not have_content '```javascript'
+    expect(page).to have_content 'first line'
   end
 end
 

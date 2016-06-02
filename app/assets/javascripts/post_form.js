@@ -5,7 +5,7 @@ $(function(){
     renderMarkdown: function() {
       var txt = post_form.$textarea.val();
       $.post("/post_preview", { body: txt }, function(result){
-        post_form.$preview.html(result);
+        post_form.$preview.html(result).syntaxLabel();
       });
     },
     renderTitle: function() {
