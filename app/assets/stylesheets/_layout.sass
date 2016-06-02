@@ -154,12 +154,12 @@ header.site_head
     a.social_twitter
       background-image: svg-url(twitter, $accent)
       &:hover
-        background-image: svg-url(twitter, #55acee)
+        background-image: svg-url(twitter, $twitter-color)
         color: #55acee
     a.social_github
       background-image: svg-url(github, $accent)
       &:hover
-        background-image: svg-url(github, #4b4b4b)
+        background-image: svg-url(github, $github-color)
         color: #4b4b4b
 
 .site_nav__search
@@ -230,6 +230,15 @@ header.page_head
     +responsive(font-size, 3rem, 2rem)
     margin-bottom: 1em
     color: $navy
+  a.author_twitter
+    +hide-text
+    display: inline-block
+    margin-left: .2em
+    width: .8em
+    height: .8em
+    background: svg-url(twitter, $twitter-color) center no-repeat
+    background-size: contain
+    vertical-align: baseline
 
 #flash
   position: fixed
