@@ -1,3 +1,7 @@
+* Label code blocks with syntax type
+
+  *Cameron Daigle*
+
 * Include author, title, date in markdown response.
 
   *Jack Christensen & Jake Worth*
