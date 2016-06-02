@@ -1,5 +1,9 @@
 include ActionView::Helpers::TextHelper
 
+When 'I dismiss the flash message' do
+  find('#flash p').click
+end
+
 When 'I click create post' do
   within '.admin_panel' do
     click_on 'Create Post'

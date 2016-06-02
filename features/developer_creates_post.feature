@@ -29,9 +29,11 @@ Feature: Developer creates post
     Then I see the homepage
     And I see the markdown inline code I created
 
+  @javascript
   Scenario: With valid information and markdown fenced code
     Given I am a signed in developer
     And a channel exists
+    When I dismiss the flash message
     When I click create post
     Then I see a form for posts
     When I enter information with markdown fenced code into that form
