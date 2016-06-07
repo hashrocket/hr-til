@@ -77,8 +77,11 @@ slack_post_endpoint: /services/some/hashes
 
 ### Contributing
 
-We welcome contributions and feedback! Please open an issue or submit a pull
-request with proposed changes.
+1. Fork it
+2. Create your feature branch (`git checkout -b my-new-feature`)
+3. Commit your changes (`git commit -am 'Add some feature'`)
+4. Push to the branch (`git push origin my-new-feature`)
+5. Create new Pull Request
 
 ### About
 
