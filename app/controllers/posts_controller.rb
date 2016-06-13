@@ -24,6 +24,12 @@ class PostsController < ApplicationController
 
   def index
     @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
+
+    respond_to do |format|
+      format.json { render json: @posts }
+      format.atom
+      format.html
+    end
   end
 
   def show
@@ -31,6 +37,7 @@ class PostsController < ApplicationController
       respond_to do |format|
         format.md
         format.html
+        format.json { render json: @post }
       end
     else
       redirect_to_valid_slug
