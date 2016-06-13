@@ -80,7 +80,7 @@ ActiveRecord::Schema.define(version: 20160223002123) do
               posts.likes,
               posts.tweeted,
               posts.published_at,
-              GREATEST((date_part('epoch'::text, (now() - posts.published_at)) / (3600)::double precision), (0.1)::double precision) AS hour_age
+              GREATEST((date_part('epoch'::text, (now() - (posts.published_at)::timestamp with time zone)) / (3600)::double precision), (0.1)::double precision) AS hour_age
              FROM posts
             WHERE (posts.published_at IS NOT NULL)
           )
