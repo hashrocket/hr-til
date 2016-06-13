@@ -1,4 +1,8 @@
-* Label code blocks with syntax type
+* Links in post bodies open in new tabs.
+
+  *Vinicius Negrisolo*
+
+* Label code blocks with syntax type.
 
   *Cameron Daigle*
 
