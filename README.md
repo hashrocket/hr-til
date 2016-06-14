@@ -83,6 +83,10 @@ slack_post_endpoint: /services/some/hashes
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+### License
+
+TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
+
 ### About
 
 [![Hashrocket logo](https://hashrocket.com/hashrocket_logo.svg)](https://hashrocket.com)
@@ -91,7 +95,3 @@ TIL is supported by the team at [Hashrocket](https://hashrocket.com), a
 multidisciplinary design & development consultancy. If you'd like to [work with
 us](https://hashrocket.com/contact-us/hire-us) or [join our
 team](https://hashrocket.com/contact-us/jobs), don't hesitate to get in touch.
-
-### License
-
-TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
