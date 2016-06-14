@@ -6,7 +6,7 @@ RSpec.describe "Posts", type: :request do
       let(:channel) { FactoryGirl.create(:channel, name: 'foo') }
       let!(:post1) do
         FactoryGirl.create(:post, {
-          body: 'foo body',
+          body: 'foo `body`',
           title: 'foo title',
           slug: 'foo slug',
           likes: 1,
@@ -26,7 +26,7 @@ RSpec.describe "Posts", type: :request do
 
         our_post = parsed_body['posts'].first
 
-        expect(our_post['body']).to eq('foo body')
+        expect(our_post['body']).to eq("<p>foo <code>body</code></p>\n")
         expect(our_post['title']).to eq('foo title')
         expect(our_post['slug']).to eq('foo slug')
         expect(our_post['likes']).to eq(1)
@@ -45,7 +45,7 @@ RSpec.describe "Posts", type: :request do
         parsed_body = JSON.parse(response.body)
         our_post = parsed_body['post']
 
-        expect(our_post['body']).to eq('foo body')
+        expect(our_post['body']).to eq("<p>foo <code>body</code></p>\n")
         expect(our_post['title']).to eq('foo title')
         expect(our_post['slug']).to eq('foo slug')
         expect(our_post['likes']).to eq(1)
