@@ -16,5 +16,12 @@ module HrTil
       host: ENV.fetch('host'),
       protocol: ENV.fetch('protocol')
     }
+
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '*', :headers => :any, :methods => [:get, :options]
+      end
+    end
   end
 end
