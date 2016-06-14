@@ -1,3 +1,7 @@
+* Allow posts to be views as JSON.
+
+  *Jonathan Jackson*
+
 * Links in post bodies open in new tabs.
 
   *Vinicius Negrisolo*
