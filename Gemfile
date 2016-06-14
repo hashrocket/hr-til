@@ -24,6 +24,7 @@ gem 'uglifier', '>= 1.3.0'
 gem 'kaminari'
 gem 'twitter'
 gem 'scenic', '~> 1.0'
+gem 'rack-cors', :require => 'rack/cors'
 
 group :development do
   gem 'brakeman', require: false
