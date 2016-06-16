@@ -59,23 +59,46 @@ RSpec.describe PostSlack::CreateSerializer, type: :serializer do
       expect(serialized).to eql(expected_text)
     end
 
-    it 'includes milestone events' do
-      developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
-      FactoryGirl.create(:post)
-      FactoryGirl.create_list(:post, 99, published_at: Time.now)
-      post = FactoryGirl.build(:post,
-                        slug: 'sluggishslug',
-                        body: 'learned some things',
-                        developer: developer,
-                        title: 'entitled title',
-                        channel: FactoryGirl.create(:channel, name: 'hacking')
-                       )
+    context 'milestone events' do
+      it 'includes a message when a milestone occurs' do
+        developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
 
-      serialized = serialize_post(post)
-      expected_text = 'This is the 100th post to Today I Learned! Tim Pope created a new post '\
-      '- <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
+        FactoryGirl.create_list(:post, 99, published_at: Time.now)
+        post = FactoryGirl.create(:post,
+                          slug: 'sluggishslug',
+                          body: 'learned some things',
+                          developer: developer,
+                          title: 'entitled title',
+                          channel: FactoryGirl.create(:channel, name: 'hacking'),
+                          published_at: Time.now
+                         )
 
-      expect(serialized).to eql(expected_text)
+        serialized = serialize_post(post)
+        expected_text = 'This is the 100th post to Today I Learned! Tim Pope created a new post '\
+        '- <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
+
+        expect(serialized).to eql(expected_text)
+      end
+
+      it 'does not include a message when a regular thing occurs' do
+        developer = FactoryGirl.build(:developer, username: 'tpope', slack_name: 'Tim Pope')
+
+        FactoryGirl.create_list(:post, 100, published_at: Time.now)
+        post = FactoryGirl.create(:post,
+                          slug: 'sluggishslug',
+                          body: 'learned some things',
+                          developer: developer,
+                          title: 'entitled title',
+                          channel: FactoryGirl.create(:channel, name: 'hacking'),
+                          published_at: Time.now
+                         )
+
+        serialized = serialize_post(post)
+        expected_text = 'Tim Pope created a new post '\
+        '- <http://www.example.com/posts/sluggishslug-entitled-title|entitled title> #hacking'
+
+        expect(serialized).to eql(expected_text)
+      end
     end
 
     it 'escapes quotes' do
