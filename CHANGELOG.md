@@ -1,3 +1,7 @@
+* Add embeds to post serializer.
+
+  *Jonathan Jackson*
+
 * Allow posts to be views as JSON.
 
   *Jonathan Jackson*
