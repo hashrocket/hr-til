@@ -30,9 +30,7 @@ RSpec.describe "Posts", type: :request do
         expect(our_post['title']).to eq('foo title')
         expect(our_post['slug']).to eq('foo slug')
         expect(our_post['likes']).to eq(1)
-        expect(our_post['developer']['username']).to eq('foousername')
-        expect(our_post['developer']['email']).to eq(nil)
-        expect(our_post['channel']['name']).to eq('foo')
+        expect(our_post['developer_id']).to eq(developer.id)
       end
     end
 
@@ -49,9 +47,14 @@ RSpec.describe "Posts", type: :request do
         expect(our_post['title']).to eq('foo title')
         expect(our_post['slug']).to eq('foo slug')
         expect(our_post['likes']).to eq(1)
-        expect(our_post['developer']['username']).to eq('foousername')
-        expect(our_post['developer']['email']).to eq(nil)
-        expect(our_post['channel']['name']).to eq('foo')
+
+        developers = parsed_body['developers']
+        our_developer = developers.find { |d| d['id'] == developer['id'] }
+
+        expect(our_developer['username']).to eq('foousername')
+
+        expect(our_post['developer_id']).to eq(developer.id)
+        # expect(our_post['channel']['name']).to eq('foo')
       end
     end
   end
