@@ -4,6 +4,7 @@
 channels = %w(
   clojure
   command-line
+  computer-science
   design
   devops
   elixir
