@@ -26,7 +26,7 @@ module SocialMessaging
     end
 
     def category
-      post.channel_name.delete('-')
+      post.channel.twitter_hashtag
     end
 
     def host
