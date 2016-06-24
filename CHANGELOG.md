@@ -1,3 +1,7 @@
+* Add customizable twitter hashtags.
+
+  *Chris Erin & Dorian Karter*
+
 * Add embeds to post serializer.
 
   *Jonathan Jackson*
