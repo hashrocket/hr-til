@@ -21,12 +21,12 @@ describe PostHelper do
         expect(helper.tweet_link(post)).to include expected_result
       end
 
-      specify 'with dashes in the channel name converted to hashtags' do
+      specify 'with hashtag different from channel name' do
         developer = FactoryGirl.create(:developer)
-        channel = FactoryGirl.create(:channel, name: 'dashy-channel')
+        channel = FactoryGirl.create(:channel, name: 'dashy-channel', twitter_hashtag: 'popularhashtag')
         post = FactoryGirl.create(:post, developer: developer, channel: channel)
 
-        expected_result = "data-hashtags=\"dashychannel\""
+        expected_result = "data-hashtags=\"popularhashtag\""
 
         expect(helper.tweet_link(post)).to include expected_result
       end
