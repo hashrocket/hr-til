@@ -13,6 +13,13 @@ Feature: Visitor views post
     When I visit the show page for that post
     Then I see the sanitized title
 
+  Scenario: Visitor sees need help text
+    Given I am a visitor
+    And a channel with a need help partial
+    And a post exists in the ruby channel
+    When I visit the show page for that post
+    Then I see the need help partial on the show page
+
   Scenario: Visitor clicks on post date
     Given I am a visitor
     And a post exists
