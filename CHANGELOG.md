@@ -1,3 +1,7 @@
+* Fix issue #74 and convert db dump to SQL.
+
+  *Jack Christensen & Jake Worth*
+
 * Add customizable twitter hashtags.
 
   *Chris Erin & Dorian Karter*
