@@ -54,7 +54,7 @@ class StatisticsController < ApplicationController
   def find_posts_per_day
     sql = <<-SQL
       with posts as (
-           select date((published_at at time zone 'UTC' at time zone 'America/New_York')::timestamptz) as post_date
+           select date((published_at at time zone 'America/New_York')::timestamptz) as post_date
               from posts
               where published_at is not null
       )
