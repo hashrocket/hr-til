@@ -390,11 +390,8 @@ Then 'I see the show page for that post' do
 end
 
 Then 'I see the need help partial on the show page' do
-  within '.need_help' do
-    expect(page).to have_content <<-NEEDHELP
-      Need help? Each developer at Hashrocket has years of experience
-      working with ruby applications of all types and sizes.
-    NEEDHELP
+  within '.need-help' do
+    expect(page).to have_content 'working with Ruby applications'
   end
 end
 
