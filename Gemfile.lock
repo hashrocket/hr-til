@@ -51,9 +51,9 @@ GEM
     brakeman (3.3.2)
     buftok (0.2.0)
     builder (3.2.2)
-    bullet (5.0.0)
+    bullet (5.1.1)
       activesupport (>= 3.0.0)
-      uniform_notifier (~> 1.9.0)
+      uniform_notifier (~> 1.10.0)
     capybara (2.6.2)
       addressable
       mime-types (>= 1.16)
@@ -335,7 +335,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.2)
-    uniform_notifier (1.9.0)
+    uniform_notifier (1.10.0)
     webmock (1.22.6)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
