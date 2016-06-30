@@ -35,7 +35,7 @@ class PostsController < ApplicationController
   def show
     if valid_url?
       respond_to do |format|
-        format.md
+        format.md { response.headers["X-Robots-Tag"] = "noindex" }
         format.html
         format.json { render json: @post }
       end

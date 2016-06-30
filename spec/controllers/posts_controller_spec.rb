@@ -86,6 +86,7 @@ January 1, 2016
 RAW
 
         expect(response.body).to eq expected
+        expect(response.headers).to include("X-Robots-Tag" => "noindex")
       end
 
       it 'returns sanitized characters' do
