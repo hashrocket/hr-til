@@ -5,7 +5,7 @@ class OAuthInfo
   end
 
   def username
-    info.fetch('name').delete(' ').downcase
+    info.fetch('name').delete(' ').gsub(/[^0-9a-z]/i, '').downcase
   end
 
   def email

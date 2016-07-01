@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe SocialMessaging::TwitterStatus do
-  let(:developer) { FactoryGirl.create(:developer, username: 'cool developer', twitter_handle: 'handle') }
+  let(:developer) { FactoryGirl.create(:developer, username: 'cooldeveloper', twitter_handle: 'handle') }
   let(:channel) { FactoryGirl.create(:channel, name: 'dreamwave', twitter_hashtag: 'yodreamhashtag') }
 
   let(:post) do

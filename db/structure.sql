@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.0
--- Dumped by pg_dump version 9.5.1
+-- Dumped from database version 9.5.2
+-- Dumped by pg_dump version 9.5.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -344,19 +344,19 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: fk_rails_447dc2e0a3; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_06b7a0db99; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_447dc2e0a3 FOREIGN KEY (channel_id) REFERENCES channels(id);
+    ADD CONSTRAINT fk_rails_06b7a0db99 FOREIGN KEY (channel_id) REFERENCES channels(id);
 
 
 --
--- Name: fk_rails_b3ec63b3ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_2c578d8f8f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_b3ec63b3ac FOREIGN KEY (developer_id) REFERENCES developers(id);
+    ADD CONSTRAINT fk_rails_2c578d8f8f FOREIGN KEY (developer_id) REFERENCES developers(id);
 
 
 --
@@ -430,4 +430,6 @@ INSERT INTO schema_migrations (version) VALUES ('20160622144602');
 INSERT INTO schema_migrations (version) VALUES ('20160622152349');
 
 INSERT INTO schema_migrations (version) VALUES ('20160622154534');
+
+INSERT INTO schema_migrations (version) VALUES ('20160701161129');
 
