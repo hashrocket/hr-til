@@ -20,7 +20,7 @@ Given 'a channel exists' do
   @channel = FactoryGirl.create(:channel)
 end
 
-Given 'a channel with a need help partial' do
+Given 'a channel with a more info partial' do
   @channel = FactoryGirl.create(:ruby_channel)
 end
 
@@ -389,8 +389,8 @@ Then 'I see the show page for that post' do
   end
 end
 
-Then 'I see the need help partial on the show page' do
-  within '.need-help' do
+Then 'I see the more info partial on the show page' do
+  within '.more-info' do
     expect(page).to have_content 'working with Ruby applications'
   end
 end
