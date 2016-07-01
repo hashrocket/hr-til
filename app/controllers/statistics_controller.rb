@@ -69,7 +69,7 @@ class StatisticsController < ApplicationController
 
     posts = ActiveRecord::Base.connection.execute(sql)
     posts.values.map do |day|
-      CountStat.new(day[0].to_date.strftime("%a, %b %e"), day[1].to_i)
+      CountStat.new(day[0].to_date.strftime("%a, %b %-e"), day[1].to_i)
     end
   end
 end
