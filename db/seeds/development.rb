@@ -32,7 +32,7 @@ puts " ...done."
 print "Creating developers"
 5.times do
   username = Phil.name.downcase.delete(' ')
-  Developer.create!(username: username, email: "#{username}@hashrocket.com")
+  Developer.create(username: username, email: "#{username}@hashrocket.com")
 end
 puts " ...done."
 

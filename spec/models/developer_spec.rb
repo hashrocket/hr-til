@@ -37,11 +37,24 @@ describe Developer do
     end
   end
 
-  it 'should validate username uniqueness' do
-    FactoryGirl.create(:developer, username: developer.username)
-    dup_developer = FactoryGirl.build(:developer, username: developer.username)
-    expect(dup_developer).to_not be_valid
-    expect(dup_developer.errors.messages[:username]).to eq ['has already been taken']
+  context 'validates usernames' do 
+    it 'should validate username uniqueness' do
+      FactoryGirl.create(:developer, username: developer.username)
+      dup_developer = FactoryGirl.build(:developer, username: developer.username)
+      expect(dup_developer).to_not be_valid
+      expect(dup_developer.errors.messages[:username]).to eq ['has already been taken']
+    end
+
+    it 'should allow alphanumeric usernames' do
+      alpha_numeric_developer = FactoryGirl.build(:developer, username: "johnsmith123")
+      expect(alpha_numeric_developer).to be_valid
+    end
+
+    it 'should deny usernames that contain other characters' do
+      non_alpha_developer = FactoryGirl.build(:developer, username: "john_smith.123")
+      expect(non_alpha_developer).to_not be_valid
+      expect(non_alpha_developer.errors.messages[:username]).to eq ['is invalid']
+    end
   end
 
   it 'should set admin as false on create' do
