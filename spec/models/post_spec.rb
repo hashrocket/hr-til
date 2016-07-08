@@ -37,7 +37,7 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  context '#generate_slug' do
+  describe '#generate_slug' do
     it 'should create a slug' do
       expect(post.slug).to be
     end
@@ -136,7 +136,7 @@ describe Post do
     end
   end
 
-  describe '.search' do
+  describe '#search' do
     it 'finds by developer' do
       needle = %w(brian jake).map do |author_name|
         FactoryGirl.create :post, developer: FactoryGirl.create(:developer, username: author_name)
@@ -206,21 +206,10 @@ describe Post do
     expect(post).to_not be_valid
   end
 
-  context 'publish drafts' do
-    describe '.published' do
-      it 'cannot create more than one draft per developer' do
-        post = FactoryGirl.create(:post, :draft)
-        expect do
-          Post.create(post.attributes)
-        end.to raise_error(ActiveRecord::RecordNotUnique)
-      end
-    end
-
-    describe '#publish' do
-      it 'sets the post to published = true' do
-        post.publish
-        expect(post.published_at).to be
-      end
+  describe '#publish' do
+    it 'sets the post to published = true' do
+      post.publish
+      expect(post.published_at).to be
     end
   end
 
@@ -254,7 +243,7 @@ describe Post do
     end
   end
 
-  context 'incrementing likes' do
+  describe '#increment_likes' do
     it 'increments max likes when likes equals max likes' do
       post = FactoryGirl.create(:post, likes: 5, max_likes: 5)
 
@@ -272,7 +261,7 @@ describe Post do
     end
   end
 
-  context 'decrementing likes' do
+  describe '#decrement_likes' do
     it 'does not change max likes' do
       post = FactoryGirl.create(:post, likes: 5, max_likes: 5)
 

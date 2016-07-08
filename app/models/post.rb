@@ -2,6 +2,7 @@ class Post < ActiveRecord::Base
   validates :body, :channel_id, :developer, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
+  validates :slug, uniqueness: true
   validate :body_size, if: -> { body.present? }
 
   delegate :name, to: :channel, prefix: true
