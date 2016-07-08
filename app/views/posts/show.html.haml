@@ -16,3 +16,7 @@
 
 %section#post_show
   = render @post
+
+- dynamic_path = "more_info/#{@post.channel.name}"
+- if lookup_context.find_all(dynamic_path, [], true).any?
+  = render dynamic_path

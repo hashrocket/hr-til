@@ -20,12 +20,20 @@ Given 'a channel exists' do
   @channel = FactoryGirl.create(:channel)
 end
 
+Given 'a channel with a more info partial' do
+  @channel = FactoryGirl.create(:ruby_channel)
+end
+
 Given 'a post exists' do
   @post = FactoryGirl.create(:post)
 end
 
 Given 'a post exists with a punctuated title' do
   @post = FactoryGirl.create(:post, :with_punctuated_title)
+end
+
+Given 'a post exists in the ruby channel' do
+  @post = FactoryGirl.create(:post, channel: FactoryGirl.create(:ruby_channel))
 end
 
 Given 'a post exists with 10 likes' do
@@ -378,6 +386,12 @@ Then 'I see the show page for that post' do
     expect(page).to have_content @post.developer_username
     expect(page).to have_content 'Today I learned about web development'
     expect(page.body).to match(/#phantomjs/i)
+  end
+end
+
+Then 'I see the more info partial on the show page' do
+  within '.more-info' do
+    expect(page).to have_content 'working with Ruby applications'
   end
 end
 
