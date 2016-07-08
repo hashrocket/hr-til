@@ -117,7 +117,7 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit :body, :channel_id, :title, :slug
+    params.require(:post).permit :body, :channel_id, :title
   end
 
   def untitled_slug

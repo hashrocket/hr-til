@@ -1,6 +1,36 @@
 require 'rails_helper'
 
 describe PostsController do
+  describe '#create' do
+
+    let(:developer) { FactoryGirl.create :developer }
+
+    before do
+      controller.sign_in developer
+    end
+
+    it 'denies non-whitelisted attributes' do
+      post_attributes = FactoryGirl.build(:post).attributes
+
+      bad_attrs = { slug: '12345',
+        id: 999,
+        developer_id: 3,
+        likes: 9,
+        tweeted: true,
+        max_likes: 10
+      }
+
+      post_attributes.merge!(bad_attrs)
+
+      post :create, post: post_attributes
+
+      last_post = Post.last
+      bad_attrs.each do |k, v|
+        expect(last_post[k.to_s]).to_not eq v
+      end
+    end
+  end
+
   describe '#update' do
     let(:not_my_post) { FactoryGirl.create :post }
 
@@ -15,6 +45,28 @@ describe PostsController do
         expect do
           patch :update, titled_slug: not_my_post.to_param, post: { title: 'HAXORD' }
         end.to_not change { not_my_post.reload.title }
+      end
+
+      it 'denies non-whitelisted attributes' do
+        existing_post = FactoryGirl.create(:post, tweeted: false, developer: developer)
+        post_attributes = existing_post.attributes
+
+        bad_attrs = { 'slug' => '12345',
+          'id' => 999,
+          'developer_id' => 3,
+          'likes' => 9,
+          'tweeted' => true,
+          'max_likes' => 10
+        }
+
+        post_attributes.merge!(bad_attrs)
+
+        put :update, titled_slug: existing_post.to_param, post: post_attributes
+
+        last_post = Post.last
+        bad_attrs.each do |k, v|
+          expect(last_post[k]).to_not eq v
+        end
       end
 
       it 'lists only my own drafts' do
