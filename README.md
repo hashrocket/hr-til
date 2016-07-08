@@ -87,6 +87,8 @@ slack_post_endpoint: /services/some/hashes
 
 TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
 
+---
+
 ### About
 
 [![Hashrocket logo](https://hashrocket.com/hashrocket_logo.svg)](https://hashrocket.com)
