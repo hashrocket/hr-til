@@ -20,6 +20,13 @@ Feature: Visitor views post
     When I visit the show page for that post
     Then I see the more info partial on the show page
 
+  Scenario: Visitor does not see more info text on draft posts
+    Given I am a visitor
+    And a channel with a more info partial
+    And a draft post exists in the ruby channel
+    When I visit the show page for that post
+    Then I do not see the more info partial on the show page
+
   Scenario: Visitor clicks on post date
     Given I am a visitor
     And a post exists

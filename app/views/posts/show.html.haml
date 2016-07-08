@@ -18,5 +18,5 @@
   = render @post
 
 - dynamic_path = "more_info/#{@post.channel.name}"
-- if lookup_context.find_all(dynamic_path, [], true).any?
+- if display_more_info?(@post, dynamic_path)
   = render dynamic_path

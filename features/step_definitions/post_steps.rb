@@ -32,6 +32,10 @@ Given 'a post exists with a punctuated title' do
   @post = FactoryGirl.create(:post, :with_punctuated_title)
 end
 
+Given 'a draft post exists in the ruby channel' do
+  @post = FactoryGirl.create(:post, :draft, channel: FactoryGirl.create(:ruby_channel))
+end
+
 Given 'a post exists in the ruby channel' do
   @post = FactoryGirl.create(:post, channel: FactoryGirl.create(:ruby_channel))
 end
@@ -393,6 +397,11 @@ Then 'I see the more info partial on the show page' do
   within '.more-info' do
     expect(page).to have_content 'working with Ruby applications'
   end
+end
+
+Then 'I do not see the more info partial on the show page' do
+  expect(page).to_not have_selector '.more-info'
+  expect(page).to_not have_content 'working with Ruby applications'
 end
 
 When 'I visit the show page for that post' do
