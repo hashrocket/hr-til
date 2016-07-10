@@ -1,5 +1,6 @@
 require 'red_carpet_code_highlighter'
 require 'tilt/redcarpet'
+require 'post_scrubber'
 
 module MarkdownHelper
   def markdown
@@ -17,6 +18,6 @@ module MarkdownHelper
   end
 
   def markdown_render(md)
-    raw markdown.render md
+    sanitize markdown.render(md), scrubber: PostScrubber.new
   end
 end

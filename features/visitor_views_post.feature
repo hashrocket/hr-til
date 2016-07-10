@@ -107,6 +107,12 @@ Feature: Visitor views post
     Then I see "Raw text content"
     And I should get a response with content-type "text/markdown; charset=utf-8"
 
+  Scenario: Visitor sees escaped HTML
+    Given I am a visitor
+    And a post exists with a body "<script>alert('XSS')</script>"
+    When I visit the show page for that post
+    Then I see the escaped script
+
   @javascript
   Scenario: Visitor sees likes
     Given I am a visitor
