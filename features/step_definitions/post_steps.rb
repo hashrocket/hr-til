@@ -412,6 +412,16 @@ Then 'I see the sanitized title' do
   expect(page).to have_title "It's Friday & Stuff"
 end
 
+Then 'I see the sanitized script' do
+  expect(page).to have_content "alert('XSS')"
+  expect(page).not_to have_selector :css, 'script', visible: false, text: "alert('XSS')"
+end
+
+Then 'I see the sanitized link' do
+  expect(page).to have_selector 'a', text: 'Click here'
+  expect(find_link('Click here')[:onclick]).not_to eq 'javascript:alert("XSS")'
+end
+
 Then 'I see the show page for that edited post' do
   within '.post' do
     expect(page).to have_content 'I changed the header'
