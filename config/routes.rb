@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   get 'account/signout', to: 'sessions#destroy'
   get '/posts_drafts', to: 'posts#drafts', as: :drafts
+  get '/random', to: 'posts#random', as: :random
 
   resources :channels, path: '/', only: :show
   post '/post_preview', to: 'posts#preview'

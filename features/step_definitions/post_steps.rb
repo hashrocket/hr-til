@@ -625,3 +625,11 @@ Then 'I see the author\'s Twitter link' do
     expect(page).to have_link '@sqlfan', href: 'https://twitter.com/sqlfan'
   end
 end
+
+When 'I visit the random page' do
+  visit random_path
+end
+
+Then 'I see the random post' do
+  expect(current_path).to eq post_path @post
+end
