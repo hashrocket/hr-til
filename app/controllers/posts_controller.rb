@@ -95,8 +95,8 @@ class PostsController < ApplicationController
 
   def random
     path =
-      if post = Post.published.sample
-        post_path(post)
+      if random = Post.random.first
+        post_path(random)
       else
         root_path
       end

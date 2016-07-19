@@ -20,6 +20,7 @@ class Post < ActiveRecord::Base
   scope :drafts, -> { where('published_at is null') }
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
   scope :published_and_untweeted, -> { published.where('tweeted is false') }
+  scope :random, -> { published.order('random()').limit(1) }
 
   MAX_TITLE_CHARS = 50
   MAX_WORDS = 200

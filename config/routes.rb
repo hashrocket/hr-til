@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/auth/google_oauth2', as: 'google_oauth2'
   get '/auth/google_oauth2/callback', to: 'sessions#create'
 
-  get 'account/signout', to: 'sessions#destroy'
+  get '/account/signout', to: 'sessions#destroy'
   get '/posts_drafts', to: 'posts#drafts', as: :drafts
   get '/random', to: 'posts#random', as: :random
 
