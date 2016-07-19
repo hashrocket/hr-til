@@ -60,3 +60,10 @@ Feature: Visitor views posts
     Then I should see 50 posts
     And I should not see a "newer TILs" button
     And I should not see a "older TILs" button
+
+  Scenario: Visitor views a randomly selected post via link
+    Given I am a visitor
+    And a post exists
+    When I visit the homepage
+    And I click "random TIL"
+    Then I see the random post

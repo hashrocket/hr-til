@@ -12,4 +12,7 @@
 
 %nav.pagination
   = link_to_previous_page @posts, "newer TILs".html_safe, class: "pagination_newer"
+  - if published_posts?
+    = link_to random_path do
+      random TIL
   = link_to_next_page @posts, "older TILs".html_safe, class: "pagination_older"

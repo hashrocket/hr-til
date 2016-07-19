@@ -11,6 +11,10 @@ module PostHelper
     post == Post.published_and_ordered.last
   end
 
+  def published_posts?
+    Post.published.any?
+  end
+
   def previous_post(post)
     posts = Post.published_and_ordered
     posts[posts.index(post) + 1]
