@@ -1,6 +1,6 @@
 module PostHelper
-  def multiple_posts?
-    Post.count > 1
+  def multiple_published_posts?
+    Post.published.count > 1
   end
 
   def newest_post?(post)
