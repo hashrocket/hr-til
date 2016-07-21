@@ -630,3 +630,12 @@ Given(/^(\d+) posts exist in a given channel$/) do |num|
   @channel = FactoryGirl.create :channel
   FactoryGirl.create_list :post, num.to_i, channel: @channel
 end
+
+Given(/^(\d+) posts exist by a given author$/) do |num|
+  @author = FactoryGirl.create :developer
+  FactoryGirl.create_list :post, num.to_i, developer: @author
+end
+
+When(/^I visit the author's page$/) do
+  visit developer_path @author
+end
