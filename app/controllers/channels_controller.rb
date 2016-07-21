@@ -8,6 +8,6 @@ class ChannelsController < ApplicationController
   end
 
   def posts
-    @posts ||= channel.posts.published_and_ordered.includes(:developer)
+    @posts ||= channel.posts.published_and_ordered.includes(:developer).page(params[:page]).per(PAGINATE_LIMIT)
   end
 end

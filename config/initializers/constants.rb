@@ -1,1 +1,2 @@
 SITE_NAME = 'Today I Learned'
+PAGINATE_LIMIT = 50

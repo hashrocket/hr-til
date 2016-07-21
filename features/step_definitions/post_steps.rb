@@ -544,7 +544,7 @@ Given(/^(\d+) posts exist$/) do |num|
   FactoryGirl.create_list(:post, num.to_i)
 end
 
-Then(/^I should see (\d+) posts$/) do |num|
+Then(/^I should see (\d+) posts*$/) do |num|
   expect(page).to have_selector '.post', count: num.to_i
 end
 
@@ -624,4 +624,9 @@ Then 'I see the author\'s Twitter link' do
   within 'header.page_head' do
     expect(page).to have_link '@sqlfan', href: 'https://twitter.com/sqlfan'
   end
+end
+
+Given(/^(\d+) posts exist in a given channel$/) do |num|
+  @channel = FactoryGirl.create :channel
+  FactoryGirl.create_list :post, num.to_i, channel: @channel
 end
