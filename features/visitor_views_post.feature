@@ -87,9 +87,9 @@ Feature: Visitor views post
 
   Scenario: Visitor views raw text of post via path
     Given I am a visitor
-    And a post exists with a body "Raw text content"
+    And a post exists with a body "Raw text content with code `{:empty => nil}`"
     And I visit the post text page
-    Then I see "Raw text content"
+    Then I see "Raw text content with code `{:empty => nil}`"
     And I should get a response with content-type "text/markdown; charset=utf-8"
 
   Scenario: Visitor views raw text of post via button
