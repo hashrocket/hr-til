@@ -1,6 +1,6 @@
 module PostHelper
-  def multiple_posts?
-    Post.count > 1
+  def multiple_published_posts?
+    Post.published.count > 1
   end
 
   def newest_post?(post)
@@ -9,6 +9,10 @@ module PostHelper
 
   def oldest_post?(post)
     post == Post.published_and_ordered.last
+  end
+
+  def published_posts?
+    Post.published.any?
   end
 
   def previous_post(post)

@@ -1,12 +1,15 @@
 - content_for :page_title, @post.title
 
 - content_for :post_nav do
-  - if @post.published? && multiple_posts?
+  - if @post.published?
     %nav.pagination
-      - unless oldest_post? @post
+      - if multiple_published_posts? && !oldest_post?(@post)
         = link_to previous_post(@post), class: "pagination_newer" do
           previous TIL
-      - unless newest_post? @post
+      - if published_posts?
+        = link_to random_path do
+          random TIL
+      - if multiple_published_posts? && !newest_post?(@post)
         = link_to next_post(@post), class: "pagination_older" do
           next TIL
 

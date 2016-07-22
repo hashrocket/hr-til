@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update]
-  before_action :require_developer, except: [:index, :show, :like, :unlike]
-  before_action :authorize_developer, only: [:edit, :update]
+  before_action :set_post, only: %i[edit show update]
+  before_action :require_developer, except: %i[index like random show unlike]
+  before_action :authorize_developer, only: %i[edit update]
 
   def preview
     render layout: false
@@ -91,6 +91,17 @@ class PostsController < ApplicationController
     end
 
     render :index
+  end
+
+  def random
+    path =
+      if random = Post.random.first
+        post_path(random)
+      else
+        root_path
+      end
+
+    redirect_to path
   end
 
   private

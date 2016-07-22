@@ -45,13 +45,13 @@ Feature: Visitor views post
     And three posts exist
     When I go to the most recent post
     Then I see only a previous TIL link
-    When I click the previous TIL link
+    When I click "previous TIL"
     Then I see the second most recent post
     And I see a next TIL link and a previous TIL link
-    When I click the previous TIL link
+    When I click "previous TIL"
     Then I see the least recent post
     And I see only a next TIL link
-    When I click the next TIL link
+    When I click "next TIL"
     Then I see the second most recent post
 
   Scenario: Visitor clicks on 'previous' arrow with a draft post
@@ -59,7 +59,7 @@ Feature: Visitor views post
     And three posts exist, one a draft
     When I go to the most recent post
     Then I see only a previous TIL link
-    When I click the previous TIL link
+    When I click "previous TIL"
     Then I see the least recent post
     And I see only a next TIL link
 
@@ -68,13 +68,13 @@ Feature: Visitor views post
     And three posts exist, with publication dates in a different order than creation dates
     When I go to the most recent post
     Then I see only a previous TIL link
-    When I click the previous TIL link
+    When I click "previous TIL"
     Then I see the second most recent post
     And I see a next TIL link and a previous TIL link
-    When I click the previous TIL link
+    When I click "previous TIL"
     Then I see the least recent post
     And I see only a next TIL link
-    When I click the next TIL link
+    When I click "next TIL"
     Then I see the second most recent post
 
   Scenario: Visitor mangles url
@@ -127,3 +127,23 @@ Feature: Visitor views post
     When I click on the title of the post
     Then I see the show page for that post
     And I see the likes count equals 10
+
+  Scenario: Visitor views a randomly selected post
+    Given I am a visitor
+    And a post exists
+    And I visit the random page
+    Then I see the random post
+
+  Scenario: Visitor views a randomly selected post via link
+    Given I am a visitor
+    And a post exists
+    And I visit the random page
+    Then I see the random post
+    When I click "random TIL"
+    Then I see the random post
+
+  Scenario: Visitor sees a homepage when there are no posts to randomly select from
+    Given I am a visitor
+    And no posts exist
+    When I visit the random page
+    Then I am on the homepage
