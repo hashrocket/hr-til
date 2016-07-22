@@ -102,16 +102,6 @@ describe PostsController do
     end
   end
 
-  describe '#index' do
-    it 'returns a list of published posts' do
-      FactoryGirl.create_list(:post, 3)
-      FactoryGirl.create(:post, :draft)
-
-      get :index
-      expect(assigns(:posts).map(&:published?).uniq == [true]).to eq(true)
-    end
-  end
-
   describe '#show' do
     render_views
 

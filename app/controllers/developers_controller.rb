@@ -12,15 +12,15 @@ class DevelopersController < ApplicationController
   private
 
   def posts
-    @posts ||= developer.posts.published_and_ordered.includes(:channel)
+    developer.posts.published_and_ordered.includes(:channel).page(params[:page]).per(PAGINATE_LIMIT)
   end
 
   def developer
-    @developer ||= if params[:action] == "show"
-                   Developer.find_by_username!(params[:id])
-                 else
-                   current_developer
-                 end
+    if params[:action] == "show"
+      Developer.find_by_username!(params[:id])
+    else
+      current_developer
+    end
   end
 
   def developer_params

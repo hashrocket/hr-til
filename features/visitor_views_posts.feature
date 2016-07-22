@@ -60,3 +60,14 @@ Feature: Visitor views posts
     Then I should see 50 posts
     And I should not see a "newer TILs" button
     And I should not see a "older TILs" button
+
+  @javascript
+  Scenario: Author's posts are paginated
+    Given I am a visitor
+    And 51 posts exist by a given author
+    When I visit the author's page
+    Then I should see 50 posts
+    When I click "older TILs"
+    Then I should see 1 post
+    When I click "newer TILs"
+    Then I should see 50 posts
