@@ -107,6 +107,18 @@ Feature: Visitor views post
     Then I see "Raw text content"
     And I should get a response with content-type "text/markdown; charset=utf-8"
 
+  Scenario: Visitor sees sanitized scripts in HTML
+    Given I am a visitor
+    And a post exists with a body "<script>alert('XSS')</script>"
+    When I visit the show page for that post
+    Then I see the sanitized script
+
+  Scenario: Visitor sees sanitized links in HTML
+    Given I am a visitor
+    And a post exists with a body "<a href='#' onclick='javascript:alert("XSS")'>Click here</a>"
+    When I visit the show page for that post
+    Then I see the sanitized link
+
   @javascript
   Scenario: Visitor sees likes
     Given I am a visitor
