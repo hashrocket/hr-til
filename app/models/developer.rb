@@ -14,8 +14,7 @@ class Developer < ActiveRecord::Base
   end
 
   def twitter_handle=(handle)
-    twitter_handle = handle.blank? ? nil : handle.to_s.gsub(/^@+/, '')
-    write_attribute(:twitter_handle, twitter_handle)
+    self[:twitter_handle] = handle.gsub(/^@+/, '').presence
   end
 
   def slack_name=(name)
