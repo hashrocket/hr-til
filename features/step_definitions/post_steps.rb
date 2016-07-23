@@ -215,12 +215,6 @@ When 'I see only a previous TIL link' do
   end
 end
 
-When 'I click the previous TIL link' do
-  within '.pagination' do
-    click_on 'previous TIL'
-  end
-end
-
 Then 'I see the second most recent post' do
   expect(current_path).to eq(post_path(@older_post))
 end
@@ -240,12 +234,6 @@ When 'I see only a next TIL link' do
   within '.pagination' do
     expect(page).to have_link 'next TIL'
     expect(page).to_not have_link 'previous TIL'
-  end
-end
-
-When 'I click the next TIL link' do
-  within '.pagination' do
-    click_on 'next TIL'
   end
 end
 
