@@ -71,12 +71,13 @@ describe Post do
   describe '#body_size' do
     it 'should return true when the post is equal or below 200 words' do
       post.body = 'word ' * 200
-      expect(post.send(:body_size)).to be
+      expect(post).to be_valid
     end
 
     it 'should return false when the post is above 200 words' do
       post.body = 'word ' * 201
-      expect(post.send(:body_size)).to eq false
+      expect(post).to_not be_valid
+      expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
     end
 
     it 'should behave like a validation and return an appropriate messsage' do
