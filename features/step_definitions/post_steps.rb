@@ -48,6 +48,10 @@ Given 'a post exists by another developer' do
   @others_post = FactoryGirl.create(:post)
 end
 
+Given(/^(\d+) drafts* exists* by another developer$/) do |num|
+  FactoryGirl.create_list(:post, num.to_i, :draft)
+end
+
 When 'I visit the edit page for that post' do
   visit edit_post_path @others_post
 end
@@ -622,4 +626,8 @@ Then 'I see the author\'s Twitter link' do
   within 'header.page_head' do
     expect(page).to have_link '@sqlfan', href: 'https://twitter.com/sqlfan'
   end
+end
+
+Then(/^I see (\d+) posts*$/) do |num|
+  expect(page).to have_selector 'article', count: num.to_i
 end
