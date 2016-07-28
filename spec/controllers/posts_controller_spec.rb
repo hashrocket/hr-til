@@ -168,17 +168,22 @@ RAW
   end
 
   describe '#drafts' do
+
     before do
       controller.sign_in developer
     end
 
-    context 'when I am a non-admin developer' do
-      let(:developer) { FactoryGirl.create :developer }
+    context 'when I am a non-admin' do
 
-      it 'lists only my own drafts' do
-        FactoryGirl.create_list :post, 3, :draft, developer: developer
+      let(:developer) { FactoryGirl.create :developer }
+      let(:rando) { FactoryGirl.create :developer }
+
+      it 'lists only my drafts' do
         FactoryGirl.create_list :post, 3, developer: developer
-        FactoryGirl.create_list :post, 3, :draft
+        FactoryGirl.create_list :post, 3, :draft, developer: developer
+
+        FactoryGirl.create_list :post, 3, developer: rando
+        FactoryGirl.create_list :post, 3, :draft, developer: rando
         get :drafts
 
         expect(assigns(:posts).length).to eq(3)
@@ -186,11 +191,16 @@ RAW
     end
 
     context 'when I am an admin developer' do
+
       let(:developer) { FactoryGirl.create :developer, admin: true }
+      let(:rando) { FactoryGirl.create :developer }
 
       it 'lists all drafts' do
+        FactoryGirl.create_list :post, 3, developer: developer
         FactoryGirl.create_list :post, 3, :draft, developer: developer
-        FactoryGirl.create_list :post, 3, :draft
+
+        FactoryGirl.create_list :post, 3, developer: rando
+        FactoryGirl.create_list :post, 3, :draft, developer: rando
         get :drafts
 
         expect(assigns(:posts).length).to eq(6)

@@ -45,6 +45,10 @@ And 'I have a post' do
   @post = FactoryGirl.create(:post, developer: @developer)
 end
 
+And 'I have a draft post' do
+  FactoryGirl.create(:post, :draft, developer: @developer)
+end
+
 And 'I have a post with markdown' do
   FactoryGirl.create(:post, developer: @developer, body: '*emphasis*')
 end
