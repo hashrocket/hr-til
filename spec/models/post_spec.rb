@@ -58,6 +58,11 @@ describe Post do
     expect(post.send(:slugified_title)).to eq valid_title
   end
 
+  it 'should use title dashes in slug' do
+    post.title = 'Today I learned about clojure-like syntax feature'
+    expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure-like-syntax-feature'
+  end
+
   it 'should remove whitespace from slug' do
     post.title = '  Today I             learned about clojure   '
     expect(post.send(:slugified_title)).to eq valid_title
