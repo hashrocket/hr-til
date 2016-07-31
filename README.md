@@ -54,7 +54,7 @@ The gem `selenium-webdriver` depends on the Firefox browser.
 
 Staging and production for Hashrocket's TIL is located here:
 
-* http://hr-til-staging.herokuapp.com
+* https://hr-til-staging.herokuapp.com
 * https://til.hashrocket.com
 
 ### Environmental Variables
@@ -77,7 +77,7 @@ slack_post_endpoint: /services/some/hashes
 
 ### Contributing
 
-1. Fork it
+1. [Fork](https://help.github.com/articles/fork-a-repo/) it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
