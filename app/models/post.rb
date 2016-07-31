@@ -105,7 +105,7 @@ class Post < ActiveRecord::Base
   end
 
   def slugified_title
-    title.downcase.strip.gsub(/[^A-Za-z0-9\s]/, '').gsub(/(\s|-)+/, '-')
+    title.downcase.strip.gsub(/[^A-Za-z0-9\s-]/, '').gsub(/(\s|-)+/, '-')
   end
 
   def notify_slack(event)
