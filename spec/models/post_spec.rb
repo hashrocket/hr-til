@@ -48,29 +48,36 @@ describe Post do
     end
   end
 
-  it 'should create a slug with dashes' do
-    post.title = 'Today I learned about clojure'
-    expect(post.send(:slugified_title)).to eq valid_title
-  end
+  describe '#slugified_title' do
+    it 'should create a slug with dashes' do
+      post.title = 'Today I learned about clojure'
+      expect(post.send(:slugified_title)).to eq valid_title
+    end
 
-  it 'should create a slug without multiple dashes' do
-    post.title = 'Today I learned --- about clojure'
-    expect(post.send(:slugified_title)).to eq valid_title
-  end
+    it 'should create a slug without multiple dashes' do
+      post.title = 'Today I learned --- about clojure'
+      expect(post.send(:slugified_title)).to eq valid_title
+    end
 
-  it 'should use title dashes in slug' do
-    post.title = 'Today I learned about clojure-like syntax feature'
-    expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure-like-syntax-feature'
-  end
+    it 'should use title dashes in slug' do
+      post.title = 'Today I learned about clojure-like syntax feature'
+      expect(post.send(:slugified_title)).to eq 'today-i-learned-about-clojure-like-syntax-feature'
+    end
 
-  it 'should remove whitespace from slug' do
-    post.title = '  Today I             learned about clojure   '
-    expect(post.send(:slugified_title)).to eq valid_title
-  end
+    it 'should remove whitespace from slug' do
+      post.title = '  Today I             learned about clojure   '
+      expect(post.send(:slugified_title)).to eq valid_title
+    end
 
-  it 'should not allow punctuation in slug' do
-    post.title = 'Today I! learned? & $ % about #clojure'
-    expect(post.send(:slugified_title)).to eq valid_title
+    it 'should not allow punctuation in slug' do
+      post.title = 'Today I! learned? & $ % about #clojure'
+      expect(post.send(:slugified_title)).to eq valid_title
+    end
+
+    it 'should ignore and strip emojis' do
+      post.title = 'Today I learned about clojure 😀'
+      expect(post.send(:slugified_title)).to eq valid_title
+    end
   end
 
   describe '#body_size' do
