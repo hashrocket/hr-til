@@ -48,6 +48,9 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.4.0)
+    airbrake (5.4.5)
+      airbrake-ruby (~> 1.4)
+    airbrake-ruby (1.4.6)
     arel (6.0.3)
     authem (2.0.1)
       activesupport (>= 4.0.4)
@@ -354,6 +357,7 @@ PLATFORMS
 
 DEPENDENCIES
   active_model_serializers
+  airbrake (~> 5.4)
   authem
   autoprefixer-rails
   brakeman
