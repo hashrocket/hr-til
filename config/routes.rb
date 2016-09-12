@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get 'account/signout', to: 'sessions#destroy'
   get '/posts_drafts', to: 'posts#drafts', as: :drafts
 
+  # Bot redirects
+  get '/wp-login.php' => redirect('/')
+
   resources :channels, path: '/', only: :show
   post '/post_preview', to: 'posts#preview'
 

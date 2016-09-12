@@ -165,3 +165,7 @@ end
 And "I don't see a search header" do
   expect(page).to_not have_selector ".page_head"
 end
+
+Given(/^I try to visit "([^"]*)"$/) do |url|
+  visit url
+end
