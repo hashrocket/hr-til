@@ -414,6 +414,10 @@ Then 'I see the sanitized link' do
   expect(find_link('Click here')[:onclick]).not_to eq 'javascript:alert("XSS")'
 end
 
+Then 'I see the canonical link for this post' do
+  expect(page.find('head link[rel=canonical]', visible: false)['href']).to include(@post.slug)
+end
+
 Then 'I see the show page for that edited post' do
   within '.post' do
     expect(page).to have_content 'I changed the header'
