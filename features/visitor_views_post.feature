@@ -27,6 +27,12 @@ Feature: Visitor views post
     When I visit the show page for that post
     Then I do not see the more info partial on the show page
 
+  Scenario: Robot Visitor sees canonical link
+    Given I am a visitor
+    And a post exists with a punctuated title
+    When I visit the show page for that post
+    Then I see the canonical link for this post
+
   Scenario: Visitor clicks on post date
     Given I am a visitor
     And a post exists
