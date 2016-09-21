@@ -3,6 +3,10 @@ Rails.application.routes.draw do
 
   root to: 'posts#index'
 
+  # Bot redirects
+  get 'wp-login.php' => redirect('/')
+  get 'authors/wp-login.php' => redirect('/')
+
   resource :profile, controller: 'developers', only: %i(update edit)
   resources :developers, path: '/authors', only: 'show'
 
