@@ -2,6 +2,30 @@ a
   text-decoration: none
   color: $red
 
+.sticker
+  color: #f31aae
+  font-size: 2.3rem
+  font-family: $news-typeface
+  text-align: center
+  padding: 2.5em 1em 1em 3.5em
+  box-sizing: border-box
+  position: absolute
+  top: .5em
+  left: -3em
+  width: 7em
+  height: 7em
+  background: #fff
+  border-radius: 50%
+  opacity: .7
+  z-index: 500
+  span
+    text-align: center
+    display: block
+    font-size: .7em
+    text-transform: uppercase
+  +max-width(600px)
+    top: -1em
+
 nav.pagination
   max-width: 40rem
   margin: 4rem auto
