@@ -48,7 +48,6 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'simplecov', require: false, github: 'colszowka/simplecov'
   gem 'webmock'
   gem 'selenium-webdriver'
 end
