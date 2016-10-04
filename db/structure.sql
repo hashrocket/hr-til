@@ -2,16 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: -
@@ -34,7 +30,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: authem_sessions; Type: TABLE; Schema: public; Owner: -
+-- Name: authem_sessions; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE authem_sessions (
@@ -70,7 +66,7 @@ ALTER SEQUENCE authem_sessions_id_seq OWNED BY authem_sessions.id;
 
 
 --
--- Name: channels; Type: TABLE; Schema: public; Owner: -
+-- Name: channels; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE channels (
@@ -103,7 +99,7 @@ ALTER SEQUENCE channels_id_seq OWNED BY channels.id;
 
 
 --
--- Name: developers; Type: TABLE; Schema: public; Owner: -
+-- Name: developers; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE developers (
@@ -120,7 +116,7 @@ CREATE TABLE developers (
 
 
 --
--- Name: posts; Type: TABLE; Schema: public; Owner: -
+-- Name: posts; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE posts (
@@ -240,7 +236,7 @@ ALTER SEQUENCE posts_id_seq OWNED BY posts.id;
 
 
 --
--- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE TABLE schema_migrations (
@@ -277,7 +273,7 @@ ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regcl
 
 
 --
--- Name: authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY authem_sessions
@@ -285,7 +281,7 @@ ALTER TABLE ONLY authem_sessions
 
 
 --
--- Name: channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY channels
@@ -293,7 +289,7 @@ ALTER TABLE ONLY channels
 
 
 --
--- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY developers
@@ -301,7 +297,7 @@ ALTER TABLE ONLY developers
 
 
 --
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY posts
@@ -309,7 +305,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: unique_slug; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: unique_slug; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
 ALTER TABLE ONLY posts
@@ -317,61 +313,61 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: index_authem_sessions_on_expires_at_and_token; Type: INDEX; Schema: public; Owner: -
+-- Name: index_authem_sessions_on_expires_at_and_token; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX index_authem_sessions_on_expires_at_and_token ON authem_sessions USING btree (expires_at, token);
 
 
 --
--- Name: index_authem_sessions_subject; Type: INDEX; Schema: public; Owner: -
+-- Name: index_authem_sessions_subject; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_authem_sessions_subject ON authem_sessions USING btree (expires_at, subject_type, subject_id);
 
 
 --
--- Name: index_posts_on_channel_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_posts_on_channel_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_posts_on_channel_id ON posts USING btree (channel_id);
 
 
 --
--- Name: index_posts_on_developer_id; Type: INDEX; Schema: public; Owner: -
+-- Name: index_posts_on_developer_id; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE INDEX index_posts_on_developer_id ON posts USING btree (developer_id);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
+-- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -; Tablespace: 
 --
 
 CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
 
 
 --
--- Name: fk_rails_447dc2e0a3; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_06b7a0db99; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_447dc2e0a3 FOREIGN KEY (channel_id) REFERENCES channels(id);
+    ADD CONSTRAINT fk_rails_06b7a0db99 FOREIGN KEY (channel_id) REFERENCES channels(id);
 
 
 --
--- Name: fk_rails_b3ec63b3ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_2c578d8f8f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_b3ec63b3ac FOREIGN KEY (developer_id) REFERENCES developers(id);
+    ADD CONSTRAINT fk_rails_2c578d8f8f FOREIGN KEY (developer_id) REFERENCES developers(id);
 
 
 --
 -- PostgreSQL database dump complete
 --
 
-SET search_path TO "$user", public;
+SET search_path TO "$user",public;
 
 INSERT INTO schema_migrations (version) VALUES ('20150316165229');
 

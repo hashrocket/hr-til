@@ -31,8 +31,9 @@ puts " ...done."
 
 print "Creating developers"
 5.times do
-  username = Phil.name.downcase.delete(' ')
-  Developer.create(username: username, email: "#{username}@hashrocket.com")
+  username = Phil.name.parameterize
+  puts username
+  Developer.create!(username: username, email: "#{username}@hashrocket.com")
 end
 puts " ...done."
 
