@@ -17,7 +17,6 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'omniauth-google-oauth2'
 gem 'pg'
-gem 'puma'
 gem 'rack-cors', :require => 'rack/cors'
 gem 'redcarpet'
 gem 'rouge'
@@ -28,6 +27,7 @@ gem 'twitter'
 gem 'uglifier', '>= 1.3.0'
 
 group :development do
+  gem 'puma'
   gem 'brakeman', require: false
   gem 'bullet'
   gem 'phil'
@@ -41,6 +41,7 @@ group :development, :test do
 end
 
 group :production do
+  gem 'unicorn'
   gem 'rails_12factor'
 end
 
