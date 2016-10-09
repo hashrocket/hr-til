@@ -66,13 +66,17 @@ GEM
     bullet (5.1.1)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.10.0)
-    capybara (2.6.2)
+    capybara (2.10.1)
       addressable
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-webmock (0.2.3)
+      capybara (~> 2.4)
+      rack (>= 1.4)
+      rack-proxy (= 0.6.0)
     celluloid (0.17.3)
       celluloid-essentials
       celluloid-extras
@@ -193,9 +197,9 @@ GEM
     memoizable (0.4.2)
       thread_safe (~> 0.3, >= 0.3.1)
     method_source (0.8.2)
-    mime-types (3.0)
+    mime-types (3.1)
       mime-types-data (~> 3.2015)
-    mime-types-data (3.2016.0221)
+    mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
     minitest (5.9.0)
     multi_json (1.12.1)
@@ -203,9 +207,8 @@ GEM
     multi_xml (0.5.5)
     multipart-post (2.0.0)
     naught (1.1.0)
-    nokogiri (1.6.8)
+    nokogiri (1.6.8.1)
       mini_portile2 (~> 2.1.0)
-      pkg-config (~> 1.1.7)
     oauth2 (1.1.0)
       faraday (>= 0.8, < 0.10)
       jwt (~> 1.0, < 1.5.2)
@@ -227,7 +230,6 @@ GEM
     phil (0.9.8)
       activesupport
       ffaker (~> 2.0)
-    pkg-config (1.1.7)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -237,6 +239,8 @@ GEM
     puma (2.16.0)
     rack (1.6.4)
     rack-cors (0.4.0)
+    rack-proxy (0.6.0)
+      rack
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -362,6 +366,7 @@ DEPENDENCIES
   autoprefixer-rails
   brakeman
   bullet
+  capybara-webmock
   coffee-rails (~> 4.1.0)
   cucumber-rails
   database_cleaner
@@ -398,4 +403,4 @@ RUBY VERSION
    ruby 2.3.1p112
 
 BUNDLED WITH
-   1.12.5
+   1.13.2

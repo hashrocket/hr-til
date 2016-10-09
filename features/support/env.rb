@@ -15,3 +15,10 @@ rescue NameError
 end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+Capybara.javascript_driver = :capybara_webmock
+Capybara::Webmock.start
+
+at_exit do
+  Capybara::Webmock.stop
+end

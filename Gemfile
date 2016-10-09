@@ -45,10 +45,11 @@ group :production do
 end
 
 group :test do
+  gem 'capybara-webmock'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'selenium-webdriver'
   gem 'simplecov', require: false, github: 'colszowka/simplecov'
   gem 'webmock'
-  gem 'selenium-webdriver'
 end
