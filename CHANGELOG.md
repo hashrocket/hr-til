@@ -1,3 +1,7 @@
+* Add code of conduct.
+
+  *Jake Worth*
+
 * Permit dashes in post slugs when appropriate.
 
   *Josh Branchaud*

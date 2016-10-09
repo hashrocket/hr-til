@@ -83,6 +83,11 @@ slack_post_endpoint: /services/some/hashes
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
 
+Bug reports and pull requests are welcome on GitHub at
+https://github.com/hashrocket/hr-til. This project is intended to be a safe,
+welcoming space for collaboration, and contributors are expected to adhere to
+the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
 ### License
 
 TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
