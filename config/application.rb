@@ -7,7 +7,7 @@ Bundler.require(*Rails.groups)
 module HrTil
   class Application < Rails::Application
     config.active_record.schema_format = :sql
-    config.autoload_paths << Rails.root.join('lib', 'app/decorators')
+    config.autoload_paths << Rails.root.join('lib')
     config.time_zone = 'Eastern Time (US & Canada)'
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
