@@ -16,7 +16,7 @@ end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
-Capybara.javascript_driver = :capybara_webmock
+Capybara.javascript_driver = :capybara_webmock_chrome
 Capybara::Webmock.start
 
 at_exit do
