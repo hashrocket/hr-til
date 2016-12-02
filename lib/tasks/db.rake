@@ -17,19 +17,4 @@ namespace :db do
     verify_exec "pg_restore --verbose --clean --no-acl --no-owner #{dump_file} | rails dbconsole"
     puts 'Completed successfully!'
   end
-
-  desc 'Tweeting untweeted posts (when feature is enabled)'
-  task touch_untweeted_posts: :environment do
-    puts 'Searching for published but untweeted posts...'
-    posts = Post.published_and_untweeted
-
-    if posts.any?
-      post = posts.sample
-      puts "Tweeting untweeted post: ##{post.id}"
-      SocialMessaging::TwitterStatus.new(post).post_to_twitter
-      puts 'Completed successfully!'
-    else
-      puts 'All published posts have been tweeted!'
-    end
-  end
 end

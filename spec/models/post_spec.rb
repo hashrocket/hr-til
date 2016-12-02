@@ -226,6 +226,16 @@ describe Post do
     end
   end
 
+  describe '.popular' do
+    it 'returns published posts with five or more likes' do
+      FactoryGirl.create(:post, likes: 5)
+      FactoryGirl.create(:post, :draft, likes: 5)
+      FactoryGirl.create(:post, likes: 4)
+
+      expect(described_class.popular.size).to eq 1
+    end
+  end
+
   context 'slack integration on publication' do
     describe 'new post, published is true' do
       it 'should notify slack' do
