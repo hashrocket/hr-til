@@ -1,3 +1,7 @@
+* Add more prominent twitter links.
+
+  *Rye Mason*
+
 * Add code of conduct.
 
   *Jake Worth*
