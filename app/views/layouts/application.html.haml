@@ -33,7 +33,10 @@
     %header.site_head
       %div
         %h1= link_to SITE_NAME, root_path
-        %h2= link_to "A Hashrocket project", "https://hashrocket.com"
+        %h2
+          = link_to "A Hashrocket project", "https://hashrocket.com", class: "hr"
+          %span
+            = link_to "Follow on Twitter", "https://twitter.com/hashrockettil", class: "twitter"
 
     = render 'shared/flash'
 
