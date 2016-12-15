@@ -33,7 +33,10 @@
     %header.site_head
       %div
         %h1= link_to SITE_NAME, root_path
-        %h2= link_to "A Hashrocket project", "https://hashrocket.com"
+        %h2
+          = link_to "A Hashrocket project", "https://hashrocket.com", class: "hr"
+          %span
+            = link_to "Follow on Twitter", "https://twitter.com/hashrockettil", class: "twitter"
 
     = render 'shared/flash'
 
@@ -66,3 +69,5 @@
               = search_field_tag :q
               = button_tag 'Search', name: nil
 
+        %li.site_nav__twitter
+          = link_to "Twitter", "https://twitter.com/hashrockettil", class: "site_nav__link"
