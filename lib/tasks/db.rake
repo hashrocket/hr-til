@@ -18,18 +18,12 @@ namespace :db do
     puts 'Completed successfully!'
   end
 
-  desc 'Tweeting untweeted posts (when feature is enabled)'
-  task touch_untweeted_posts: :environment do
-    puts 'Searching for published but untweeted posts...'
-    posts = Post.published_and_untweeted
+  desc 'Automatically tweet well-liked posts'
+  task touch_popular_posts: :environment do
 
-    if posts.any?
-      post = posts.sample
-      puts "Tweeting untweeted post: ##{post.id}"
-      SocialMessaging::TwitterStatus.new(post).post_to_twitter
-      puts 'Completed successfully!'
-    else
-      puts 'All published posts have been tweeted!'
+    if (2..4).include?(Date.today.wday)
+      popular_post = Post.popular.sample
+      SocialMessaging::TwitterStatus.new(popular_post).post_to_twitter
     end
   end
 end

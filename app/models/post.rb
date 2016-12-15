@@ -16,10 +16,10 @@ class Post < ActiveRecord::Base
   before_create :generate_slug
   after_save :notify_slack_on_publication, if: :publishing?
 
-  scope :published, -> { where('published_at is not null') }
   scope :drafts, -> { where('published_at is null') }
+  scope :popular, -> { published.where('likes >= 5') }
+  scope :published, -> { where('published_at is not null') }
   scope :published_and_ordered, -> { published.order(published_at: :desc) }
-  scope :published_and_untweeted, -> { published.where('tweeted is false') }
 
   MAX_TITLE_CHARS = 50
   MAX_WORDS = 200
