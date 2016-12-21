@@ -19,11 +19,18 @@ namespace :db do
   end
 
   desc 'Automatically tweet well-liked posts'
-  task touch_popular_posts: :environment do
+  task tweet_popular_posts: :environment do
 
+    puts 'Finding a post'
     if (2..4).include?(Date.today.wday)
+
       popular_post = Post.popular.sample
+
+      puts "Tweeting post ##{popular_post.id}"
       SocialMessaging::TwitterStatus.new(popular_post).post_to_twitter
+      print " ...done"
+    else
+      puts 'No popular posts found'
     end
   end
 end
