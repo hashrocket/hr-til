@@ -2,11 +2,12 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.2
--- Dumped by pg_dump version 9.5.2
+-- Dumped from database version 9.5.5
+-- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -32,6 +33,18 @@ SET search_path = public, pg_catalog;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+--
+-- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE ar_internal_metadata (
+    key character varying NOT NULL,
+    value character varying,
+    created_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
 
 --
 -- Name: authem_sessions; Type: TABLE; Schema: public; Owner: -
@@ -249,35 +262,43 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: authem_sessions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authem_sessions ALTER COLUMN id SET DEFAULT nextval('authem_sessions_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: channels id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY channels ALTER COLUMN id SET DEFAULT nextval('channels_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: developers id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY developers ALTER COLUMN id SET DEFAULT nextval('developers_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
 --
--- Name: authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY ar_internal_metadata
+    ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: authem_sessions authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authem_sessions
@@ -285,7 +306,7 @@ ALTER TABLE ONLY authem_sessions
 
 
 --
--- Name: channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY channels
@@ -293,7 +314,7 @@ ALTER TABLE ONLY channels
 
 
 --
--- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: developers developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY developers
@@ -301,7 +322,7 @@ ALTER TABLE ONLY developers
 
 
 --
--- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -309,7 +330,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: unique_slug; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts unique_slug; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -352,7 +373,7 @@ CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (v
 
 
 --
--- Name: fk_rails_447dc2e0a3; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: posts fk_rails_447dc2e0a3; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -360,7 +381,7 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: fk_rails_b3ec63b3ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: posts fk_rails_b3ec63b3ac; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -373,73 +394,41 @@ ALTER TABLE ONLY posts
 
 SET search_path TO "$user", public;
 
-INSERT INTO schema_migrations (version) VALUES ('20150316165229');
+INSERT INTO schema_migrations (version) VALUES
+('20150316165229'),
+('20150316165241'),
+('20150317204546'),
+('20150319202107'),
+('20150319204402'),
+('20150324163219'),
+('20150408210733'),
+('20150414002719'),
+('20150424190902'),
+('20150430195052'),
+('20150501143525'),
+('20150501152953'),
+('20150529183728'),
+('20150529190009'),
+('20150529190148'),
+('20150601191337'),
+('20150603155844'),
+('20150610141445'),
+('20150610145829'),
+('20150825183004'),
+('20150903191744'),
+('20150922171442'),
+('20150925155814'),
+('20151001212705'),
+('20160115214137'),
+('20160115214650'),
+('20160125205238'),
+('20160205153837'),
+('20160211043316'),
+('20160223002123'),
+('20160622144602'),
+('20160622152349'),
+('20160622154534'),
+('20160701161129'),
+('20160708201736');
 
-INSERT INTO schema_migrations (version) VALUES ('20150316165241');
-
-INSERT INTO schema_migrations (version) VALUES ('20150317204546');
-
-INSERT INTO schema_migrations (version) VALUES ('20150319202107');
-
-INSERT INTO schema_migrations (version) VALUES ('20150319204402');
-
-INSERT INTO schema_migrations (version) VALUES ('20150324163219');
-
-INSERT INTO schema_migrations (version) VALUES ('20150408210733');
-
-INSERT INTO schema_migrations (version) VALUES ('20150414002719');
-
-INSERT INTO schema_migrations (version) VALUES ('20150424190902');
-
-INSERT INTO schema_migrations (version) VALUES ('20150430195052');
-
-INSERT INTO schema_migrations (version) VALUES ('20150501143525');
-
-INSERT INTO schema_migrations (version) VALUES ('20150501152953');
-
-INSERT INTO schema_migrations (version) VALUES ('20150529183728');
-
-INSERT INTO schema_migrations (version) VALUES ('20150529190009');
-
-INSERT INTO schema_migrations (version) VALUES ('20150529190148');
-
-INSERT INTO schema_migrations (version) VALUES ('20150601191337');
-
-INSERT INTO schema_migrations (version) VALUES ('20150603155844');
-
-INSERT INTO schema_migrations (version) VALUES ('20150610141445');
-
-INSERT INTO schema_migrations (version) VALUES ('20150610145829');
-
-INSERT INTO schema_migrations (version) VALUES ('20150825183004');
-
-INSERT INTO schema_migrations (version) VALUES ('20150903191744');
-
-INSERT INTO schema_migrations (version) VALUES ('20150922171442');
-
-INSERT INTO schema_migrations (version) VALUES ('20150925155814');
-
-INSERT INTO schema_migrations (version) VALUES ('20151001212705');
-
-INSERT INTO schema_migrations (version) VALUES ('20160115214137');
-
-INSERT INTO schema_migrations (version) VALUES ('20160115214650');
-
-INSERT INTO schema_migrations (version) VALUES ('20160125205238');
-
-INSERT INTO schema_migrations (version) VALUES ('20160205153837');
-
-INSERT INTO schema_migrations (version) VALUES ('20160211043316');
-
-INSERT INTO schema_migrations (version) VALUES ('20160223002123');
-
-INSERT INTO schema_migrations (version) VALUES ('20160622144602');
-
-INSERT INTO schema_migrations (version) VALUES ('20160622152349');
-
-INSERT INTO schema_migrations (version) VALUES ('20160622154534');
-
-INSERT INTO schema_migrations (version) VALUES ('20160701161129');
-
-INSERT INTO schema_migrations (version) VALUES ('20160708201736');
 

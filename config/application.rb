@@ -1,4 +1,4 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 
@@ -10,15 +10,8 @@ module HrTil
     config.autoload_paths << Rails.root.join('lib')
     config.time_zone = 'Eastern Time (US & Canada)'
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
 
-    config.action_controller.default_url_options = {
-      host: ENV.fetch('host'),
-      protocol: ENV.fetch('protocol')
-    }
-
-    config.middleware.insert_before 0, "Rack::Cors" do
+    config.middleware.insert_before 0, Rack::Cors do
       allow do
         origins '*'
         resource '*', :headers => :any, :methods => [:get, :options]

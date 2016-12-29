@@ -1,4 +1,4 @@
-class Channel < ActiveRecord::Base
+class Channel < ApplicationRecord
   validates_presence_of :name
   has_many :posts
 
