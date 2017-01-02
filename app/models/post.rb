@@ -1,4 +1,4 @@
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   validates :body, :channel_id, :developer, presence: true
   validates :title, presence: true, length: { maximum: 50 }
   validates :likes, numericality: { greater_than_or_equal_to: 0 }
@@ -109,7 +109,7 @@ class Post < ActiveRecord::Base
   end
 
   def notify_slack(event)
-    SlackNotifier.new.async.perform(self, event)
+    SlackNotifier.new.perform(self, event)
   end
 
   def self.search(query)

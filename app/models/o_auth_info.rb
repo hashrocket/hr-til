@@ -1,5 +1,6 @@
 class OAuthInfo
   attr_reader :info
+
   def initialize(response)
     @info = response['info']
   end

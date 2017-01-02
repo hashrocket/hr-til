@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
+
   get 'ui(/:action)', controller: 'ui' unless Rails.env.production?
 
   root to: 'posts#index'

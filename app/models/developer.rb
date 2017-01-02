@@ -1,4 +1,4 @@
-class Developer < ActiveRecord::Base
+class Developer < ApplicationRecord
   has_many :posts
   validates :email, presence: true, format: { with: Proc.new { /\A(.+@(#{ENV['permitted_domains']})|(#{ENV['permitted_emails']}))\z/ } }
   validates :username, presence: true, uniqueness: true, format: { with: /\A[A-Za-z0-9]+\Z/ }
@@ -7,7 +7,11 @@ class Developer < ActiveRecord::Base
   def self.editor_options
     ['Text Field', 'Ace (w/ Vim)', 'Ace'].freeze
   end
-  validates :editor, inclusion: { in: editor_options, message: "%{value} is not a valid editor" }
+
+  validates :editor, inclusion: {
+    in: editor_options,
+    message: "%{value} is not a valid editor"
+  }
 
   def to_param
     username
