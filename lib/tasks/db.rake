@@ -27,7 +27,7 @@ namespace :db do
       popular_post = Post.popular.sample
 
       puts "Tweeting post ##{popular_post.id}"
-      SocialMessaging::TwitterStatus.new(popular_post).post_to_twitter
+      SocialMessaging::TwitterStatus.new(popular_post).post_unlimited
       print " ...done"
     else
       puts 'No popular posts found'

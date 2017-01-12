@@ -51,7 +51,7 @@ class PostsController < ApplicationController
   def update
     if @post.update(post_params)
       @post.publish if params[:published] && !@post.published?
-      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
+      SocialMessaging::TwitterStatus.new(@post).post_once
       redirect_to @post, notice: display_name(@post) + 'updated'
     else
       render :edit
@@ -98,7 +98,7 @@ class PostsController < ApplicationController
   def process_post
     if params[:published]
       @post.publish
-      SocialMessaging::TwitterStatus.new(@post).post_to_twitter
+      SocialMessaging::TwitterStatus.new(@post).post_once
       root_path
     else
       drafts_path
