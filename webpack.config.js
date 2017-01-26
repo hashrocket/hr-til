@@ -12,11 +12,13 @@ const prod = process.argv.indexOf('-p') !== -1;
 const css_output_template = prod ? "stylesheets/[name]-[hash].css" : "stylesheets/[name].css";
 const js_output_template = prod ? "javascripts/[name]-[hash].js" : "javascripts/[name].js";
 
+const extractCss = new ExtractTextPlugin(css_output_template)
+
 module.exports = {
-  context: __dirname + "/app/assets/javascripts",
+  context: __dirname + "/app/assets",
 
   entry: {
-    application: "./application.js",
+    application: ["./javascripts/application.js", "./stylesheets/main.scss"],
   },
 
   output: {
@@ -34,15 +36,21 @@ module.exports = {
           presets: ['es2015']
         },
       },
+
+      {
+        test: /\.scss$/,
+        loader: extractCss.extract("style-loader", "css-loader", "sass-loader"),
+      },
+
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract("css!sass")
+        loader: ExtractTextPlugin.extract("css!sass"),
       },
     ]
   },
 
   plugins: [
-    new ExtractTextPlugin(css_output_template),
+    extractCss,
 
     function() {
       // output the fingerprint
