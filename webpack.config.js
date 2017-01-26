@@ -1,5 +1,6 @@
 'use strict';
 
+const fs = require('fs');
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
@@ -34,5 +35,13 @@ module.exports = {
 
   plugins: [
     new ExtractTextPlugin("stylesheets/[name]-[hash].css"),
+
+    function() {
+      // output the fingerprint
+      this.plugin("done", function(stats) {
+        let output = "ASSET_FINGERPRINT = \"" + stats.hash + "\""
+        fs.writeFileSync("config/initializers/fingerprint.rb", output, "utf8");
+      });
+    }
   ]
 };
