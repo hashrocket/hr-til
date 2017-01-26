@@ -4,6 +4,11 @@ const fs = require('fs');
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
+// Only fingerprint assets in production. Run `webpack -p` for production.
+const prod = process.argv.indexOf('-p') !== -1;
+const css_output_template = prod ? "stylesheets/[name]-[hash].css" : "stylesheets/[name].css";
+const js_output_template = prod ? "javascripts/[name]-[hash].js" : "javascripts/[name].js";
+
 module.exports = {
   context: __dirname + "/app/assets/javascripts",
 
@@ -13,7 +18,7 @@ module.exports = {
 
   output: {
     path: __dirname + "/public",
-    filename: "[name]-[hash].js",
+    filename: js_output_template,
   },
 
   module: {
@@ -34,7 +39,7 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("stylesheets/[name]-[hash].css"),
+    new ExtractTextPlugin(css_output_template),
 
     function() {
       // output the fingerprint
