@@ -8,6 +8,7 @@
 /config/application.yml
 /vendor/bundle
 /node_modules
+/public/javascripts
 
 coverage
 lastest.dump
