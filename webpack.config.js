@@ -12,7 +12,7 @@ module.exports = {
 
   output: {
     path: __dirname + "/public",
-    filename: "javascripts/[name].js",
+    filename: "[name]-[hash].js",
   },
 
   module: {
@@ -33,6 +33,6 @@ module.exports = {
   },
 
   plugins: [
-    new ExtractTextPlugin("stylesheets/[name].css"),
+    new ExtractTextPlugin("stylesheets/[name]-[hash].css"),
   ]
 };
