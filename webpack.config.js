@@ -1,5 +1,8 @@
 'use strict';
 
+// Big thanks to http://pixelatedworks.com/articles/replacing-the-rails-asset-pipeline-with-webpack-and-yarn/
+// for this webpack config
+
 const fs = require('fs');
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
