@@ -121,8 +121,18 @@ GEM
       multipart-post (>= 1.2, < 3)
     ffaker (2.3.0)
     ffi (1.9.14)
+    ffi-rzmq (2.0.4)
+      ffi-rzmq-core (>= 1.0.1)
+    ffi-rzmq-core (1.0.5)
+      ffi
     figaro (1.1.1)
       thor (~> 0.14)
+    flatware (0.4.0)
+      ffi-rzmq (~> 2.0)
+      thor (~> 0.13)
+    flatware-rspec (0.4.0)
+      flatware (= 0.4.0)
+      rspec (>= 3.4)
     gherkin (4.0.0)
     globalid (0.3.7)
       activesupport (>= 4.1.0)
@@ -262,6 +272,10 @@ GEM
     rake (12.0.0)
     redcarpet (3.4.0)
     rouge (2.0.7)
+    rspec (3.5.0)
+      rspec-core (~> 3.5.0)
+      rspec-expectations (~> 3.5.0)
+      rspec-mocks (~> 3.5.0)
     rspec-core (3.5.4)
       rspec-support (~> 3.5.0)
     rspec-expectations (3.5.0)
@@ -360,6 +374,7 @@ DEPENDENCIES
   dynamic_form
   factory_girl_rails
   figaro
+  flatware-rspec
   haml-rails
   httparty
   jbuilder (~> 2.0)

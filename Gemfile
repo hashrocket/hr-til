@@ -50,6 +50,7 @@ group :test do
   gem 'capybara-webmock'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'flatware-rspec'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'selenium-webdriver'

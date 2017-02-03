@@ -9,7 +9,7 @@ development:
 
 test: &test
   <<: *default
-  database: hr-til_test
+  database: hr-til_test<%=ENV['TEST_ENV_NUMBER']%>
 
 cucumber:
   <<: *test
