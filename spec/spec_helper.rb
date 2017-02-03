@@ -1,4 +1,3 @@
-require 'simplecov'
 require 'pathname'
 require 'webmock/rspec'
 
