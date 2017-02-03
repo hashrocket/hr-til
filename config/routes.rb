@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
   default_url_options host: ENV.fetch('host'), protocol: ENV.fetch('protocol')
 
-  get 'ui(/:action)', controller: 'ui' unless Rails.env.production?
+  unless Rails.env.production?
+    namespace 'ui' do
+      get '/', action: 'index'
+      %w(author_index drafts home post_edit post_show statistics tag_index).each do |action|
+        get action, action: action
+      end
+    end
+  end
 
   root to: 'posts#index'
 
