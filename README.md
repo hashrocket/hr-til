@@ -46,9 +46,26 @@ permitted_emails: 'friend@whitelist.com'
 
 Once set, visit '/admin' and log in with a permitted email address or domain.
 
+### Testing
+
+Run all tests with:
+
+```
+$ rake
+```
+
+Or, run all the test in parallel with [flatware](https://github.com/briandunn/flatware):
+
+```
+$ flatware fan rake db:test:prepare
+$ flatware rspec && flatware cucumber
+```
+
 ### Dependencies
 
-The gem `selenium-webdriver` depends on the Firefox browser.
+- The gem `selenium-webdriver` depends on the Firefox browser.
+- The gems `flatware-rspec` and `flatware-cucumber` require ZeroMQ. Learn more
+[here](https://github.com/briandunn/flatware).
 
 ### Hosting
 

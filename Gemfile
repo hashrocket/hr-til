@@ -50,9 +50,10 @@ group :test do
   gem 'capybara-webmock'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
+  gem 'flatware-cucumber', require: false
+  gem 'flatware-rspec', require: false
   gem 'launchy'
-  gem 'selenium-webdriver'
-  gem 'simplecov', require: false, git: 'https://github.com/colszowka/simplecov'
-  gem 'webmock'
   gem 'rails-controller-testing'
+  gem 'selenium-webdriver'
+  gem 'webmock'
 end
