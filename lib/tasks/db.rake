@@ -17,20 +17,4 @@ namespace :db do
     verify_exec "pg_restore --verbose --clean --no-acl --no-owner #{dump_file} | rails dbconsole"
     puts 'Completed successfully!'
   end
-
-  desc 'Automatically tweet well-liked posts'
-  task tweet_popular_posts: :environment do
-
-    puts 'Finding a post'
-    if (2..4).include?(Date.today.wday)
-
-      popular_post = Post.popular.sample
-
-      puts "Tweeting post ##{popular_post.id}"
-      SocialMessaging::TwitterStatus.new(popular_post).post_to_twitter
-      print " ...done"
-    else
-      puts 'No popular posts found'
-    end
-  end
 end
