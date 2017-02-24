@@ -1,3 +1,7 @@
+* Update SEO meta tag content.
+
+  *Jake Worth*
+
 * Add more prominent twitter links.
 
   *Rye Mason*
