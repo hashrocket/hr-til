@@ -2,6 +2,8 @@
   %title= [content_for(:page_title), SITE_NAME].compact.join(' - ').html_safe
   = csrf_meta_tags
 
+  %meta(name="format-detection" content="telephone=no")
+
   = stylesheet_link_tag 'application', media: 'all'
   = javascript_include_tag 'application'
 
