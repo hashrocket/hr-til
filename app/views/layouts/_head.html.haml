@@ -11,13 +11,7 @@
   %meta(itemprop="description" content="TIL is an open-source project by Hashrocket that exists to catalogue the sharing & accumulation of knowledge as it happens day-to-day.")
 
   %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
-
-  %link(href='//fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
-  %link(href='//fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
-
-  = favicon_link_tag 'favicon.png'
-
-  = yield :head
+  %link(rel="canonical" href="https://til.hashrocket.com#{request.path}")
 
   %meta(name="twitter:card" content="summary_large_image")
   %meta(name="twitter:site" content="@hashrockettil")
@@ -28,5 +22,12 @@
 
   /[if IE]
     = javascript_include_tag "html5"
+
+  %link(href='//fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
+  %link(href='//fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
+
   = stylesheet_link_tag 'application', media: 'all'
   = javascript_include_tag 'application'
+  = favicon_link_tag 'favicon.png'
+
+  = yield :head

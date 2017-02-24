@@ -1,8 +1,5 @@
 - content_for :page_title, @post.title
 
-- content_for :canonical do
-  %link{rel: 'canonical', href: post_url(@post)}
-
 - content_for :post_nav do
   - if @post.published? && multiple_posts?
     %nav.pagination
