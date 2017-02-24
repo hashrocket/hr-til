@@ -1,0 +1,24 @@
+%head
+  %title= [content_for(:page_title), SITE_NAME].compact.join(' - ').html_safe
+  = csrf_meta_tags
+
+  = stylesheet_link_tag 'application', media: 'all'
+  = javascript_include_tag 'application'
+
+  %meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1")
+
+  %link(href='//fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css')
+  %link(href='//fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css')
+
+  = favicon_link_tag 'favicon.png'
+
+  = yield :head
+
+  %meta(name="twitter:card" content="summary_large_image")
+  %meta(name="twitter:site" content="@hashrockettil")
+  %meta(name="twitter:creator" content="@hashrockettil")
+  %meta(name="twitter:title" content="Today I Learned: a Hashrocket Project")
+  %meta(name="twitter:description" content="TIL is an open-source project by Hashrocket that exists to catalogue the sharing & accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit, and posting is open to any Rocketeer as well as select friends of the team. We hope you enjoy learning along with us.")
+  %meta(name="twitter:image" content="https://til.hashrocket.com/assets/til_twittercard.png")
+
+  = yield :canonical
