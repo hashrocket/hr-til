@@ -26,17 +26,17 @@ class PostsController < ApplicationController
     @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
 
     respond_to do |format|
+      format.html
       format.json { render json: @posts }
       format.atom
-      format.html
     end
   end
 
   def show
     if valid_url?
       respond_to do |format|
-        format.md { response.headers["X-Robots-Tag"] = "noindex" }
         format.html
+        format.md { response.headers["X-Robots-Tag"] = "noindex" }
         format.json { render json: @post }
       end
     else
