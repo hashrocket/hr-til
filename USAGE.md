@@ -29,4 +29,12 @@ Here's an example of an easy way to link to us:
     code](https://github.com/hashrocket/hr-til) to make your own!
 ```
 
-Thank you!
+### Forks in Production
+
+- http://til.obiefernandez.com/
+- https://fortiscadere.com/
+- https://til-engineering.nulogy.com/
+
+Have you deployed TIL to production? Please open a pull request or contact
+dev@hashrocket.com to be added to this list.  Thank you to everybody who has
+contributed, forked, and deployed!
