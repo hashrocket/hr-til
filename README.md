@@ -105,6 +105,11 @@ https://github.com/hashrocket/hr-til. This project is intended to be a safe,
 welcoming space for collaboration, and contributors are expected to adhere to
 the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
 
+### Usage
+
+We love seeing forks of Today I Learned in production! Please consult our
+[usage guide](/USAGE.md) for guidelines on appropriate styling and attribution.
+
 ### License
 
 TIL is released under the [MIT License](http://www.opensource.org/licenses/MIT).
