@@ -7,7 +7,7 @@ describe PostHelper do
       specify 'with appropriate data' do
         post = FactoryGirl.create(:post, slug: '1234')
 
-        expected_result = "<a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Today I learned: Web Development\" data-via=\"hashrocket\" data-hashtags=\"phantomjs\" data-url=\"http://www.example.com/posts/1234-web-development\">Tweet</a>"
+        expected_result = "<a href=\"http://twitter.com/share\" class=\"twitter-share-button\" data-text=\"Today I learned: Web Development\" data-via=\"obie\" data-hashtags=\"phantomjs\" data-url=\"http://test.host/posts/1234-web-development\">Tweet</a>"
 
         expect(helper.tweet_link(post)).to eq expected_result
       end

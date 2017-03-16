@@ -1,7 +1,6 @@
 class PostSlack::CreateSerializer < ActiveModel::Serializer
   include Rails.application.routes.url_helpers
 
-  root false
   attributes :text
 
   def text
@@ -25,6 +24,6 @@ class PostSlack::CreateSerializer < ActiveModel::Serializer
   end
 
   def full_url
-    Rails.configuration.server_url + post_path(object)
+    post_url(object)
   end
 end

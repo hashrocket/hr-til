@@ -3,3 +3,5 @@ if seed_file.exist? && !ENV['NO_SEED_DATA']
   puts "*** Loading #{Rails.env} seed data"
   require seed_file
 end
+
+AdminUser.create!(email: 'obiefernandez@gmail.com', password: 'password')

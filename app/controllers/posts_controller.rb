@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  authem_for :developer
+
   before_action :set_post, only: [:show, :edit, :update]
   before_action :require_developer, except: [:index, :show, :like, :unlike]
   before_action :authorize_developer, only: [:edit, :update]

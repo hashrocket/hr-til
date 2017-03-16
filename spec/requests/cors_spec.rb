@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "CORS", type: :request do
   describe "GET /" do
     it "receive CORS headers on get requests" do
-      get root_path, nil, 'HTTP_ORIGIN' => '*'
+      get root_path, headers: { 'HTTP_ORIGIN' => '*' }
       expect(response).to have_http_status(200)
 
       expect(response.headers['Access-Control-Allow-Origin']).to eq('*')

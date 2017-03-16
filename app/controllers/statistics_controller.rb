@@ -1,4 +1,5 @@
 class StatisticsController < ApplicationController
+  authem_for :developer
   helper_method :authors,
     :channels,
     :highest_count_last_30_days,

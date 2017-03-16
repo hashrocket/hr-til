@@ -1,4 +1,6 @@
 class SessionsController < ApplicationController
+  authem_for :developer
+
   def create
     begin
       oauth_info = OAuthInfo.new(request.env['omniauth.auth'])

@@ -26,7 +26,7 @@ module PostHelper
     handle = post.twitter_handle
     channel = post.channel
 
-    url = Rails.configuration.server_url + post_path(post)
+    url = post_url(post)
 
     content_tag(:a,
       'Tweet',

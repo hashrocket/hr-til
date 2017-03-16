@@ -2,7 +2,7 @@
   %section
     .post__content.copy
       %h1= link_to post.title, post
-      = find_and_preserve markdown_render post.body
+      = find_and_preserve(markdown_render(post.body)).html_safe
       %footer
         - if content_for?(:social)
           %p.post__social= content_for :social
@@ -15,7 +15,7 @@
     %aside
       %ul
         %li
-          = link_to "##{post.channel_name}", post.channel, class: "post__tag-link"
+          = link_to "##{post.channel_name}", post.channel.name, class: "post__tag-link"
         %li
           = link_to [post, format: 'md'], class: "post__raw-link", target: "_blank" do
             view raw
@@ -30,5 +30,11 @@
             = link_to post_path(post), class: "js-like-action post__like-link", id: post.slug do
               %span.post__like-count= post.likes
               %span.post__like-label likes
+
+- if post.channel.ad
+  %article.post
+    %section
+      .post__content.copy
+        = render(inline: post.channel.ad, type: :haml).html_safe
 
 = content_for :post_nav

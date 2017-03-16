@@ -1,7 +1,0 @@
-%section#author
-  %header.page_head
-    %h1
-      #{Phil.pick 1..1000} posts by #{Phil.name.downcase.gsub(" ", "")}
-      = link_to "@twitteraccounthere", "#", class: "author_twitter", target: "_blank"
-  - 10.times do
-    = render "post"

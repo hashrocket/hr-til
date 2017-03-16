@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
-  get 'ui(/:action)', controller: 'ui' unless Rails.env.production?
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
 
   root to: 'posts#index'
 
@@ -27,4 +28,6 @@ Rails.application.routes.draw do
 
   post '/posts/:slug/like', to: 'posts#like'
   post '/posts/:slug/unlike', to: 'posts#unlike'
+
+
 end

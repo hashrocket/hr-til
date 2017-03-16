@@ -1,22 +1,21 @@
 source 'https://rubygems.org'
 
-ruby '2.2.1'
-
-gem 'rails', '4.2.6'
-
 gem 'active_model_serializers'
+gem 'activeadmin', '~> 1.0.0.pre5'
 gem 'authem'
 gem 'autoprefixer-rails'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'devise'
 gem 'dynamic_form'
-gem 'haml-rails'
+gem 'hamlit-rails'
 gem 'httparty'
+gem 'inherited_resources', github: 'activeadmin/inherited_resources'
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'omniauth-google-oauth2'
 gem 'pg'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'rails', '5.0.1'
 gem 'redcarpet'
 gem 'rouge'
 gem 'sass-rails', '~> 5.0'
@@ -48,6 +47,8 @@ group :test do
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'launchy'
-  gem 'webmock'
+  gem 'rails-controller-testing'
   gem 'selenium-webdriver'
+  gem 'simplecov'
+  gem 'webmock'
 end

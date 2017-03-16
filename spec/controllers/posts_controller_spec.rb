@@ -22,7 +22,7 @@ describe PostsController do
 
       post_attributes.merge!(bad_attrs)
 
-      post :create, post: post_attributes
+      post :create, params: { post: post_attributes }
 
       last_post = Post.last
       bad_attrs.each do |k, v|
@@ -43,7 +43,7 @@ describe PostsController do
 
       it 'only allows me to update my own posts' do
         expect do
-          patch :update, titled_slug: not_my_post.to_param, post: { title: 'HAXORD' }
+          patch :update, params: { titled_slug: not_my_post.to_param, post: { title: 'HAXORD' } }
         end.to_not change { not_my_post.reload.title }
       end
 
@@ -61,7 +61,7 @@ describe PostsController do
 
         post_attributes.merge!(bad_attrs)
 
-        put :update, titled_slug: existing_post.to_param, post: post_attributes
+        put :update, params: { titled_slug: existing_post.to_param, post: post_attributes }
 
         last_post = Post.last
         bad_attrs.each do |k, v|
@@ -88,7 +88,7 @@ describe PostsController do
 
       it 'allows me to update anyones post' do
         expect do
-          patch :update, titled_slug: not_my_post.to_param, post: { title: 'this is ok' }
+          patch :update, params: { titled_slug: not_my_post.to_param, post: { title: 'this is ok' } }
         end.to change { not_my_post.reload.title }
       end
     end
@@ -97,7 +97,7 @@ describe PostsController do
   describe '#show' do
     it 'is a 404 when the post is not there' do
       expect do
-        get :show, titled_slug: 'asdf'
+        get :show, params: { titled_slug: 'asdf' }
       end.to raise_error ActiveRecord::RecordNotFound
     end
   end
@@ -126,7 +126,7 @@ describe PostsController do
           title: 'Plaintext Title'
         )
 
-        get :show, titled_slug: raw_post.to_param, format: 'md'
+        get :show, params: { titled_slug: raw_post.to_param, format: 'md' }
 
         expected = <<-RAW
 Plaintext Title
@@ -138,7 +138,7 @@ January 1, 2016
 RAW
 
         expect(response.body).to eq expected
-        expect(response.headers).to include("X-Robots-Tag" => "noindex")
+        expect(response.headers.inspect).to include('X-Robots-Tag')
       end
 
       it 'returns sanitized characters' do
@@ -151,7 +151,7 @@ RAW
           title: '"Quotable" Title'
         )
 
-        get :show, titled_slug: raw_post.to_param, format: 'md'
+        get :show, params: { titled_slug: raw_post.to_param, format: 'md' }
 
         expected = <<-RAW
 "Quotable" Title

@@ -82,29 +82,29 @@ describe Post do
 
   describe '#body_size' do
     it 'should return true when the post is equal or below 200 words' do
-      post.body = 'word ' * 200
+      post.body = 'word ' * 1200
       expect(post).to be_valid
     end
 
     it 'should return false when the post is above 200 words' do
-      post.body = 'word ' * 201
+      post.body = 'word ' * 1201
       expect(post).to_not be_valid
       expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
     end
 
     it 'should behave like a validation and return an appropriate messsage' do
-      post.body = 'word ' * 200
+      post.body = 'word ' * 1200
       expect(post).to be_valid
 
-      post.body = 'word ' * 201
+      post.body = 'word ' * 1201
       expect(post).to_not be_valid
       expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 1 word over the limit of 200 words']
 
-      post.body = 'word ' * 300
+      post.body = 'word ' * 1300
       expect(post).to_not be_valid
       expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 100 words over the limit of 200 words']
 
-      post.body = 'word ' * 400
+      post.body = 'word ' * 1400
       expect(post).to_not be_valid
       expect(post.errors.messages[:body]).to eq ['of this post is too long. It is 200 words over the limit of 200 words']
     end
@@ -130,21 +130,21 @@ describe Post do
   context 'it should know how many words are available' do
     it 'with trailing spaces' do
       post = FactoryGirl.create(:post, body: 'word ' * 150)
-      expect(post.send(:words_remaining)).to eq 50
+      expect(post.send(:words_remaining)).to eq 1050
     end
 
     it 'with no trailing spaces' do
       post = FactoryGirl.create(:post, body: ('word ' * 150).strip)
-      expect(post.send(:words_remaining)).to eq 50
+      expect(post.send(:words_remaining)).to eq 1050
     end
 
     it 'with one word' do
       post = FactoryGirl.create(:post, body: 'word')
-      expect(post.send(:words_remaining)).to eq 199
+      expect(post.send(:words_remaining)).to eq 1199
     end
 
     it 'with too many words' do
-      post = FactoryGirl.build(:post, body: 'word ' * 300)
+      post = FactoryGirl.build(:post, body: 'word ' * 1300)
       expect(post.send(:words_remaining)).to eq -100
     end
   end

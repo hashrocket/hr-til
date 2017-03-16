@@ -1,4 +1,5 @@
 class ChannelsController < ApplicationController
+  authem_for :developer
   helper_method :channel, :posts
 
   private
