@@ -2,13 +2,15 @@
 # rake db:restore_production_dump
 
 channels = [
-  { name: 'clojure', twitter_hashtag: 'clojure' },
+  { name: 'business', twitter_hashtag: 'business' },
   { name: 'command-line', twitter_hashtag: 'commandline' },
   { name: 'computer-science', twitter_hashtag: 'computerscience' },
   { name: 'design', twitter_hashtag: 'design' },
   { name: 'devops', twitter_hashtag: 'devops' },
   { name: 'elixir', twitter_hashtag: 'elixir' },
-  { name: 'emberjs', twitter_hashtag: 'emberjs' },
+  { name: 'angular', twitter_hashtag: 'angular' },
+  { name: 'aws', twitter_hashtag: 'aws' },
+  { name: 'serverless', twitter_hashtag: 'serverless' },
   { name: 'git', twitter_hashtag: 'git' },
   { name: 'go', twitter_hashtag: 'go' },
   { name: 'html-css', twitter_hashtag: 'htmlcss' },
@@ -16,7 +18,6 @@ channels = [
   { name: 'mobile', twitter_hashtag: 'mobile' },
   { name: 'rails', twitter_hashtag: 'rails' },
   { name: 'react', twitter_hashtag: 'react' },
-  { name: 'ruby', twitter_hashtag: 'ruby' },
   { name: 'sql', twitter_hashtag: 'sql' },
   { name: 'testing', twitter_hashtag: 'testing' },
   { name: 'vim', twitter_hashtag: 'vim' },
