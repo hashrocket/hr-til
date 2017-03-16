@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/activeadmin/inherited_resources.git
+  remote: https://github.com/activeadmin/inherited_resources.git
   revision: eea3aa21f3867dc182e4db24d1c765bdbcb3df34
   specs:
     inherited_resources (1.7.0)
