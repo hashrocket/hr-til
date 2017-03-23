@@ -15,7 +15,7 @@
     %aside
       %ul
         %li
-          = link_to "##{post.channel_name}", post.channel.name, class: "post__tag-link"
+          = link_to "##{post.channel_name}", "/#{post.channel.name}", class: "post__tag-link"
         %li
           = link_to [post, format: 'md'], class: "post__raw-link", target: "_blank" do
             view raw
