@@ -6,6 +6,15 @@ When 'I visit the statistics page' do
   visit statistics_path
 end
 
+Given 'I visit the homepage (gold master)' do
+  ActiveRecord::Base.connection.execute <<-SQL
+    truncate schema_migrations;
+    #{Rails.root.join('spec/fixtures/gold_master.sql').read}
+  SQL
+
+  visit root_path
+end
+
 Given(/^a post exists for each of the last (\d+) days$/) do |count|
   Date.today.downto(Date.today - (count.to_i - 1)) do |date|
     FactoryGirl.create(:post, created_at: date.end_of_day)
@@ -168,4 +177,22 @@ end
 
 Given(/^I try to visit "([^"]*)"$/) do |url|
   visit url
+end
+
+Then 'it should look like it always looks' do
+
+  page_html = page.html
+  gold_master_file = Rails.root.join('spec/fixtures/gold_master.txt')
+
+  if !gold_master_file.exist?
+    gold_master_file.write(page_html)
+  else
+    gold_master = gold_master_file.read
+
+    if gold_master != page_html
+      gold_master_file.write(page_html)
+    end
+
+    expect(page_html).to eq(gold_master)
+  end
 end

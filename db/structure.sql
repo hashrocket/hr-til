@@ -2,12 +2,11 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.5
--- Dumped by pg_dump version 9.6.1
+-- Dumped from database version 9.5.0
+-- Dumped by pg_dump version 9.5.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
@@ -53,8 +52,8 @@ CREATE TABLE ar_internal_metadata (
 CREATE TABLE authem_sessions (
     id integer NOT NULL,
     role character varying NOT NULL,
-    subject_id integer NOT NULL,
     subject_type character varying NOT NULL,
+    subject_id integer NOT NULL,
     token character varying(60) NOT NULL,
     expires_at timestamp without time zone NOT NULL,
     ttl integer NOT NULL,
@@ -262,35 +261,35 @@ CREATE TABLE schema_migrations (
 
 
 --
--- Name: authem_sessions id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authem_sessions ALTER COLUMN id SET DEFAULT nextval('authem_sessions_id_seq'::regclass);
 
 
 --
--- Name: channels id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY channels ALTER COLUMN id SET DEFAULT nextval('channels_id_seq'::regclass);
 
 
 --
--- Name: developers id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY developers ALTER COLUMN id SET DEFAULT nextval('developers_id_seq'::regclass);
 
 
 --
--- Name: posts id; Type: DEFAULT; Schema: public; Owner: -
+-- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts ALTER COLUMN id SET DEFAULT nextval('posts_id_seq'::regclass);
 
 
 --
--- Name: ar_internal_metadata ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: ar_internal_metadata_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY ar_internal_metadata
@@ -298,7 +297,7 @@ ALTER TABLE ONLY ar_internal_metadata
 
 
 --
--- Name: authem_sessions authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: authem_sessions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY authem_sessions
@@ -306,7 +305,7 @@ ALTER TABLE ONLY authem_sessions
 
 
 --
--- Name: channels channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: channels_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY channels
@@ -314,7 +313,7 @@ ALTER TABLE ONLY channels
 
 
 --
--- Name: developers developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: developers_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY developers
@@ -322,7 +321,7 @@ ALTER TABLE ONLY developers
 
 
 --
--- Name: posts posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: posts_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -330,7 +329,15 @@ ALTER TABLE ONLY posts
 
 
 --
--- Name: posts unique_slug; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: unique_slug; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
@@ -366,26 +373,19 @@ CREATE INDEX index_posts_on_developer_id ON posts USING btree (developer_id);
 
 
 --
--- Name: unique_schema_migrations; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE UNIQUE INDEX unique_schema_migrations ON schema_migrations USING btree (version);
-
-
---
--- Name: posts fk_rails_447dc2e0a3; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_06b7a0db99; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_447dc2e0a3 FOREIGN KEY (channel_id) REFERENCES channels(id);
+    ADD CONSTRAINT fk_rails_06b7a0db99 FOREIGN KEY (channel_id) REFERENCES channels(id);
 
 
 --
--- Name: posts fk_rails_b3ec63b3ac; Type: FK CONSTRAINT; Schema: public; Owner: -
+-- Name: fk_rails_2c578d8f8f; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY posts
-    ADD CONSTRAINT fk_rails_b3ec63b3ac FOREIGN KEY (developer_id) REFERENCES developers(id);
+    ADD CONSTRAINT fk_rails_2c578d8f8f FOREIGN KEY (developer_id) REFERENCES developers(id);
 
 
 --
