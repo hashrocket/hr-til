@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang='en-US'>
+<head>
+<title>Today I Learned</title>
+
+<meta content='telephone=no' name='format-detection'>
+<meta content='TIL is an open-source project by Hashrocket that exists to catalogue the sharing &amp; accumulation of knowledge as it happens day-to-day.' name='description'>
+<meta content='Today I Learned' itemprop='name'>
+<meta content='Today I Learned' itemprop='brand'>
+<meta content='TIL is an open-source project by Hashrocket that exists to catalogue the sharing &amp; accumulation of knowledge as it happens day-to-day.' itemprop='description'>
+<meta content='width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1' name='viewport'>
+<meta content='summary_large_image' name='twitter:card'>
+<meta content='@hashrockettil' name='twitter:site'>
+<meta content='@hashrockettil' name='twitter:creator'>
+<meta content='Today I Learned: a Hashrocket Project' name='twitter:title'>
+<meta content='TIL is an open-source project by Hashrocket that exists to catalogue the sharing &amp; accumulation of knowledge as it happens day-to-day. Posts have a 200-word limit, and posting is open to any Rocketeer as well as select friends of the team. We hope you enjoy learning along with us.' name='twitter:description'>
+<meta content='https://til.hashrocket.com/assets/til_twittercard.png' name='twitter:image'>
+<link href='//fonts.googleapis.com/css?family=Raleway:700,900' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lora:400,700italic,700,400italic' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" media="all" href="/assets/application-c3e051849b20a2e4c5a34714d4e81b9ee47dc50fcf138eca8b42d20e2113f077.css" />
+<script src="/assets/application-4047120873067554c74b09dea5beee493a243ecf6bea41b951e0838e9b872a0a.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-b997e749ffb07c3bf50ca9a354d2367fa73747002282240be8076516515da6e1.png" />
+
+<link rel="alternate" type="application/atom+xml" title="ATOM" href="/?format=atom" />
+</head>
+
+<body>
+<header class='site_head'>
+<div>
+<h1><a href="/">Today I Learned</a></h1>
+<h2>
+<a class="hr" href="https://hashrocket.com">A Hashrocket project</a>
+<span>
+<a class="twitter" href="https://twitter.com/hashrockettil">Follow on Twitter</a>
+</span>
+</h2>
+</div>
+</header>
+<div id='flash'>
+</div>
+
+<main>
+<section id='home'>
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/65e013b87e-reset-postgres-user-password">Reset Postgres User Password</a></h1>
+<p>Resetting a Postgres user's password with <code>alter role</code> is fine, but there is a better way! Try:</p>
+<pre class="highlight plaintext"><code>\password [ username ]&#x000A;</code></pre>
+<p>This changes the password of the specified user, defaulting to the current user. I like this because it prompts you for a password, encrypts it (security!), and sends it to the server as <code>alter role</code>. Your password will not appear as cleartext in the command history, server log, or anywhere else.</p>
+
+<p><a href="http://www.postgresql.org/docs/current/static/app-psql.html">Source</a></p>
+
+<p>h/t Jack Christensen</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/65e013b87e-reset-postgres-user-password">July 20, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/65e013b87e-reset-postgres-user-password.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/65e013b87e-reset-postgres-user-password">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="65e013b87e" href="/posts/65e013b87e-reset-postgres-user-password"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/ef629b4101-return-an-empty-active-record-collection">Return an Empty Active Record Collection</a></h1>
+<p>You can use <code>.none</code>  in a scope to short circuit the query in the event you don't have all the data.</p>
+
+<p>Imagine this query but the <code>project_type</code> on a <code>Project</code> is <code>nil</code></p>
+<pre class="highlight ruby"><code>&#x000A;<span class="k">class</span> <span class="nc">User</span>&#x000A;&#x000A;  <span class="n">scope</span> <span class="ss">:active</span> <span class="o">-&gt;</span> <span class="p">{</span> <span class="n">where</span><span class="p">(</span><span class="ss">archived: </span><span class="kp">nil</span> <span class="p">}</span>&#x000A;&#x000A;  <span class="n">scope</span> <span class="ss">:by_project</span><span class="p">,</span> <span class="o">-&gt;</span> <span class="p">(</span><span class="n">project</span><span class="p">)</span> <span class="k">do</span>&#x000A;    <span class="k">return</span> <span class="n">none</span> <span class="k">unless</span> <span class="n">project</span><span class="p">.</span><span class="nf">type</span><span class="p">.</span><span class="nf">present?</span>&#x000A;    <span class="n">where</span><span class="p">(</span><span class="ss">project_guid: </span><span class="n">project</span><span class="p">.</span><span class="nf">guid</span><span class="p">,</span> <span class="ss">role: </span><span class="n">project</span><span class="p">.</span><span class="nf">type</span><span class="p">)</span>&#x000A;  <span class="k">end</span>&#x000A;&#x000A;<span class="k">end</span>&#x000A;&#x000A;</code></pre>
+<p>Just return <code>none</code>.</p>
+
+<p>The cool thing about this is it's chainable. So you can still do something like:</p>
+<pre class="highlight ruby"><code>&#x000A;<span class="n">project</span> <span class="o">=</span> <span class="no">Project</span><span class="p">.</span><span class="nf">new</span><span class="p">(</span><span class="ss">project_type: </span><span class="kp">nil</span><span class="p">)</span>&#x000A;&#x000A;<span class="no">User</span><span class="p">.</span><span class="nf">by_project</span><span class="p">(</span><span class="n">project</span><span class="p">).</span><span class="nf">active</span>&#x000A;&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer11">rocketeer11</a>
+<br>
+<a class="post__permalink" href="/posts/ef629b4101-return-an-empty-active-record-collection">July 20, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/ef629b4101-return-an-empty-active-record-collection.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/ef629b4101-return-an-empty-active-record-collection">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="ef629b4101" href="/posts/ef629b4101-return-an-empty-active-record-collection"><span class='post__like-count'>11</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/a1a73bd5fc-list-all-the-say-voices">List All The Say Voices</a></h1>
+<p>The <code>say</code> command can be a fun party trick.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>say Get ready <span class="k">for </span>the bass to drop&#x000A;</code></pre>
+<p>Your friends will be even more impressed when you use some of the alternate
+voices.</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>say -v Daniel Would you like a cup of tea?&#x000A;</code></pre>
+<p>To see all the alternate voices available, type the following</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>say -v <span class="s1">'?'</span>&#x000A;</code></pre>
+<p><a href="http://stackoverflow.com/questions/1489800/getting-list-of-mac-text-to-speech-voices-programmatically">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/a1a73bd5fc-list-all-the-say-voices">July 16, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/command-line">#command-line</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/a1a73bd5fc-list-all-the-say-voices.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/a1a73bd5fc-list-all-the-say-voices">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="a1a73bd5fc" href="/posts/a1a73bd5fc-list-all-the-say-voices"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/bac161425e-ruby-partition-methods">Ruby Partition Methods</a></h1>
+<p>One cool way to chop through a Ruby string is the <code>partition</code> String method. This uses regex to search for a match in a string. If it finds one, it returns what came before the match, the match, and what came after as elements in an array.</p>
+<pre class="highlight ruby"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="s1">'foo bar baz bat'</span><span class="p">.</span><span class="nf">partition</span> <span class="s1">'bar'</span>&#x000A; <span class="o">=&gt;</span> <span class="p">[</span><span class="s2">"foo "</span><span class="p">,</span> <span class="s2">"bar"</span><span class="p">,</span> <span class="s2">" baz bat"</span><span class="p">]</span>&#x000A;</code></pre>
+<p>This is not to be confused with the <code>partition</code> Array method, which takes a block. Any elements that evaluate true are returned first, followed by the elements that evaluate false.</p>
+<pre class="highlight ruby"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">].</span><span class="nf">partition</span><span class="p">(</span><span class="o">&amp;</span><span class="ss">:even?</span><span class="p">)</span>&#x000A; <span class="o">=&gt;</span> <span class="p">[[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">]]</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/bac161425e-ruby-partition-methods">July 16, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/bac161425e-ruby-partition-methods.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/bac161425e-ruby-partition-methods">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="bac161425e" href="/posts/bac161425e-ruby-partition-methods"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/4b3ee8cb18-be-careful-when-editing-the-sudoers-file">Be careful when editing the sudoers file</a></h1>
+<p>This <a href="https://www.digitalocean.com/community/tutorials/how-to-edit-the-sudoers-file-on-ubuntu-and-centos">website</a> says: Because improper syntax in the sudoers file can leave you with a system where it is impossible to obtain elevated privileges, it is important to use the <code>visudo</code> command to edit the file.</p>
+
+<p>RIGHT.  If you screw up the syntax you may remove access to the system.  <code>visudo</code> checks the syntax for you and won't let you save a file with incorrect syntax.  It responds to the EDITOR env variable so you can edit it in an editor of your choice. </p>
+
+<p>Another command that helps you edit a resource with safety restrictions is <code>vipw</code>.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/4b3ee8cb18-be-careful-when-editing-the-sudoers-file">July 16, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/devops">#devops</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/4b3ee8cb18-be-careful-when-editing-the-sudoers-file.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/4b3ee8cb18-be-careful-when-editing-the-sudoers-file">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="4b3ee8cb18" href="/posts/4b3ee8cb18-be-careful-when-editing-the-sudoers-file"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/e04ffe1d76-because-javascript">Because JavaScript</a></h1>
+<p><code>1 &lt; 1.000000000000001   =&gt; true</code></p>
+
+<p><code>1 &lt; 1.0000000000000001 =&gt; false</code></p>
+
+<p>Because REASONS! #javascript</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer16">rocketeer16</a>
+<br>
+<a class="post__permalink" href="/posts/e04ffe1d76-because-javascript">July 15, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/e04ffe1d76-because-javascript.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/e04ffe1d76-because-javascript">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="e04ffe1d76" href="/posts/e04ffe1d76-because-javascript"><span class='post__like-count'>50</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/2ec6211f93-ignore-poltergeist-javascript-errors">Ignore Poltergeist JavaScript Errors</a></h1>
+<p>Poltergeist with PhantomJS (&lt;2.0) does not support JavaScript's <code>bind()</code>
+method. This means that when executing an integration test that exercises
+JavaScript with the <code>bind()</code> method, an error will occur. If you cannot
+simply upgrade to a version of PhantomJS that supports <code>bind()</code>, then what
+can you do?</p>
+
+<p>Ignore the error!</p>
+
+<p>This can be achieved by placing the following rescue block in the
+appropriate place.</p>
+<pre class="highlight ruby"><code><span class="k">rescue</span> <span class="no">Capybara</span><span class="o">::</span><span class="no">Poltergeist</span><span class="o">::</span><span class="no">JavascriptError</span>&#x000A;</code></pre>
+<p>Use this in moderation. You want to make sure you don't ignore actual
+JavaScript errors.</p>
+
+<p><a href="http://stackoverflow.com/questions/22020680/temporarily-set-js-errors-to-false-in-poltergeist">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/2ec6211f93-ignore-poltergeist-javascript-errors">July 14, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/2ec6211f93-ignore-poltergeist-javascript-errors.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/2ec6211f93-ignore-poltergeist-javascript-errors">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="2ec6211f93" href="/posts/2ec6211f93-ignore-poltergeist-javascript-errors"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/4f6a382260-postgres-containscontained-by-array-operators">Postgres Contains/Contained By Array Operators</a></h1>
+<p>Today I learned about the Postgres 'contains' array operator (<code>@&gt;</code>). This compares two arrays, returning true if the first array contains all of the elements of the second array.</p>
+<pre class="highlight plaintext"><code>myapp_development=# select array[1,2,3] @&gt; array[1,3];&#x000A; ?column?&#x000A;----------&#x000A; t&#x000A;(1 row)&#x000A;&#x000A;myapp_development=# select array[1,2,3] @&gt; array[5,9];&#x000A; ?column?&#x000A;----------&#x000A; f&#x000A;(1 row)&#x000A;</code></pre>
+<p>It works in reverse via the 'is contained by' array operator (<code>&lt;@</code>).</p>
+<pre class="highlight plaintext"><code>myapp_development=# select array[1,3] &lt;@ array[1,2,3,4];&#x000A; ?column?&#x000A;----------&#x000A; t&#x000A;(1 row)&#x000A;</code></pre>
+<p>A practical example might be comparing two arrays, one of names and one of common nicknames associated with that name.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/4f6a382260-postgres-containscontained-by-array-operators">July 14, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/4f6a382260-postgres-containscontained-by-array-operators.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/4f6a382260-postgres-containscontained-by-array-operators">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="4f6a382260" href="/posts/4f6a382260-postgres-containscontained-by-array-operators"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/d6727640d8-select-value-for-sql-counts">Select Value For SQL Counts</a></h1>
+<p>If you are like me and prefer writing raw SQL over the Arel DSL for counting
+stuff in your database, then the <code>select_value</code> method will come in handy.
+Write a command similar to the following with a type cast to get the count
+of whatever.</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="n">sql</span> <span class="o">=</span> <span class="s1">'select count(*) from posts where published_at is not null'</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"select count(*) from posts where published_at is not null"</span>&#x000A;<span class="o">&gt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span><span class="p">.</span><span class="nf">connection</span><span class="p">.</span><span class="nf">select_value</span><span class="p">(</span><span class="n">sql</span><span class="p">).</span><span class="nf">to_i</span>&#x000A;   <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">6</span><span class="n">ms</span><span class="p">)</span>  <span class="nb">select</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span> <span class="n">posts</span> <span class="n">where</span> <span class="n">published_at</span> <span class="n">is</span> <span class="n">not</span> <span class="n">null</span>&#x000A;<span class="o">=&gt;</span> <span class="mi">42</span>&#x000A;</code></pre>
+<p>Writing raw SQL for a simple query like this hardly seems like a win.
+However when a count query starts to involve joins or other fanciness, I
+find it much clearer to reason about the raw SQL.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/d6727640d8-select-value-for-sql-counts">July 13, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/d6727640d8-select-value-for-sql-counts.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/d6727640d8-select-value-for-sql-counts">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="d6727640d8" href="/posts/d6727640d8-select-value-for-sql-counts"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/c8e6611985-get-first-value-from-javascript-map">Get first value from javascript Map</a></h1>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">Map</a> is a new key/value data structure in es6 (and its available in your chrome browser RIGHT NOW).  But getting values out of a Map without using a key is complicated a little by having to go through a javascript iterator.</p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="s2">"a"</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="s2">"b"</span><span class="p">]])</span>&#x000A;<span class="nx">Map</span> <span class="p">{</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">"a"</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s2">"b"</span><span class="p">}</span>&#x000A;<span class="o">&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>&#x000A;<span class="kc">undefined</span>&#x000A;<span class="o">&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">values</span><span class="p">()</span>&#x000A;<span class="nx">MapIterator</span> <span class="p">{</span><span class="s2">"a"</span><span class="p">,</span> <span class="s2">"b"</span><span class="p">}</span>&#x000A;</code></pre>
+<p>Its all good though, the <code>next()</code> function of a fresh iterator will always return the first value.  Well, not really the first value but a value wrapped in an object with two values, the value you are looking for represented by value and done which tells you whether the iterator has run out of elements or not.</p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">m</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Map</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="s2">"a"</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="s2">"b"</span><span class="p">]])</span>&#x000A;<span class="nx">Map</span> <span class="p">{</span><span class="mi">1</span> <span class="o">=&gt;</span> <span class="s2">"a"</span><span class="p">,</span> <span class="mi">2</span> <span class="o">=&gt;</span> <span class="s2">"b"</span><span class="p">}</span>&#x000A;<span class="o">&gt;</span> <span class="nx">m</span><span class="p">.</span><span class="nx">values</span><span class="p">().</span><span class="nx">next</span><span class="p">().</span><span class="nx">value</span>&#x000A;<span class="s2">"a"</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/c8e6611985-get-first-value-from-javascript-map">July 13, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/c8e6611985-get-first-value-from-javascript-map.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/c8e6611985-get-first-value-from-javascript-map">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="c8e6611985" href="/posts/c8e6611985-get-first-value-from-javascript-map"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/05ba251569-special-math-operators">Special Math Operators</a></h1>
+<p>Postgres has all the mathematical operators you might expect in any
+programming language (e.g. <code>+</code>,<code>-</code>,<code>*</code>,<code>/</code>,<code>%</code>). It also has a few extras
+that you might not be expecting.</p>
+
+<p>Factorial Operator:</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="mi">5</span><span class="o">!</span><span class="p">;</span>&#x000A; <span class="o">?</span><span class="k">column</span><span class="o">?</span>&#x000A;<span class="c1">----------</span>&#x000A;      <span class="mi">120</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p>Square Root Operator:</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="o">|/</span><span class="mi">81</span><span class="p">;</span>&#x000A; <span class="o">?</span><span class="k">column</span><span class="o">?</span>&#x000A;<span class="c1">----------</span>&#x000A;        <span class="mi">9</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p>Absolute Value Operator:</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="o">@</span> <span class="o">-</span><span class="mi">23</span><span class="p">.</span><span class="mi">4</span><span class="p">;</span>&#x000A; <span class="o">?</span><span class="k">column</span><span class="o">?</span>&#x000A;<span class="c1">----------</span>&#x000A;     <span class="mi">23</span><span class="p">.</span><span class="mi">4</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/05ba251569-special-math-operators">July 12, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/05ba251569-special-math-operators.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/05ba251569-special-math-operators">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="05ba251569" href="/posts/05ba251569-special-math-operators"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/f03b648ded-cycle-through-tmux-layouts">Cycle Through tmux Layouts</a></h1>
+<p>Arranging a series of split windows in tmux can take some time. Once those
+splits windows are arranged, it is difficult to set them up in a new way.
+There is a way of cycling through layouts that might be able to help though.
+Hit <code>&lt;prefix&gt;&lt;space&gt;</code> over and over to cycle through the layouts until you
+find the arrangement that you want.</p>
+
+<p><a href="http://superuser.com/questions/493048/how-to-convert-2-horizontal-panes-to-vertical-panes-in-tmux">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/f03b648ded-cycle-through-tmux-layouts">July 10, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/command-line">#command-line</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/f03b648ded-cycle-through-tmux-layouts.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/f03b648ded-cycle-through-tmux-layouts">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="f03b648ded" href="/posts/f03b648ded-cycle-through-tmux-layouts"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/61ccc16fa3-edges-of-the-selection">Edges Of The Selection</a></h1>
+<p>When you make a visual selection, Vim stores the position of the first
+character of the selection in the <code>&lt;</code> mark and the position of the last
+character of the selection in the <code>&gt;</code> mark.</p>
+
+<p>Thus moving to the edges of your previous selection is easy. To move to the
+beginning of the selection, press</p>
+<pre class="highlight plaintext"><code>`&lt;&#x000A;</code></pre>
+<p>To move to the end, press</p>
+<pre class="highlight plaintext"><code>`&gt;&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/61ccc16fa3-edges-of-the-selection">July 9, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/61ccc16fa3-edges-of-the-selection.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/61ccc16fa3-edges-of-the-selection">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="61ccc16fa3" href="/posts/61ccc16fa3-edges-of-the-selection"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/0dfebe01c2-vim-range-copy-and-move">Vim Range Copy And Move</a></h1>
+<p>Today I used the Vim command <code>:88t143</code> to copy a <code>let</code> block from one unit test to another. Vim has a few terse commands that work on whole lines like this. Here are two:</p>
+<pre class="highlight plaintext"><code>:[range]co[py] {address}        :co :copy&#x000A;:[range]m[ove] {address}        :m :mo :move&#x000A;</code></pre>
+<p><code>:t</code> is an alias for <code>:copy</code>, so the command I used copied line 88 and pasted it below line 143. It's all about saving those keystrokes!</p>
+
+<p>h/t Josh Davey &amp; Josh Branchaud</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/0dfebe01c2-vim-range-copy-and-move">July 9, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/0dfebe01c2-vim-range-copy-and-move.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/0dfebe01c2-vim-range-copy-and-move">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="0dfebe01c2" href="/posts/0dfebe01c2-vim-range-copy-and-move"><span class='post__like-count'>6</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/4c4bc8873f-javascript-closures-bind-to-the-variable">Javascript closures bind to the variable</a></h1>
+<p>If you're a clever kind of javascript dev you create functions with variables from outside the function definition.</p>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>&#x000A;<span class="kd">function</span> <span class="nx">printSomething</span><span class="p">()</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);}</span>&#x000A;<span class="nx">printSomething</span><span class="p">();</span>&#x000A;<span class="o">&gt;</span> <span class="mi">5</span>&#x000A;</code></pre>
+<p>But you should watch yourself when using a closure within a loop.</p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">fns</span> <span class="o">=</span> <span class="p">[]</span>&#x000A;<span class="o">&gt;</span> <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="nx">fns</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="p">})};</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">0</span><span class="p">]();</span>&#x000A;<span class="mi">3</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">1</span><span class="p">]();</span>&#x000A;<span class="mi">3</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">2</span><span class="p">]();</span>&#x000A;<span class="mi">3</span>&#x000A;</code></pre>
+<p>Yikes!  The closure references the variable as it is now, not the variable as it was.  You should only reference the variable if you don't expect it to change (or if you want it to change).</p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">fns</span> <span class="o">=</span> <span class="p">[]</span>&#x000A;<span class="o">&gt;</span> <span class="kd">function</span> <span class="nx">createFn</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span> <span class="p">};}</span>&#x000A;<span class="o">&gt;</span> <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span><span class="nx">fns</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="nx">createFn</span><span class="p">(</span><span class="nx">i</span><span class="p">))};</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">0</span><span class="p">]();</span>&#x000A;<span class="mi">0</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">1</span><span class="p">]();</span>&#x000A;<span class="mi">1</span>&#x000A;<span class="o">&gt;</span> <span class="nx">fns</span><span class="p">[</span><span class="mi">2</span><span class="p">]();</span>&#x000A;<span class="mi">2</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/4c4bc8873f-javascript-closures-bind-to-the-variable">July 9, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/4c4bc8873f-javascript-closures-bind-to-the-variable.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/4c4bc8873f-javascript-closures-bind-to-the-variable">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="4c4bc8873f" href="/posts/4c4bc8873f-javascript-closures-bind-to-the-variable"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/727117d102-pause-ember-acceptance-tests">Pause Ember acceptance tests</a></h1>
+<p>While your acceptance tests are running you can use <code>pauseTest()</code> to pause the test suite and interact with your app. NOTE: this does not halt execution like <code>debugger</code>, it only pauses the test suite.</p>
+<pre class="highlight javascript"><code><span class="nx">test</span><span class="p">(</span><span class="s2">"my acceptance test"</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">assert</span><span class="p">)</span> <span class="p">{</span>&#x000A;  <span class="nx">visit</span><span class="p">(</span><span class="s1">'/'</span><span class="p">);</span>&#x000A;  <span class="nx">pauseTest</span><span class="p">();</span>  <span class="c1">// returns a promise that will never resolve</span>&#x000A;  <span class="nx">andThen</span><span class="p">(</span><span class="kd">function</span><span class="p">(){</span>&#x000A;    <span class="c1">// make assertions</span>&#x000A;  <span class="p">});</span>&#x000A;<span class="p">});</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer14">rocketeer14</a>
+<br>
+<a class="post__permalink" href="/posts/727117d102-pause-ember-acceptance-tests">July 8, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/727117d102-pause-ember-acceptance-tests.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/727117d102-pause-ember-acceptance-tests">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="727117d102" href="/posts/727117d102-pause-ember-acceptance-tests"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/48444e2f94-comment-with-commentary">Comment with Commentary</a></h1>
+<p>Commenting out a range of code is easy with the plugin <a href="https://github.com/tpope/vim-commentary">commentary.vim</a>.</p>
+
+<p>Simply highlight the range of code in visual mode and type <code>gc</code>.</p>
+
+<p>Undo the action with <code>u</code>, or by repeating the same <code>gc</code> command on your range.</p>
+
+<p>h/t Josh Branchaud</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/48444e2f94-comment-with-commentary">July 7, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/48444e2f94-comment-with-commentary.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/48444e2f94-comment-with-commentary">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="48444e2f94" href="/posts/48444e2f94-comment-with-commentary"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/9fe260961a-send-a-command-to-psql">Send A Command To psql</a></h1>
+<p>You can send a command to <code>psql</code> to be executed by using the <code>-c</code> flag</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>psql -c <span class="s2">"select 'Hello, World!';"</span>&#x000A;   ?column?&#x000A;---------------&#x000A; Hello, World!&#x000A;<span class="o">(</span>1 row<span class="o">)</span>&#x000A;</code></pre>
+<p>Specify a particular database as needed</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>psql blog_prod -c <span class="s1">'select count(*) from posts;'</span>&#x000A; count &#x000A;-------&#x000A;     8 &#x000A;<span class="o">(</span>1 row<span class="o">)</span>&#x000A;</code></pre>
+<p>h/t Jack Christensen</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/9fe260961a-send-a-command-to-psql">July 7, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/9fe260961a-send-a-command-to-psql.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/9fe260961a-send-a-command-to-psql">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="9fe260961a" href="/posts/9fe260961a-send-a-command-to-psql"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/0ea16d4de4-javascript-keys-are-only-strings">Javascript keys are only strings!</a></h1>
+<p>You can use squares to access or set a value in an object, but that key is just getting converted to a string.  And you can't loop through the keys and expect the keys to be objects... they're strings!</p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="s2">"x"</span><span class="p">}</span>&#x000A;<span class="p">{</span> <span class="s1">'1'</span><span class="p">:</span> <span class="s1">'x'</span> <span class="p">}</span>&#x000A;<span class="o">&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="sr">/x/</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"y"</span>&#x000A;<span class="s1">'y'</span>&#x000A;<span class="o">&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>&#x000A;<span class="s1">'x'</span>&#x000A;<span class="o">&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="sr">/x/</span><span class="p">]</span>&#x000A;<span class="s1">'y'</span>&#x000A;<span class="o">&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="s1">'1'</span><span class="p">]</span>&#x000A;<span class="s1">'x'</span>&#x000A;<span class="o">&gt;</span> <span class="nx">a</span><span class="p">[</span><span class="s1">'/x/'</span><span class="p">]</span>&#x000A;<span class="s1">'y'</span>&#x000A;<span class="o">&gt;</span> <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="k">in</span> <span class="nx">a</span><span class="p">)</span> <span class="p">{</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="mi">1</span><span class="p">);</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span> <span class="o">===</span> <span class="sr">/x/</span><span class="p">)</span> <span class="p">}</span>&#x000A;<span class="kc">false</span>&#x000A;<span class="kc">false</span>&#x000A;<span class="kc">false</span>&#x000A;<span class="kc">false</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/0ea16d4de4-javascript-keys-are-only-strings">July 6, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/0ea16d4de4-javascript-keys-are-only-strings.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/0ea16d4de4-javascript-keys-are-only-strings">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="0ea16d4de4" href="/posts/0ea16d4de4-javascript-keys-are-only-strings"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/fcabfefe57-list-of-plugins">List Of Plugins</a></h1>
+<p>Get a list of all your plugins (and other sourced scripts) with</p>
+<pre class="highlight plaintext"><code>:scriptnames&#x000A;</code></pre>
+<p>See <code>:h scriptnames</code> for more details.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/fcabfefe57-list-of-plugins">July 6, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/fcabfefe57-list-of-plugins.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/fcabfefe57-list-of-plugins">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="fcabfefe57" href="/posts/fcabfefe57-list-of-plugins"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/4159783cdf-checking-the-type-of-a-value">Checking The Type Of A Value</a></h1>
+<p>The <code>pg_typeof()</code> function allows you to determine the data type of anything
+in Postgres.</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="n">pg_typeof</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>&#x000A; <span class="n">pg_typeof</span>&#x000A;<span class="c1">-----------</span>&#x000A; <span class="n">integer</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;&#x000A;<span class="o">&gt;</span> <span class="k">select</span> <span class="n">pg_typeof</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>&#x000A; <span class="n">pg_typeof</span>&#x000A;<span class="c1">-----------</span>&#x000A; <span class="n">boolean</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p>If you try it on an arbitrary string, it is unable to disambiguate which
+string type (e.g. <code>text</code> vs <code>varchar</code>).</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="n">pg_typeof</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>&#x000A; <span class="n">pg_typeof</span>&#x000A;<span class="c1">-----------</span>&#x000A; <span class="k">unknown</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p>You just have to be a bit more specific.</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="n">pg_typeof</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">::</span><span class="n">varchar</span><span class="p">);</span>&#x000A;     <span class="n">pg_typeof</span>&#x000A;<span class="c1">-------------------</span>&#x000A; <span class="n">character</span> <span class="n">varying</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p><a href="http://www.postgresql.org/docs/9.3/static/functions-info.html#FUNCTIONS-INFO-CATALOG-TABLE">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/4159783cdf-checking-the-type-of-a-value">July 5, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/4159783cdf-checking-the-type-of-a-value.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/4159783cdf-checking-the-type-of-a-value">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="4159783cdf" href="/posts/4159783cdf-checking-the-type-of-a-value"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/8608c63aae-create-a-named-tmux-session">Create A Named tmux Session</a></h1>
+<p>When creating a new tmux session</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>tmux new&#x000A;</code></pre>
+<p>a default name of <code>0</code> will be given to the session.</p>
+
+<p>If you'd like to give your session a name with a bit more meaning, use the
+<code>-s</code> flag</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>tmux new -s burrito&#x000A;</code></pre>
+<p><a href="https://robots.thoughtbot.com/a-tmux-crash-course">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/8608c63aae-create-a-named-tmux-session">July 4, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/command-line">#command-line</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/8608c63aae-create-a-named-tmux-session.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/8608c63aae-create-a-named-tmux-session">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="8608c63aae" href="/posts/8608c63aae-create-a-named-tmux-session"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/21b31b56ae-question-mark-operator">Question Mark Operator</a></h1>
+<p>Ruby has a question mark (<code>?</code>) operator that works like so</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="sc">?a</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"a"</span>&#x000A;<span class="o">&gt;</span> <span class="sc">?\s</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">" "</span>&#x000A;<span class="o">&gt;</span> <span class="sc">??</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"?"</span>&#x000A;<span class="o">&gt;</span> <span class="sc">?a</span> <span class="o">+</span> <span class="sc">?b</span> <span class="o">+</span> <span class="sc">?c</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"abc"</span>&#x000A;</code></pre>
+<p>It essentially creates single character strings. At least in Ruby 1.9+ it
+does. In versions of Ruby before 1.9, the <code>?</code> operator could be used to get
+the ascii character code of the operand character.</p>
+
+<p>h/t Josh Davey</p>
+
+<p><a href="http://stackoverflow.com/questions/16641205/what-does-the-question-mark-operator-do">source</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/21b31b56ae-question-mark-operator">July 3, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/21b31b56ae-question-mark-operator.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/21b31b56ae-question-mark-operator">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="21b31b56ae" href="/posts/21b31b56ae-question-mark-operator"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/50a4b972d7-cleanup-cucumber-steps">Cleanup Cucumber Steps</a></h1>
+<p>Code that is never executed is bad. Try this on your brownfield test suite:</p>
+<pre class="highlight shell"><code><span class="gp">$ </span>cucumber --dry-run -f stepdefs&#x000A;</code></pre>
+<p>The <code>stepdefs</code> flag reports the location of each step, and also which steps aren't being used by any test. Delete those dusty old steps!</p>
+
+<p><code>--dry-run</code> skips running the actual steps, a significant time-saver.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/50a4b972d7-cleanup-cucumber-steps">July 2, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/testing">#testing</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/50a4b972d7-cleanup-cucumber-steps.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/50a4b972d7-cleanup-cucumber-steps">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="50a4b972d7" href="/posts/50a4b972d7-cleanup-cucumber-steps"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/bd020363ca-intervals-of-time-by-week">Intervals Of Time By Week</a></h1>
+<p>It is pretty common to use hours or days when creating a Postgres
+interval. However, intervals can also be created in week-sized chunks</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="s1">'2 weeks'</span><span class="p">::</span><span class="n">interval</span><span class="p">;</span>&#x000A; <span class="n">interval</span>&#x000A;<span class="c1">----------</span>&#x000A; <span class="mi">14</span> <span class="n">days</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;&#x000A;<span class="o">&gt;</span> <span class="k">select</span> <span class="n">make_interval</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">);</span>&#x000A; <span class="n">make_interval</span>&#x000A;<span class="c1">---------------</span>&#x000A; <span class="mi">49</span> <span class="n">days</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/bd020363ca-intervals-of-time-by-week">July 2, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/bd020363ca-intervals-of-time-by-week.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/bd020363ca-intervals-of-time-by-week">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="bd020363ca" href="/posts/bd020363ca-intervals-of-time-by-week"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/816c79fb11-the-microseconds-since-navigation-started">The microseconds since navigation started</a></h1>
+<p><code>Date.now</code> will give you milliseconds since the epoch, but maybe what you really want is the time since the page started loading.  </p>
+<pre class="highlight javascript"><code><span class="o">&gt;</span> <span class="nx">performance</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span>&#x000A;<span class="mf">162374.73599999974</span>&#x000A;</code></pre>
+<p>Essentially that is the microseconds since the page started loading, but really its the microseconds since <code>performance.timing.navigationStart</code> which itself is defined as the:</p>
+<pre class="highlight plaintext"><code>time immediately after the user agent finishes prompting to unload &#x000A;</code></pre>
+<p>which is defined <a href="http://www.w3.org/TR/html5/browsers.html#prompt-to-unload-a-document">here</a>.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/816c79fb11-the-microseconds-since-navigation-started">July 2, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/816c79fb11-the-microseconds-since-navigation-started.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/816c79fb11-the-microseconds-since-navigation-started">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="816c79fb11" href="/posts/816c79fb11-the-microseconds-since-navigation-started"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/0fc9f690bb-coffeescript-doesnt-have-a-ternary-operator">CoffeeScript doesn&#39;t have a ternary operator</a></h1>
+<p>CoffeeScript has no ternary operator! This blew me away, since CoffeeScript is so similar to Ruby.</p>
+
+<p>In Ruby, <code>a ? b : c</code>  translates to: Is <code>a</code> true? Ok, then return <code>b</code>, otherwise I'll return <code>c</code>.</p>
+
+<p>In CoffeeScript, <code>a ? b : c</code> translates to pure madness. If <code>a</code> is not <code>null</code> or <code>"undefined"</code>, return <code>a</code>. Otherwise, return an object literal <code>({ b: c })</code>...!?!</p>
+
+<p>That's crazy.....so instead of using a ternary (which doesn't exist in CoffeeScript), call it a day with:</p>
+
+<p><code>if a then b else c</code></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer16">rocketeer16</a>
+<br>
+<a class="post__permalink" href="/posts/0fc9f690bb-coffeescript-doesnt-have-a-ternary-operator">July 2, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/0fc9f690bb-coffeescript-doesnt-have-a-ternary-operator.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/0fc9f690bb-coffeescript-doesnt-have-a-ternary-operator">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="0fc9f690bb" href="/posts/0fc9f690bb-coffeescript-doesnt-have-a-ternary-operator"><span class='post__like-count'>9</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/ae108ebc5f-use-argument-indexes">Use Argument Indexes</a></h1>
+<p>In Postgres, each of the arguments you specify in a <code>select</code> statement has a
+1-based index tied to it. You can use these indexes in the <code>order by</code> and
+<code>group by</code> parts of the statement.</p>
+
+<p>Instead of writing</p>
+<pre class="highlight sql"><code><span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="n">updated_at</span> <span class="k">from</span> <span class="n">posts</span> <span class="k">order</span> <span class="k">by</span> <span class="n">updated_at</span><span class="p">;</span>&#x000A;</code></pre>
+<p>you can write</p>
+<pre class="highlight sql"><code><span class="k">select</span> <span class="n">id</span><span class="p">,</span> <span class="n">updated_at</span> <span class="k">from</span> <span class="n">posts</span> <span class="k">order</span> <span class="k">by</span> <span class="mi">2</span><span class="p">;</span>&#x000A;</code></pre>
+<p>If you want to group by a table's <code>type</code> and then order by the counts from
+highest to lowest, you can do the following</p>
+<pre class="highlight sql"><code><span class="k">select</span> <span class="k">type</span><span class="p">,</span> <span class="k">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="k">from</span> <span class="n">transaction</span> <span class="k">group</span> <span class="k">by</span> <span class="mi">1</span> <span class="k">order</span> <span class="k">by</span> <span class="mi">2</span> <span class="k">desc</span><span class="p">;</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/ae108ebc5f-use-argument-indexes">July 1, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/ae108ebc5f-use-argument-indexes.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/ae108ebc5f-use-argument-indexes">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="ae108ebc5f" href="/posts/ae108ebc5f-use-argument-indexes"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/95ba159cf8-ruby-redo">Ruby Redo</a></h1>
+<p>Ruby has a keyword <code>redo</code> that you might see inside a block. It causes the unconditional re-execution of the block, with the same parameter bindings as the current execution.</p>
+
+<p>Here it is, causing an endless loop:</p>
+<pre class="highlight ruby"><code><span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>&#x000A;<span class="k">until</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">do</span>&#x000A;  <span class="nb">puts</span> <span class="n">n</span>&#x000A;  <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>&#x000A;  <span class="k">redo</span>&#x000A;<span class="k">end</span>&#x000A;</code></pre>
+<p><code>redo</code> does not evaluate the 'until' condition, so the likelihood of it causing an endless loop is high.</p>
+
+<p>I'd love to see a practical application. It seems to me that <code>redo</code> would have to be inside a conditional, based on some information coming from outside the loop-- information we are certain will eventually be false.</p>
+
+<p>That's a lot to ask; I would avoid <code>redo</code> in most cases.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/95ba159cf8-ruby-redo">July 1, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/95ba159cf8-ruby-redo.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/95ba159cf8-ruby-redo">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="95ba159cf8" href="/posts/95ba159cf8-ruby-redo"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/7a17a43fb0-push-specific-commit-to-remote-repo">Push specific commit to remote repo</a></h1>
+<p>Sometimes you have multiple local commits and you want to push just part of them to the remote repo. Just specify the SHA1 for the revision you want and everything below it will be pushed.</p>
+<pre class="highlight shell"><code>git push &lt;remote&gt; &lt;SHA1&gt;:&lt;branch&gt;&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer18">rocketeer18</a>
+<br>
+<a class="post__permalink" href="/posts/7a17a43fb0-push-specific-commit-to-remote-repo">July 1, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/git">#git</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/7a17a43fb0-push-specific-commit-to-remote-repo.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/7a17a43fb0-push-specific-commit-to-remote-repo">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="7a17a43fb0" href="/posts/7a17a43fb0-push-specific-commit-to-remote-repo"><span class='post__like-count'>6</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/078103dea0-smarter-css-positioning-with-calc">Smarter CSS positioning with calc()</a></h1>
+<p>Let's talk a specific use case: if you're looking to position something a fixed amount from the bottom edge of an area, you'll end up with something like this:</p>
+<pre class="highlight css"><code><span class="nc">.foo</span> <span class="p">{</span>&#x000A;  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>&#x000A;  <span class="nl">top</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>&#x000A;<span class="p">}</span>&#x000A;</code></pre>
+<p>... but if you want the element to be offset a fixed amount from the bottom edge, the standard methodology used to be to just add some margin:</p>
+<pre class="highlight css"><code><span class="nc">.foo</span> <span class="p">{</span>&#x000A;  <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>&#x000A;  <span class="nl">top</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>&#x000A;  <span class="nl">margin-top</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>&#x000A;<span class="p">}</span>&#x000A;</code></pre>
+<p>However, with <code>calc()</code>, you can just throw a fixed amount onto your percentage:</p>
+<pre class="highlight scss"><code><span class="nc">.foo</span> <span class="p">{</span>&#x000A;  <span class="nl">top</span><span class="p">:</span> <span class="nf">calc</span><span class="p">(</span><span class="m">100%</span> <span class="o">+</span> <span class="m">5px</span><span class="p">)</span>&#x000A;<span class="p">}</span>&#x000A;</code></pre>
+<p>There are countless other uses, but for me that's the one that comes up the most, so there you go. As always, check <a href="http://caniuse.com/#feat=calc">caniuse.com</a> for browser caveats (you're basically safe everywhere except &lt;IE10).</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer10">rocketeer10</a>
+<br>
+<a class="post__permalink" href="/posts/078103dea0-smarter-css-positioning-with-calc">July 1, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/html-css">#html-css</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/078103dea0-smarter-css-positioning-with-calc.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/078103dea0-smarter-css-positioning-with-calc">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="078103dea0" href="/posts/078103dea0-smarter-css-positioning-with-calc"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/573b9ca030-percent-notation">Percent Notation</a></h1>
+<p>Ruby has many uses for the <code>%</code> character. One of the more obscure uses is as
+a notion for custom delimited strings. Use the percent notation with a
+non-alphanumeric character to surround a string.</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="sx">%=Jurassic Park=</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"Jurassic Park"</span>&#x000A;<span class="o">&gt;</span> <span class="sx">% Ghostbusters </span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"Ghostbusters"</span>&#x000A;</code></pre>
+<p>It even works with balanced characters</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="sx">%(The Goonies)</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"The Goonies"</span>&#x000A;</code></pre>
+<p>This is useful for defining a string that has both types of quotes</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="sx">%[That'll be the "day"]</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"That'll be the </span><span class="se">\"</span><span class="s2">day</span><span class="se">\"</span><span class="s2">"</span>&#x000A;</code></pre>
+<p>It's also useful for creating horribly obfuscated code</p>
+<pre class="highlight ruby"><code><span class="o">&gt;</span> <span class="sx">%=what=</span><span class="o">==</span><span class="sx">%?what?</span>&#x000A;<span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;</code></pre>
+<p>h/t <a href="https://twitter.com/joshuadavey/status/615613617099046912">Josh Davey</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/573b9ca030-percent-notation">June 30, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/573b9ca030-percent-notation.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/573b9ca030-percent-notation">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="573b9ca030" href="/posts/573b9ca030-percent-notation"><span class='post__like-count'>12</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/e85b9fe990-ruby-array-set-intersection">Ruby Array Set Intersection</a></h1>
+<p>Ruby's Array class has a method <code>&amp;</code> which returns a new array containing elements common to two arrays, excluding duplicates.</p>
+
+<p>I used this on a project today to compare a random number (17) to a set of numbers with special meaning to the program.</p>
+<pre class="highlight ruby"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="p">(</span><span class="mi">5</span><span class="p">.</span><span class="nf">.</span><span class="mi">32</span><span class="p">).</span><span class="nf">step</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nf">to_a</span> <span class="o">&amp;</span> <span class="p">[</span><span class="mi">17</span><span class="p">]</span>&#x000A; <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">17</span><span class="p">]</span>&#x000A;<span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="p">((</span><span class="mi">5</span><span class="p">.</span><span class="nf">.</span><span class="mi">32</span><span class="p">).</span><span class="nf">step</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nf">to_a</span> <span class="o">&amp;</span> <span class="p">[</span><span class="mi">17</span><span class="p">]).</span><span class="nf">size</span> <span class="o">&gt;</span> <span class="mi">0</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;</code></pre>
+<p>The order is preserved from the original array:</p>
+<pre class="highlight ruby"><code><span class="mi">2</span><span class="o">.</span><span class="mi">2</span><span class="o">.</span><span class="mi">2</span> <span class="p">:</span><span class="mo">003</span> <span class="o">&gt;</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>&#x000A; <span class="o">=&gt;</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>&#x000A;</code></pre>
+<p>h/t Chris Erin</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/e85b9fe990-ruby-array-set-intersection">June 30, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/e85b9fe990-ruby-array-set-intersection.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/e85b9fe990-ruby-array-set-intersection">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="e85b9fe990" href="/posts/e85b9fe990-ruby-array-set-intersection"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/30faa41b10-make-fonts-work-with-asset-pipeline-on-production">Make fonts work with asset pipeline on production</a></h1>
+<p>If you encounter a problem where fonts don't work on production when using Bourbon CSS toolset, you need to replace the font declaration from:</p>
+<pre class="highlight css"><code><span class="nt">font-face</span><span class="o">(</span><span class="s1">"great-font"</span><span class="o">,</span><span class="s1">"/assets/greatfont"</span><span class="o">)</span>&#x000A;</code></pre>
+<p>to</p>
+<pre class="highlight css"><code><span class="k">@include</span> <span class="n">font-face</span><span class="p">(</span><span class="s1">"greatfont"</span><span class="p">,</span> <span class="s1">"greatfont"</span><span class="p">,</span> <span class="err">$</span><span class="n">asset-pipeline</span><span class="p">:</span> <span class="n">true</span><span class="p">)</span>&#x000A;</code></pre>
+<p>This will use asset pipeline fingerprinted URL in the font declaration and should work on all environments.</p>
+
+<p>P.S.
+With rails 4.0+ you only need to put font files in app/assets/fonts and they will be fingerprinted and zipped.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer17">rocketeer17</a>
+<br>
+<a class="post__permalink" href="/posts/30faa41b10-make-fonts-work-with-asset-pipeline-on-production">June 30, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/30faa41b10-make-fonts-work-with-asset-pipeline-on-production.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/30faa41b10-make-fonts-work-with-asset-pipeline-on-production">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="30faa41b10" href="/posts/30faa41b10-make-fonts-work-with-asset-pipeline-on-production"><span class='post__like-count'>6</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/e8532ed4a9-ruby-threequals">Ruby Threequals</a></h1>
+<p>Ruby's <code>==</code> is pretty straightforward. From the Object class documentation:</p>
+
+<p><em>Equality — At the Object level, == returns true only if obj and other are the same object. Typically, this method is overridden in descendant classes to provide class-specific meaning.</em></p>
+
+<p>Some examples from the  String class:</p>
+<pre class="highlight ruby"><code><span class="n">irb</span> <span class="o">&gt;</span> <span class="s1">'foo'</span> <span class="o">==</span> <span class="s1">'foo'</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;<span class="n">irb</span> <span class="o">&gt;</span> <span class="s1">'foo'</span> <span class="o">==</span> <span class="ss">:foo</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">false</span>&#x000A;<span class="n">irb</span> <span class="o">&gt;</span> <span class="s1">'foo'</span> <span class="o">==</span> <span class="s1">'bar'</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">false</span>&#x000A;</code></pre>
+<p>The triple equals, <code>===</code>, sometimes called a ‘threequals’ or ‘case equality operator’, is different (again from the Object docs):</p>
+
+<p><em>Case Equality – For class Object, effectively the same as calling #==, but typically overridden by descendants to provide meaningful semantics in case statements.</em></p>
+
+<p>The threequals compares the type of two arguments. One way to think about <code>a === b</code> is: 'does <code>b</code> belong in a box <code>a</code>’?</p>
+
+<p>A few examples:</p>
+<pre class="highlight ruby"><code><span class="n">irb</span> <span class="o">&gt;</span> <span class="no">String</span> <span class="o">===</span> <span class="s1">'foo'</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;<span class="n">irb</span> <span class="o">&gt;</span> <span class="no">Array</span> <span class="o">===</span> <span class="sx">%w(one two three)</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;<span class="n">irb</span> <span class="o">&gt;</span> <span class="no">Range</span> <span class="o">===</span> <span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="nf">.</span><span class="mi">10</span><span class="p">)</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;<span class="n">irb</span> <span class="o">&gt;</span> <span class="sr">/car/</span> <span class="o">===</span> <span class="s1">'carpool'</span>&#x000A; <span class="o">=&gt;</span> <span class="kp">true</span>&#x000A;</code></pre>
+<p>All of these evaluate <code>false</code> when the <code>==</code> operator is used.</p>
+
+<p>Ruby's <code>case</code> statement operator uses the threequals for its control flow.</p>
+
+<p>h/t Chris Erin</p>
+
+<p><a href="http://ruby-doc.org/docs/keywords/1.9/Object.html#method-i-case">http://ruby-doc.org/docs/keywords/1.9/Object.html#method-i-case</a>
+<a href="http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and">http://stackoverflow.com/questions/7156955/whats-the-difference-between-equal-eql-and</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/e8532ed4a9-ruby-threequals">June 29, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/ruby">#ruby</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/e8532ed4a9-ruby-threequals.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/e8532ed4a9-ruby-threequals">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="e8532ed4a9" href="/posts/e8532ed4a9-ruby-threequals"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/0b6934dd6d-treat-a-subquery-like-a-value">Treat a subquery like a value</a></h1>
+<p>Postgres is cool with returning a value from a query.</p>
+<pre class="highlight plaintext"><code>select 1;&#x000A;</code></pre>
+<p>And also returning a value from a subquery.</p>
+<pre class="highlight plaintext"><code>select (select 1);&#x000A;</code></pre>
+<p>Turtles all the way down.</p>
+<pre class="highlight plaintext"><code>select (select (select 1));&#x000A;</code></pre>
+<p>But that subquery can only return one row or you'll get an error.</p>
+<pre class="highlight plaintext"><code>select (select unnest('{1, 2}'::integer[]));&#x000A;ERROR:  more than one row returned by a subquery used as an expression&#x000A;</code></pre>
+<p>This is used sometimes when you need to use a count in an expression.</p>
+<pre class="highlight plaintext"><code>select round((select count(*) from pg_class where reltype = 0) / (select count(*)::float from pg_class) * 100) as percent_with_zero_reltype;&#x000A; percent_with_zero_reltype &#x000A;---------------------------&#x000A;                        39&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/0b6934dd6d-treat-a-subquery-like-a-value">June 29, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/0b6934dd6d-treat-a-subquery-like-a-value.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/0b6934dd6d-treat-a-subquery-like-a-value">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="0b6934dd6d" href="/posts/0b6934dd6d-treat-a-subquery-like-a-value"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/d842ab2d0f-temporary-tables">Temporary Tables</a></h1>
+<p>Create a temporary table in Postgres like so</p>
+<pre class="highlight sql"><code><span class="k">create</span> <span class="k">temp</span> <span class="k">table</span> <span class="n">posts</span> <span class="p">(</span>&#x000A;    <span class="p">...</span>&#x000A;<span class="p">);</span>&#x000A;</code></pre>
+<p>This table (and its data) will only last for the duration of the session.
+It is created on a schema specific to temporary tables. It is also worth
+noting that it won't be autovacuumed, so this must be done manually as
+necessary.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/d842ab2d0f-temporary-tables">June 28, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/d842ab2d0f-temporary-tables.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/d842ab2d0f-temporary-tables">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="d842ab2d0f" href="/posts/d842ab2d0f-temporary-tables"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/f0e86c1d7d-change-column-null">Change Column Null</a></h1>
+<p>The <code>not null</code> constraint is a great way to ensure data integrity. If a Rails model <code>validates_presence_of</code> an attribute, that column should be <code>not null</code> in the database.</p>
+
+<p>Rails has a special migration method for setting this constraint.</p>
+<pre class="highlight ruby"><code><span class="n">change_column_null</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:mandatory_attribute</span><span class="p">,</span> <span class="kp">false</span>&#x000A;</code></pre>
+<p>You could also use the <code>change_column</code> method. The reason <code>change_column_null</code> is a better choice is that <code>change_column</code> requires you to state the type of the column; <code>change_column_null</code> does not.</p>
+<pre class="highlight ruby"><code><span class="n">change_column</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">type</span><span class="p">,</span> <span class="n">options</span><span class="p">)</span>&#x000A;<span class="n">change_column_null</span><span class="p">(</span><span class="n">table_name</span><span class="p">,</span> <span class="n">column_name</span><span class="p">,</span> <span class="n">null</span><span class="p">,</span> <span class="n">default</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">)</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/f0e86c1d7d-change-column-null">June 28, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/f0e86c1d7d-change-column-null.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/f0e86c1d7d-change-column-null">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="f0e86c1d7d" href="/posts/f0e86c1d7d-change-column-null"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/1002396d66-fizzbuzz-with-common-table-expressions">Fizzbuzz With Common Table Expressions</a></h1>
+<p>In learning about CTEs (common table expressions) in postgres, I discovered
+that you can do some interesting and powerful things using the <code>with&#x000A;recursive</code> construct. The following solves the fizzbuzz problem for integers
+up to 100</p>
+<pre class="highlight sql"><code><span class="k">with</span> <span class="k">recursive</span> <span class="n">fizzbuzz</span> <span class="p">(</span><span class="n">num</span><span class="p">,</span><span class="n">val</span><span class="p">)</span> <span class="k">as</span> <span class="p">(</span>&#x000A;    <span class="k">select</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">''</span>&#x000A;    <span class="k">union</span>&#x000A;    <span class="k">select</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span>&#x000A;      <span class="k">case</span>&#x000A;      <span class="k">when</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">15</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="s1">'fizzbuzz'</span>&#x000A;      <span class="k">when</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">5</span>  <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="s1">'buzz'</span>&#x000A;      <span class="k">when</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="mi">3</span>  <span class="o">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="s1">'fizz'</span>&#x000A;      <span class="k">else</span> <span class="p">(</span><span class="n">num</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)::</span><span class="n">text</span>&#x000A;      <span class="k">end</span>&#x000A;    <span class="k">from</span> <span class="n">fizzbuzz</span>&#x000A;    <span class="k">where</span> <span class="n">num</span> <span class="o">&lt;</span> <span class="mi">100</span>&#x000A;<span class="p">)</span>&#x000A;<span class="k">select</span> <span class="n">val</span> <span class="k">from</span> <span class="n">fizzbuzz</span> <span class="k">where</span> <span class="n">num</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>&#x000A;</code></pre>
+<p>Check out <a href="http://www.postgresql.org/docs/9.4/static/queries-with.html">With Queries (Common Table Expressions)</a> for more details on CTEs.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/1002396d66-fizzbuzz-with-common-table-expressions">June 27, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/1002396d66-fizzbuzz-with-common-table-expressions.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/1002396d66-fizzbuzz-with-common-table-expressions">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="1002396d66" href="/posts/1002396d66-fizzbuzz-with-common-table-expressions"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/192721096f-create-with-timestamp">Create with Timestamp</a></h1>
+<p>Today I learned how to interpolate a timestamp at the command line. Here are two examples:</p>
+
+<p>For a file:</p>
+<pre class="highlight plaintext"><code>$ touch test_$(date +%s).md&#x000A;$ ls&#x000A;test_1435435401.md&#x000A;</code></pre>
+<p>For a git branch:</p>
+<pre class="highlight plaintext"><code>$ git checkout -b pull_request_$(date +%s)&#x000A;Switched to a new branch 'pull_request_1435435344'&#x000A;</code></pre>
+<p>The timestamp represents seconds since the UNIX epoch.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/192721096f-create-with-timestamp">June 27, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/command-line">#command-line</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/192721096f-create-with-timestamp.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/192721096f-create-with-timestamp">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="192721096f" href="/posts/192721096f-create-with-timestamp"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/7dae7c9648-swapping-letters-with-vim">Swapping Letters With Vim</a></h1>
+<p>Imagine you've typed 'recieve' instead of 'receive' in an RSpec test. This is will break things. I use this example because it's a typo I make frequently.</p>
+
+<p>To swap the letters, move to the first letter ('i') and type <code>xp</code>. This will swap that letter with the next letter. It's Vim for 'cut what's under the cursor, then paste it after the cursor.'</p>
+
+<p>There are more complex ways to do this; this is the simplest I know of.</p>
+
+<p>h/t Matt Polito</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/7dae7c9648-swapping-letters-with-vim">June 26, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/7dae7c9648-swapping-letters-with-vim.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/7dae7c9648-swapping-letters-with-vim">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="7dae7c9648" href="/posts/7dae7c9648-swapping-letters-with-vim"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/e62c6408e5-default-schema">Default Schema</a></h1>
+<p>Schemas can be used to organize tables within a database. In postgres, we can see all
+the schemas our database has like so</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="k">schema_name</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">schemata</span><span class="p">;</span>&#x000A;    <span class="k">schema_name</span>&#x000A;<span class="c1">--------------------</span>&#x000A; <span class="n">pg_toast</span>&#x000A; <span class="n">pg_temp_1</span>&#x000A; <span class="n">pg_toast_temp_1</span>&#x000A; <span class="n">pg_catalog</span>&#x000A; <span class="k">public</span>&#x000A; <span class="n">information_schema</span>&#x000A;<span class="p">(</span><span class="mi">6</span> <span class="k">rows</span><span class="p">)</span>&#x000A;</code></pre>
+<p>When you create a new table, it will need to be placed under one of these
+schemas. So if we have a <code>create table posts (...)</code>, how does postgres know
+what schema to put it under?</p>
+
+<p>Postgres checks your <code>search_path</code> for a default.</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">show</span> <span class="n">search_path</span><span class="p">;</span>&#x000A;   <span class="n">search_path</span>&#x000A;<span class="c1">-----------------</span>&#x000A; <span class="nv">"$user"</span><span class="p">,</span> <span class="k">public</span>&#x000A;<span class="p">(</span><span class="mi">1</span> <span class="k">row</span><span class="p">)</span>&#x000A;</code></pre>
+<p>From our first select statement, we see that there is no schema with my user
+name, so postgres uses public as the default schema.</p>
+
+<p>If we set the search path to something that won't resolve to a schema name,
+postgres will complain</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">set</span> <span class="n">search_path</span> <span class="o">=</span> <span class="s1">'$user'</span><span class="p">;</span>&#x000A;<span class="k">SET</span>&#x000A;<span class="o">&gt;</span> <span class="k">create</span> <span class="k">table</span> <span class="n">posts</span> <span class="p">(...);</span>&#x000A;<span class="n">ERROR</span><span class="p">:</span>  <span class="k">no</span> <span class="k">schema</span> <span class="n">has</span> <span class="n">been</span> <span class="n">selected</span> <span class="k">to</span> <span class="k">create</span> <span class="k">in</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/e62c6408e5-default-schema">June 26, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/e62c6408e5-default-schema.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/e62c6408e5-default-schema">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="e62c6408e5" href="/posts/e62c6408e5-default-schema"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/2dedfc48e3-jquery-empty">jQuery Empty</a></h1>
+<p>Today I learned about the jQuery <code>.empty()</code> method.</p>
+
+<p><code>.empty()</code> removes all child nodes of the set of matched elements from the DOM. Consider it a delete button for whatever element you call it on.</p>
+
+<p><code>.empty()</code> is equivalent to <code>.html('')</code> but much faster.</p>
+
+<p>h/t Cameron Daigle</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/2dedfc48e3-jquery-empty">June 25, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/2dedfc48e3-jquery-empty.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/2dedfc48e3-jquery-empty">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="2dedfc48e3" href="/posts/2dedfc48e3-jquery-empty"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/3ead348be3-repeat-yourself">Repeat Yourself</a></h1>
+<p>Use the <code>repeat</code> command to repeat some other command.</p>
+
+<p>You can repeat a command any number of times like so</p>
+<pre class="highlight plaintext"><code>$ repeat 5 say Hello World&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/3ead348be3-repeat-yourself">June 25, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/command-line">#command-line</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/3ead348be3-repeat-yourself.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/3ead348be3-repeat-yourself">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="3ead348be3" href="/posts/3ead348be3-repeat-yourself"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/ae1fb8fe62-tmux-zoom">Tmux Zoom</a></h1>
+<p>Tmux 1.8 introduced a great feature, zoom. Zoom expands the current pane to temporarily fill whole screen. It's helpful when you want to focus or read long lines of code.</p>
+
+<p>The long way to this function is <code>resize-pane -Z -t target-pane</code> in the Tmux bar.</p>
+
+<p>By default it is also mapped to <code>prefix + z</code>.</p>
+
+<p>A cool alternative is to map <code>Up</code> and <code>Down</code> to toggle the zoom. That's how it works in the <a href="https://github.com/hashrocket/dotmatrix/blob/master/.tmux.conf">Hashrocket Dotmatrix</a>:</p>
+<pre class="highlight plaintext"><code># tmux.conf&#x000A;unbind Up; bind Up resize-pane -Z; unbind Down; bind Down resize-pane -Z&#x000A;</code></pre>
+<p>h/t Chris Erin</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/ae1fb8fe62-tmux-zoom">June 24, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/workflow">#workflow</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/ae1fb8fe62-tmux-zoom.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/ae1fb8fe62-tmux-zoom">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="ae1fb8fe62" href="/posts/ae1fb8fe62-tmux-zoom"><span class='post__like-count'>3</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/30701430dd-list-all-columns-of-a-specific-type">List All Columns Of A Specific Type</a></h1>
+<p>In postgres, we can access information about all the columns in our database through the
+<code>information_schema</code> tables; in particular, the <code>columns</code> table. After
+connecting to a particular database, we can list all columns (across all our
+tables) of a specific type. We just need to know the schema of the tables we
+are interested in and the type that we want to track down.</p>
+
+<p>My application's tables are under the <code>public</code> schema and I want to track
+down all <code>timestamp</code> columns. My query can look something like this</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="k">table_name</span><span class="p">,</span> <span class="k">column_name</span><span class="p">,</span> <span class="n">data_type</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span> <span class="k">where</span> <span class="n">table_schema</span> <span class="o">=</span> <span class="s1">'public'</span> <span class="k">and</span> <span class="n">data_type</span> <span class="o">=</span> <span class="s1">'timestamp without time zone'</span><span class="p">;</span>&#x000A;   <span class="k">table_name</span>    <span class="o">|</span> <span class="k">column_name</span> <span class="o">|</span>          <span class="n">data_type</span>&#x000A;<span class="c1">-----------------+-------------+-----------------------------</span>&#x000A; <span class="n">articles</span>        <span class="o">|</span> <span class="n">created_at</span>  <span class="o">|</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span>&#x000A; <span class="n">articles</span>        <span class="o">|</span> <span class="n">updated_at</span>  <span class="o">|</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span>&#x000A; <span class="n">users</span>           <span class="o">|</span> <span class="n">created_at</span>  <span class="o">|</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span>&#x000A; <span class="n">users</span>           <span class="o">|</span> <span class="n">updated_at</span>  <span class="o">|</span> <span class="k">timestamp</span> <span class="k">without</span> <span class="n">time</span> <span class="k">zone</span>&#x000A;<span class="p">(</span><span class="mi">4</span> <span class="k">rows</span><span class="p">)</span>&#x000A;</code></pre>
+<p>Alternatively, I could look for both <code>timestamp</code> and <code>timestamptz</code> with a
+query like this</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">select</span> <span class="k">table_name</span><span class="p">,</span> <span class="k">column_name</span><span class="p">,</span> <span class="n">data_type</span> <span class="k">from</span> <span class="n">information_schema</span><span class="p">.</span><span class="n">columns</span> <span class="k">where</span> <span class="n">table_schema</span> <span class="o">=</span> <span class="s1">'public'</span> <span class="k">and</span> <span class="n">data_type</span> <span class="k">like</span> <span class="s1">'%timestamp%'</span><span class="p">;</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/30701430dd-list-all-columns-of-a-specific-type">June 24, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/30701430dd-list-all-columns-of-a-specific-type.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/30701430dd-list-all-columns-of-a-specific-type">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="30701430dd" href="/posts/30701430dd-list-all-columns-of-a-specific-type"><span class='post__like-count'>2</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/bdc4c3d36f-inline-your-helpermethod-declaration">Inline your helper_method declaration</a></h1>
+<p>Remember, <code>def</code> is just a special function in ruby and as such it has a return value that is a symbol that is the name of the function being defined.  </p>
+
+<p>That allows us to do some cool (weird?) looking things with class methods that take a symbol that refers to a function, like the <code>helper_method</code> call in a controller.</p>
+<pre class="highlight ruby"><code>  <span class="k">class</span> <span class="nc">DataController</span> <span class="o">&lt;</span> <span class="no">BaseController</span>&#x000A;&#x000A;  <span class="c1">#actions and whatever</span>&#x000A;&#x000A;  <span class="kp">private</span>&#x000A;&#x000A;  <span class="n">helper_method</span> <span class="k">def</span> <span class="nf">format_that_data</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>&#x000A;    <span class="s2">"</span><span class="si">#{</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> X </span><span class="si">#{</span><span class="n">data</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>&#x000A;  <span class="k">end</span>&#x000A;&#x000A;  <span class="k">end</span>&#x000A;</code></pre>
+<footer>
+<p>
+<a href="/authors/rocketeer4">rocketeer4</a>
+<br>
+<a class="post__permalink" href="/posts/bdc4c3d36f-inline-your-helpermethod-declaration">June 24, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/rails">#rails</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/bdc4c3d36f-inline-your-helpermethod-declaration.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/bdc4c3d36f-inline-your-helpermethod-declaration">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="bdc4c3d36f" href="/posts/bdc4c3d36f-inline-your-helpermethod-declaration"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/ae030b2773-javascript-casing">JavaScript Casing</a></h1>
+<p>The ES5 spec defined two methods for changing the case of a string, <code>.toUpperCase()</code> and <code>.toLowerCase()</code>. They work just like Ruby's <code>upcase</code> and <code>downcase</code>.</p>
+<pre class="highlight javascript"><code><span class="s1">'test'</span><span class="p">.</span><span class="nx">toUpperCase</span><span class="p">()</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"TEST"</span>&#x000A;<span class="s1">'TEST'</span><span class="p">.</span><span class="nx">toLowerCase</span><span class="p">()</span>&#x000A;<span class="o">=&gt;</span> <span class="s2">"test"</span>&#x000A;</code></pre>
+<p>There are two similar methods called <code>.toLocaleUpperCase()</code> and <code>.toLocaleLowerCase()</code> which are intended to yield the correct result based on the host environment's locale. I have not seen these methods in the wild but I'm curious if they are used.</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer2">rocketeer2</a>
+<br>
+<a class="post__permalink" href="/posts/ae030b2773-javascript-casing">June 23, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/javascript">#javascript</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/ae030b2773-javascript-casing.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/ae030b2773-javascript-casing">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="ae030b2773" href="/posts/ae030b2773-javascript-casing"><span class='post__like-count'>4</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/efd1a73936-save-your-vim-sessions-for-later">Save your vim sessions for later</a></h1>
+<p>Create a new session in vim:</p>
+<pre class="highlight plaintext"><code>:mksession ~/session_file_name.vim&#x000A;</code></pre>
+<p>Open it up later in terminal:</p>
+<pre class="highlight plaintext"><code>$ vim -S ~/session_file_name.vim&#x000A;</code></pre>
+<p>Or from vim:</p>
+<pre class="highlight plaintext"><code>:source ~/session_file_name.vim&#x000A;</code></pre>
+<p>I learned this from <a href="https://twitter.com/hogihung">@hogihung</a>. <a href="http://www.oldguynewtrick.com/blog/2015/06/23/learnings-from-the-front/">Full post</a></p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer11">rocketeer11</a>
+<br>
+<a class="post__permalink" href="/posts/efd1a73936-save-your-vim-sessions-for-later">June 23, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/vim">#vim</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/efd1a73936-save-your-vim-sessions-for-later.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/efd1a73936-save-your-vim-sessions-for-later">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="efd1a73936" href="/posts/efd1a73936-save-your-vim-sessions-for-later"><span class='post__like-count'>8</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+<article class='post'>
+<section>
+<div class='post__content copy'>
+<h1><a href="/posts/bd8df15767-temporarily-disable-triggers">Temporarily Disable Triggers</a></h1>
+<p>In general, you are always going to want your triggers to fire. That's why
+they are there. Though special circumstances may arise where you need to
+temporarily disable them. In postgres, you can use</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">set</span> <span class="n">session_replication_role</span> <span class="o">=</span> <span class="s1">'replica'</span><span class="p">;</span>&#x000A;<span class="k">SET</span>&#x000A;</code></pre>
+<p>By changing the
+<a href="http://www.postgresql.org/docs/9.4/static/runtime-config-client.html#GUC-SESSION-REPLICATION-ROLE">replication role</a>
+from <code>origin</code> to
+<code>replica</code> you are essentially disabling all non-replica triggers across the
+database (for that session). When you are done, you can simply set the
+replication role back so that normal trigger behavior can resume</p>
+<pre class="highlight sql"><code><span class="o">&gt;</span> <span class="k">set</span> <span class="n">session_replication_role</span> <span class="o">=</span> <span class="s1">'origin'</span><span class="p">;</span>&#x000A;<span class="k">SET</span>&#x000A;</code></pre>
+<p>A more direct and fine-grained approach to disabling triggers is to use an
+<code>alter table</code> command that targets a specific trigger.</p>
+
+<p>h/t Jack Christensen</p>
+
+<footer>
+<p>
+<a href="/authors/rocketeer8">rocketeer8</a>
+<br>
+<a class="post__permalink" href="/posts/bd8df15767-temporarily-disable-triggers">June 23, 2015</a>
+</p>
+</footer>
+</div>
+<aside>
+<ul>
+<li>
+<a class="post__tag-link" href="/sql">#sql</a>
+</li>
+<li>
+<a class="post__raw-link" target="_blank" href="/posts/bd8df15767-temporarily-disable-triggers.md">view raw
+</a></li>
+<li>
+<a class="post__permalink" href="/posts/bd8df15767-temporarily-disable-triggers">permalink
+</a></li>
+<li>
+<a class="js-like-action post__like-link" id="bd8df15767" href="/posts/bd8df15767-temporarily-disable-triggers"><span class='post__like-count'>5</span>
+<span class='post__like-label'>likes</span>
+</a></li>
+</ul>
+</aside>
+</section>
+</article>
+
+
+</section>
+<nav class='pagination'>
+
+<a rel="next" class="pagination_older" href="/?page=2">older TILs</a>
+</nav>
+</main>
+<nav class='site_nav'>
+<ul>
+<li class='site_nav__about'>
+<a class="site_nav__link" href="#">?</a>
+<div class='site_nav__toggle'>
+<div class='copy'>
+<p>TIL is an open-source project by
+<a href="https://hashrocket.com">Hashrocket</a> that exists to catalogue
+the sharing &amp; accumulation of knowledge as it happens
+day-to-day. Posts have a 200-word limit, and posting is open to
+any Rocketeer as well as selected friends of Hashrocket. We
+hope you enjoy learning along with us.</p>
+<ul class='social'>
+<li><a class="social_twitter" href="https://twitter.com/hashrockettil">/hashrockettil</a></li>
+<li><a class="social_github" href="https://github.com/hashrocket/hr-til">/hashrocket/hr-til</a></li>
+</ul>
+</div>
+</div>
+</li>
+<li class='site_nav__statistics'>
+<a class="site_nav__link" href="/statistics">statistics</a>
+</li>
+<li class='site_nav__search'><a class="site_nav__link" href="#">search</a><div class='site_nav__toggle'>
+<form action="/" accept-charset="UTF-8" method="get"><input name="utf8" type="hidden" value="&#x2713;" />
+<input type="search" name="q" id="q" />
+<button type="submit">Search</button>
+</form>
+
+</div></li>
+<li class='site_nav__twitter'>
+<a class="site_nav__link" href="https://twitter.com/hashrockettil">Twitter</a>
+</li>
+</ul>
+</nav>
+</body>
+</html>

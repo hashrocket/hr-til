@@ -23,7 +23,10 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
+    @posts = posts_with_developer_and_channel
+      .published
+      .order(published_at: :desc)
+      .search(params[:q])
 
     respond_to do |format|
       format.html
