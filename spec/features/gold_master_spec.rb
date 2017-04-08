@@ -29,7 +29,7 @@ describe 'gold master spec' do
 
   specify 'the homepage does not change at all', :js do
 
-    # Replace with Gold Master data, once I figure out how to do that
+    # TODO: Replace with Gold Master data, once I figure out how to do that
     FactoryGirl.create_list(:post, 55)
 
     visit root_path
@@ -38,15 +38,25 @@ describe 'gold master spec' do
     if !gold_master_image.exist?
       save_screenshot(gold_master_image)
     else
+      tmp_image = Rails.root.join('tmp/capybara/tmp_image.png')
+      save_screenshot(tmp_image)
 
-      tmp_image_location = Rails.root.join('tmp/capybara/tmp_image.png')
-      save_screenshot(tmp_image_location)
-      gold_master_image_read = gold_master_image.read
-      tmp_image_read = tmp_image_location.read
+      gold_master_image_data = gold_master_image.read
+      tmp_image_data = tmp_image.read
 
-      if gold_master_image_read != tmp_image_read
+      diff_image = 'tmp/capybara/gold_master_diff.png'
+
+      if gold_master_image_data != tmp_image_data
+
+        # TODO: Allow this to handle file size changes (a realistic situation)
+        exec "compare #{gold_master_image} #{tmp_image} -highlight-color seagreen #{diff_image}"
+
+        # TODO: Open the file for inspection
         gold_master_image.write(tmp_image_read)
+        # TODO: Return early failure and clean up artifacts
       end
+
+      # TODO: Return true
     end
   end
 end
