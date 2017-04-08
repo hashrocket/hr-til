@@ -37,6 +37,16 @@ describe 'gold master spec' do
     gold_master_image = Rails.root.join('spec/fixtures/gold_master.png')
     if !gold_master_image.exist?
       save_screenshot(gold_master_image)
+    else
+
+      tmp_image_location = Rails.root.join('tmp/capybara/tmp_image.png')
+      save_screenshot(tmp_image_location)
+      gold_master_image_read = gold_master_image.read
+      tmp_image_read = tmp_image_location.read
+
+      if gold_master_image_read != tmp_image_read
+        gold_master_image.write(tmp_image_read)
+      end
     end
   end
 end
