@@ -33,6 +33,10 @@ describe 'gold master spec' do
     FactoryGirl.create_list(:post, 55)
 
     visit root_path
-    save_screenshot
+
+    gold_master_image = Rails.root.join('spec/fixtures/gold_master.png')
+    if !gold_master_image.exist?
+      save_screenshot(gold_master_image)
+    end
   end
 end
