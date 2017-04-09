@@ -36,23 +36,23 @@ describe 'gold master spec' do
 
     gold_master_image = Rails.root.join('spec/fixtures/gold_master.png')
     if !gold_master_image.exist?
+      print "Writing Gold Master image... "
       save_screenshot(gold_master_image)
+      puts "done"
     else
-      tmp_image = Rails.root.join('tmp/capybara/tmp_image.png')
-      save_screenshot(tmp_image)
+      actual_image = Rails.root.join('spec/fixtures/actual_image.png')
+      save_screenshot(actual_image)
 
-      gold_master_image_data = gold_master_image.read
-      tmp_image_data = tmp_image.read
+      gold_master_image_read = gold_master_image.read
+      actual_image_read = actual_image.read
 
-      unless match = gold_master_image_data == tmp_image_data
+      match = gold_master_image_read == actual_image_read
+      if !match
+        diff_image = 'spec/fixtures/diff_image.png'
+        exec "compare #{gold_master_image} #{actual_image} -highlight-color seagreen #{diff_image}"
+        exec "open #{diff_image}"
 
-        require 'pry'; binding.pry;
-        diff_image = 'tmp/capybara/gold_master_diff.png'
-        exec "compare #{gold_master_image} #{tmp_image} -highlight-color seagreen #{diff_image}"
-
-        # TODO: Open the file for inspection
         gold_master_image.write(tmp_image_data)
-        # TODO: Clean up artifacts
       end
 
       expect(match).to eq true
