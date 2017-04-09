@@ -44,19 +44,18 @@ describe 'gold master spec' do
       gold_master_image_data = gold_master_image.read
       tmp_image_data = tmp_image.read
 
-      diff_image = 'tmp/capybara/gold_master_diff.png'
+      unless match = gold_master_image_data == tmp_image_data
 
-      if gold_master_image_data != tmp_image_data
-
-        # TODO: Allow this to handle file size changes (a realistic situation)
+        require 'pry'; binding.pry;
+        diff_image = 'tmp/capybara/gold_master_diff.png'
         exec "compare #{gold_master_image} #{tmp_image} -highlight-color seagreen #{diff_image}"
 
         # TODO: Open the file for inspection
-        gold_master_image.write(tmp_image_read)
-        # TODO: Return early failure and clean up artifacts
+        gold_master_image.write(tmp_image_data)
+        # TODO: Clean up artifacts
       end
 
-      # TODO: Return true
+      expect(match).to eq true
     end
   end
 end
