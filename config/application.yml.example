@@ -4,9 +4,10 @@ development: &default
   google_client_secret:
   heroku_production_app_name:
   host: 'www.example.com'
-  protocol: 'http://'
+  pagination_breakpoint: '50'
   permitted_domains: 'hashrocket.com|hshrckt.com|example.com'
   permitted_emails: 'johnsmith@whitelisted-guest.com'
+  protocol: 'http://'
   slack_post_endpoint:
   twitter_access_token:
   twitter_access_token_secret:
@@ -16,3 +17,4 @@ development: &default
 
 test:
   <<: *default
+  pagination_breakpoint: '10'

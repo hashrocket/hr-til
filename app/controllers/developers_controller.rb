@@ -12,7 +12,12 @@ class DevelopersController < ApplicationController
   private
 
   def posts
-    @posts ||= developer.posts.published_and_ordered.includes(:channel)
+    @posts ||= developer
+      .posts
+      .includes(:channel, :developer)
+      .published_and_ordered
+      .page(params[:page])
+      .per(ENV.fetch('pagination_breakpoint'))
   end
 
   def developer

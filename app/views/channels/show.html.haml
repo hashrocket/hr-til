@@ -3,4 +3,6 @@
 %section#tag
   %header.page_head
     %h1 #{pluralize channel.posts_count, "post"} about ##{channel.name}
+
 = render posts
+= render "shared/pagination"

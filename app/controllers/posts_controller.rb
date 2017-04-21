@@ -3,6 +3,8 @@ class PostsController < ApplicationController
   before_action :require_developer, except: [:index, :show, :like, :unlike]
   before_action :authorize_developer, only: [:edit, :update]
 
+  helper_method :posts
+
   def preview
     render layout: false
   end
@@ -23,11 +25,9 @@ class PostsController < ApplicationController
   end
 
   def index
-    @posts = posts_with_developer_and_channel.published_and_ordered.search(params[:q])
-
     respond_to do |format|
       format.html
-      format.json { render json: @posts }
+      format.json { render json: posts }
       format.atom
     end
   end
@@ -95,6 +95,12 @@ class PostsController < ApplicationController
 
   private
 
+  def posts
+    @posts ||= posts_with_developer_and_channel
+      .published_and_ordered
+      .search(params[:q])
+  end
+
   def process_post
     if params[:published]
       @post.publish
@@ -106,7 +112,9 @@ class PostsController < ApplicationController
   end
 
   def posts_with_developer_and_channel
-    Post.includes(:developer, :channel).page(params[:page]).per(50)
+    Post.includes(:developer, :channel)
+      .page(params[:page])
+      .per(ENV.fetch('pagination_breakpoint'))
   end
 
   def redirect_to_valid_slug
