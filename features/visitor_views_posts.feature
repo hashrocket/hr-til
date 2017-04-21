@@ -37,26 +37,42 @@ Feature: Visitor views posts
     Then I see the author's Twitter link
 
   @javascript
-  Scenario: Visitor sees pagination
+  Scenario: Visitor sees paginated posts
     Given I am a visitor
-    And 150 posts exist
+    And 3 pages' worth of paginated posts exist
     When I visit the homepage
-    Then I should see 50 posts
+    Then I see posts matching the pagination breakpoint
     And I should see a "older TILs" button
     And I should not see a "newer TILs" button
     When I click "older TILs"
-    Then I should see 50 posts
+    Then I see posts matching the pagination breakpoint
     And I should see a "older TILs" button
     And I should see a "newer TILs" button
     When I click "older TILs"
-    Then I should see 50 posts
+    Then I see posts matching the pagination breakpoint
     And I should see a "newer TILs" button
     And I should not see a "older TILs" button
 
-  Scenario: Visitor sees no pagination when less than 51 posts
+  @javascript
+  Scenario: Visitor sees paginated posts for an author
     Given I am a visitor
-    And 50 posts exist
+    And author "Corl" has 10 more posts than the pagination breakpoint
+    When I visit the author page for "Corl"
+    Then I see posts matching the pagination breakpoint
+    And I should see a "older TILs" button
+
+  @javascript
+  Scenario: Visitor sees paginated posts for a channel
+    Given I am a visitor
+    And channel "Haskell" has 10 more posts than the pagination breakpoint
+    When I visit the channel page for "Haskell"
+    Then I see posts matching the pagination breakpoint
+    And I should see a "older TILs" button
+
+  Scenario: Visitor sees no pagination when less than breakpoint posts
+    Given I am a visitor
+    And 1 pages' worth of paginated posts exist
     When I visit the homepage
-    Then I should see 50 posts
+    Then I see posts matching the pagination breakpoint
     And I should not see a "newer TILs" button
     And I should not see a "older TILs" button

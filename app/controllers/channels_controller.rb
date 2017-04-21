@@ -8,6 +8,11 @@ class ChannelsController < ApplicationController
   end
 
   def posts
-    @posts ||= channel.posts.published_and_ordered.includes(:developer)
+    @posts ||= channel
+      .posts
+      .includes(:channel, :developer)
+      .published_and_ordered
+      .page(params[:page])
+      .per(ENV.fetch('pagination_breakpoint'))
   end
 end
