@@ -1,5 +1,5 @@
 %head
-  %title= [content_for(:page_title), SITE_NAME].compact.join(' - ').html_safe
+  %title= [content_for(:page_title), SITE_NAME, ENV['organization_name']].compact.join(' - ').html_safe
   = csrf_meta_tags
 
   %meta(name="format-detection" content="telephone=no")
