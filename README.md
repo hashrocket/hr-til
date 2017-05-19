@@ -1,5 +1,7 @@
 # HR-TIL
 
+![til](https://cloud.githubusercontent.com/assets/11463275/26385291/8125cf72-400c-11e7-8779-1fdb802c9d6f.png)
+
 [![Circle CI](https://circleci.com/gh/hashrocket/hr-til.svg?style=svg)](https://circleci.com/gh/hashrocket/hr-til) [![Code Climate](https://codeclimate.com/github/hashrocket/hr-til/badges/gpa.svg)](https://codeclimate.com/github/hashrocket/hr-til) [![Issue Count](https://codeclimate.com/github/hashrocket/hr-til/badges/issue_count.svg)](https://codeclimate.com/github/hashrocket/hr-til)
 
 > TIL is an open-source project by the team at
@@ -33,7 +35,7 @@ In development, `db:seed` will load sample data for channels, developers, and
 posts. Omit this command to opt-out of this step, or create your own sample
 data in `db/seeds/development.rb`.
 
-Authentication is managed by Omniauth and Google. To allow users from a domain,
+Authentication is managed by Omniauth and Google. See the [omniauth-google-oauth2  README](https://github.com/zquestz/omniauth-google-oauth2/blob/master/README.md) and [Google Oauth 2 docs](https://developers.google.com/identity/protocols/OAuth2WebServer) for setup instructions. To allow users from a domain,
 multiple domains, or a specific email to log in, set those configurations in 
 your environmental variables:
 
@@ -43,6 +45,7 @@ your environmental variables:
 permitted_domains: 'hashrocket.com|hshrckt.com'
 permitted_emails: 'friend@whitelist.com'
 ```
+Ensure you have set the google client id and google client secret via Oauth instructions.
 
 Once set, visit '/admin' and log in with a permitted email address or domain.
 
