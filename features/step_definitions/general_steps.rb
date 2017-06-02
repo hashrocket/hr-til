@@ -149,7 +149,7 @@ Then 'I do not see the edit button' do
 end
 
 Then 'I see the site name in the title' do
-  expect(page.title).to eq SITE_NAME
+  expect(page.title).to include SITE_NAME
 end
 
 Then(/^I am on the homepage$/) do

@@ -274,7 +274,7 @@ end
 Then 'I see all posts with that channel' do
   expect(page).to have_content '3 posts about #phantomjs'
   expect(page).to have_selector '.post', count: 3
-  expect(page.title).to eq 'Posts about phantomjs - Today I Learned'
+  expect(page.title).to include 'Posts about phantomjs - Today I Learned'
 end
 
 Then 'I see the sorted posts' do
@@ -375,7 +375,7 @@ end
 
 Then 'I see the show page for that post' do
   expect(current_path).to eq "/posts/#{@post.slug}-web-development"
-  expect(page.title).to eq 'Web Development - Today I Learned'
+  expect(page.title).to include 'Web Development - Today I Learned'
 
   within '.post' do
     expect(page).to have_content @post.title
