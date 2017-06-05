@@ -1,6 +1,6 @@
 # HR-TIL
 
-![til](https://cloud.githubusercontent.com/assets/11463275/26385291/8125cf72-400c-11e7-8779-1fdb802c9d6f.png)
+![til](https://raw.githubusercontent.com/hashrocket/hr-til/master/app/assets/images/banner.png)
 
 [![Circle CI](https://circleci.com/gh/hashrocket/hr-til.svg?style=svg)](https://circleci.com/gh/hashrocket/hr-til) [![Code Climate](https://codeclimate.com/github/hashrocket/hr-til/badges/gpa.svg)](https://codeclimate.com/github/hashrocket/hr-til) [![Issue Count](https://codeclimate.com/github/hashrocket/hr-til/badges/issue_count.svg)](https://codeclimate.com/github/hashrocket/hr-til)
 
