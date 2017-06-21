@@ -72,10 +72,10 @@ $ flatware rspec && flatware cucumber
 
 ### Hosting
 
-Staging and production for Hashrocket's TIL is located here:
+Staging and production instances are located here:
 
 * https://hr-til-staging.herokuapp.com
-* https://til.hashrocket.com
+* https://hr-til-production.herokuapp.com
 
 ### Environmental Variables
 
