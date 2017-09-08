@@ -14,6 +14,12 @@ This site was open-sourced as a window into our development process, as well as
 to allow people to experiment with the site on their own and contribute to the
 project.
 
+Today I Learned was ported to Elixir/Phoenix in 2017 ([source
+code](https://github.com/hashrocket/tilex)), and the Rails application is no
+longer in production as a Hashrocket project. We still plan to respond to
+issues and merge pull requests. Thanks to all of our
+[contributors](https://github.com/hashrocket/hr-til/graphs/contributors)!
+
 ### Install
 
 If you are creating your own version of the site,
@@ -35,9 +41,14 @@ In development, `db:seed` will load sample data for channels, developers, and
 posts. Omit this command to opt-out of this step, or create your own sample
 data in `db/seeds/development.rb`.
 
-Authentication is managed by Omniauth and Google. See the [omniauth-google-oauth2  README](https://github.com/zquestz/omniauth-google-oauth2/blob/master/README.md) and [Google Oauth 2 docs](https://developers.google.com/identity/protocols/OAuth2WebServer) for setup instructions. To allow users from a domain,
-multiple domains, or a specific email to log in, set those configurations in 
-your environmental variables:
+Authentication is managed by Omniauth and Google. See the
+[omniauth-google-oauth2
+README](https://github.com/zquestz/omniauth-google-oauth2/blob/master/README.md)
+and [Google Oauth 2
+docs](https://developers.google.com/identity/protocols/OAuth2WebServer) for
+setup instructions. To allow users from a domain, multiple domains, or a
+specific email to log in, set those configurations in your environmental
+variables:
 
 ```yml
 # config/application.yml
