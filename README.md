@@ -14,8 +14,7 @@ project.
 
 Today I Learned was ported to Elixir/Phoenix in 2017 ([source
 code](https://github.com/hashrocket/tilex)), and the Rails application is no
-longer in production as a Hashrocket project. We still plan to respond to
-issues and merge pull requests. Thanks to all of our
+longer in production or actively maintained by Hashrocket. Thanks to all of our
 [contributors](https://github.com/hashrocket/hr-til/graphs/contributors)!
 
 ### Install
