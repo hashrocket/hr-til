@@ -78,13 +78,6 @@ $ flatware rspec && flatware cucumber
 - The gems `flatware-rspec` and `flatware-cucumber` require ZeroMQ. Learn more
 [here](https://github.com/briandunn/flatware).
 
-### Hosting
-
-Staging and production instances are located here:
-
-* https://hr-til-staging.herokuapp.com
-* https://hr-til-production.herokuapp.com
-
 ### Environmental Variables
 
 `basic_auth_credentials` both toggles and defines basic authentication:
